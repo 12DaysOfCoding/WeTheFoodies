@@ -22,7 +22,7 @@ Where: Zoom
 - [x] Complete Kickoff Tasks
 - [x] Schedule Subsequent Meetings
 - [ ] Create a Team Name
-- [ ] Schedule Team Bonding
+- [x] Schedule Team Bonding
 - [ ] Group Contract
 
 ## Tasks Completed
