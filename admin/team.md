@@ -4,7 +4,7 @@
 * We The Foodies
 
 ## Team Logo
-![logo](/branding/logo.png)
+![logo](admin/branding/logo.png)
 ## Values
 * **Passion!**
 
