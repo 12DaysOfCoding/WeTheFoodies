@@ -22,4 +22,3 @@
 | [Harry Lei](https://zijie-lei.github.io/CSE110-Lab01/) | <zil026@ucsd.edu> |
 | [Bin Ni](https://binnyever.github.io/CSE110Lab01/) | <bni@ucsd.edu> |
 | [Jingjing Qiao](https://joyqiao1.github.io/index.md/) | <j1qiao@ucsd.edu> |
-| Lyra U | <murrutia@ucsd.edu> |
