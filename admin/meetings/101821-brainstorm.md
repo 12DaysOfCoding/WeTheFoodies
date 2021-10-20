@@ -1,6 +1,8 @@
 # 10/18 Brainstorm
 *cse110-fa21-group30*
+
 Time: 10/18/21 1:00 - 1:15 pm
+
 Where: Zoom
 
 ## Attendence
