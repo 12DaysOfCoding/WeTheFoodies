@@ -17,7 +17,7 @@ Where: Zoom
 
 ## Tasks Completed
 - Created the Figma Team
-- Started brainstorming by adding notes to the brainstorm page on Figma
+- Started brainstorming by adding notes to the brainstorm page in Figma
 
 ## Decisions Made
 - Do further brainstorming (ex. research on other recipe applications) in tomorrow's meeting at 1:00 - 2:00 pm.
