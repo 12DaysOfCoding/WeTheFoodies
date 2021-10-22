@@ -19,7 +19,7 @@ Where: Zoom
 ## Tasks Completed
 - Researched existing recipe applications and recorded them in Figma
 - Voted on members' brainstorming ideas and applications found in Figma
-- Started on persona
+- Started on user persona section to hone in the general target audience
 
 ## Decisions Made
 - Further brainstorm in tomorrow's meeting at 10-11am.
