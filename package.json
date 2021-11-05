@@ -1,0 +1,22 @@
+{
+  "name": "cse110-fa21-group30",
+  "version": "1.0.0",
+  "description": "[Team Page](admin/team.md)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse110-fa21-group30/cse110-fa21-group30.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse110-fa21-group30/cse110-fa21-group30/issues"
+  },
+  "homepage": "https://github.com/cse110-fa21-group30/cse110-fa21-group30#readme",
+  "devDependencies": {
+    "eslint": "^8.1.0"
+  }
+}
