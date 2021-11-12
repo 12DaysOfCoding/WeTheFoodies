@@ -64,7 +64,7 @@ const [first, second] = arr2; // const first = arr2[0]; const second = arr2[1];
 // Functions
 // Use default parameter syntax rather than mutating function arguments
 function handleThings(opts = {}) {
-  // ...
+  console.log(opts);
 }
 
 // use functions with super long function name
@@ -98,16 +98,16 @@ numbers.forEach((num) => {
 switch (b) {
   case 1: {
     let x = 1;
+    console.log(x);
     break;
   }
   case 2: {
     const y = 2;
+    console.log(y);
     break;
   }
   default: {
-    function f() {
-      console.log(b);
-    }
+    console.log(b);
     break;
   }
 }
@@ -121,7 +121,6 @@ console.log(noA);
 console.log(itemsCopy);
 console.log(nodes);
 console.log(arr);
-console.log(buzz);
 console.log(arr1);
 console.log(objectInArray);
 const user1 = {
@@ -130,10 +129,10 @@ const user1 = {
 };
 console.log(first);
 console.log(second);
-console.log(opts);
 const foo3 = handleThings(user1);
 console.log(foo3);
 console.log(f3(1));
 console.log(sum);
 console.log(x);
-console.log(y);
+console.log(baz);
+console.log(foo2);
