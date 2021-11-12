@@ -126,14 +126,12 @@ console.log(arr1);
 console.log(objectInArray);
 const user1 = {
   firstName: 'first',
-  lastName: 'last';
+  lastName: 'last',
 };
 console.log(first);
 console.log(second);
 console.log(opts);
-const foo3 = (
-  handleThings(user1);
-);
+const foo3 = handleThings(user1);
 console.log(foo3);
 console.log(f3(1));
 console.log(sum);
