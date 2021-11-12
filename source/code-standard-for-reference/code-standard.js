@@ -67,9 +67,9 @@ function handleThings(opts = {}) {
   // ...
 }
 
-// use very long functions
+// use functions with super long function name
 const foo2 = (
-  getFullNameNameNameNameNameNameName(user1);
+  getFullNameNameNameNameNameNameName(user1)
 );
 
 // Never reassign parameters
