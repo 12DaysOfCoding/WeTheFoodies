@@ -35,11 +35,11 @@ const nodes = [...foo]; // convert an iterable object to an array
 const arrLike = { 0: 'foo', 1: 'bar', 2: 'baz', length: 3 };
 const arr = Array.from(arrLike); // ['foo', 'bar', 'baz'] // convert an array-like object to an array
 
-const foo = [1, 2, 3];
+const foo1 = [1, 2, 3];
 function bar(x){
   return x + x;
 }
-const baz = Array.from(foo, bar); // map over iterables => [2, 4, 6]
+const baz = Array.from(foo1, bar); // map over iterables => [2, 4, 6]
 
 // How to use line breaks
 const arr1 = [[0, 1], [2, 3], [4, 5]];
@@ -67,7 +67,7 @@ function handleThings(opts = {}) {
   // ...
 }
 
-const foo = (
+const foo2 = (
   superLongLongLongLongLongLongLongLongFunctionName()
 );
 
@@ -94,7 +94,7 @@ numbers.forEach((num) => {
 }); // sum = 15
 
 // Comparison
-switch (foo) {
+switch (foo2) {
   case 1: {
     let x = 1;
     break;
