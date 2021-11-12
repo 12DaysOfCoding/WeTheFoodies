@@ -1,0 +1,25 @@
+/*
+ * Code standard for CSS files 
+ * Find more: https://google.github.io/styleguide/htmlcssguide.html
+ * W3C CSS validator: https://jigsaw.w3.org/css-validator/
+**/
+
+/* Do not use quotation marks in URL values */
+@import url(https://www.google.com/css/maia.css);
+
+#example {
+  /* Instead of using #eebbcc, use 3 character hexadecimal notation where possible */
+  background-color: #ebc;
+}
+
+/* Separate words in ID and class names by a hyphen */
+.code-wrapper {
+  /* Use a semicolon after every declaration */
+  display: block;
+  height: 100px;
+}
+
+html {
+  /* Use single quotation */
+  font-family: 'open sans', arial, sans-serif;
+}
