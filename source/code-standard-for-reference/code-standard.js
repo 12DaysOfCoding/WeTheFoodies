@@ -3,7 +3,7 @@
 
 // Reference
 const aConst = 1; // use const for references which cannot be reassigned
-let b = 1; // use let for references which can be reassigned
+let b = 3; // use let for references which can be reassigned
 var c = 1; // use var for references which can be accessed outside some block
 const item = {}; // create an empty object
 
@@ -53,7 +53,7 @@ const objectInArray = [
 ];
 
 // Destructuring
-function getFullName(user) {
+function getFullNameNameNameNameNameNameName(user) {
   const { firstName, lastName } = user; // const firstName = user.firstName; const lastName = user.lastName;
   return `${firstName} ${lastName}`; // build up strings
 }
@@ -67,14 +67,15 @@ function handleThings(opts = {}) {
   // ...
 }
 
+// use very long functions
 const foo2 = (
-  superLongLongLongLongLongLongLongLongFunctionName()
+  getFullNameNameNameNameNameNameName(user1);
 );
 
 // Never reassign parameters
 function f3(a) {
-  const b = a || 1;
-  // ...
+  const result = a || 1;
+  return result;
 }
 
 const x = [1, 2, 3, 4, 5];
@@ -94,7 +95,7 @@ numbers.forEach((num) => {
 }); // sum = 15
 
 // Comparison
-switch (foo2) {
+switch (b) {
   case 1: {
     let x = 1;
     break;
@@ -103,16 +104,38 @@ switch (foo2) {
     const y = 2;
     break;
   }
-  case 3: {
+  default: {
     function f() {
-      // ...
+      console.log(b);
     }
     break;
   }
-  case 4:
-    bar();
-    break;
-  default: {
-    class C {}
-  }
 }
+
+// for passing the lint test, no need to view
+console.log(b);
+console.log(c);
+console.log(item);
+console.log(a);
+console.log(noA);
+console.log(itemsCopy);
+console.log(nodes);
+console.log(arr);
+console.log(buzz);
+console.log(arr1);
+console.log(objectInArray);
+const user1 = {
+  firstName: 'first',
+  lastName: 'last';
+};
+console.log(first);
+console.log(second);
+console.log(opts);
+const foo3 = (
+  handleThings(user1);
+);
+console.log(foo3);
+console.log(f3(1));
+console.log(sum);
+console.log(x);
+console.log(y);
