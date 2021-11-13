@@ -1,0 +1,13 @@
+.section__foodie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
