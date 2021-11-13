@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
+  <link href="assets/styles/dashboard.css" rel="stylesheet"
 
   <title>Dashboard</title>
 
@@ -20,9 +21,18 @@
 
 <body>
     <nav>
-        <h1>we the foodies</h1>
+        <img src="assets/images/logo.svg" id="logo">
     </nav>
   <main>
+    <section class="points-summary">
+      <div>You currently have</div>
+      <span class="points" id="num-points">1020</span>
+      <span class="points" id="points">POINTS</span>
+      <br>
+      <span>Try out more</span>
+      <span id="recipe-level">intermediate</span>
+      <span>recipes to advance to the next level!</span>
+    </section>
     <section class="section__saved-recipes">
       <h2>Saved Recipes</h2>
       <div class="saved-recipes__wrapper">
