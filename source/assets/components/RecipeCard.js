@@ -20,15 +20,14 @@ class RecipeCard extends HTMLElement {
                 flex-direction: column;
                 align-items: flex-start;
                 background-color: #fff;
-                border: 1px solid #aaa;
                 overflow-x: hidden;
                 border-radius: 8px;
                 position: relative;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
             }
 
             article > span {
                 color: #fff;
-                background-color: #EC8A53;
                 padding: 4px 9px;
                 border-radius: 50%;
                 font-weight: 500;
@@ -38,6 +37,22 @@ class RecipeCard extends HTMLElement {
                 right: 10px;
             }
 
+            .level-1 {
+                background-color: #5EAF70;
+            }
+
+            .level-2 {
+                background-color: #F4BA26;
+            }
+
+            .level-3 {
+                background-color: #EC8A53;
+            }
+
+
+            .level-4 {
+                background-color: #EC5353;
+            }
 
             .wrapper > p {
                 font-style: italic;
@@ -47,11 +62,11 @@ class RecipeCard extends HTMLElement {
             }
 
             .wrapper {
-                padding: 8px 8px;
+                padding: 12px 12px;
             }
 
             .tags__wrapper > span {
-                font-size: 10px;
+                font-size: 9px;
                 font-weight: 500;
                 color: #EC8A53;
                 background-color: #FFEBE0;
@@ -90,7 +105,8 @@ class RecipeCard extends HTMLElement {
         title.appendChild(titleLink)
 
         const tagWrapper = document.createElement('div');
-        tagWrapper.classList.add("tags__wrapper")
+        tagWrapper.classList.add("tags__wrapper");
+        
         
         const tags = ["NUT-FREE", "SHELLFISH-FREE"]
         tags.forEach((tagName) => {
@@ -100,7 +116,27 @@ class RecipeCard extends HTMLElement {
         })
 
         const level = document.createElement('span');
-        level.textContent = "3"
+        const setLevel = 'medium';
+        let numLevel;
+        switch (setLevel) {
+            case 'easy':
+                numLevel = 1;
+                break;
+            case 'medium':
+                numLevel = 2;
+                break;
+            case 'hard':
+                numLevel = 3;
+                break;
+            case 'very hard':
+                numLevel = 4;
+                break;
+            default:
+                break;
+        }
+        level.textContent = numLevel;
+        level.classList.add(`level-${numLevel}`);
+
 
         const duration = document.createElement('time');
         duration.textContent = "10 MIN"
