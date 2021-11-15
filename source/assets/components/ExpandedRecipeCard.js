@@ -1,14 +1,14 @@
 class RecipeCard extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' })
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
 
-    set data(data) {
-        if (!data) return
+  set data(data) {
+    if (!data) return;
 
-        const styleElem = document.createElement('style')
-        const styles = `
+    const styleElem = document.createElement('style');
+    const styles = `
             * {
                 font-family: 'Inter', sans-serif;
                 margin: 0;
@@ -102,92 +102,92 @@ class RecipeCard extends HTMLElement {
                 font-weight: 100;
                 font-size: 14px;
             }
-        `
-        styleElem.innerHTML = styles;
+        `;
+    styleElem.innerHTML = styles;
 
-        this.json = data;
-        const card = document.createElement('article');
+    this.json = data;
+    const card = document.createElement('article');
 
-        const image = document.createElement('img');
-        image.src = "assets/images/default.png"
-        image.alt = "Image Title"
+    const image = document.createElement('img');
+    image.src = 'assets/images/default.png';
+    image.alt = 'Image Title';
 
-        const wrapper = document.createElement('div');
-        wrapper.classList.add("wrapper");
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper');
 
-        const wrapperLeft = document.createElement('div');
-        wrapperLeft.classList.add("wrapper-left");
+    const wrapperLeft = document.createElement('div');
+    wrapperLeft.classList.add('wrapper-left');
 
-        const wrapperRight = document.createElement('div');
-        wrapperRight.classList.add("wrapper-right");
+    const wrapperRight = document.createElement('div');
+    wrapperRight.classList.add('wrapper-right');
 
-        const title = document.createElement('p');
-        const titleLink = document.createElement('a');
-        titleLink.textContent = "Recipe name";
+    const title = document.createElement('p');
+    const titleLink = document.createElement('a');
+    titleLink.textContent = 'Recipe name';
 
-        title.appendChild(titleLink)
+    title.appendChild(titleLink);
 
-        const tagWrapper = document.createElement('div');
-        tagWrapper.classList.add("tags__wrapper")
+    const tagWrapper = document.createElement('div');
+    tagWrapper.classList.add('tags__wrapper');
         
-        const tags = ["NUT-FREE", "SHELLFISH-FREE"]
-        tags.forEach((tagName) => {
-            const tag = document.createElement('span');
-            tag.textContent = tagName
-            tagWrapper.appendChild(tag);
-        })
+    const tags = ['NUT-FREE', 'SHELLFISH-FREE'];
+    tags.forEach((tagName) => {
+      const tag = document.createElement('span');
+      tag.textContent = tagName;
+      tagWrapper.appendChild(tag);
+    });
 
-        const level = document.createElement('span');
-        const setLevel = 'easy';
-        let numLevel;
-        switch (setLevel) {
-            case 'easy':
-                numLevel = 1;
-                break;
-            case 'medium':
-                numLevel = 2;
-                break;
-            case 'hard':
-                numLevel = 3;
-                break;
-            case 'very hard':
-                numLevel = 4;
-                break;
-            default:
-                break;
-        }
-        level.textContent = numLevel;
-        level.classList.add(`level`);
-        level.classList.add(`level-${numLevel}`);
+    const level = document.createElement('span');
+    const setLevel = 'easy';
+    let numLevel;
+    switch (setLevel) {
+    case 'easy':
+      numLevel = 1;
+      break;
+    case 'medium':
+      numLevel = 2;
+      break;
+    case 'hard':
+      numLevel = 3;
+      break;
+    case 'very hard':
+      numLevel = 4;
+      break;
+    default:
+      break;
+    }
+    level.textContent = numLevel;
+    level.classList.add('level');
+    level.classList.add(`level-${numLevel}`);
 
-        const points = document.createElement('span');
-        points.classList.add("points");
-        points.classList.add(`points-${numLevel}`);
-        points.textContent = `43 points`;
+    const points = document.createElement('span');
+    points.classList.add('points');
+    points.classList.add(`points-${numLevel}`);
+    points.textContent = '43 points';
 
-        /*const calories = document.createElement('span');
+    /*const calories = document.createElement('span');
         calories.classList.add('calories');
         calories.textContent = '123 Calories';*/
 
-        wrapperLeft.appendChild(title);
-        wrapperLeft.appendChild(tagWrapper);
-        wrapperRight.appendChild(level);
-        wrapperRight.appendChild(points);
-        // wrapperRight.appendChild(calories);
+    wrapperLeft.appendChild(title);
+    wrapperLeft.appendChild(tagWrapper);
+    wrapperRight.appendChild(level);
+    wrapperRight.appendChild(points);
+    // wrapperRight.appendChild(calories);
 
-        wrapper.appendChild(wrapperLeft);
-        wrapper.appendChild(wrapperRight);
+    wrapper.appendChild(wrapperLeft);
+    wrapper.appendChild(wrapperRight);
 
-        card.appendChild(image);
-        card.appendChild(wrapper);
+    card.appendChild(image);
+    card.appendChild(wrapper);
         
     
-        this.shadowRoot.append(styleElem, card)
-    }
+    this.shadowRoot.append(styleElem, card);
+  }
 
-    get data() {
-        return this.json;
-    }
+  get data() {
+    return this.json;
+  }
 }
 
-customElements.define('expanded-recipe-card', RecipeCard)
+customElements.define('expanded-recipe-card', RecipeCard);
