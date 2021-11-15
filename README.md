@@ -1,5 +1,5 @@
-# cse110-fa21-group30
-[Team Page](admin/team.md)
+# [cse110-fa21-group30](admin/team.md)
+![CI](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/main.yml/badge.svg)
 
 ## Project Description
 Our team will design a recipe management application.
