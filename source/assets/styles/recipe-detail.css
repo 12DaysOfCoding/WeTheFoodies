@@ -1,0 +1,159 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+.points-summary {
+    text-align: center;
+    
+}
+
+div {
+    font-size: 22px;
+    color: #F4BA26;
+    font-weight: 700;
+}
+
+.points {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+h2, #points {
+    color: #F4BA26;
+}
+
+span {
+    font-size: 18px;
+}
+
+nav {
+    background-color: #F4BA26;
+    padding: 20px;
+}
+
+#dount-p {
+    text-align: right;
+    margin-top: -60px;
+    margin-bottom: 0;
+}
+
+#dount {
+    width: 50px;
+}
+
+#recipe-search {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+section > div {
+    width: 340px;
+    margin: auto;
+}
+
+.recipe-cooking-time-and-serving {
+    padding-top: 25px;
+}
+
+.recipe-cooking-time {
+    display: inline;
+    border: 1px solid #F4BA26;
+    padding: 0px 5px;
+    border-radius: 8px;
+}
+
+.recipe-cooking-serving {
+    display: inline;
+    border: 1px solid #F4BA26;
+    padding: 0px 5px;
+    border-radius: 8px;
+    float: right;
+}
+
+#cooking-time {
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline;
+}
+
+#cooking-time-input {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline;
+}
+
+#serving-size {
+    font-style: italic;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline;
+}
+
+#serving-size-input {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline;
+}
+
+h1 {
+    padding-top: 10px;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.specific-ingredients > p {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.specific-instructions > p {
+    color: black;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.bottom-buttons {
+    position: relative;
+    text-align: center;
+}
+
+.bottom-buttons > p {
+    padding-top: 20px;
+    color: #EAB52F;
+    font-family: 'Avenir', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.foodie-mode {
+    font-size: 30px;
+    font-family: 'Avenir', sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: #ffc83a;
+    width: 340px;
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.save {
+    margin-top: 10px;
+    font-size: 28px;
+    color: #ffc83a;
+    background-color: #FAF9F6;
+    width: 340px;
+    border: 1px solid #ffc83a;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.save > p {
+    display: inline;
+}
