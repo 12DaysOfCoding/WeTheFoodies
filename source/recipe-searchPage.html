@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <link href="assets/styles/recipe-searchPage.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- Web Components -->
+  <script src="assets/components/RecipeCard.js" type="module"></script>
+  <script src="assets/scripts/recipe-searchPage.js"></script>
+</head>
+
+<body>
+  <nav>
+    <img src="assets/images/recipe-search.svg" id="recipe-search">
+  </nav>
+  <p id="dount-p">
+    <img id="dount" src="assets/images/donut.svg">
+  </p>
+  <main>
+    <section class="section__search-recipes">
+        <div class = "Recipe-SearchPage">
+          <!-- Load icon library -->
+          <div class = "search-bar">
+            <!-- The form -->
+            <form class="search" action="action_page.php">
+              <input type="text" placeholder="Search.." name="search">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+
+          <p id='apply-filters'>APPLY FILTERS</p>
+          <div class="diet-restrictionBox">
+            <div class="container">
+                <div class="word">Dietary Restrictions</div>
+                <div class="left">
+                <label class="container">Vegan
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Vegetarian
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Dairy-dree
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Egg-free
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">Shellfish-free
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+                </div>
+                <div class="right">
+                  <label class="container">Gluten-free
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Tree Nut-free
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Peanut-free
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Fish-free
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                  <label class="container">Soy-free
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+          </div> 
+      </div>
+      <section class="recipes__wrapper">
+          <!-- recipe detail -->
+      </section>
+  </main>
+</body>
+
+</html>
