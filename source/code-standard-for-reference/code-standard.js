@@ -96,20 +96,20 @@ numbers.forEach((num) => {
 
 // Comparison
 switch (b) {
-  case 1: {
-    let x = 1;
-    console.log(x);
-    break;
-  }
-  case 2: {
-    const y = 2;
-    console.log(y);
-    break;
-  }
-  default: {
-    console.log(b);
-    break;
-  }
+case 1: {
+  let x = 1;
+  console.log(x);
+  break;
+}
+case 2: {
+  const y = 2;
+  console.log(y);
+  break;
+}
+default: {
+  console.log(b);
+  break;
+}
 }
 
 // for passing the lint test, no need to view
