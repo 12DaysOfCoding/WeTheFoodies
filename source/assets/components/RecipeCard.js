@@ -1,14 +1,14 @@
 class RecipeCard extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' })
-    }
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+  }
 
-    set data(data) {
-        if (!data) return
+  set data(data) {
+    if (!data) return;
 
-        const styleElem = document.createElement('style')
-        const styles = `
+    const styleElem = document.createElement('style');
+    const styles = `
             * {
                 font-family: 'Inter', sans-serif;
                 margin: 0;
@@ -85,78 +85,78 @@ class RecipeCard extends HTMLElement {
                 font-size: 14px;
                 color: #999;
             }
-        `
-        styleElem.innerHTML = styles;
+        `;
+    styleElem.innerHTML = styles;
 
-        this.json = data;
-        const card = document.createElement('article');
+    this.json = data;
+    const card = document.createElement('article');
 
-        const image = document.createElement('img');
-        image.src = "assets/images/default.png"
-        image.alt = "Image Title"
+    const image = document.createElement('img');
+    image.src = 'assets/images/default.png';
+    image.alt = 'Image Title';
 
-        const wrapper = document.createElement('div');
-        wrapper.classList.add("wrapper");
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper');
 
-        const title = document.createElement('p');
-        const titleLink = document.createElement('a');
-        titleLink.textContent = "Recipe Name";
+    const title = document.createElement('p');
+    const titleLink = document.createElement('a');
+    titleLink.textContent = 'Recipe Name';
 
-        title.appendChild(titleLink)
+    title.appendChild(titleLink);
 
-        const tagWrapper = document.createElement('div');
-        tagWrapper.classList.add("tags__wrapper");
+    const tagWrapper = document.createElement('div');
+    tagWrapper.classList.add('tags__wrapper');
         
         
-        const tags = ["NUT-FREE", "SHELLFISH-FREE"]
-        tags.forEach((tagName) => {
-            const tag = document.createElement('span');
-            tag.textContent = tagName
-            tagWrapper.appendChild(tag);
-        })
+    const tags = ['NUT-FREE', 'SHELLFISH-FREE'];
+    tags.forEach((tagName) => {
+      const tag = document.createElement('span');
+      tag.textContent = tagName;
+      tagWrapper.appendChild(tag);
+    });
 
-        const level = document.createElement('span');
-        const setLevel = 'medium';
-        let numLevel;
-        switch (setLevel) {
-            case 'easy':
-                numLevel = 1;
-                break;
-            case 'medium':
-                numLevel = 2;
-                break;
-            case 'hard':
-                numLevel = 3;
-                break;
-            case 'very hard':
-                numLevel = 4;
-                break;
-            default:
-                break;
-        }
-        level.textContent = numLevel;
-        level.classList.add(`level-${numLevel}`);
-
-
-        const duration = document.createElement('time');
-        duration.textContent = "10 MIN"
-
-        wrapper.appendChild(title)
-        wrapper.appendChild(tagWrapper)
-        wrapper.appendChild(duration)
+    const level = document.createElement('span');
+    const setLevel = 'medium';
+    let numLevel;
+    switch (setLevel) {
+    case 'easy':
+      numLevel = 1;
+      break;
+    case 'medium':
+      numLevel = 2;
+      break;
+    case 'hard':
+      numLevel = 3;
+      break;
+    case 'very hard':
+      numLevel = 4;
+      break;
+    default:
+      break;
+    }
+    level.textContent = numLevel;
+    level.classList.add(`level-${numLevel}`);
 
 
-        card.appendChild(image);
-        card.appendChild(level);
-        card.appendChild(wrapper);
+    const duration = document.createElement('time');
+    duration.textContent = '10 MIN';
+
+    wrapper.appendChild(title);
+    wrapper.appendChild(tagWrapper);
+    wrapper.appendChild(duration);
+
+
+    card.appendChild(image);
+    card.appendChild(level);
+    card.appendChild(wrapper);
         
     
-        this.shadowRoot.append(styleElem, card)
-    }
+    this.shadowRoot.append(styleElem, card);
+  }
 
-    get data() {
-        return this.json;
-    }
+  get data() {
+    return this.json;
+  }
 }
 
-customElements.define('recipe-card', RecipeCard)
+customElements.define('recipe-card', RecipeCard);
