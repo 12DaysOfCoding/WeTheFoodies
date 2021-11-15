@@ -1,4 +1,4 @@
-// index.js
+// foodie.js
   
 window.addEventListener('DOMContentLoaded', init)
 
