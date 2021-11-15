@@ -1,0 +1,67 @@
+* {
+    background-color: #FAF9F6;
+    font-family: 'Inter', sans-serif;
+}
+
+.section__foodie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+button {
+    background-color: #F4BA26;
+    color: white;
+    border-radius: 50px;
+    border-style: none;
+    margin: auto;
+    padding: 8px 15px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.symbol {
+    background-color: white;
+    color: #F4BA26;
+    border-radius: 200px;
+    padding: 0.5px 7px;
+    font-weight: 500;
+}
+
+#exit {
+    margin-left: 230px;
+    margin-right: 5px;
+}
+
+#prev {
+    margin-left: 5px;
+    margin-right: 90px;
+}
+
+#next {
+    margin-right: 5px;
+}
+
+#step-num {
+    font-style: italic;
+    color: #F4BA26;
+    font-size: 22px;
+}
+
+#step {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="assets/styles/foodie.css" rel="stylesheet">
+
+  <title>Foodie</title>
+
+  <!-- Web Components -->
+  <script src="assets/components/ExpandedRecipeCard.js" type="module"></script>
+
+  <script src="assets/scripts/foodie.js"></script>
+</head>
+
+<body>
+    <nav>
+        <h1>we the foodies</h1>
+    </nav>
+  <main>
+    <section class="section__foodie">
+        <button id="exit">Exit
+          <span class="symbol">X</span>
+        </button>
+        <div class="step__wrapper">
+            <span id="step-num"></span>
+            <span id="step"></span>
+        </div>
+        <div>
+            <button id="prev">Prev
+              <span class="symbol">&lt</span>
+            </button>
+            <button id="next">Next
+              <span class="symbol">&gt</span>
+            </button>
+        </div>
+    </section>
+  </main>
+</body>
+
+</html>
