@@ -17,7 +17,7 @@ function saveOrSaved() {
   const heart = document.getElementById('heart');
   const text = document.getElementById('save-or-not');
 
-  btn.addEventListener('click', function (event) {
+  btn.addEventListener('click', () => {
     if (text.textContent === 'SAVE') {
       text.textContent = 'SAVED';
       heart.src = 'assets/images/heart1.svg';
