@@ -1,7 +1,7 @@
 ## Lists of features that are planed for implementation:
 - [x] Linting and code style enforcement
-- [x] Code quality via tool
-- [x] Code quality via human review
+- [x] Check code quality via tool
+- [x] Check code quality via human review
 - [x] Unit tests via automation
 - [ ] Documentation generation via automation
 - [ ] End to end testing
@@ -23,3 +23,5 @@
 
 
 - **Human review**: After a series of checks and tests are performed on the given pull request, the approval of this pull requst depends on human review, which is performed by our team members. By enforcing such practice, conflicts among different pull requests can be forstalled and the final product presented in the repo would be better organized. Also, human reviews make sure that all desired features are covered, and new features that don't have test cases yet can be manually tested.
+
+- **Code quality via Codacy:** Similar to Linting and Style enforcement, Codacy is used as the tool to analyze source code and give suggestions regarding potential problems of our codes, including code coverage, code duplication and code complexity for each pull request. After installing Codacy in this repo, we can monitor and discover potential issues through the separate dashboard provided by Codacy, which allows us to keep track of quality of the source code and minimize problems that could pose threats to qualtiy of our recipe management application. 
