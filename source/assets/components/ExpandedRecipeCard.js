@@ -15,26 +15,49 @@ class RecipeCard extends HTMLElement {
             }
 
             article {
-                width: 160px;
+                width: 340px;
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
                 background-color: #fff;
                 overflow-x: hidden;
-                border-radius: 8px;
-                position: relative;
+                border-radius: 12px;
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
             }
 
-            article > span {
+            article > img {
+                object-fit: cover;
+                width: 100%;
+                height: 80px;
+            }
+
+            .wrapper {
+                width: 90%;
+                padding: 12px 16px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .wrapper-left > p {
+                font-style: italic;
+                font-size: 18px;
+                font-weight: 300;
+                padding: 6px 0;
+            }
+
+            .wrapper-right {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+            }
+
+            .level {
                 color: #fff;
                 padding: 4px 9px;
                 border-radius: 50%;
                 font-weight: 500;
                 font-size: 18px;
-                position: absolute;
-                top: 10px;
-                right: 10px;
+                margin-bottom: 4px;
             }
 
             .level-1 {
@@ -54,15 +77,22 @@ class RecipeCard extends HTMLElement {
                 background-color: #EC5353;
             }
 
-            .wrapper > p {
-                font-style: italic;
-                font-size: 18px;
-                font-weight: 300;
-                padding: 6px 0;
+
+            .points-1 {
+                color: #5EAF70;
             }
 
-            .wrapper {
-                padding: 12px 12px;
+            .points-2 {
+                color: #F4BA26;
+            }
+
+            .points-3 {
+                color: #EC8A53;
+            }
+
+
+            .points-4 {
+                color: #EC5353;
             }
 
             .tags__wrapper > span {
@@ -81,10 +111,6 @@ class RecipeCard extends HTMLElement {
                 flex-wrap: wrap;
             }
 
-            time {
-                font-size: 14px;
-                color: #999;
-            }
         `
         styleElem.innerHTML = styles;
 
@@ -98,6 +124,12 @@ class RecipeCard extends HTMLElement {
         const wrapper = document.createElement('div');
         wrapper.classList.add("wrapper");
 
+        const wrapperLeft = document.createElement('div');
+        wrapperLeft.classList.add("wrapper-left");
+
+        const wrapperRight = document.createElement('div');
+        wrapperRight.classList.add("wrapper-right");
+
         const title = document.createElement('p');
         const titleLink = document.createElement('a');
         titleLink.textContent = "Recipe Name";
@@ -105,8 +137,7 @@ class RecipeCard extends HTMLElement {
         title.appendChild(titleLink)
 
         const tagWrapper = document.createElement('div');
-        tagWrapper.classList.add("tags__wrapper");
-        
+        tagWrapper.classList.add("tags__wrapper")
         
         const tags = ["NUT-FREE", "SHELLFISH-FREE"]
         tags.forEach((tagName) => {
@@ -116,7 +147,7 @@ class RecipeCard extends HTMLElement {
         })
 
         const level = document.createElement('span');
-        const setLevel = 'medium';
+        const setLevel = 'easy';
         let numLevel;
         switch (setLevel) {
             case 'easy':
@@ -135,19 +166,23 @@ class RecipeCard extends HTMLElement {
                 break;
         }
         level.textContent = numLevel;
+        level.classList.add(`level`);
         level.classList.add(`level-${numLevel}`);
 
+        const points = document.createElement('span');
+        points.classList.add("points");
+        points.classList.add(`points-${numLevel}`);
+        points.textContent = `43 points`;
 
-        const duration = document.createElement('time');
-        duration.textContent = "10 MIN"
+        wrapperLeft.appendChild(title);
+        wrapperLeft.appendChild(tagWrapper);
+        wrapperRight.appendChild(level);
+        wrapperRight.appendChild(points);
 
-        wrapper.appendChild(title)
-        wrapper.appendChild(tagWrapper)
-        wrapper.appendChild(duration)
-
+        wrapper.appendChild(wrapperLeft);
+        wrapper.appendChild(wrapperRight);
 
         card.appendChild(image);
-        card.appendChild(level);
         card.appendChild(wrapper);
         
     
@@ -159,4 +194,4 @@ class RecipeCard extends HTMLElement {
     }
 }
 
-customElements.define('recipe-card', RecipeCard)
+customElements.define('expanded-recipe-card', RecipeCard)
