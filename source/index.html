@@ -9,9 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
-  <link href="assets/styles/dashboard.css" rel="stylesheet"
-
-  <title>Dashboard</title>
+  <link href="assets/styles/index.css" rel="stylesheet" <title>Dashboard</title>
 
   <!-- Web Components -->
   <script src="assets/components/RecipeCard.js" type="module"></script>
@@ -20,12 +18,12 @@
 </head>
 
 <body>
-    <nav>
-        <img src="assets/images/logo.svg" id="logo">
-    </nav>
+  <nav>
+    <img src="assets/images/logo.svg" id="logo">
+  </nav>
   <main>
     <section class="points-summary">
-      <div>You currently have</div>
+      <div class="prompt">You currently have</div>
       <span class="points" id="num-points">1020</span>
       <span class="points" id="points">POINTS</span>
       <br>
@@ -39,6 +37,24 @@
         <!-- Recipes Added Here -->
       </div>
       <h2>My Recipes</h2>
+    </section>
+    <section class="nav-bar">
+      <div class="nav-dashboard">
+        <p id="nav-dashboard-img"><img src="assets/images/nav-bar-dashboard.svg" alt=""></p>
+        <p id="nav-dashboard-text">DASHBOARD</p>
+      </div>
+      <div class="nav-search">
+        <p id="nav-search-img"><img src="assets/images/nav-bar-search.svg" alt=""></p>
+        <p id="nav-dashboard-text">SEARCH</p>
+      </div>
+      <div class="nav-add">
+        <p id="nav-add-img"><img src="assets/images/nav-bar-add.svg" alt=""></p>
+        <p id="nav-dashboard-text">ADD</p>
+      </div>
+      <div class="nav-settings">
+        <p id="nav-settings-img"><img src="assets/images/nav-bar-settings.svg" alt=""></p>
+        <p id="nav-dashboard-text">SETTINGS</p>
+      </div>
     </section>
   </main>
 </body>

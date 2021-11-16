@@ -2,6 +2,10 @@
     background-color: #FAF9F6;
 } */
 
+* {
+
+  font-family: 'Inter', sans-serif;
+}
 nav {
     background-color: #F4BA26;
     padding: 20px;
@@ -202,7 +206,143 @@ grid-template-columns: 100px 150px 120px;
 
 
 
-section > div {
+.section_search-recipes > div {
   width: 360px;
   margin: auto;
+}
+.section_search-recipes{
+  text-align: center;
+}
+
+.nav-bar {
+    
+  background-color: #F4BA26;
+  height: 70px;
+  
+  /* margin: auto; */
+  margin-top: 10px;
+}
+
+.nav-dashboard {
+  /* position: relative; */
+  width: 25%;
+  display: inline;
+  float: left;
+  height: 70px;
+  text-align: center;
+  
+}
+.nav-search {
+  /* position: relative; */
+  width: 25%;
+  display: inline;
+  float: left;
+  height: 70px;
+  text-align: center;
+  
+
+}
+.nav-add {
+  /* position: relative; */
+  width: 25%;
+  display: inline;
+  float: left;
+  height: 70px;
+  text-align: center;
+  
+}
+.nav-settings {
+  /* position: relative; */
+  width: 25%;
+  display: inline;
+  float: left;
+  height: 70px;
+  text-align: center;
+  
+}
+
+.nav-dashboard #nav-dashboard-img {
+  display: inline-block;
+  height: 36px;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+}
+#nav-dashboard-text{
+  display: block;
+  height: 12px;
+  text-align: center;
+  margin: 0; 
+  color: white;
+  font-size: 12px;
+  /* padding-top: 3px;
+  padding-bottom: 6px; */
+}
+
+.nav-dashboard img {
+  display: inline-block;
+  height: 36px;
+}
+.nav-search #nav-search-img {
+  display: inline-block;
+  height: 36px;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+}
+#nav-search-text{
+  display: block;
+  height: 12px;
+  text-align: center;
+  margin: 0; 
+  color: white;
+  font-size: 12px;
+  /* padding-top: 3px;
+  padding-bottom: 6px; */
+}
+.nav-search img {
+  display: inline-block;
+  height: 36px;
+}
+.nav-add #nav-add-img {
+  display: inline-block;
+  height: 36px;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+}
+#nav-add-text{
+  display: block;
+  height: 12px;
+  text-align: center;
+  margin: 0; 
+  color: white;
+  font-size: 12px;
+  /* padding-top: 3px;
+  padding-bottom: 6px; */
+}
+.nav-add img {
+  display: inline-block;
+  height: 36px;
+}
+.nav-settings #nav-settings-img {
+  display: inline-block;
+  height: 36px;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+}
+#nav-settings-text{
+  display: block;
+  height: 12px;
+  text-align: center;
+  margin: 0; 
+  color: white;
+  font-size: 12px;
+  /* padding-top: 3px;
+  padding-bottom: 6px; */
+}
+.nav-settings img {
+  display: inline-block;
+  height: 36px;
 }
