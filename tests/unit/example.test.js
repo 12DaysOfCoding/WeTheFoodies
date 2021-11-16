@@ -1,4 +1,8 @@
 /**
+ * @jest-environment jsdom
+ */
+
+/**
  * example for how to write a test case as well as to test if the testing framework works
  */
 

@@ -9,6 +9,6 @@ describe('Basic user flow for Website', () => {
     console.log('Checking if page loads');
     let saved_recipe = await page.$('h2');
     let text = await saved_recipe.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("saved_recipe");
+    expect(text['_remoteObject'].value).toBe("Saved Recipes");
   });
 });
