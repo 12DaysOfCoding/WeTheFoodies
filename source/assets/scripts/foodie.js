@@ -1,20 +1,20 @@
 // foodie.js
   
-window.addEventListener('DOMContentLoaded', init)
+window.addEventListener('DOMContentLoaded', init);
 
 let currStep = 0;
 
 const steps = [
-  "Melt butter",
-  "Bring cookie",
-  "Buy food"
-]
+  'Melt butter',
+  'Bring cookie',
+  'Buy food'
+];
   
 async function init() {
   updateStep();
 
   const prevButton = document.querySelector('#prev');
-  const nextButton = document.querySelector('#next')
+  const nextButton = document.querySelector('#next');
 
   prevButton.addEventListener('click', () => {
     if (currStep > 0) currStep -= 1; 
@@ -25,18 +25,18 @@ async function init() {
     }
 
     updateStep();
-  })
+  });
 
   nextButton.addEventListener('click', () => {
     if (currStep < steps.length - 1) currStep += 1;
     if (currStep === steps.length) { 
-      nextButton.classList.add('hidden')
+      nextButton.classList.add('hidden');
     } else {
-      prevButton.classList.remove('disabled')
+      prevButton.classList.remove('disabled');
     }
     
     updateStep();
-  })
+  });
 }
 
 const updateStep = () => {
@@ -45,5 +45,5 @@ const updateStep = () => {
 
   stepNum.textContent = `STEP ${currStep + 1}`;
   step.textContent = steps[currStep];
-}
+};
   
