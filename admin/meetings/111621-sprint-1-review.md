@@ -56,7 +56,7 @@ Where: Zoom
         - ![api-1](./images/api-1.png)
 - Go through code standard
     - Yizhou
-        - ![standard-1](./images/standaed-1.png)
+        - ![standard-1](./images/standard-1.png)
 - Finalize wireframe designs
     - Prothit
         - ![wireframe](./images/wireframe.png)
