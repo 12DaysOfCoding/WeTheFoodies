@@ -1,5 +1,6 @@
 # [cse110-fa21-group30](admin/team.md)
 ![CI](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/main.yml/badge.svg)
+![CD](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/firebase-hosting-merge.yml/badge.svg)
 
 ## Project Description
 Our team will design a recipe management application.
