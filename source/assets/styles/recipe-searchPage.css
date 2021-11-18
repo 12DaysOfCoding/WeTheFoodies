@@ -59,19 +59,30 @@ nav {
     line-height: 15px;
     /* identical to box height */
     justify-items: center;
-    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6rem;
     color: #000000;
 }
-
 .diet-restrictionBox{
-    width:450px;
+  position: relative;right:22px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px;
     height:110px;
     border:2px solid #FFC83A;
     background-color: white;
 }
 
 .Recipe-SearchPage .search-bar{
-    box-sizing: border-box;
+    box-sizing: border-box;    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 410px;
+    position: relative;right: 19px;
 }
   
   /* Style the search field */
@@ -81,13 +92,12 @@ nav {
 }
 
   form.search input[type=text] {
-    position:relative; left:0px;
     border-radius: 5px;
     padding: 10px;
     font-size: 17px;
     border: 3px solid #FFC83A;
     float: left;
-    width: 500px;
+    width: 350px;
     background: #f1f1f1;
     font-family: Inter;
     font-style: normal;
@@ -97,7 +107,6 @@ nav {
   /* Style the submit button */
   form.search button {
     position:relative; right:5px;
-    margin-right:300px;
     border-radius: 5px;
     float: left;
     width: 60px;
@@ -124,7 +133,7 @@ nav {
     padding-left: 35px;
     margin-bottom: 0;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 12px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -132,7 +141,7 @@ nav {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
-    margin-top: 2px;
+    margin-top: 4px;
   }
   
   /* Hide the browser's default checkbox */
@@ -171,7 +180,7 @@ background-color: #FFC83A;
   
 .container {
 display: grid;
-grid-template-columns: 100px 150px 120px;  
+grid-template-columns: 80px 150px 120px;  
 }
 
 .word {
@@ -179,7 +188,7 @@ grid-template-columns: 100px 150px 120px;
     position: relative;right:25px;
     font-family: Inter;
     font-style: italic; 
-    font-size: 18px;
+    font-size: 12px;
 }
 .left {
     grid-row: 1;    
@@ -194,23 +203,31 @@ grid-template-columns: 100px 150px 120px;
 } */
 
 .recipes__wrapper{
-    column-gap: 30px;
+    column-gap: 50px;
     display: flex;
     flex-wrap: wrap;
     height: auto;
-    margin: 30px 0 0 30px;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-right: auto;
     max-width: 400px;
-    row-gap: 50px;
-    padding-left: 18px;
+    row-gap: 20px;
+    position: relative;right:8px;
 }
 
-
-
+.search_page_content{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 .section_search-recipes > div {
   width: 360px;
   margin: auto;
 }
 .section_search-recipes{
+  margin:auto;
+  width: auto;
   text-align: center;
 }
 

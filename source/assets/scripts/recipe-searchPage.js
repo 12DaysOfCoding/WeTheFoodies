@@ -17,13 +17,13 @@ async function init() {
   recipeCard2.data = {};
   document.querySelector('.recipes__wrapper').appendChild(recipeCard2);
 
-  // let recipeCard3 = document.createElement('recipe-card');
-  // recipeCard3.data = {};
-  // document.querySelector('.recipes__wrapper').appendChild(recipeCard3);
+  let recipeCard3 = document.createElement('recipe-card');
+  recipeCard3.data = {};
+  document.querySelector('.recipes__wrapper').appendChild(recipeCard3);
 
-  // let recipeCard4 = document.createElement('recipe-card');
-  // recipeCard4.data = {};
-  // document.querySelector('.recipes__wrappers').appendChild(recipeCard4);
+  let recipeCard4 = document.createElement('recipe-card');
+  recipeCard4.data = {};
+  document.querySelector('.recipes__wrapper').appendChild(recipeCard4);
 
 }
 
