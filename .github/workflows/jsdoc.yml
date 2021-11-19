@@ -21,8 +21,8 @@ jobs:
           template: minami
           front_page: README.md
           
-      - name: Deploy Doc
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./doc
