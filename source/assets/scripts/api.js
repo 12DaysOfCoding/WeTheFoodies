@@ -66,7 +66,7 @@ function remove_localstore(recipe_name){
 //if recipe can't be founded, the value will be undefined
 // a few sample to show how to use it
 search_recipe_name('chicken').then(value=>{
-  a = value;
+  let a = value;
   set_localstore(a[0].recipe.label,a[0]);
   let b=get_info_localstore(a[0].recipe.label);
   console.log('test1');
@@ -77,13 +77,13 @@ search_recipe_name('chicken').then(value=>{
   
   
 search_recipe_id('8275bb28647abcedef0baaf2dcf34f8b').then(value=>{
-  a = value;
+  let a = value;
   console.log('test2');
   console.log(a);
 });
   
 search_recipe_name_health('chicken',['dairy-free']).then(value=>{
-  a = value;
+  let a = value;
   console.log('test3');
   console.log(a);
 });
