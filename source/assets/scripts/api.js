@@ -27,7 +27,8 @@ async function search_recipe_id(id){
   let data=await response.json();
   return data;
 }
-  
+
+
 // Parameter:
 // recipe_name: the recipe name 
 // it will automaticlt get and parse the recipe in local storage if it can't find it it will just print a sentence to console,.
