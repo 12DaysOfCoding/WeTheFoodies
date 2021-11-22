@@ -21,7 +21,10 @@ async function init() {
   const prevButton = document.querySelector('#prev');
   const nextButton = document.querySelector('#next');
 
+  prevButton.classList.add('hidden');
+  
   prevButton.addEventListener('click', () => {
+    nextButton.classList.remove('hidden');
     if (currStep > 0) currStep -= 1;
     if (currStep === 0) {
       prevButton.classList.add('hidden');
@@ -33,8 +36,9 @@ async function init() {
   });
 
   nextButton.addEventListener('click', () => {
+    prevButton.classList.remove('hidden');
     if (currStep < steps.length - 1) currStep += 1;
-    if (currStep === steps.length) {
+    if (currStep === steps.length - 1) {
       nextButton.classList.add('hidden');
     } else {
       prevButton.classList.remove('disabled');
