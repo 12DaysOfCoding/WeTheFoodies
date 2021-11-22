@@ -32,3 +32,33 @@ describe('preference-setting test', () => {
     expect(text2['_remoteObject'].value).toBe("SAVED");
   });
 });
+
+describe('recipe-searchPage test', () => {
+
+  beforeAll(async () => {
+    await page.goto('http://127.0.0.1:5500/source/recipe-searchPage.html');
+  });
+
+  // check preference-setting
+  it('check saved or not ', async () => {
+    console.log('Checking if recipe-searchPage successfully load');
+    let text_check = await page.$('#apply-filters');
+    let text = await text_check.getProperty('innerText');
+    expect(text['_remoteObject'].value).toBe("APPLY FILTERS");
+  });
+});
+
+describe('navBar test', () => {
+
+  beforeAll(async () => {
+    await page.goto('http://127.0.0.1:5500/source/recipe-searchPage.html');
+  });
+
+  // check preference-setting
+  it('check saved or not ', async () => {
+    console.log('Checking if recipe-searchPage successfully load');
+    let text_check = await page.$('.nav-search #nav-dashboard-text');
+    let text = await text_check.getProperty('innerText');
+    expect(text['_remoteObject'].value).toBe("SEARCH");
+  });
+});
