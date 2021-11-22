@@ -1,14 +1,9 @@
-// recipe-detail.js
+// preference-setting.js
 
 window.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-
-  // Create a recipe card with mock data
-  let expandedRecipeCard = document.createElement('expanded-recipe-card');
-  expandedRecipeCard.data = {};
-  document.querySelector('.recipe-detail__wrapper').appendChild(expandedRecipeCard);
-
+  goBack();
   saveOrSaved();
   goDashboard();
   goSearch();
@@ -24,12 +19,20 @@ function saveOrSaved() {
   btn.addEventListener('click', () => {
     if (text.textContent === 'SAVE') {
       text.textContent = 'SAVED';
-      heart.src = 'assets/images/heart1.svg';
+      heart.src = 'assets/images/white-border-heart2.svg';
     } else {
       text.textContent = 'SAVE';
-      heart.src = 'assets/images/heart0.svg';
+      heart.src = 'assets/images/white-border-heart.svg';
     }
   });
+}
+
+function goBack(){
+    const btn = document.getElementById('dount');
+
+    btn.addEventListener('click', () => {
+        window.location.replace("settings.html");
+    });
 }
 
 function goDashboard() {

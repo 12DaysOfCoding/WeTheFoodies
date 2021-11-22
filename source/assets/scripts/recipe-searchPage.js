@@ -53,6 +53,6 @@ function goSettings() {
   const btn = document.getElementsByClassName('nav-settings');
 
   btn[0].addEventListener('click', () => {
-    window.location.replace("#");
+    window.location.replace("settings.html");
   });
 }
