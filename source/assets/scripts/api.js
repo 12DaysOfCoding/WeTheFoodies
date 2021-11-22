@@ -1,33 +1,25 @@
-
 // Parameter:
 // Name: the name of the recipe
 // it will fetch the reicpe that contain the same word, If it can't find the recipe, then it will return undefiened
+// it will include analyze instruction and ingredient data 
 async function search_recipe_name(name){
-  let response=await fetch(`https://api.edamam.com/search?q=${name}&app_id=b5f49952&app_key=5c2d978fabfbb048d95adf40f11e6fea`);
+  let response=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
   let data=await response.json();
-  return data.hits;
+  console.log(data);
+  return data.results;
 }
 
 // Parameter:
 // Name: the name of the recipe
-// heal: the filter we set, pass a array of what kind of filter we applied
-// it will fetch the reicpe that satify both parameters If it can't find the recipe, then it will return undefiened
+// heal: the filter we set, pass a comma-seperate string of what kind of filter we applied
+// it will fetch the reicpe that satify both parameters If it can't find the recipe, then it will return undefiened.
+// it will include analyze instruction and ingredient data 
 async function search_recipe_name_health(name,health)//health is an array
 {
-  let response=await fetch(`https://api.edamam.com/search?q=${name}&health=${health}&app_id=b5f49952&app_key=5c2d978fabfbb048d95adf40f11e6fea`);
+  let response=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&intolerances=${health}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
   let data=await response.json();
-  return data.hits;
+  return data.results;
 }
-  
-// Parameter:
-// Name: the id of the recipe
-// it will fetch the reicpe with same id, If it can't find the recipe, then it will return undefiened 
-async function search_recipe_id(id){
-  let response=await fetch(`https://api.edamam.com/api/recipes/v2/${id}?app_id=b5f49952&app_key=5c2d978fabfbb048d95adf40f11e6fea&type=public`);
-  let data=await response.json();
-  return data;
-}
-
 
 // Parameter:
 // recipe_name: the recipe name 
@@ -74,13 +66,6 @@ search_recipe_name('chicken').then(value=>{
   console.log(a[0].recipe.label);
   console.log(b);
   remove_localstore(a[0].recipe.label);
-});
-  
-  
-search_recipe_id('8275bb28647abcedef0baaf2dcf34f8b').then(value=>{
-  let a = value;
-  console.log('test2');
-  console.log(a);
 });
   
 search_recipe_name_health('chicken',['dairy-free']).then(value=>{
