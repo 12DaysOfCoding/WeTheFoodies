@@ -1,57 +1,62 @@
-// Parameter:
-// Name: the name of the recipe
-// it will fetch the reicpe that contain the same word, If it can't find the recipe, then it will return undefiened
-// it will include analyze instruction and ingredient data 
-async function search_recipe_name(name){
-  let response=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
-  let data=await response.json();
-  let temp=data.results
-  return_list=new Array();
-  localStorage.clear();
-  for( let i=0; i<temp.length;i++){
-  let temp2={'Recipe hash':temp[i].id,
-              'Name':temp[i].title,
-              'imageType':temp[i].imageType,
-              'Thumbnail':temp[i].image,
-              'Author':temp[i].sourceName,
-              'Type':temp[i].dishTypes,
-              //'Difficulty':
-              'Ingredients':temp[i].extendedIngredients,//notice that the ingredient is not string, but a array of object, because it has a lot info
-              'Intolerances':temp[i].diets,//notice that the intolerence is not string, but a array
-              'Steps:':temp[i].analyzedInstructions[0].steps
-            };
-    set_localstore(temp2["Recipe hash"],temp2);
-    return_list.push(temp2)
-  }
-  return return_list;
+/** @module api */
+
+import { recipe_data, keep_fields } from './recipe-data.js'
+
+/**
+ * search a recipe by its name and return a promise of list of raw json
+ * @param {string} name - name of the recipe
+ * @returns {Promise} - a list of unfiltered recipe, empty if non found
+ */
+async function search_recipe_name_raw(name) {
+  const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
+  const data = await response.json();
+  if (data.results) return data.results;
+  else return [];  // an empty list
 }
+
+/**
+ * search a recipe by its name and keep only the parts we need according to the global variable keep_fields
+ * we then remap the field names by the rule fields_remap
+ * if no recipe is found, it should return a promise of an empty list
+ * @param {string} name - name of the recipe 
+ * @returns {Promise} - a list of filtered recipe
+ */
+export async function search_recipe_name(name) {
+  const raw_recipes = await search_recipe_name_raw(name);
+  // for each recipe, keep only ones in keep_fields and rename them to fields_remap
+  // const filtered_recipes = raw_recipes.map(
+  //   raw_recipe => keep_fields.reduce((a, b, i) => a[fields_remap[i]] = raw_recipe[b]));
+  return raw_recipes;
+}
+
+// search_recipe_name('pizza').then(console.log);
 
 // Parameter:
 // Name: the name of the recipe
 // heal: the filter we set, pass a comma-seperate string of what kind of filter we applied
 // it will fetch the reicpe that satify both parameters If it can't find the recipe, then it will return undefiened.
 // it will include analyze instruction and ingredient data 
-async function search_recipe_name_health(name,health)//health is an array
+export async function search_recipe_name_health(name,health)//health is an array
 {
   let response=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&intolerances=${health}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
   let data=await response.json();
-  let temp=data.results
-  return_list=new Array();
+  let temp=data.results;
+  let return_list=new Array();
   localStorage.clear();
   for( let i=0; i<temp.length;i++){
-  let temp2={'Recipe hash':temp[i].id,
-              'Name':temp[i].title,
-              'imageType':temp[i].imageType,
-              'Thumbnail':temp[i].image,
-              'Author':temp[i].sourceName,
-              'Type':temp[i].dishTypes,
-              //'Difficulty':
-              'Ingredients':temp[i].extendedIngredients,//notice that the ingredient is not string, but a array of object, because it has a lot info
-              'Intolerances':temp[i].diets,//notice that the intolerence is not string, but a array
-              'Steps:':temp[i].analyzedInstructions[0].steps
-            };
-    set_localstore(temp2["Recipe hash"],temp2);
-    return_list.push(temp2)
+    let temp2={'Recipe hash':temp[i].id,
+      'Name':temp[i].title,
+      'imageType':temp[i].imageType,
+      'Thumbnail':temp[i].image,
+      'Author':temp[i].sourceName,
+      'Type':temp[i].dishTypes,
+      //'Difficulty':
+      'Ingredients':temp[i].extendedIngredients,//notice that the ingredient is not string, but a array of object, because it has a lot info
+      'Intolerances':temp[i].diets,//notice that the intolerence is not string, but a array
+      'Steps:':temp[i].analyzedInstructions[0].steps
+    };
+    set_localstore(temp2['Recipe hash'],temp2);
+    return_list.push(temp2);
   }
   return return_list;
 }
@@ -105,7 +110,7 @@ function add_favorite(id){
     if(fav.indexOf(id)==-1){
       fav.push(id);
       remove_localstore('favorite');
-      set_localstore('favorite',fav)
+      set_localstore('favorite',fav);
     }
     else{
       console.log('Add: Recipe already in the favorite list');
@@ -122,15 +127,15 @@ function remove_favorite(id){
     console.log('Favorite list is empty');
   }
   else{
-    let index=fav.indexOf(id)
+    let index=fav.indexOf(id);
     if(index==-1)
     {
       console.log('Remove: Recipe not in the favorite list');
     }
     else{
-     fav.splice(index,1);
-     remove_localstore('favorite');
-     set_localstore('favorite',fav)
+      fav.splice(index,1);
+      remove_localstore('favorite');
+      set_localstore('favorite',fav);
     }
   }
 }
@@ -149,7 +154,7 @@ function add_custom(id){
     if(added.indexOf(id)==-1){
       added.push(id);
       remove_localstore('custom');
-      set_localstore('custom',added)
+      set_localstore('custom',added);
     }
     else{
       console.log('Add: Recipe already in the custom list');
@@ -166,62 +171,16 @@ function remove_custom(id){
     console.log('Custom list is empty');
   }
   else{
-    let index=added.indexOf(id)
+    let index=added.indexOf(id);
     if(index==-1)
     {
       console.log('Remove: Recipe not in the cuntom list');
     }
     else{
-     added.splice(index,1);
-     remove_localstore('custom');
-     set_localstore('custom',added)
+      added.splice(index,1);
+      remove_localstore('custom');
+      set_localstore('custom',added);
     }
   }
 }
-
-
-
-
-//if recipe can't be founded, the value will be undefined
-// a few sample to show how to use it
-// some example and test below
-// search_recipe_name('chicken').then(value=>{
-//   let a = value;
-//   console.log('test')
-//   console.log(a)
-//   console.log(get_info_localstore(a[0]["Recipe hash"]))
-// });
-  
-
-// search_recipe_name_health('chicken','dairy-free').then(value=>{
-//   let a = value;
-//   console.log('test3');
-//   console.log(a);
-// });
-
-// localStorage.clear();
-// console.log('fav test')
-// add_favorite('1412414');
-// console.log(get_info_localstore('favorite'));
-// add_favorite('12421421515');
-// console.log(get_info_localstore('favorite'));
-// add_favorite('12421421515');
-// console.log(get_info_localstore('favorite'));
-// remove_favorite('afsafafaf')
-// console.log(get_info_localstore('favorite'));
-// remove_favorite('12421421515')
-// console.log(get_info_localstore('favorite'));
-
-// console.log('cus test')
-// add_custom('1412414');
-// console.log(get_info_localstore('custom'));
-// add_custom('12421421515');
-// console.log(get_info_localstore('custom'));
-// add_custom('12421421515');
-// console.log(get_info_localstore('custom'));
-// remove_custom('afsafafaf')
-// console.log(get_info_localstore('custom'));
-// remove_custom('12421421515')
-// console.log(get_info_localstore('custom'));
-
 
