@@ -3,7 +3,7 @@
 - [x] Check code quality via tool
 - [x] Check code quality via human review
 - [x] Unit tests via automation
-- [ ] Documentation generation via automation
+- [x] Documentation generation via automation
 - [ ] End to end testing
 
 ## Lists of tools used for this CI/CD Pipeline:
@@ -26,4 +26,4 @@
 - **Code quality via Codacy:** Similar to Linting and Style enforcement, Codacy is used as the tool to analyze source code and give suggestions regarding potential problems of our codes, including code coverage, code duplication and code complexity for each pull request. After installing Codacy in this repo, we can monitor and discover potential issues through the separate dashboard provided by Codacy, which allows us to keep track of quality of the source code and minimize problems that could pose threats to qualtiy of our recipe management application. 
 
 
-- **Documentation Generation via JSDoc:** With the help of JSDoc, we could generate documentations out of comments form the source code, which would come in handy when customers want to get familiar with what our application is capable of. 
+- **Documentation Generation via JSDoc:** Unlike the traditional appraoch which we manually make documentations for different features of our applications, we've implemented documentation generation automation in the CI/CD pipeline using JSDoc. With the help of JSDoc, we could generate documentations out of comments form the source code, which would come in handy when customers want to get familiar with what our application is capable of. 
