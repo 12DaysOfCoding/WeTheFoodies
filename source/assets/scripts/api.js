@@ -5,7 +5,7 @@ import { recipe_data, keep_fields } from './recipe-data.js';
 /**
  * search a recipe by its name and return a promise of list of raw json
  * @param {string} name - name of the recipe
- * @param {[string]} intolerances - a list of intolerances. see below for details
+ * @param {Array<string>} intolerances - a list of intolerances. see below for details
  * @returns {Promise} - a list of unfiltered recipe, empty if non found
  */
 export async function search_recipe_raw(name, intolerances) {
@@ -22,7 +22,7 @@ export async function search_recipe_raw(name, intolerances) {
  * we then remap the field names by the rule fields_remap
  * if no recipe is found, it should return a promise of an empty list
  * @param {string} name - name of the recipe 
- * @param {[string]} intolerances - a list of intolerances. for a list of supported keywords, see 
+ * @param {Array<string>} intolerances - a list of intolerances. for a list of supported keywords, see 
  *  https://spoonacular.com/food-api/docs#:~:text=of%20supported%20diets.-,intolerances,-string
  *  Note that this functionality is pretty bad since if a recipe can be nut free without listing nuts as intolerance
  * @returns {Promise} - a list of filtered recipe
