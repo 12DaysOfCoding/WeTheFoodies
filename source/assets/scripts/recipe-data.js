@@ -16,10 +16,11 @@ export const recipe_data = {
   'readyInMinutes': 0,
   'servings': 0,
   'vegan': true,
-  'vegetarian': true
-}
+  'vegetarian': true,
+  'difficulty': 0  // currently configured as ingredients.length*steps.length/readyInMinutes
+};
 
-// fields we want to keep from the raw json response of Spoonacular and what they remap to
+// fields we want to keep from the raw json response of Spoonacular and what they map to. Ex. 'id' was 'hash'
 /** @global */
 export const keep_fields = {
   'id': 'hash',

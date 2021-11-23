@@ -1,14 +1,17 @@
 /** @module api */
 
-import { recipe_data, keep_fields } from './recipe-data.js'
+import { recipe_data, keep_fields } from './recipe-data.js';
 
 /**
  * search a recipe by its name and return a promise of list of raw json
  * @param {string} name - name of the recipe
+ * @param {[string]} intolerances - a list of intolerances. see below for details
  * @returns {Promise} - a list of unfiltered recipe, empty if non found
  */
-async function search_recipe_name_raw(name) {
-  const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
+export async function search_recipe_raw(name, intolerances) {
+  const intolerances_str = Array.isArray(intolerances) ? `&intolerances=${intolerances.join(',')}` : '';
+  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}${intolerances_str}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`;
+  const response = await fetch(url);
   const data = await response.json();
   if (data.results) return data.results;
   else return [];  // an empty list
@@ -19,46 +22,23 @@ async function search_recipe_name_raw(name) {
  * we then remap the field names by the rule fields_remap
  * if no recipe is found, it should return a promise of an empty list
  * @param {string} name - name of the recipe 
+ * @param {[string]} intolerances - a list of intolerances. for a list of supported keywords, see 
+ *  https://spoonacular.com/food-api/docs#:~:text=of%20supported%20diets.-,intolerances,-string
+ *  Note that this functionality is pretty bad since if a recipe can be nut free without listing nuts as intolerance
  * @returns {Promise} - a list of filtered recipe
  */
-export async function search_recipe_name(name) {
-  const raw_recipes = await search_recipe_name_raw(name);
-  // for each recipe, keep only ones in keep_fields and rename them to fields_remap
-  // const filtered_recipes = raw_recipes.map(
-  //   raw_recipe => keep_fields.reduce((a, b, i) => a[fields_remap[i]] = raw_recipe[b]));
-  return raw_recipes;
-}
-
-// search_recipe_name('pizza').then(console.log);
-
-// Parameter:
-// Name: the name of the recipe
-// heal: the filter we set, pass a comma-seperate string of what kind of filter we applied
-// it will fetch the reicpe that satify both parameters If it can't find the recipe, then it will return undefiened.
-// it will include analyze instruction and ingredient data 
-export async function search_recipe_name_health(name,health)//health is an array
-{
-  let response=await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${name}&intolerances=${health}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`);
-  let data=await response.json();
-  let temp=data.results;
-  let return_list=new Array();
-  localStorage.clear();
-  for( let i=0; i<temp.length;i++){
-    let temp2={'Recipe hash':temp[i].id,
-      'Name':temp[i].title,
-      'imageType':temp[i].imageType,
-      'Thumbnail':temp[i].image,
-      'Author':temp[i].sourceName,
-      'Type':temp[i].dishTypes,
-      //'Difficulty':
-      'Ingredients':temp[i].extendedIngredients,//notice that the ingredient is not string, but a array of object, because it has a lot info
-      'Intolerances':temp[i].diets,//notice that the intolerence is not string, but a array
-      'Steps:':temp[i].analyzedInstructions[0].steps
-    };
-    set_localstore(temp2['Recipe hash'],temp2);
-    return_list.push(temp2);
-  }
-  return return_list;
+export async function search_recipe(name, intolerances) {
+  const raw_recipes = await search_recipe_raw(name, intolerances);
+  // for each recipe, keep only ones in keep_fields and rename them accordingly
+  const filtered_recipes = raw_recipes.map(raw_recipe => {
+    const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
+    Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
+    recipe.steps = recipe.steps[0].steps; // special modification 1: spoonacular's step array is cursed
+    recipe.difficulty = recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;  // calculate difficulty
+    recipe.hash = recipe.hash.toString();  // turn hash from int to string
+    return recipe;
+  });
+  return filtered_recipes;
 }
 
 // Parameter:
@@ -183,4 +163,3 @@ function remove_custom(id){
     }
   }
 }
-
