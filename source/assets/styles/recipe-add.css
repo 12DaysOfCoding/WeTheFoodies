@@ -271,8 +271,10 @@ background-color: #FFC83A;
     
     background-color: #F4BA26;
     height: 70px;
-    
-    /* margin: auto; */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin-top: 10px;
     border-radius: 0px 0px 6px 6px;
 }
