@@ -24,9 +24,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: stefanoeb/eslint-action@1.0.2
-        with:
-          files: src/
 
       # Set up dependencies
       - name: Set up nodejs
