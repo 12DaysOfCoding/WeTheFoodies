@@ -235,8 +235,11 @@ grid-template-columns: 100px 120px 120px;
     
   background-color: #F4BA26;
   height: 70px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   
-  /* margin: auto; */
   margin-top: 10px;
 }
 
