@@ -3,15 +3,19 @@ describe('Basic user flow for Recipe detail page', () => {
 		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
 	});
 
-	// check page loads
-  it('Initial Recipe detail Page', async () => {
-    console.log('Checking if page loads');
-    let ingredients = await page.$('h1');
-    let text = await ingredients.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("INGREDIENTS");
-  });
+	/**
+	 * Check initial recipe card
+	 */
+	it('Initial Recipe detail Page', async () => {
+		console.log('Checking if page loads');
+		let ingredients = await page.$('h1');
+		let text = await ingredients.getProperty('innerText');
+		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
+	});
 	
-	// Check click save the button change to saved
+	/**
+	 * Check click save the button change to saved
+	 */
 	it('Check save or saved - 1', async () => {
 		console.log('Checking the "save" button...');
 		let buttons = await page.$$('button');
@@ -22,7 +26,9 @@ describe('Basic user flow for Recipe detail page', () => {
 		expect(text).toBe("SAVED");
 	});
 	
-	// Check click saved the button change to save
+	/**
+	 * Check click saved the button change to save
+	 */
 	it('Check save or saved - 2', async () => {
 		console.log('Checking the "saved" button...');
 		let buttons = await page.$$('button');
@@ -33,7 +39,9 @@ describe('Basic user flow for Recipe detail page', () => {
 		expect(text).toBe("SAVE");
 	});
 
-	// Check back to dashboard
+	/**
+	 * Check click back to dashboard
+	 */
 	it('Check go dashboard', async () => {
 		console.log('Checking go dashboard');
 		let sections = await page.$$('section');
@@ -49,7 +57,9 @@ describe('Basic user flow for Recipe detail page', () => {
   });
 
 	
-	// Check go search
+	/**
+	 * Check click go search
+	 */
 	it('Check go search', async () => {
 		console.log('Checking go search');
 		let sections = await page.$$('section');
@@ -65,7 +75,9 @@ describe('Basic user flow for Recipe detail page', () => {
 		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
 	});
 
-	// Check go add
+	/**
+	 * Check click go add
+	 */
 	it('Check go add', async () => {
 		console.log('Checking go add');
 		let sections = await page.$$('section');
@@ -78,7 +90,9 @@ describe('Basic user flow for Recipe detail page', () => {
 		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
 	});
 
-	// Check go setting
+	/**
+	 * Check click go setting
+	 */
 	it('Check go setting', async () => {
 		console.log('Checking go setting');
 		let sections = await page.$$('section');

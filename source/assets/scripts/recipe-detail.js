@@ -2,6 +2,11 @@
 
 window.addEventListener('DOMContentLoaded', init);
 
+
+
+/**
+ * Initialize and call others function
+ */
 async function init() {
 
   // Create a recipe card with mock data
@@ -16,6 +21,9 @@ async function init() {
   goSettings();
 }
 
+/**
+ * Click to change to save or saved
+ */
 function saveOrSaved() {
   const btn = document.querySelector('.save');
   const heart = document.getElementById('heart');
@@ -32,6 +40,9 @@ function saveOrSaved() {
   });
 }
 
+/**
+ * Click to go back to dashboard
+ */
 function goDashboard() {
   const btn = document.getElementsByClassName('nav-dashboard');
 
@@ -40,6 +51,10 @@ function goDashboard() {
   });
 }
 
+
+/**
+ * Click to go to search
+ */
 function goSearch() {
   const btn = document.getElementsByClassName('nav-search');
 
@@ -47,6 +62,10 @@ function goSearch() {
     window.location.replace("recipe-searchPage.html");
   });
 }
+
+/**
+ * Click to add the recipe card
+ */
 function goAdd() {
   const btn = document.getElementsByClassName('nav-add');
 
@@ -54,6 +73,10 @@ function goAdd() {
     window.location.replace("recipe-add.html");
   });
 }
+
+/**
+ * Click to go to settings
+ */
 function goSettings() {
   const btn = document.getElementsByClassName('nav-settings');
 
