@@ -1,4 +1,5 @@
 // recipe-detail.js
+/** @module recipe-detail */
 
 window.addEventListener('DOMContentLoaded', init);
 
