@@ -30,3 +30,8 @@ Ex.
  */
 const add = (a, b) => a + b;
 ```
+
+## Linting 
+- Ideally, make sure to lint locally before make the pull request. But it's fine to just push to repo, since CI pipeline would lint again just in case. 
+- We are using [ESLint](https://eslint.org/) as linter. 
+- Only files within the "src" directory would be linted. 
