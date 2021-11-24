@@ -8,6 +8,7 @@ Where: Zoom
 ## Attendence
 - Cora Coleman (TA)
 - Anna Hsieh
+- Bin Ni (async)
 - Enze Ma
 - Harry Lei
 - Jingjing Qiao (async)
