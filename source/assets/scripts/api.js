@@ -166,7 +166,7 @@ function remove_custom(id){
 
 /**
  * This function will get a array of intolerance then store them into local storage with the key intolerance
- * @param {array} intolerance_list - a list of intolerance that user applied
+ * @param {Array<string>} intolerance_list - a list of intolerance that user applied
  */
  function set_intolerance(intolerance_list){
   let intolerance=get_info_localstore('intolerance');
