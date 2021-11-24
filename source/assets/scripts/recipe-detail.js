@@ -1,11 +1,12 @@
 // recipe-detail.js
+/** @module recipe-detail */
 
 window.addEventListener('DOMContentLoaded', init);
 
 
 
 /**
- * Initialize and call others function
+ * Initialize and call other function
  */
 async function init() {
 
