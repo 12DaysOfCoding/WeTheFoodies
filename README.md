@@ -1,6 +1,7 @@
 # [cse110-fa21-group30](admin/team.md)
 [![CI](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/main.yml/badge.svg)](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions)
 [![CD](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://cse110-group30-affd4.web.app/)
+[![Codacy](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions)
 
 ## Project Description
 Our team will design a recipe management application.
@@ -29,3 +30,8 @@ Ex.
  */
 const add = (a, b) => a + b;
 ```
+
+## Linting 
+- Ideally, make sure to lint locally before make the pull request. But it's fine to just push to repo, since CI pipeline would lint again just in case. 
+- We are using [ESLint](https://eslint.org/) as linter. 
+- Only files within the "src" directory would be linted. 

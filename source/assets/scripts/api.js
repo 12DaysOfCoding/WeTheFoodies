@@ -1,33 +1,45 @@
+/** @module api */
 
-// Parameter:
-// Name: the name of the recipe
-// it will fetch the reicpe that contain the same word, If it can't find the recipe, then it will return undefiened
-async function search_recipe_name(name){
-  let response=await fetch(`https://api.edamam.com/search?q=${name}&app_id=b5f49952&app_key=5c2d978fabfbb048d95adf40f11e6fea`);
-  let data=await response.json();
-  return data.hits;
+import { recipe_data, keep_fields } from './recipe-data.js';
+
+/**
+ * search a recipe by its name and return a promise of list of raw json
+ * @param {string} name - name of the recipe
+ * @param {Array<string>} intolerances - a list of intolerances. see below for details
+ * @returns {Promise} - a list of unfiltered recipe, empty if non found
+ */
+export async function search_recipe_raw(name, intolerances) {
+  const intolerances_str = Array.isArray(intolerances) ? `&intolerances=${intolerances.join(',')}` : '';
+  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}${intolerances_str}&apiKey=486eca841c6a49b896486723439f9977&addRecipeInformation=true&fillIngredients=true`;
+  const response = await fetch(url);
+  const data = await response.json();
+  if (data.results) return data.results;
+  else return [];  // an empty list
 }
 
-// Parameter:
-// Name: the name of the recipe
-// heal: the filter we set, pass a array of what kind of filter we applied
-// it will fetch the reicpe that satify both parameters If it can't find the recipe, then it will return undefiened
-async function search_recipe_name_health(name,health)//health is an array
-{
-  let response=await fetch(`https://api.edamam.com/search?q=${name}&health=${health}&app_id=b5f49952&app_key=5c2d978fabfbb048d95adf40f11e6fea`);
-  let data=await response.json();
-  return data.hits;
+/**
+ * search a recipe by its name and keep only the parts we need according to the global variable keep_fields
+ * we then remap the field names by the rule fields_remap
+ * if no recipe is found, it should return a promise of an empty list
+ * @param {string} name - name of the recipe 
+ * @param {Array<string>} intolerances - a list of intolerances. for a list of supported keywords, see 
+ *  https://spoonacular.com/food-api/docs#:~:text=of%20supported%20diets.-,intolerances,-string
+ *  Note that this functionality is pretty bad since if a recipe can be nut free without listing nuts as intolerance
+ * @returns {Promise} - a list of filtered recipe
+ */
+export async function search_recipe(name, intolerances) {
+  const raw_recipes = await search_recipe_raw(name, intolerances);
+  // for each recipe, keep only ones in keep_fields and rename them accordingly
+  const filtered_recipes = raw_recipes.map(raw_recipe => {
+    const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
+    Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
+    recipe.steps = recipe.steps[0].steps; // special modification 1: spoonacular's step array is cursed
+    recipe.difficulty = recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;  // calculate difficulty
+    recipe.hash = recipe.hash.toString();  // turn hash from int to string
+    return recipe;
+  });
+  return filtered_recipes;
 }
-  
-// Parameter:
-// Name: the id of the recipe
-// it will fetch the reicpe with same id, If it can't find the recipe, then it will return undefiened 
-async function search_recipe_id(id){
-  let response=await fetch(`https://api.edamam.com/api/recipes/v2/${id}?app_id=b5f49952&app_key=5c2d978fabfbb048d95adf40f11e6fea&type=public`);
-  let data=await response.json();
-  return data;
-}
-
 
 // Parameter:
 // recipe_name: the recipe name 
@@ -64,27 +76,90 @@ function remove_localstore(recipe_name){
   }
 }
   
-//if recipe can't be founded, the value will be undefined
-// a few sample to show how to use it
-search_recipe_name('chicken').then(value=>{
-  let a = value;
-  set_localstore(a[0].recipe.label,a[0]);
-  let b=get_info_localstore(a[0].recipe.label);
-  console.log('test1');
-  console.log(a[0].recipe.label);
-  console.log(b);
-  remove_localstore(a[0].recipe.label);
-});
-  
-  
-search_recipe_id('8275bb28647abcedef0baaf2dcf34f8b').then(value=>{
-  let a = value;
-  console.log('test2');
-  console.log(a);
-});
-  
-search_recipe_name_health('chicken',['dairy-free']).then(value=>{
-  let a = value;
-  console.log('test3');
-  console.log(a);
-});
+// Parameter:
+// id: id of the recipe
+// add recipe to favorite list
+function add_favorite(id){
+  let fav=get_info_localstore('favorite');
+  if(fav==undefined){
+    let temp=new Array(0);
+    temp.push(id);
+    set_localstore('favorite',temp);
+  }
+  else{
+    if(fav.indexOf(id)==-1){
+      fav.push(id);
+      remove_localstore('favorite');
+      set_localstore('favorite',fav);
+    }
+    else{
+      console.log('Add: Recipe already in the favorite list');
+    }
+  }
+}
+
+// Parameter:
+// id: id of the recipe
+// remove recipe to favorite list
+function remove_favorite(id){
+  let fav=get_info_localstore('favorite');
+  if(fav==undefined){
+    console.log('Favorite list is empty');
+  }
+  else{
+    let index=fav.indexOf(id);
+    if(index==-1)
+    {
+      console.log('Remove: Recipe not in the favorite list');
+    }
+    else{
+      fav.splice(index,1);
+      remove_localstore('favorite');
+      set_localstore('favorite',fav);
+    }
+  }
+}
+
+// Parameter:
+// id: id of the recipe
+// add recipe to custom added list
+function add_custom(id){
+  let added=get_info_localstore('custom');
+  if(added==undefined){
+    let temp=new Array(0);
+    temp.push(id);
+    set_localstore('custom',temp);
+  }
+  else{
+    if(added.indexOf(id)==-1){
+      added.push(id);
+      remove_localstore('custom');
+      set_localstore('custom',added);
+    }
+    else{
+      console.log('Add: Recipe already in the custom list');
+    }
+  }
+}
+
+// Parameter:
+// id: id of the recipe
+// remove recipe to custom added list
+function remove_custom(id){
+  let added=get_info_localstore('custom');
+  if(added==undefined){
+    console.log('Custom list is empty');
+  }
+  else{
+    let index=added.indexOf(id);
+    if(index==-1)
+    {
+      console.log('Remove: Recipe not in the cuntom list');
+    }
+    else{
+      added.splice(index,1);
+      remove_localstore('custom');
+      set_localstore('custom',added);
+    }
+  }
+}
