@@ -4,9 +4,11 @@
 }
 
 .section__foodie {
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 100px;
 }
 
 .step__wrapper {
@@ -69,11 +71,12 @@ button {
 
 
 .nav-bar {
-    
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: #F4BA26;
     height: 70px;
-    
-    /* margin: auto; */
     margin-top: 10px;
 }
 

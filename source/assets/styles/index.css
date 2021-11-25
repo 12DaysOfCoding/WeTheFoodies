@@ -39,13 +39,16 @@
      width: 50%;
  }
 
+ .section__saved-recipes {
+     margin-bottom: 100px;
+ }
  
 .nav-bar {
     
     background-color: #F4BA26;
     height: 70px;
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     left: 0;
     right: 0;
     margin-top: 10px;
