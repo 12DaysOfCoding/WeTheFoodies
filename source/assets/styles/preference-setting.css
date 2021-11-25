@@ -125,6 +125,7 @@ grid-template-columns: 100px 120px 120px;
 .bottom-buttons {
     position: relative;
     text-align: center;
+    margin-bottom: 100px;
 }
 
 .bottom-buttons > p {
@@ -139,8 +140,10 @@ grid-template-columns: 100px 120px 120px;
 .nav-bar {
     background-color: #F4BA26;
     height: 70px;
-    
-    /* margin: auto; */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin-top: 30px;
     
 }

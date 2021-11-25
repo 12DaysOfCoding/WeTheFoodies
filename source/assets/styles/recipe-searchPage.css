@@ -197,10 +197,10 @@ grid-template-columns: 100px 120px 120px;
     grid-row: 1;     
 }
 
-/* .section__search-recipes{
-  position: relative;
-  text-align: center;
-} */
+.section__search-recipes{
+  
+  margin-bottom: 100px;
+}
 
 .recipes__wrapper{
     column-gap: 20px;

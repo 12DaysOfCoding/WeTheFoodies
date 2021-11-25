@@ -35,6 +35,11 @@ nav {
     color: #FAF9F6;
 }
 
+.flexbox {
+    margin-bottom: 70px;
+}
+
+
 .RecipeBox {
     display: flex;
     justify-content: center;
