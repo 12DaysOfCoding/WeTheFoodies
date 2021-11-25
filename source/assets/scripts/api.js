@@ -44,11 +44,12 @@ export async function search_recipe(name, intolerances) {
 // Parameter:
 // recipe_name: the recipe name 
 // it will automaticlt get and parse the recipe in local storage if it can't find it it will just print a sentence to console,.
-function get_info_localstore(recipe_name){
+export function get_info_localstore(recipe_name){
   if(localStorage.getItem(recipe_name)) {
     return JSON.parse(localStorage.getItem(recipe_name));
   } else {
     console.log('Can not find recipe info in local,can not get');
+    return undefined;
   }
 }
 
@@ -57,7 +58,7 @@ function get_info_localstore(recipe_name){
 // recipe_info: the recipe object
 // it will automaticlt change the info to string and store it in the local storage, 
 // if locale storage already have it it will just print a sentence to console.
-function set_localstore(recipe_name,recipe_info){
+export function set_localstore(recipe_name,recipe_info){
   if(!localStorage.getItem(recipe_name)) {
     localStorage.setItem(recipe_name,JSON.stringify(recipe_info));
   } else {
@@ -68,7 +69,7 @@ function set_localstore(recipe_name,recipe_info){
 // Parameter:
 // recipe_name: the recipe name 
 // it will automaticlt remove the recipe in local storage if it can't find it it will just print a sentence to console,.
-function remove_localstore(recipe_name){
+export function remove_localstore(recipe_name){
   if(localStorage.getItem(recipe_name)) {
     localStorage.removeItem(recipe_name);
   } else {
@@ -79,7 +80,7 @@ function remove_localstore(recipe_name){
 // Parameter:
 // id: id of the recipe
 // add recipe to favorite list
-function add_favorite(id){
+export function add_favorite(id){
   let fav=get_info_localstore('favorite');
   if(fav==undefined){
     let temp=new Array(0);
@@ -101,7 +102,7 @@ function add_favorite(id){
 // Parameter:
 // id: id of the recipe
 // remove recipe to favorite list
-function remove_favorite(id){
+export function remove_favorite(id){
   let fav=get_info_localstore('favorite');
   if(fav==undefined){
     console.log('Favorite list is empty');
@@ -123,7 +124,7 @@ function remove_favorite(id){
 // Parameter:
 // id: id of the recipe
 // add recipe to custom added list
-function add_custom(id){
+export function add_custom(id){
   let added=get_info_localstore('custom');
   if(added==undefined){
     let temp=new Array(0);
@@ -145,7 +146,7 @@ function add_custom(id){
 // Parameter:
 // id: id of the recipe
 // remove recipe to custom added list
-function remove_custom(id){
+export function remove_custom(id){
   let added=get_info_localstore('custom');
   if(added==undefined){
     console.log('Custom list is empty');
@@ -168,7 +169,7 @@ function remove_custom(id){
  * This function will get a array of intolerance then store them into local storage with the key intolerance
  * @param {Array<string>} intolerance_list - a list of intolerance that user applied
  */
- function set_intolerance(intolerance_list){
+ export function set_intolerance(intolerance_list){
   let intolerance=get_info_localstore('intolerance');
   if(intolerance==undefined){
     set_localstore('intolerance',intolerance_list);
