@@ -1,4 +1,11 @@
 
+* {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
 nav {
     background-color: #F4BA26;
     padding: 20px;
@@ -14,11 +21,6 @@ nav {
 #dount {
     width: 50px;
 }
-
-
-
-
-
 
 .diet-restrictionBox{
     position: relative;right:5.5px;
