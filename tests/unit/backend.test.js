@@ -27,15 +27,27 @@ global.fetch = fetch;
 import * as backend from '../../source/assets/scripts/backend.js';
 import { recipe_data } from '../../source/assets/scripts/recipe-data.js'
 
-test('testing search recipe w/o intolerance', async () => {
-  const result = await backend.fetch_recipe('cherry pie');
-  result.forEach(recipe => Object.keys(recipe_data).forEach(key => {
-    expect(recipe).toHaveProperty(key);  // check every key exists
-    expect(typeof recipe[key]).toBe(typeof recipe_data[key]);  // check every value has the right type
-  }));
+describe('testing fetch recipe w/o intolerance', () => {
+  let result;
+  beforeAll(async () => {
+    result = await backend.fetch_recipe('cherry pie');
+  });
+
+  it('fetches and filters recipe objects to have the right keys and key types', () =>
+    result.forEach(recipe =>
+      Object.keys(recipe_data).forEach(key => {
+        expect(recipe).toHaveProperty(key);  // check every key exists
+        expect(typeof recipe[key]).toBe(typeof recipe_data[key]);  // check every value has the right type
+      })
+    )
+  );
+
+  it('saves fetched recipe objects in localstore', () => 
+    result.forEach(recipe => expect(backend.get_recipe(recipe.hash)).toEqual(recipe))
+  );
 });
 
-test('testing search recipe w/ intolerance', async () => {
+test('testing fetch recipe w/ intolerance', async () => {
   const result = await backend.fetch_recipe('cherry pie', ['gluten']);  // should have just 1 entry haha
   result.forEach(recipe => Object.keys(recipe_data).forEach(key => {
     expect(recipe).toHaveProperty(key);  // check every key exists
@@ -44,7 +56,7 @@ test('testing search recipe w/ intolerance', async () => {
   }));
 });
 
-test('testing search recipe that should return emtpy list', async () => {
+test('testing fetch recipe that should return emtpy list', async () => {
   const result = await backend.fetch_recipe('computer');  // should have just 0 entry
   expect(result).toHaveLength(0);
 });
