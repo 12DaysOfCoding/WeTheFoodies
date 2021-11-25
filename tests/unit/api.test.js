@@ -24,7 +24,7 @@ import fetch from 'node-fetch';  // we need a fetch equivalent for nodejs
 global.fetch = fetch;
 
 // test begins
-import { search_recipe，get_info_localstore,set_localstore,remove_localstore,add_favorite,add_custom,remove_favorite,remove_custom,set_intolerance } from '../../source/assets/scripts/api.js';
+import { search_recipe,get_info_localstore,set_localstore,remove_localstore,add_favorite,add_custom,remove_favorite,remove_custom,set_intolerance } from '../../source/assets/scripts/api.js';
 import { recipe_data } from '../../source/assets/scripts/recipe-data.js'
 
 test('testing search recipe w/o intolerance', async () => {
