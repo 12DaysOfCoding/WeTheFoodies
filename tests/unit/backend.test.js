@@ -27,24 +27,76 @@ global.fetch = fetch;
 import * as backend from '../../source/assets/scripts/backend.js';
 import { recipe_data } from '../../source/assets/scripts/recipe-data.js'
 
-describe('testing fetch recipe w/o intolerance', () => {
+describe('testing functionalities that require actual recipes', () => {
   let result;
   beforeAll(async () => {
     result = await backend.fetch_recipe('cherry pie');
   });
 
-  it('fetches and filters recipe objects to have the right keys and key types', () =>
-    result.forEach(recipe =>
-      Object.keys(recipe_data).forEach(key => {
-        expect(recipe).toHaveProperty(key);  // check every key exists
-        expect(typeof recipe[key]).toBe(typeof recipe_data[key]);  // check every value has the right type
-      })
-    )
-  );
+  describe('testing fetch w/o intolerance along with its helpers', () => {
+    it('fetches and filters recipe objects to have the right keys and key types', () =>
+      result.forEach(recipe =>
+        Object.keys(recipe_data).forEach(key => {
+          expect(recipe).toHaveProperty(key);  // check every key exists
+          expect(typeof recipe[key]).toBe(typeof recipe_data[key]);  // check every value has the right type
+        })
+      )
+    );
 
-  it('saves fetched recipe objects in localstore', () => 
-    result.forEach(recipe => expect(backend.get_recipe(recipe.hash)).toEqual(recipe))
-  );
+    it('computes hash correctly for each recipe', () =>
+      result.forEach(recipe => expect(recipe.hash.startsWith(recipe.name+"$")).toBe(true))
+    );
+
+    it('computes difficulty correctly for each recipe', () =>
+      result.forEach(recipe => expect(recipe.difficulty).toBeGreaterThan(0))
+    );
+
+    it('does not add spoonacular recipes as custom', () =>
+      expect(backend.get_custom()).toHaveLength(0)
+    );
+
+    it('saves fetched recipe objects in localstore and getter is also working', () => 
+      result.forEach(recipe => expect(backend.get_recipe(recipe.hash)).toEqual(recipe))
+    );
+  });
+
+  it('can add a custom recipe', () => {
+    const custom_recipe = result[0];
+    const original_hash = custom_recipe.hash;
+    custom_recipe.name = 'I am custom';
+    custom_recipe.steps.push('hahaha');
+    backend.add_recipe(custom_recipe, true);
+    const custom_recipes = backend.get_custom();
+    expect(custom_recipes).toHaveLength(1);  // only 1 added
+    const [recipe_hash] = custom_recipes;
+    const recipe = backend.get_recipe(recipe_hash);
+    expect(recipe.name).toBe(custom_recipe.name);  // name same
+    expect(recipe.steps.pop()).toBe(custom_recipe.steps.pop());  // last step same
+    expect(recipe.hash.slice(-7) !== original_hash.slice(-7)).toBe(true);  // different hash
+  });
+
+  it('does not allow dup custom recipe', () => {
+    const custom_recipe = result[0];
+    custom_recipe.name = 'I am custom';
+    backend.add_recipe(custom_recipe, true);
+    const old_length = backend.get_custom().length;
+    backend.add_recipe(custom_recipe, true);
+    expect(backend.get_custom()).toHaveLength(old_length);  // length unchanged
+  })
+
+  it('can remove recipes', () => {
+    const recipe_to_remove = result[1];
+    expect(backend.get_recipe(recipe_to_remove.hash)).toBeTruthy();  // not null
+    backend.remove_recipe(recipe_to_remove.hash);
+    expect(backend.get_recipe(recipe_to_remove.hash)).toBeNull();  // gone!
+  });
+
+  it('removes custom when recipe is removed', () => {
+    const custom_recipe_hash = backend.get_custom()[0];  // there should still be some left
+    backend.remove_recipe(custom_recipe_hash);
+    expect(backend.get_recipe(custom_recipe_hash)).toBeNull();  // gone!
+    expect(backend.get_custom().includes(custom_recipe_hash)).toBe(false);  // gone too from list!
+  });
 });
 
 test('testing fetch recipe w/ intolerance', async () => {
@@ -61,51 +113,9 @@ test('testing fetch recipe that should return emtpy list', async () => {
   expect(result).toHaveLength(0);
 });
 
-// test('test get local with key not exist',() => {
-//   const result=backend.get_recipe('dne');
-//   expect(result).toBe(null);
-// });
-
-// test('test set local and get local',async () => {
-//   backend.add_recipe('a',[1,2,3,4,5]);
-//   const result=backend.get_recipe('a');
-//   expect(result).toHaveLength(5);
-// });
-
-// test('test remove local',async () => {
-//   backend.remove_localstore('a');
-//   const result=backend.get_recipe('a');
-//   expect(result).toBe(null);
-// });
-
-// test('add favorite with kay does not exist',async () => {
-//   backend.add_favorite('1')
-//   const result=backend.get_recipe('favorite');
-//   console.log(result);
-//   expect(result).toHaveLength(1);
-// });
-
-// test('add favorite with kay exist',async () => {
-//   backend.add_favorite('1')
-//   const result=backend.get_info_localstore('favorite');
-//   expect(result).toHaveLength(1);
-// });
-
-// test('remove favorite',async () => {
-//   backend.remove_favorite('1')
-//   const result=backend.get_info_localstore('favorite');
-//   expect(result).toHaveLength(0);
-// });
-
-// test('testing set intolerance preference',async  () => {
-//   backend.set_intolerance(['a','b']);
-//   const result=backend.get_info_localstore('intolerance');
-//   expect(result).toHaveLength(2);
-// });
-
-// test('testing set intolerance preference reset the data',async  () => {
-//   backend.set_intolerance(['1','2','3']);
-//   const result=backend.get_info_localstore('intolerance');
-//   expect(result).toHaveLength(3);
-// });
- 
+test('testing get/set intolerance preference', async () => {
+  backend.set_intolerance(['a','b']);
+  expect(backend.get_intolerance()).toEqual(['a','b']);
+  backend.set_intolerance(['1','2','3']);
+  expect(backend.get_intolerance()).toEqual(['1','2','3']);
+});
