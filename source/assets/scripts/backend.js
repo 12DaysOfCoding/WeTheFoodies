@@ -169,6 +169,7 @@ function remove_hash_in_arr(recipe_hash, arr_name) {
 }
 
 /**
+ * mark a recipe as custom
  * @param {string} recipe_hash 
  */
 export function add_custom(recipe_hash) {
@@ -176,6 +177,7 @@ export function add_custom(recipe_hash) {
 }
 
 /**
+ * get an array of recipe that are custom
  * @return {Array<string>} an array of custom item, empty if non exisit
  */
 export function get_custom() {
@@ -184,6 +186,7 @@ export function get_custom() {
 }
 
 /**
+ * unmark a recipe as custom
  * @param {string} recipe_hash 
  */
 export function remove_custom(recipe_hash) {
@@ -191,6 +194,7 @@ export function remove_custom(recipe_hash) {
 }
 
 /**
+ * mark a recipe as favorite
  * @param {string} recipe_hash 
  */
 export function add_favorite(recipe_hash) {
@@ -198,6 +202,7 @@ export function add_favorite(recipe_hash) {
 }
 
 /**
+ * get a list of starred recipe
  * @return {Array<string>} an array of favorite item, empty if non exisit
  */
 export function get_favorite() {
@@ -206,6 +211,7 @@ export function get_favorite() {
 }
 
 /**
+ * unfavorite a recipe
  * @param {string} recipe_hash 
  */
 export function remove_favorite(recipe_hash) {
