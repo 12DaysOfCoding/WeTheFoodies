@@ -232,3 +232,92 @@ export function get_intolerance() {
   const intolerance = get_localstore(INTOLERANCE_KEY);
   return intolerance ? intolerance : [];
 }
+
+let char_coords = {};  // keyboard layout in rows. inited upon first use
+/**
+ * helper function that returns the cost of turning c1 -> c2
+ * this is related to how far apart the characters are on the keyboard
+ * @param {char} c1 
+ * @param {char} c2 
+ */
+function sub_cost(c1, c2) {
+  c1 = c1.toLowerCase();
+  c2 = c2.toLowerCase();
+  if (c1 === c2) return 0;
+  if (Object.keys(char_coords).length === 0) {
+    const row_strs = ['1234567890-', 'qwertyuiop', 'asdfghjkl;\'"', 'zxcvbnm,./', '      '];
+    const offsets = [0, 0, 0, 1, 1];
+    row_strs.forEach((row_str, r) => {
+      for (let c = 0; c < row_str.length; c++)
+        char_coords[row_str.charAt(c)] = [r, c+offsets[r]];  
+    });
+  }
+  const coords1 = char_coords[c1], coords2 = char_coords[c2];
+  if (!coords1 || !coords2) return 2;  // weird character
+  else if (Math.abs(coords1[0]-coords2[0])<2 && Math.abs(coords1[1]-coords2[1])<2) return 1;
+  else return 2; // large distance
+}
+
+/**
+ * calculate the minimum edit distance to edit the first string to be the second
+ * @param {string} str1 
+ * @param {string} str2 
+ * @param {float} del_cost 
+ * @param {float} add_cost 
+ * @param {float} sub_cost 
+ */
+function min_edit_dist(str1, str2, del_cost=1, add_cost=1) {
+  str1 = str1.toLowerCase();
+  str2 = str2.toLowerCase();  // ignore case
+  let m = str1.length, n = str2.length;
+  let dp = Array.from(Array(m+1), () => new Array(n+1));
+  dp[0][0] = 0;  // two empty strings
+  for (let i = 1; i <= m; i++) dp[i][0] = del_cost*i;
+  for (let j = 1; j <= n; j++) dp[0][j] = add_cost*j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      let c1 = str1.charAt(i-1), c2 = str2.charAt(j-1);
+      if (c1 === c2) dp[i][j] = dp[i-1][j-1];  // no edit
+      else {  // we will have to edit
+        dp[i][j] = Math.min(dp[i-1][j-1]+sub_cost(c1, c2), 
+          Math.min(dp[i-1][j]+del_cost, dp[i][j-1]+add_cost));  // min of the three
+      }
+    }
+  }
+  return dp[m][n];
+}
+
+/**
+ * search recipe in the localstore and as well as an option to auto fetch from the internet
+ * @param {string} name - name of the recipe you want to search 
+ * @param {boolean} online - whether you want to pull in online results (local search by default)
+ * @param {float} match_tolerance - what is the max distance between two strings that the fuzzy search allows
+ * @return {Promise} a list of recipe_hash
+ */
+export async function search_recipe(name, online=false, match_tolerance=10) {
+  if (online) await fetch_recipe(name);  // populate localstore
+
+  const multimap = [];  // stores (name, recipe_hash) pair
+  for (let i = 0; i < localStorage.length; i++) {
+    const recipe_hash = localStorage.key(i);
+    if (recipe_hash.startsWith('%')) continue;  // ignore
+    const recipe_name = recipe_hash.substring(0, recipe_hash.indexOf('$'));
+    multimap.push([recipe_name, recipe_hash]);
+  }
+
+  const result = [];
+  multimap.forEach(itm => {
+    const [recipe_name, recipe_hash] = itm;
+    let dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
+    // some huristic to handle substring distance
+    if (recipe_name.toLowerCase().includes(name.toLowerCase()))
+      dist = Math.min(dist, (1-name.length/recipe_name.length)*match_tolerance);
+    // include if distance is below the tolerance
+    if (dist < match_tolerance)
+      result.push([dist, recipe_hash]);  // use the distance as a sorting key
+  });
+
+  return result.sort().map(itm => itm[1]);  // grab 2nd elem
+}
+
+search_recipe('fried rice', true).then(console.log);
