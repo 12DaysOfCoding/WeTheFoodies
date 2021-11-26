@@ -91,7 +91,7 @@ nav {
     display:flex
 }
 
-  form.search input[type=text] {
+  div.search input[type=text] {
     border-radius: 5px;
     padding: 10px;
     font-size: 17px;
@@ -105,7 +105,7 @@ nav {
   }
   
   /* Style the submit button */
-  form.search button {
+  div.search button {
     position:relative; right:5px;
     border-radius: 5px;
     float: left;
@@ -122,7 +122,7 @@ nav {
   
   
   /* Clear floats */
-  form.example::after {
+  div.example::after {
     content: "";
     clear: both;
     display: table;

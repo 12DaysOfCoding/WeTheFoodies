@@ -291,11 +291,12 @@ function min_edit_dist(str1, str2, del_cost=1, add_cost=1) {
  * search recipe in the localstore and as well as an option to auto fetch from the internet
  * @param {string} name - name of the recipe you want to search 
  * @param {boolean} online - whether you want to pull in online results (local search by default)
- * @param {float} match_tolerance - what is the max distance between two strings that the fuzzy search allows
+ * @param {float} match_tolerance - max distance between two strings that the fuzzy search allows
  * @return {Promise} a list of recipe_hash
  */
 export async function search_recipe(name, online=false, match_tolerance=10) {
-  if (online) await fetch_recipe(name);  // populate localstore
+  if (!name.length) return [];  // empty search
+  else if (online) await fetch_recipe(name);  // populate localstore
 
   const multimap = [];  // stores (name, recipe_hash) pair
   for (let i = 0; i < localStorage.length; i++) {
@@ -318,4 +319,26 @@ export async function search_recipe(name, online=false, match_tolerance=10) {
   });
 
   return result.sort().map(itm => itm[1]);  // grab 2nd elem
+}
+
+/**
+ * suggest some recipes a user might be looking for
+ * @param {string} name - user input
+ * @param {float} match_tolerance - max distance between two strings that the fuzzy search allows
+ * @param {float} return_size - max length of the return array
+ * @return an array of recipe names that might be the thing you are searching for sorted by relavance
+ */
+export async function search_suggest(name, match_tolerance=15, return_size=5) {
+  if (!name.length) return [];  // empty search
+  const recipe_hashes = await search_recipe(name, false, match_tolerance);
+  const recipe_names = recipe_hashes.map(hash => hash.substring(0, hash.indexOf('$')));
+  const hash_set = new Set();
+  const deduped_names = [];  // we want to remove dups but keep the order
+  for (const name of recipe_names) {
+    if (hash_set.has(name)) continue;
+    hash_set.add(name);
+    deduped_names.push(name);
+    if (deduped_names.length >= return_size) break;
+  }
+  return deduped_names;
 }
