@@ -319,5 +319,3 @@ export async function search_recipe(name, online=false, match_tolerance=10) {
 
   return result.sort().map(itm => itm[1]);  // grab 2nd elem
 }
-
-search_recipe('fried rice', true).then(console.log);

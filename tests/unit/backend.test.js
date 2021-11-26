@@ -5,18 +5,25 @@
 class LocalStorageMock {
   constructor() {
     this.store = {};
+    this.length = 0;
   }
   clear() {
     this.store = {};
+    this.length = 0;
   }
   getItem(key) {
     return this.store[key] || null;
   }
   setItem(key, value) {
+    if (!(key in this.store)) this.length++;
     this.store[key] = String(value);
   }
   removeItem(key) {
+    if (key in this.store) this.length--;
     delete this.store[key];
+  }
+  key(idx) {
+    return Object.keys(this.store)[idx];
   }
 }
 global.localStorage = new LocalStorageMock;  // we need this to mock the local storage
@@ -111,6 +118,12 @@ test('testing fetch recipe w/ intolerance', async () => {
 test('testing fetch recipe that should return emtpy list', async () => {
   const result = await backend.fetch_recipe('computer');  // should have just 0 entry
   expect(result).toHaveLength(0);
+});
+
+test('testing fuzzy search', async () => {
+  expect(await backend.search_recipe('fried rice')).toHaveLength(0);
+  const online_results = await backend.search_recipe('fried rice', true);
+  expect(online_results.length > 0).toBe(true);
 });
 
 test('testing get/set intolerance preference', async () => {
