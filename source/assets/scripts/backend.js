@@ -294,7 +294,7 @@ function min_edit_dist(str1, str2, del_cost=1, add_cost=1) {
  * @param {float} match_tolerance - max distance between two strings that the fuzzy search allows
  * @return {Promise} a list of recipe_hash
  */
-export async function search_recipe(name, online=true, match_tolerance=10) {
+export async function search_recipe(name, online=false, match_tolerance=10) {
   if (!name.length) return [];  // empty search
   else if (online) await fetch_recipe(name);  // populate localstore
 
