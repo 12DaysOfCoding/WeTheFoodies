@@ -9,6 +9,8 @@ async function init() {
   goSearch();
   goAdd();
   goSettings();
+  
+  defaultPreference();
 
   // sample usage of the search_recipe function
   const search_button = document.getElementById('search-button');
@@ -41,6 +43,33 @@ async function init() {
   let recipeCard4 = document.createElement('recipe-card');
   recipeCard4.data = {};
   document.querySelector('.recipes__wrapper').appendChild(recipeCard4);
+
+}
+
+function defaultPreference(){
+  let intolerance_list = backend.get_intolerance();
+
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName("container");
+  for(var i = 0; i < leftCkbox.length; i++){
+    var ingredientBox = leftCkbox[i].getElementsByTagName("input")[0];
+    var ingredientText = leftCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText)){
+      ingredientBox.checked = true;
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName("container");
+  for(var i = 0; i < rightCkbox.length; i++){
+    var ingredientBox = rightCkbox[i].getElementsByTagName("input")[0];
+    var ingredientText = rightCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText)){
+      ingredientBox.checked = true;
+    }
+  }
 
 }
 

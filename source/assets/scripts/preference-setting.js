@@ -1,15 +1,77 @@
 // preference-setting.js
+import * as backend from './backend.js'
 
 window.addEventListener('DOMContentLoaded', init);
 
 async function init() {
   goBack();
-  saveOrSaved();
+
   goDashboard();
   goSearch();
   goAdd();
   goSettings();
+
+  defaultPreference();
+  saveOrSaved();
 }
+
+//helper function
+function changePreference(){
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName("container");
+  let intolerance_list = [];
+
+  //leftCkbox[0].getElementsByTagName("input")[0].checked
+
+  for(var i = 0; i < leftCkbox.length; i++){
+    var ingredientBox = leftCkbox[i].getElementsByTagName("input")[0];
+    if(ingredientBox.checked){
+      var ingredientText = leftCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName("container");
+  for(var i = 0; i < rightCkbox.length; i++){
+    var ingredientBox = rightCkbox[i].getElementsByTagName("input")[0];
+    if(ingredientBox.checked){
+      var ingredientText = rightCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  backend.set_intolerance(intolerance_list);
+}
+
+function defaultPreference(){
+  let intolerance_list = backend.get_intolerance();
+
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName("container");
+  for(var i = 0; i < leftCkbox.length; i++){
+    var ingredientBox = leftCkbox[i].getElementsByTagName("input")[0];
+    var ingredientText = leftCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText)){
+      ingredientBox.checked = true;
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName("container");
+  for(var i = 0; i < rightCkbox.length; i++){
+    var ingredientBox = rightCkbox[i].getElementsByTagName("input")[0];
+    var ingredientText = rightCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText)){
+      ingredientBox.checked = true;
+    }
+  }
+
+}
+
+
 
 function saveOrSaved() {
   const btn = document.querySelector('.save');
@@ -18,6 +80,7 @@ function saveOrSaved() {
 
   btn.addEventListener('click', () => {
     if (text.textContent === 'SAVE') {
+      changePreference();
       text.textContent = 'SAVED';
       heart.src = 'assets/images/white-border-heart2.svg';
     } else {
