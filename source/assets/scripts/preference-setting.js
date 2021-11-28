@@ -1,5 +1,5 @@
 // preference-setting.js
-import * as backend from './backend.js'
+import * as backend from './backend.js';
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -18,25 +18,25 @@ async function init() {
 //helper function
 function changePreference(){
   const leftElmt = document.querySelector('.left');
-  const leftCkbox = leftElmt.getElementsByClassName("container");
+  const leftCkbox = leftElmt.getElementsByClassName('container');
   let intolerance_list = [];
 
   //leftCkbox[0].getElementsByTagName("input")[0].checked
 
-  for(var i = 0; i < leftCkbox.length; i++){
-    var ingredientBox = leftCkbox[i].getElementsByTagName("input")[0];
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     if(ingredientBox.checked){
-      var ingredientText = leftCkbox[i].innerText;
+      let ingredientText = leftCkbox[i].innerText;
       intolerance_list.push(ingredientText);
     }
   }
 
   const rightElmt = document.querySelector('.right');
-  const rightCkbox = rightElmt.getElementsByClassName("container");
-  for(var i = 0; i < rightCkbox.length; i++){
-    var ingredientBox = rightCkbox[i].getElementsByTagName("input")[0];
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     if(ingredientBox.checked){
-      var ingredientText = rightCkbox[i].innerText;
+      let ingredientText = rightCkbox[i].innerText;
       intolerance_list.push(ingredientText);
     }
   }
@@ -48,10 +48,10 @@ function defaultPreference(){
   let intolerance_list = backend.get_intolerance();
 
   const leftElmt = document.querySelector('.left');
-  const leftCkbox = leftElmt.getElementsByClassName("container");
-  for(var i = 0; i < leftCkbox.length; i++){
-    var ingredientBox = leftCkbox[i].getElementsByTagName("input")[0];
-    var ingredientText = leftCkbox[i].innerText;
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = leftCkbox[i].innerText;
 
     if(intolerance_list.includes(ingredientText)){
       ingredientBox.checked = true;
@@ -59,10 +59,10 @@ function defaultPreference(){
   }
 
   const rightElmt = document.querySelector('.right');
-  const rightCkbox = rightElmt.getElementsByClassName("container");
-  for(var i = 0; i < rightCkbox.length; i++){
-    var ingredientBox = rightCkbox[i].getElementsByTagName("input")[0];
-    var ingredientText = rightCkbox[i].innerText;
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = rightCkbox[i].innerText;
 
     if(intolerance_list.includes(ingredientText)){
       ingredientBox.checked = true;
