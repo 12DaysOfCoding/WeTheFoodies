@@ -86,7 +86,6 @@ describe('Basic user flow for Recipe detail page', () => {
 			divs[2].click(),
 			page.waitForNavigation(),
 		]);
-		// TODO: check the page after implementing add page
     let label = await page.$('label');
     let text = await label.getProperty('innerText');
     expect(text['_remoteObject'].value).toBe("NAME: ");
