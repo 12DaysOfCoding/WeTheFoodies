@@ -133,7 +133,7 @@ input {
     margin-top: 4px;
 }
 
-  
+/* Hide the browser's default checkbox */  
 .container input {
     position: absolute;
     opacity: 0;
@@ -141,7 +141,8 @@ input {
     height: 0;
     width: 0;
 }
-  
+
+/* Create a custom checkbox */
 .checkmark {
     position: absolute;
     top: 0;
@@ -161,6 +162,7 @@ input {
     display: block;
 }
 
+/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
     background-color: #FFC83A;
 }
