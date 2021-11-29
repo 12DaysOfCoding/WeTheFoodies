@@ -208,7 +208,6 @@ input {
 
 .ingredientList {
   border: 1.5px solid #ffc83a;
-	
   box-sizing: border-box;
   border-radius: 6px;
   width: 100%;
@@ -254,7 +253,7 @@ input {
 	display: flex;
 	align-items: center;
 	text-align: center;
-	background: #ffc83a;
+  background: #ffc83a;
   border-radius: 6px;
   align-items: center;
   display: flex;
@@ -284,7 +283,8 @@ input {
   display: inline;
   float: left;
   height: 70px;
-  text-align: center;   
+  text-align: center;
+  
 }
 .nav-search {
   /* position: relative; */
@@ -293,6 +293,7 @@ input {
   float: left;
   height: 70px;
   text-align: center;
+  
 }
 .nav-add {
   /* position: relative; */
@@ -300,7 +301,8 @@ input {
   display: inline;
   float: left;
   height: 70px;
-  text-align: center;  
+  text-align: center;
+  
 }
 .nav-settings {
   /* position: relative; */
@@ -308,7 +310,8 @@ input {
   display: inline;
   float: left;
   height: 70px;
-  text-align: center; 
+  text-align: center;
+ 
 }
 
 .nav-dashboard #nav-dashboard-img {
