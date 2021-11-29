@@ -1,94 +1,84 @@
-#dount-p {
-    text-align: right;
-    margin-top: -60px;
-    margin-bottom: 0;
-    justify-content: right;
-    right: 0px;
-    margin-right: 0px;
-    top: 2em;
-    position: absolute;
-
+* {
+    font-family: 'Inter', sans-serif;
 }
 
-#dount {
-    width: 4vw;
+.points-summary {
+    text-align: center;
+}
+
+div {
+    font-size: 22px;
+    color: #F4BA26;
+    font-weight: 700;
+}
+
+.points {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+h2, #points {
+    color: #F4BA26;
+}
+
+span {
+    font-size: 18px;
 }
 
 nav {
     background-color: #F4BA26;
-    padding: 22px;
+    padding: 20px;
+}
 
-    font-family: Inter;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 61.99%;
-    /* or 25px */
+#dount-p {
+    text-align: right;
+    margin-top: -60px;
+    margin-bottom: 0;
+}
 
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: -0.025em;
-    justify-content: center;
-    border-radius: 15px;
+#dount {
+    width: 50px;
+}
 
-    color: #FAF9F6;
+#add-recipe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .flexbox {
-    margin-bottom: 70px;
+    width: 340px;
+    margin: auto;
 }
-
 
 .RecipeBox {
     display: flex;
     justify-content: center;
-
 }
 
 .radioClass {
-    float: left;
     clear: none;
 }
 
 input.radio {
     width: auto;
-    display:inline
+    display: inline;
 }
 
-#easy {
-    padding: 5px;
-    width:25px;
-}
-#medium {
-    padding: 5px;
-    width:25px;
-}
-#hard {
-    padding: 5px;
-    width:25px;
-}
-#veryHard {
-    padding: 5px;
-    width:25px;
-}
 label {
     font-family: Inter;
     font-style: italic;
-    font-weight: bold;
     font-size: 16px;
+    font-weight: 400;
     line-height: 61.99%;
     /* identical to box height, or 10px */
-
     letter-spacing: -0.025em;
     padding: 10px;
-    margin: 10px;
-
-    display: flex;
     align-items: center;
-
     color: #000000;
 }
+
 .labelRadio {
     display: inline-block;
 }
@@ -97,13 +87,9 @@ input {
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
     line-height: 110%;
     /* or 20px */
-
-    display: flex;
     align-items: center;
-
     color: #000000;
     padding: 2px;
     margin: 5px;
@@ -117,16 +103,18 @@ input {
     font-weight: bold;
     font-size: 30px;
     line-height: 36px;
-
     color: #FFFFFF;
     padding: 10px;
     margin: 10px;
+    margin-left: 2px;
     border: none;
-    width: 100%;
+    width: 99%;
     text-align: center;
     align-items: center;
     justify-content: center;
+    margin-bottom: 80px;
 }
+
 
 .container {
     display: block;
@@ -143,57 +131,57 @@ input {
     font-style: normal;
     font-weight: normal;
     margin-top: 4px;
-  }
+}
 
-/* Hide the browser's default checkbox */
+  
 .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
+}
   
-  /* Create a custom checkbox */
-  .checkmark {
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 15px;
     width: 15px;
     background-color: #FFC83A;
-  }
+}
   
-  .checkmark:after {
+.checkmark:after {
     content: "✓";
     position: absolute;
     display: none;
-  }
-  
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-background-color: #FFC83A;
 }
   
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #FFC83A;
+}
+ 
 .diet-restrictionBox{
-    position: relative;right:5.5px;
+    position: relative;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:auto;
-    height:auto;
-    border: 1.5px solid #FFC83A;
-    
+    width: auto;
+    height: auto;
+    border: 1.5px solid #FFC83A;  
     border-radius: 6px;
-  }
+}
+
 .container {
     display: grid;
     grid-template-columns: 100px 120px 120px;  
 }
+
+
 .word {
     grid-row: 1; 
     position: relative;
@@ -208,14 +196,19 @@ background-color: #FFC83A;
     grid-row: 1;     
 }
 
+.bottom-boxes {
+    margin-top: 10px;
+    position: relative;
+}
+
 .ingredientList {
     border: 1.5px solid #FFC83A;
     box-sizing: border-box;
     border-radius: 6px;
     width: 100%;
+    font-size: 16px;
     
 }
-
 .ingredientButton {
     font-family: Inter;
     font-style: normal;
@@ -225,14 +218,12 @@ background-color: #FFC83A;
     border: none;
     margin: 10px;
     padding: 10px;
-
     display: flex;
     align-items: center;
     text-align: center;
     background: #FFC83A;
     border-radius: 6px;
     justify-content: center;
-
     color: #FAF9F6;
     align-items: center;
 }
@@ -241,10 +232,8 @@ background-color: #FFC83A;
     box-sizing: border-box;
     border-radius: 6px;
     width: 100%;
-    
-    
+    font-size: 16px;
 }
-
 .instructionButton {
     font-family: Inter;
     font-style: normal;
@@ -255,7 +244,6 @@ background-color: #FFC83A;
     margin: 10px;
     padding: 10px;
     justify-content: center;
-
     display: flex;
     align-items: center;
     text-align: center;
@@ -264,12 +252,12 @@ background-color: #FFC83A;
     align-items: center;
     display: flex;
   
-
     color: #FAF9F6;
 }
 
-
-
+.delete {
+    width: 12px;
+}
 
 
 .nav-bar {
