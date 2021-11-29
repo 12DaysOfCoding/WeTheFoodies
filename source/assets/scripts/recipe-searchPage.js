@@ -21,7 +21,6 @@ async function init() {
     // backend.search_recipe(input, true).then(console.log);  // use this for online search
   
     // console.log(backend.fetch_recipe("egg")[0].ingredientText[0]);
-    // backend.filter_intolerance("11").then(console.log());
   });
 
   // sample usage of the auto_suggest function

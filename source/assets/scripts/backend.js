@@ -40,7 +40,11 @@ export async function fetch_recipe(name, intolerances) {
     // grab data from raw json
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
     recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
-    return add_recipe(recipe);
+    
+    const status = filter_intolerance(recipe);  //filter the recipe by intolerances
+    if(status){       
+      return add_recipe(recipe);
+    }
   });
 }
 
@@ -343,33 +347,48 @@ export async function search_suggest(name, match_tolerance=15, return_size=5) {
   return deduped_names;
 }
 
-// /**
-//  * filter the intolerance follow the user preferences
-//  */
-//  export async function filter_intolerance(recipe_list){
-//   let final_recipe = [];
-  
-//   //Make a hashset for checking
-//   const intolerance = get_localstore(INTOLERANCE_KEY);
-//   const specialSet = new Set();
-//   for(let i = 0; i < intolerance.length;i++){
-//     switch(intolerance[i]){
-//       case 'Vegan':
-//         specialSet.add("meat"); specialSet.add("chicken"); specialSet.add("eggs"); 
-//     }
-//   }
+/**
+ * filter the intolerance follow the user preferences
+ * @param {Object} recipe - a recipe object defined in the recipe-data
+ * @return {boolean} - true if pass the filter, false if not
+ */
+ export function filter_intolerance(recipe){
+  const intolerance = get_localstore(INTOLERANCE_KEY);
+  const specialSet = new Set();  //Make a hashset for checking
+  for(let i = 0; i < intolerance.length;i++){
+    switch(intolerance[i]){
+      case 'Vegan':
+        specialSet.add("Meat");
+        specialSet.add("Milk, Eggs, Other Dairy");
+        break;
+      case 'Vegetarian':
+        specialSet.add("Meat");
+        break;
+      case 'Dairy-free':
+        specialSet.add("Milk, Eggs, Other Dairy");
+        break;
+      case 'Seafood-free':
+        specialSet.add("Seafood");
+        break;
+      case 'Gluten-free':
+        specialSet.add("Gluten Free");
+        break;
+      case 'Tree Nut-free':
+        specialSet.add("Nuts;Savory Snacks");
+        break;
+      case 'Peanut-free':
+        specialSet.add("Nuts;Savory Snacks");
+        break;
+    }
+  }
 
+  let ingredientsList = recipe.ingredients;
+  for(let j = 0; j < ingredientsList.length;j++){
+    let thisAisle = ingredientsList[j].aisle;
+    if(specialSet.has(thisAisle)){
+      return false;
+    }
+  }
 
-
-
-//   let res = await fetch_recipe("tofu")
-//   for(let i = 0; i < res.length; i++){
-//     let longIngredientsList = [];  // save all the ingredients in one recipe
-//     let ingredientsList = res[i].ingredients;
-//     for(let j = 0; j < ingredientsList.length;j++){
-//       let temp = ingredientsList[j].name;
-//       longIngredientsList.push(temp.split(" "));
-//     }
-//   }
-//   return res;
-// }
+  return true;
+}
