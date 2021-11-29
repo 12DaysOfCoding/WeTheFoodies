@@ -6,7 +6,7 @@ describe('Basic user flow for Recipe Add page', () => {
   /**
    * Check click back to dashboard
    */
-   it('Check go dashboard', async () => {
+  it('Check go dashboard', async () => {
     console.log('Checking go dashboard');
     let sections = await page.$$('section');
     let divs = await sections[1].$$('div');
