@@ -309,16 +309,18 @@ export async function search_recipe(name, online=false, match_tolerance=10) {
   const result = [];
   multimap.forEach(itm => {
     const [recipe_name, recipe_hash] = itm;
-    let dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
-    // some huristic to handle substring distance
-    if (recipe_name.toLowerCase().includes(name.toLowerCase()))
-      dist = Math.min(dist, (1-name.length/recipe_name.length)*match_tolerance);
-    // include if distance is below the tolerance
-    if (dist < match_tolerance)
-      result.push([dist, recipe_hash]);  // use the distance as a sorting key
-  });
+    let dist;
+    if (recipe_name.toLowerCase().includes(name.toLowerCase())) {  // substr
+      dist = -name.length/recipe_name.length;  // huristics: shorter name better
+    } else {
+      dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
+    }
 
-  return result.sort().map(itm => itm[1]);  // grab 2nd elem
+    if (dist < match_tolerance)
+      result.push([recipe_hash, dist]);  // use the distance as a sorting key
+  });
+  result.sort((a, b) => a[1]-b[1]);  // sort by distance
+  return result.map(itm => itm[0]);  // grab the name
 }
 
 /**
