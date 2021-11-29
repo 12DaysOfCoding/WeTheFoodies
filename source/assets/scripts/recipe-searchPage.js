@@ -11,6 +11,7 @@ async function init() {
   goSettings();
   
   defaultPreference();
+  readPreference();
 
   // sample usage of the search_recipe function
   const search_button = document.getElementById('search-button');
@@ -18,6 +19,9 @@ async function init() {
     const input = document.getElementById('search-field').value;
     backend.search_recipe(input).then(console.log);
     // backend.search_recipe(input, true).then(console.log);  // use this for online search
+  
+    // console.log(backend.fetch_recipe("egg")[0].ingredientText[0]);
+    // backend.filter_intolerance("11").then(console.log());
   });
 
   // sample usage of the auto_suggest function
@@ -44,6 +48,32 @@ async function init() {
   recipeCard4.data = {};
   document.querySelector('.recipes__wrapper').appendChild(recipeCard4);
 
+}
+
+function readPreference(){
+  let intolerance_list = [];
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = leftCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = rightCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  return intolerance_list;
 }
 
 function defaultPreference(){

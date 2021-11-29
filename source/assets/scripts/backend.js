@@ -342,3 +342,34 @@ export async function search_suggest(name, match_tolerance=15, return_size=5) {
   }
   return deduped_names;
 }
+
+// /**
+//  * filter the intolerance follow the user preferences
+//  */
+//  export async function filter_intolerance(recipe_list){
+//   let final_recipe = [];
+  
+//   //Make a hashset for checking
+//   const intolerance = get_localstore(INTOLERANCE_KEY);
+//   const specialSet = new Set();
+//   for(let i = 0; i < intolerance.length;i++){
+//     switch(intolerance[i]){
+//       case 'Vegan':
+//         specialSet.add("meat"); specialSet.add("chicken"); specialSet.add("eggs"); 
+//     }
+//   }
+
+
+
+
+//   let res = await fetch_recipe("tofu")
+//   for(let i = 0; i < res.length; i++){
+//     let longIngredientsList = [];  // save all the ingredients in one recipe
+//     let ingredientsList = res[i].ingredients;
+//     for(let j = 0; j < ingredientsList.length;j++){
+//       let temp = ingredientsList[j].name;
+//       longIngredientsList.push(temp.split(" "));
+//     }
+//   }
+//   return res;
+// }
