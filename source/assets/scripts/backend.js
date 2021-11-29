@@ -40,7 +40,7 @@ export async function fetch_recipe(name, intolerances) {
     // grab data from raw json
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
     recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
-    
+
     const status = filter_intolerance(recipe);  //filter the recipe by intolerances
     if(status){       
       return add_recipe(recipe);
@@ -354,6 +354,9 @@ export async function search_suggest(name, match_tolerance=15, return_size=5) {
  */
  export function filter_intolerance(recipe){
   const intolerance = get_localstore(INTOLERANCE_KEY);
+  if(intolerance == null){
+    return true;
+  }
   const specialSet = new Set();  //Make a hashset for checking
   for(let i = 0; i < intolerance.length;i++){
     switch(intolerance[i]){
