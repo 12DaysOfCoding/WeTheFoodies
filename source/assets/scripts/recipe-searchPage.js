@@ -35,18 +35,25 @@ async function init() {
   let recipeCard = document.createElement('recipe-card');
   recipeCard.data = {};
   document.querySelector('.recipes__wrapper').appendChild(recipeCard);
-
-  let recipeCard2 = document.createElement('recipe-card');
-  recipeCard2.data = {};
-  document.querySelector('.recipes__wrapper').appendChild(recipeCard2);
-
-  let recipeCard3 = document.createElement('recipe-card');
-  recipeCard3.data = {};
-  document.querySelector('.recipes__wrapper').appendChild(recipeCard3);
-
-  let recipeCard4 = document.createElement('recipe-card');
-  recipeCard4.data = {};
-  document.querySelector('.recipes__wrapper').appendChild(recipeCard4);
+  //set the default filter
+  defaultPreference();
+  // clear the prior output
+  let recipe_list=document.querySelector(".recipes__wrapper");
+  recipe_list.innerHTML="";
+  //select the button
+  //once the button got clicked, request the data from api and then output the result
+  let button=document.querySelector('#search-button');
+  button.addEventListener('click',()=>{
+    let list=readPreference();
+    let recipe_name=document.querySelector('#search-field').value;
+    backend.fetch_recipe(recipe_name,list).then(data => {
+      for(let i=0;i<data.length;i++){
+        let recipeCard=document.createElement('recipe-card');
+        recipeCard.data = data[i];
+        document.querySelector('.recipes__wrapper').appendChild(recipeCard);
+      }
+        })
+  });
 
 }
 
