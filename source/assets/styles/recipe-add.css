@@ -233,8 +233,7 @@ input {
 	align-items: center;
 }
 .instructionList {
-	border: 1.5px solid #FFC83A;
-	
+	border: 1.5px solid #FFC83A;	
 	box-sizing: border-box;
 	border-radius: 6px;
 	width: 100%;
