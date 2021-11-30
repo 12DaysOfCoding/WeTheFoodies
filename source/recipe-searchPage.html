@@ -15,7 +15,7 @@
 
   <!-- Web Components -->
   <script src="assets/components/RecipeCard.js" type="module"></script>
-  <script src="assets/scripts/recipe-searchPage.js"></script>
+  <script src="assets/scripts/recipe-searchPage.js" type="module"></script>
 </head>
 
 <body>
@@ -32,10 +32,10 @@
       <section class="search_page_content">
         <div class="search-bar">
           <!-- The form -->
-          <form class="search" action="action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-          </form>
+          <div class="search">
+            <input id="search-field" type="text" placeholder="Search.." name="search">
+            <button id="search-button" type="submit"><i class="fa fa-search"></i></button>
+          </div>
         </div>
         <p id='apply-filters'>APPLY FILTERS</p>
         <div class="diet-restrictionBox">
