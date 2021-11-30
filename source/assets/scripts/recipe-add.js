@@ -27,7 +27,7 @@ function goSearch() {
   const btn = document.getElementsByClassName('nav-search');
 
   btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-searchPage.html');
+    window.location.replace('recipe-search.html');
   });
 }
 function goAdd() {

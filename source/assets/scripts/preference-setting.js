@@ -53,9 +53,9 @@ function defaultPreference(){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = leftCkbox[i].innerText;
 
-    if(intolerance_list.includes(ingredientText)){
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    }
+    
   }
 
   const rightElmt = document.querySelector('.right');
@@ -64,9 +64,9 @@ function defaultPreference(){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = rightCkbox[i].innerText;
 
-    if(intolerance_list.includes(ingredientText)){
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    }
+    
   }
 
 }
@@ -110,7 +110,7 @@ function goSearch() {
   const btn = document.getElementsByClassName('nav-search');
 
   btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-searchPage.html');
+    window.location.replace('recipe-search.html');
   });
 }
 function goAdd() {
