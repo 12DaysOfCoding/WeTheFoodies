@@ -222,7 +222,7 @@ export function select_recipe(recipe_hash) {
 
 export function get_selected() {
   const selected = get_localstore(SELECTED_RECIPE_KEY);
-  return selected ? selected : [];
+  return selected ? selected : '';
 }
 
 /**

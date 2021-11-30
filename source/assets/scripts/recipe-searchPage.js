@@ -17,6 +17,9 @@ async function init() {
   bindSearchButton();
 }
 
+/**
+ * event listeners on search input change
+ */
 function bindSearchBar() {
   const input_field = document.getElementById('search-field');
   input_field.addEventListener('input', function() {
@@ -39,6 +42,9 @@ function bindSearchBar() {
   });
 }
 
+/**
+ * event listeners on search button click
+ */
 function bindSearchButton() {
   // Create a recipe card
   let recipeCard = document.createElement('recipe-card');
@@ -54,13 +60,16 @@ function bindSearchButton() {
   button.addEventListener('click', hitSearch);
 }
 
+/**
+ * app logic when we hit search
+ */
 function hitSearch() {
   clearDropdowns();  // remove all suggestions
   let recipe_list = document.querySelector(".recipes__wrapper");
   recipe_list.innerHTML = "";  // clear old recipe cards
   let list = readPreference();
   let recipe_name = document.querySelector('#search-field').value;
-  backend.search_recipe(recipe_name, true, 10, list).then(data => {
+  backend.search_recipe(recipe_name, false, 10, list).then(data => {
     recipe_list.innerHTML="";
     for(let i = 0; i < data.length; i++){
       let recipeCard = document.createElement('recipe-card');
@@ -78,6 +87,9 @@ function hitSearch() {
   // configureRecipeCards();
 }
 
+/**
+ * wipe dropdowns
+ */
 function clearDropdowns() {
   const search_bar = document.querySelector(".search-bar");
   const suggest_dropdowns = document.getElementsByClassName('suggest_dropdown');
@@ -87,6 +99,9 @@ function clearDropdowns() {
   }
 }
 
+/**
+ * add event listeners for each recipe card onclick
+ */
 function configureRecipeCards() {
   const recipeCards = document.querySelectorAll('recipe-card');
   recipeCards.forEach((card) => {
@@ -97,6 +112,10 @@ function configureRecipeCards() {
   });
 }
 
+/**
+ * read the check boxes to return a list of preferences
+ * @returns {Array<string>} an array of preferences
+ */
 function readPreference(){
   let intolerance_list = [];
   const leftElmt = document.querySelector('.left');
@@ -123,6 +142,9 @@ function readPreference(){
   return intolerance_list;
 }
 
+/**
+ * apply the default preferences to the UI
+ */
 function defaultPreference(){
   let intolerance_list = backend.get_intolerance();
 
