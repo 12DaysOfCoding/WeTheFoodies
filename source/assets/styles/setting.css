@@ -1,15 +1,17 @@
 * {
     font-family: 'Inter', sans-serif;
+    padding: 0;
+    border: 0;
+    margin: 0;
 }
 
-div {
+#setting-text {
     font-size: 22px;
-    color: #F4BA26;
-    /* color: black; */
+    color: #383200;
     font-weight: 700;
 }
 
-nav {
+.header-bar {
     background-color: #F4BA26;
     padding: 20px;
     text-align: center;
@@ -35,13 +37,10 @@ nav {
     height: 50%;
 } */
 
-.settings-body {
-    margin-bottom: 70px;
-}
 
 .fontsize{
     display: flex;
-    height: 60px;
+    height: 50px;
     justify-content: space-between;
 
     /* margin-top: 10px; */
@@ -50,32 +49,33 @@ nav {
     /* border-top: 2px solid #ffc83a; */
     border-bottom: 2px solid #ffc83a;
     font-size: 20px;
+
 }
 
 .preference{
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    height: 50px;
 
     margin-top: 10px;
     /* color: #ffc83a; */
     color: rgb(77, 76, 24);
     background-color: #FAF9F6;
     border-bottom: 2px solid #ffc83a;
-
+    padding-top: 5px;
 }
 
 .version{
     display: flex;
     justify-content: space-between;
-    height: 60px;
+    height: 50px;
 
     margin-top: 10px;
     /* color: #ffc83a; */
     color: rgb(77, 76, 24);
     background-color: #FAF9F6;
     border-bottom: 2px solid #ffc83a;
-
+    padding-top: 5px;
 }
 
 

@@ -40,7 +40,9 @@ export async function fetch_recipe(name, intolerances) {
     const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
     // grab data from raw json
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
-    recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
+    if (recipe.steps.length) {
+      recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
+    }
     return add_recipe(recipe);
   });
 }
@@ -319,16 +321,18 @@ export async function search_recipe(name, online=false, match_tolerance=10) {
   const result = [];
   multimap.forEach(itm => {
     const [recipe_name, recipe_hash] = itm;
-    let dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
-    // some huristic to handle substring distance
-    if (recipe_name.toLowerCase().includes(name.toLowerCase()))
-      dist = Math.min(dist, (1-name.length/recipe_name.length)*match_tolerance);
-    // include if distance is below the tolerance
-    if (dist < match_tolerance)
-      result.push([dist, recipe_hash]);  // use the distance as a sorting key
-  });
+    let dist;
+    if (recipe_name.toLowerCase().includes(name.toLowerCase())) {  // substr
+      dist = -name.length/recipe_name.length;  // huristics: shorter name better
+    } else {
+      dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
+    }
 
-  return result.sort().map(itm => itm[1]);  // grab 2nd elem
+    if (dist < match_tolerance)
+      result.push([recipe_hash, dist]);  // use the distance as a sorting key
+  });
+  result.sort((a, b) => a[1]-b[1]);  // sort by distance
+  return result.map(itm => itm[0]);  // grab the name
 }
 
 /**
