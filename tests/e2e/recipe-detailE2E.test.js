@@ -88,7 +88,7 @@ describe('Basic user flow for Recipe detail page', () => {
 		]);
     let label = await page.$('label');
     let text = await label.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("NAME: ");
+    expect(text['_remoteObject'].value).toBe("NAME:");
 		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
 	});
 
