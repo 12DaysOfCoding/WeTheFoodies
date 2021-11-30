@@ -39,7 +39,9 @@ export async function fetch_recipe(name, intolerances) {
     const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
     // grab data from raw json
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
-    recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
+    if (recipe.steps.length) {
+      recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
+    }
     return add_recipe(recipe);
   });
 }
