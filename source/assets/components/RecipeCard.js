@@ -91,12 +91,19 @@ class RecipeCard extends HTMLElement {
                 font-size: 14px;
                 color: #999;
             }
+
+            .hash {
+              display: none;
+            }
         `;
     styleElem.innerHTML = styles;
 
 
     this.json = data;
-    console.log(data);
+
+    const hash = document.createElement('span');
+    hash.classList.add('hash');
+    hash.textContent = data.hash;
     const card = document.createElement('article');
 
     const image = document.createElement('img');
@@ -151,6 +158,7 @@ class RecipeCard extends HTMLElement {
     card.appendChild(image);
     card.appendChild(level);
     card.appendChild(wrapper);
+    card.appendChild(hash);
         
     
     this.shadowRoot.append(styleElem, card);

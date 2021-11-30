@@ -44,20 +44,38 @@ async function init() {
   recipe_list.innerHTML='';
   //select the button
   //once the button got clicked, request the data from api and then output the result
-  let button=document.querySelector('#search-button');
-  button.addEventListener('click',()=>{
-    let list=readPreference();
-    let recipe_name=document.querySelector('#search-field').value;
+  let button = document.querySelector('#search-button');
+  button.addEventListener('click',() => {
+    let list = readPreference();
+    let recipe_name = document.querySelector('#search-field').value;
     backend.search_recipe(recipe_name,list).then(data => {
-      for(let i=0; i<data.length; i++){
+      for(let i = 0; i < data.length; i++){
         let recipeCard = document.createElement('recipe-card');
-        console.log(backend.get_recipe(data[i]));
         recipeCard.data = backend.get_recipe(data[i]);
         document.querySelector('.recipes__wrapper').appendChild(recipeCard);
       }
+    
+      configureRecipeCards();
     });
+
+    // USE FOR TESTING PURPOSES – to not overwhelm API
+    // let recipe = backend.get_recipe('Apple Pie Pancakes$5316512375443084');
+    // let recipeCard = document.createElement('recipe-card');
+    // recipeCard.data = recipe;
+    // document.querySelector('.recipes__wrapper').appendChild(recipeCard);
+    // configureRecipeCards();
   });
 
+}
+
+function configureRecipeCards() {
+  const recipeCards = document.querySelectorAll('recipe-card');
+  recipeCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      backend.select_recipe(card.shadowRoot.querySelector('.hash').textContent);
+      window.location.replace('recipe-detail.html');
+    });
+  });
 }
 
 function readPreference(){
