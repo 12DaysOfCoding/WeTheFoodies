@@ -109,8 +109,8 @@ class RecipeCard extends HTMLElement {
     const card = document.createElement('article');
 
     const image = document.createElement('img');
-    image.src = 'assets/images/default.png';
-    image.alt = 'Image Title';
+    image.src = data.thumbnail;
+    image.alt = data.name;
 
     const wrapper = document.createElement('div');
     wrapper.classList.add('wrapper');
@@ -123,14 +123,14 @@ class RecipeCard extends HTMLElement {
 
     const title = document.createElement('p');
     const titleLink = document.createElement('a');
-    titleLink.textContent = 'Recipe name';
+    titleLink.textContent = data.name;
 
     title.appendChild(titleLink);
 
     const tagWrapper = document.createElement('div');
     tagWrapper.classList.add('tags__wrapper');
         
-    const tags = ['NUT-FREE', 'SHELLFISH-FREE'];
+    const tags = data.intolerances;
     tags.forEach((tagName) => {
       const tag = document.createElement('span');
       tag.textContent = tagName;
@@ -138,24 +138,17 @@ class RecipeCard extends HTMLElement {
     });
 
     const level = document.createElement('span');
-    const setLevel = 'easy';
+    const setLevel = data.difficulty;
     let numLevel;
-    switch (setLevel) {
-    case 'easy':
-      numLevel = 1;
-      break;
-    case 'medium':
-      numLevel = 2;
-      break;
-    case 'hard':
-      numLevel = 3;
-      break;
-    case 'very hard':
+
+    if (setLevel > 0.75) 
       numLevel = 4;
-      break;
-    default:
-      break;
-    }
+    else if (setLevel > 0.50) 
+      numLevel = 3;
+    else if (setLevel > 0.25) 
+      numLevel = 2;
+    else 
+      numLevel = 1;
     level.textContent = numLevel;
     level.classList.add('level');
     level.classList.add(`level-${numLevel}`);
