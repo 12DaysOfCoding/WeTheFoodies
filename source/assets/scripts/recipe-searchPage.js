@@ -37,6 +37,8 @@ async function init() {
   document.querySelector('.recipes__wrapper').appendChild(recipeCard);
   //set the default filter
   defaultPreference();
+  let recipe_list=document.querySelector(".recipes__wrapper");
+  recipe_list.innerHTML="";
   //select the button
   //once the button got clicked, request the data from api and then output the result
   let button = document.querySelector('#search-button');
@@ -45,7 +47,6 @@ async function init() {
     let recipe_name = document.querySelector('#search-field').value;
     backend.search_recipe(recipe_name,list).then(data => {
       for(let i = 0; i < data.length; i++){
-        let recipe_list=document.querySelector(".recipes__wrapper");
         recipe_list.innerHTML="";
         let recipeCard = document.createElement('recipe-card');
         recipeCard.data = backend.get_recipe(data[i]);
