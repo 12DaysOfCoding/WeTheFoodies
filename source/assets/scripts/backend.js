@@ -10,12 +10,10 @@ const INTOLERANCE_KEY = '%intolerances';
 /**
  * search a recipe by its name and return a promise of list of raw json
  * @param {string} name - name of the recipe
- * @param {Array<string>} intolerances - a list of intolerances. see below for details
  * @returns {Promise} - a list of unfiltered recipe, empty if non found
  */
-async function fetch_recipe_raw(name, intolerances) {
-  const intolerances_str = Array.isArray(intolerances) ? `&intolerances=${intolerances.join(',')}` : '';
-  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}${intolerances_str}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
+async function fetch_recipe_raw(name) {
+  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
   const response = await fetch(url);
   const data = await response.json();
   if (data.results) return data.results;
@@ -26,14 +24,11 @@ async function fetch_recipe_raw(name, intolerances) {
  * search a recipe by its name and keep only the parts we need according to the global variable keep_fields
  * we then remap the field names by the rule fields_remap
  * afterwards, it saves all filtered recipes to the localstore
- * @param {string} name - name of the recipe 
- * @param {Array<string>} intolerances - a list of intolerances. for a list of supported keywords, see 
- *  https://spoonacular.com/food-api/docs#:~:text=of%20supported%20diets.-,intolerances,-string
- *  Note that this functionality is pretty bad since if a recipe can be nut free without listing nuts as intolerance
+ * @param {string} name - name of the recipe
  * @return {Promise} returns a list of fetched recipe for testing purpose
  */
-export async function fetch_recipe(name, intolerances) {
-  const raw_recipes = await fetch_recipe_raw(name, intolerances);
+export async function fetch_recipe(name) {
+  const raw_recipes = await fetch_recipe_raw(name);
   // for each recipe, keep only ones in keep_fields and rename them accordingly
   return raw_recipes.map(raw_recipe => {
     const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
@@ -294,9 +289,10 @@ function min_edit_dist(str1, str2, del_cost=1, add_cost=1) {
  * @param {string} name - name of the recipe you want to search 
  * @param {boolean} online - whether you want to pull in online results (local search by default)
  * @param {float} match_tolerance - max distance between two strings that the fuzzy search allows
+ * @param {Array<string>} intolerances - a list of intolerances
  * @return {Promise} a list of recipe_hash
  */
-export async function search_recipe(name, online=false, match_tolerance=10) {
+export async function search_recipe(name, online=false, match_tolerance=10, intolerances=null) {
   if (!name.length) return [];  // empty search
   else if (online) await fetch_recipe(name);  // populate localstore
 
@@ -308,7 +304,7 @@ export async function search_recipe(name, online=false, match_tolerance=10) {
     multimap.push([recipe_name, recipe_hash]);
   }
 
-  const result = [];
+  let result = [];
   multimap.forEach(itm => {
     const [recipe_name, recipe_hash] = itm;
     let dist;
@@ -322,7 +318,9 @@ export async function search_recipe(name, online=false, match_tolerance=10) {
       result.push([recipe_hash, dist]);  // use the distance as a sorting key
   });
   result.sort((a, b) => a[1]-b[1]);  // sort by distance
-  return result.map(itm => itm[0]);  // grab the name
+  result = result.map(itm => itm[0]);  // grab the name
+  result = filter_intolerance(result, intolerances);  // filter intolerances
+  return result;
 }
 
 /**
@@ -349,49 +347,53 @@ export async function search_suggest(name, match_tolerance=15, return_size=5) {
 
 /**
  * filter the intolerance follow the user preferences
- * @param {Object} recipe - a recipe object defined in the recipe-data
- * @return {boolean} - true if pass the filter, false if not
+ * @param {Array<string>} recipe_hashes - a list of recipe_hashes on which to apply the filter
+ * @return {Array<string>} - a list of filtered recipe hashes
  */
- export function filter_intolerance(recipe){
-  const intolerance = get_localstore(INTOLERANCE_KEY);
-  if(intolerance == null){
-    return true;
+export function filter_intolerance(recipe_hashes, intolerances) {
+  if (intolerances == null || !Array.isArray(intolerances)) {
+    return recipe_hashes;  // nothing to do, return the original list
   }
-  const specialSet = new Set();  //Make a hashset for checking
-  for(let i = 0; i < intolerance.length;i++){
-    switch(intolerance[i]){
+
+  // at this point, we have some intolerances
+  const aisles_to_avoid = new Set();  // Make a hashset for checking
+  for (let i = 0; i < intolerances.length; i++) {
+    switch (intolerances[i]) {
       case 'Vegan':
-        specialSet.add("Meat");
-        specialSet.add("Milk, Eggs, Other Dairy");
+        aisles_to_avoid.add("Meat");
+        aisles_to_avoid.add("Milk, Eggs, Other Dairy");
         break;
       case 'Vegetarian':
-        specialSet.add("Meat");
+        aisles_to_avoid.add("Meat");
         break;
       case 'Dairy-free':
-        specialSet.add("Milk, Eggs, Other Dairy");
+        aisles_to_avoid.add("Milk, Eggs, Other Dairy");
         break;
       case 'Seafood-free':
-        specialSet.add("Seafood");
+        aisles_to_avoid.add("Seafood");
         break;
       case 'Gluten-free':
-        specialSet.add("Gluten Free");
+        aisles_to_avoid.add("Baking");
         break;
       case 'Tree Nut-free':
-        specialSet.add("Nuts;Savory Snacks");
+        aisles_to_avoid.add("Nuts");
+        aisles_to_avoid.add("Savory Snacks");
         break;
       case 'Peanut-free':
-        specialSet.add("Nuts;Savory Snacks");
+        aisles_to_avoid.add("Nuts");
+        aisles_to_avoid.add("Savory Snacks");
         break;
     }
   }
 
-  let ingredientsList = recipe.ingredients;
-  for(let j = 0; j < ingredientsList.length;j++){
-    let thisAisle = ingredientsList[j].aisle;
-    if(specialSet.has(thisAisle)){
-      return false;
+  return recipe_hashes.filter(recipe_hash => {
+    const ingredients = get_recipe(recipe_hash).ingredients;
+    for (let ingredient of ingredients) {
+      if (!ingredient.aisle) continue;  // empty aisle info, do nothing
+      const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
+      for (let aisle of aisles)
+        if (aisles_to_avoid.has(aisle)) return false;
     }
-  }
-
-  return true;
+    return true;  // otherwise, include
+  });
 }

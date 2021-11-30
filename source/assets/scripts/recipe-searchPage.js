@@ -17,10 +17,8 @@ async function init() {
   const search_button = document.getElementById('search-button');
   search_button.addEventListener('click', () => {
     const input = document.getElementById('search-field').value;
-    backend.search_recipe(input).then(console.log);
+    backend.search_recipe(input, false, 10, readPreference()).then(console.log);
     // backend.search_recipe(input, true).then(console.log);  // use this for online search
-  
-    // console.log(backend.fetch_recipe("egg")[0].ingredientText[0]);
   });
 
   // sample usage of the auto_suggest function
