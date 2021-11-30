@@ -14,7 +14,8 @@
 
   <!-- Web Components -->
 
-  <script src="assets/scripts/onBoardingPage.js"></script>
+  <script src="assets/scripts/onBoardingPage.js" type="module"></script>
+  <script src="assets/scripts/backend.js" type="module"></script>
 </head>
 
 <body>
@@ -29,63 +30,55 @@
         <p>Hi there! Before we begin, do you have any dietary preferences?</p>
     </section>
     <div class="diet-restrictionBox">
-        <div class="container">
-          <div class="word">Dietary Restrictions</div>
-          <div class="left">
-            <label class="container">Vegan
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Vegetarian
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Dairy-dree
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Egg-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Shellfish-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-          </div>
-          <div class="right">
-            <label class="container">Gluten-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Tree Nut-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Peanut-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Fish-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">Soy-free
-              <input type="checkbox">
-              <span class="checkmark"></span>
-            </label>
-          </div>
+      <div class="container">
+        <div class="word">Dietary Restrictions</div>
+        <div class="left">
+          <label class="container">Vegan
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Vegetarian
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Dairy-free
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Seafood-free
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+        <div class="right">
+          <label class="container">Gluten-free
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Tree Nut-free
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Peanut-free
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Soy-free
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
         </div>
       </div>
-      <section class="bottom-text">
-          <p>You can also change these preferences later in the settings page.</p>
-      </section>
-      <section class="bottom-buttons">
-        <button class="save">
-          <!-- <img src="assets/images/white-border-heart.svg" id="heart" /> -->
-          <p id="begin-text">Let's begin!</p>
-        </button>
-      </section>
+    </div>
+    <section class="bottom-text">
+      <p>You can also change these preferences later in the settings page.</p>
+    </section>
+    <section class="bottom-buttons">
+      <button class="save">
+        <!-- <img src="assets/images/white-border-heart.svg" id="heart" /> -->
+        <p id="begin-text">Let's begin!</p>
+      </button>
+    </section>
   </main>
 </body>
 
