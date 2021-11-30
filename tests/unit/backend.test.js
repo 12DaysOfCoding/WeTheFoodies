@@ -40,7 +40,23 @@ describe('testing functionalities that require actual recipes', () => {
     result = await backend.fetch_recipe('cherry pie');
   });
 
-  describe('testing fetch w/o intolerance along with its helpers', () => {
+  describe('testing search functionalities', () => {
+    it('fuzzy searches', async () => {
+      expect(await backend.search_recipe('fried rice')).toHaveLength(0);
+      const online_results = await backend.search_recipe('fried rice', true);
+      expect(online_results.length > 0).toBe(true);
+    });
+    
+    it('fuzzy searches with intolerances', async () => {
+      const results_before = await backend.search_recipe('pie', false, 10, []);
+      const intolerances = ["Gluten-free"];
+      const results_after = await backend.search_recipe('pie', false, 10, intolerances);
+      results_after.forEach(result => expect(results_before.includes(result)).toBe(true));  // subset
+      expect(results_after.length).toBeLessThan(results_before.length);  // subsetneq
+    });
+  });
+
+  describe('testing fetch along with its helpers', () => {
     it('fetches and filters recipe objects to have the right keys and key types', () =>
       result.forEach(recipe =>
         Object.keys(recipe_data).forEach(key => {
@@ -106,24 +122,9 @@ describe('testing functionalities that require actual recipes', () => {
   });
 });
 
-test('testing fetch recipe w/ intolerance', async () => {
-  const result = await backend.fetch_recipe('cherry pie', ['gluten']);  // should have just 1 entry haha
-  result.forEach(recipe => Object.keys(recipe_data).forEach(key => {
-    expect(recipe).toHaveProperty(key);  // check every key exists
-    expect(typeof recipe[key]).toBe(typeof recipe_data[key]);  // check every value has the right type
-    expect(recipe.intolerances.join(',')).toContain('gluten');  // intolerances should have gluten
-  }));
-});
-
 test('testing fetch recipe that should return emtpy list', async () => {
   const result = await backend.fetch_recipe('computer');  // should have just 0 entry
   expect(result).toHaveLength(0);
-});
-
-test('testing fuzzy search', async () => {
-  expect(await backend.search_recipe('fried rice')).toHaveLength(0);
-  const online_results = await backend.search_recipe('fried rice', true);
-  expect(online_results.length > 0).toBe(true);
 });
 
 test('testing get/set intolerance preference', async () => {

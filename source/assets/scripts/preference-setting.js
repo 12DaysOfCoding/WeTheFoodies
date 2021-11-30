@@ -13,6 +13,7 @@ async function init() {
 
   defaultPreference();
   saveOrSaved();
+  registerCheckboxes();
 }
 
 //helper function
@@ -87,6 +88,22 @@ function saveOrSaved() {
       text.textContent = 'SAVE';
       heart.src = 'assets/images/white-border-heart.svg';
     }
+  });
+}
+
+/**
+ * this register listeners to toggle the savebutton whenever checkboxes are changed
+ */
+function registerCheckboxes() {
+  const checkboxes = document.querySelectorAll("input");
+  const heart = document.getElementById('heart');
+  const text = document.getElementById('save-or-not');
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener("click", () => {
+      text.textContent = 'SAVE';
+      heart.src = 'assets/images/white-border-heart.svg';
+    });
   });
 }
 
