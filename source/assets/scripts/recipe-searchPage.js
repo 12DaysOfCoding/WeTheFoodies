@@ -46,8 +46,8 @@ async function init() {
     let list = readPreference();
     let recipe_name = document.querySelector('#search-field').value;
     backend.search_recipe(recipe_name,list).then(data => {
-      for(let i = 0; i < data.length; i++){
-        recipe_list.innerHTML="";
+      recipe_list.innerHTML="";
+      for(let i = 3; i < data.length; i++){
         let recipeCard = document.createElement('recipe-card');
         recipeCard.data = backend.get_recipe(data[i]);
         document.querySelector('.recipes__wrapper').appendChild(recipeCard);
