@@ -15,14 +15,16 @@ async function init() {
 
   // sample usage of the search_recipe function
   const search_button = document.getElementById('search-button');
-  search_button.addEventListener('click', () => {
-    const input = document.getElementById('search-field').value;
-    backend.search_recipe(input).then(console.log);
-    // backend.search_recipe(input, true).then(console.log);  // use this for online search
+  // search_button.addEventListener('click', () => {
+  //   const input = document.getElementById('search-field').value;
+  //   // backend.search_recipe(input).then(res => {
+  //   //   console.log(res)
+  //   // });
+  //   // backend.search_recipe(input, true).then(console.log);  // use this for online search
   
-    // console.log(backend.fetch_recipe("egg")[0].ingredientText[0]);
-    // backend.filter_intolerance("11").then(console.log());
-  });
+  //   // console.log(backend.fetch_recipe("egg")[0].ingredientText[0]);
+  //   // backend.filter_intolerance("11").then(console.log());
+  // });
 
   // sample usage of the auto_suggest function
   const input_field = document.getElementById('search-field');
@@ -38,21 +40,22 @@ async function init() {
   //set the default filter
   defaultPreference();
   // clear the prior output
-  let recipe_list=document.querySelector(".recipes__wrapper");
-  recipe_list.innerHTML="";
+  let recipe_list=document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML='';
   //select the button
   //once the button got clicked, request the data from api and then output the result
   let button=document.querySelector('#search-button');
   button.addEventListener('click',()=>{
     let list=readPreference();
     let recipe_name=document.querySelector('#search-field').value;
-    backend.fetch_recipe(recipe_name,list).then(data => {
-      for(let i=0;i<data.length;i++){
-        let recipeCard=document.createElement('recipe-card');
-        recipeCard.data = data[i];
+    backend.search_recipe(recipe_name,list).then(data => {
+      for(let i=0; i<data.length; i++){
+        let recipeCard = document.createElement('recipe-card');
+        console.log(backend.get_recipe(data[i]));
+        recipeCard.data = backend.get_recipe(data[i]);
         document.querySelector('.recipes__wrapper').appendChild(recipeCard);
       }
-        })
+    });
   });
 
 }
@@ -92,9 +95,9 @@ function defaultPreference(){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = leftCkbox[i].innerText;
 
-    if(intolerance_list.includes(ingredientText)){
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    }
+    
   }
 
   const rightElmt = document.querySelector('.right');
@@ -103,9 +106,9 @@ function defaultPreference(){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = rightCkbox[i].innerText;
 
-    if(intolerance_list.includes(ingredientText)){
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    }
+    
   }
 
 }
