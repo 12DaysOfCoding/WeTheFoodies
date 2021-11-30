@@ -1,5 +1,7 @@
 // recipe-searchPage.js
 
+import * as backend from './backend.js';
+
 window.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -7,6 +9,24 @@ async function init() {
   goSearch();
   goAdd();
   goSettings();
+  
+  defaultPreference();
+  readPreference();
+
+  // sample usage of the search_recipe function
+  const search_button = document.getElementById('search-button');
+  search_button.addEventListener('click', () => {
+    const input = document.getElementById('search-field').value;
+    backend.search_recipe(input, false, 10, readPreference()).then(console.log);
+    // backend.search_recipe(input, true).then(console.log);  // use this for online search
+  });
+
+  // sample usage of the auto_suggest function
+  const input_field = document.getElementById('search-field');
+  input_field.addEventListener('input', function() {
+    const input = this.value;
+    backend.search_suggest(input).then(console.log);
+  });
 
   // Create a recipe card with mock data
   let recipeCard = document.createElement('recipe-card');
@@ -24,6 +44,59 @@ async function init() {
   let recipeCard4 = document.createElement('recipe-card');
   recipeCard4.data = {};
   document.querySelector('.recipes__wrapper').appendChild(recipeCard4);
+
+}
+
+function readPreference(){
+  let intolerance_list = [];
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = leftCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = rightCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  return intolerance_list;
+}
+
+function defaultPreference(){
+  let intolerance_list = backend.get_intolerance();
+
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = leftCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText)){
+      ingredientBox.checked = true;
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = rightCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText)){
+      ingredientBox.checked = true;
+    }
+  }
 
 }
 

@@ -1,4 +1,10 @@
 
+* {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
 nav {
     background-color: #F4BA26;
     padding: 20px;
@@ -18,7 +24,7 @@ nav {
 .diet-asking{
     font-size: 16px;
     text-align: center;
-
+    margin-bottom: 5px;
 }
 
 .diet-asking > p{
@@ -27,19 +33,21 @@ nav {
     display: inline-block;
 }
 
-.buttom-text{
+.bottom-text{
     margin-top: 175px;
     font-family: Inter;
     font-style: normal;
     color: #EAB52F;
     font-size: 12px;
     text-align: center;
+    margin-bottom: 10px;
 }
 
-.buttom-text > p{
-    width: 400px;
+.bottom-text > p{
+    width: 320px;
     display: inline-block;
-    font-size: 12px;
+    font-size: 10px;
+    
 }
 
 
@@ -71,8 +79,8 @@ nav {
     font-style: normal;
     font-weight: normal;
     margin-top: 4px;
-  }
-  
+}
+
   /* Hide the browser's default checkbox */
   .container input {
     position: absolute;
