@@ -5,6 +5,7 @@ import { recipe_data, keep_fields } from './recipe-data.js';
 const API_KEY = '486eca841c6a49b896486723439f9977';
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
+const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
 
 /**
@@ -127,9 +128,9 @@ export function remove_recipe(recipe_hash){
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
     remove_favorite(recipe_hash);
-  } else {
+  } else 
     console.warn(`${recipe_hash} not in localstore, check your arguments`);
-  }
+  
 }
 
 /**
@@ -158,11 +159,11 @@ function remove_hash_in_arr(recipe_hash, arr_name) {
   }
   // otherwise
   const hash_set = new Set(arr);
-  if (!hash_set.delete(recipe_hash)) {  // not in set
+  if (!hash_set.delete(recipe_hash))   // not in set
     console.warn(`${recipe_hash} is not in ${arr_name}, check your arguments`);
-  } else {  // overwrite to localstore
+  else   // overwrite to localstore
     set_localstore(arr_name, [...hash_set]);
-  }
+  
 }
 
 /**
@@ -213,6 +214,15 @@ export function get_favorite() {
  */
 export function remove_favorite(recipe_hash) {
   remove_hash_in_arr(recipe_hash, FAVORITE_RECIPE_KEY);
+}
+
+export function select_recipe(recipe_hash) {
+  set_localstore(SELECTED_RECIPE_KEY, recipe_hash)
+}
+
+export function get_selected() {
+  const selected = get_localstore(SELECTED_RECIPE_KEY);
+  return selected ? selected : '';
 }
 
 /**
@@ -271,16 +281,16 @@ function min_edit_dist(str1, str2, del_cost=1, add_cost=1) {
   dp[0][0] = 0;  // two empty strings
   for (let i = 1; i <= m; i++) dp[i][0] = del_cost*i;
   for (let j = 1; j <= n; j++) dp[0][j] = add_cost*j;
-  for (let i = 1; i <= m; i++) {
+  for (let i = 1; i <= m; i++) 
     for (let j = 1; j <= n; j++) {
       let c1 = str1.charAt(i-1), c2 = str2.charAt(j-1);
       if (c1 === c2) dp[i][j] = dp[i-1][j-1];  // no edit
-      else {  // we will have to edit
+      else   // we will have to edit
         dp[i][j] = Math.min(dp[i-1][j-1]+sub_cost(c1, c2), 
           Math.min(dp[i-1][j]+del_cost, dp[i][j-1]+add_cost));  // min of the three
-      }
+      
     }
-  }
+  
   return dp[m][n];
 }
 

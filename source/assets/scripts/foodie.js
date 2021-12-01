@@ -26,11 +26,11 @@ async function init() {
   prevButton.addEventListener('click', () => {
     nextButton.classList.remove('hidden');
     if (currStep > 0) currStep -= 1;
-    if (currStep === 0) {
+    if (currStep === 0) 
       prevButton.classList.add('hidden');
-    } else {
+    else 
       nextButton.classList.remove('disabled');
-    }
+    
 
     updateStep();
   });
@@ -38,11 +38,11 @@ async function init() {
   nextButton.addEventListener('click', () => {
     prevButton.classList.remove('hidden');
     if (currStep < steps.length - 1) currStep += 1;
-    if (currStep === steps.length - 1) {
+    if (currStep === steps.length - 1) 
       nextButton.classList.add('hidden');
-    } else {
+    else 
       prevButton.classList.remove('disabled');
-    }
+    
 
     updateStep();
   });
@@ -68,7 +68,7 @@ function goSearch() {
   const btn = document.getElementsByClassName('nav-search');
 
   btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-searchPage.html');
+    window.location.replace('recipe-search.html');
   });
 }
 function goAdd() {

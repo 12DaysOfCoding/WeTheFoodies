@@ -56,50 +56,36 @@ section > div {
 }
 
 .recipe-cooking-time-and-serving {
+    display: flex;
+    justify-content: space-between;
     padding-top: 25px;
 }
 
-.recipe-cooking-time {
-    display: inline;
-    border: 1px solid #F4BA26;
-    padding: 0px 5px;
-    border-radius: 8px;
-}
-
+.recipe-cooking-time, 
 .recipe-cooking-serving {
-    display: inline;
+    display: flex;
     border: 1px solid #F4BA26;
     padding: 0px 5px;
     border-radius: 8px;
-    float: right;
 }
 
-#cooking-time {
-    font-style: italic;
-    font-size: 12px;
-    font-weight: 400;
-    display: inline;
-}
-
-#cooking-time-input {
-    color: black;
-    font-size: 12px;
-    font-weight: 400;
-    display: inline;
-}
-
+#cooking-time,
 #serving-size {
     font-style: italic;
     font-size: 12px;
     font-weight: 400;
     display: inline;
+    line-height: 40%;
+    margin-right: 8px;
 }
 
+#cooking-time-input,
 #serving-size-input {
     color: black;
     font-size: 12px;
     font-weight: 400;
     display: inline;
+    line-height: 40%;
 }
 
 h1 {
