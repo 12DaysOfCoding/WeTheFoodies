@@ -15,12 +15,13 @@
   <!-- Web Components -->
   <script src="assets/components/ExpandedRecipeCard.js" type="module"></script>
 
-  <script src="assets/scripts/foodie.js"></script>
+  <script src="assets/scripts/backend.js" type="module"></script>
+  <script src="assets/scripts/foodie.js" type="module"></script>
 </head>
 
 <body>
   <nav>
-    <h1>we the foodies</h1>
+    <h1>FOODIE MODE</h1>
   </nav>
   <main>
     <section class="section__foodie">
@@ -32,7 +33,7 @@
         <span id="step"></span>
       </div>
       <div>
-        <button id="prev">Prev
+        <button id="prev" class="hidden">Prev
           <span class="symbol">&lt</span>
         </button>
         <button id="next">Next
