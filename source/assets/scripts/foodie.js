@@ -9,6 +9,7 @@ let currStep = 0;
 let steps = [];
 
 async function init() {
+  getSteps();
   updateStep();
 
   bindExitButton();
@@ -24,14 +25,6 @@ function getSteps() {
   const recipe = backend.get_recipe(backend.get_selected());
   steps = recipe.steps.map((step) => step.step);
 }
-
-function updateStep() {
-  const stepNum = document.querySelector('#step-num');
-  const step = document.querySelector('#step');
-
-  stepNum.textContent = `STEP ${currStep + 1}`;
-  step.textContent = steps[currStep];
-};
 
 function bindExitButton() {
   const exitBtn = document.getElementById('exit');
