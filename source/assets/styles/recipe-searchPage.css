@@ -6,6 +6,7 @@
   padding: 0;
   border: 0;
   margin: 0;
+  font-family: 'Inter', sans-serif;
 }
 nav {
     background-color: #F4BA26;
@@ -109,7 +110,6 @@ input:focus {
     background: #f1f1f1;
     font-family: Inter;
     font-style: normal;
-    border-right: none;
   }
   
   /* Style the submit button */
@@ -175,6 +175,7 @@ input:focus {
     content: "✓";
     position: absolute;
     display: none;
+    margin-left: 3px;
   }
   
   .container input:checked ~ .checkmark:after {
