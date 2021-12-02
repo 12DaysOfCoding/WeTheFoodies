@@ -69,3 +69,10 @@ function saveOrSaved(recipe) {
     }
   });
 }
+
+function bindFoodieButton() {
+  const foodieBtn = document.getElementById('foodie-mode');
+  foodieBtn.addEventListener('click', () => {
+    window.location.replace('foodie.html');
+  });
+}

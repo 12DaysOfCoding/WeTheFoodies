@@ -89,12 +89,12 @@ function saveOrSaved() {
  * this register listeners to toggle the savebutton whenever checkboxes are changed
  */
 function registerCheckboxes() {
-  const checkboxes = document.querySelectorAll("input");
+  const checkboxes = document.querySelectorAll('input');
   const heart = document.getElementById('heart');
   const text = document.getElementById('save-or-not');
 
   checkboxes.forEach(checkbox => {
-    checkbox.addEventListener("click", () => {
+    checkbox.addEventListener('click', () => {
       text.textContent = 'SAVE';
       heart.src = 'assets/images/white-border-heart.svg';
     });

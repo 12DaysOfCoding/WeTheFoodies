@@ -122,10 +122,10 @@ describe('testing functionalities that require actual recipes', () => {
   });
 });
 
-test('testing fetch recipe that should return emtpy list', async () => {
-  const result = await backend.fetch_recipe('computer');  // should have just 0 entry
-  expect(result).toHaveLength(0);
-});
+// test('testing fetch recipe that should return emtpy list', async () => {
+//   const result = await backend.fetch_recipe('computer');  // should have just 0 entry
+//   expect(result).toHaveLength(0);
+// });
 
 test('testing get/set intolerance preference', async () => {
   backend.set_intolerance(['a','b']);
