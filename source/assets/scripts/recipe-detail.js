@@ -21,6 +21,7 @@ async function init() {
 
   saveOrSaved(recipe);
   populateUI(recipe);
+  bindFoodieButton();
 }
 
 function populateUI(recipe) {
@@ -30,14 +31,14 @@ function populateUI(recipe) {
 
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
   recipe.ingredients.forEach(function(ingredient) {
-    const ingredientElem = document.createElement('p');
+    const ingredientElem = document.createElement('li');
     ingredientElem.textContent = ingredient.original;
     ingredientsWrapper.appendChild(ingredientElem);
   });
 
   const stepsWrapper = document.querySelector('.specific-instructions');
   recipe.steps.forEach(function(step) {
-    const stepElem = document.createElement('p');
+    const stepElem = document.createElement('li');
     stepElem.textContent = `${step.step}`; 
     stepsWrapper.appendChild(stepElem);
   });

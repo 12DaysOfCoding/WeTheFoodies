@@ -15,6 +15,7 @@
 
   <!-- Web Components -->
   <script src="assets/scripts/recipe-add.js" type="module"></script>
+  <script src="assets/scripts/backend.js" type="module"></script>
   
 </head>
 
@@ -28,7 +29,7 @@
   <main>
     <section class="flexbox">
       <div class="RecipeBox">
-        <form>
+        <form action="" id="add-recipe-form">
           <div class = 'basic'>
             <label for="recipeName" class="labelRadio">
               NAME:
@@ -82,11 +83,11 @@
               <div class="word">Dietary Restrictions</div>
               <div class="left">
                 <label class="container">Vegan
-                  <input type="checkbox">
+                  <input type="checkbox" id="vegan">
                   <span class="checkmark"></span>
                 </label>
                 <label class="container">Vegetarian
-                  <input type="checkbox">
+                  <input type="checkbox" id="veggie">
                   <span class="checkmark"></span>
                 </label>
                 <label class="container">Dairy-free
@@ -100,19 +101,19 @@
               </div>
               <div class="right">
                 <label class="container">Gluten-free
-                  <input type="checkbox">
+                  <input type="checkbox" id="glutenFree">
                   <span class="checkmark"></span>
                 </label>
                 <label class="container">Tree Nut-free
-                  <input type="checkbox">
+                  <input type="checkbox" id="nutFree">
                   <span class="checkmark"></span>
                 </label>
                 <label class="container">Peanut-free
-                  <input type="checkbox">
+                  <input type="checkbox" id="peanut">
                   <span class="checkmark"></span>
                 </label>
                 <label class="container">Soy-free
-                  <input type="checkbox">
+                  <input type="checkbox" id="soy">
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -128,7 +129,7 @@
             <div class="ingredientList">
               <ol type = "1" id="ingredientOrderedList">
                 <li>
-                  <input type='text' id='ingredients' name='ingredients'>
+                  <input type='text' id='ingredient-1' name='ingredients'>
                 </li>
               </ol>
               <button class="ingredientButton" id="ingredientButton" type="button">Add Ingredient</button>
@@ -137,9 +138,7 @@
             <label for="instructions">Instructions:</label>
             <div class="instructionList">
               <ol type = "1" id="instructionOrderedList">
-                <li>
-                  <input type='text' id='instructions' name='instructions'>
-                </li>
+                <li>  <input type='text' id='instruction-1' name='instructions'> </li>
               </ol>
               <button class="instructionButton" id="instructionButton" type="button">Add Step</button>
             </div>

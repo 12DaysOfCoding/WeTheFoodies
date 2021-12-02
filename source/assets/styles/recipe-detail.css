@@ -9,6 +9,12 @@
     
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 div {
     font-size: 22px;
     color: #F4BA26;
@@ -65,7 +71,7 @@ section > div {
 .recipe-cooking-serving {
     display: flex;
     border: 1px solid #F4BA26;
-    padding: 0px 5px;
+    padding: 8px 5px;
     border-radius: 8px;
 }
 
@@ -95,16 +101,17 @@ h1 {
     font-weight: 300;
 }
 
-.specific-ingredients > p {
-    color: black;
-    font-size: 12px;
-    font-weight: 400;
+.specific-ingredients,
+.specific-instructions {
+    margin-left: 20px;
 }
 
-.specific-instructions > p {
+.specific-ingredients > li,
+.specific-instructions > li {
     color: black;
     font-size: 12px;
     font-weight: 400;
+    margin: 8px 0;
 }
 
 .bottom-buttons {
@@ -114,27 +121,24 @@ h1 {
 }
 
 .bottom-buttons > p {
-    padding-top: 20px;
+    padding: 20px 0 10px 0;
     color: #EAB52F;
-    font-family: 'Avenir', sans-serif;
     font-size: 12px;
     font-weight: 400;
 }
 
-.foodie-mode {
+#foodie-mode {
+    display: block;
     font-size: 30px;
-    font-family: 'Avenir', sans-serif;
     font-weight: bold;
     color: white;
     background-color: #ffc83a;
-    width: 340px;
     border: none;
     padding: 6px;
     border-radius: 8px;
 }
 
 .save {
-    margin-top: 10px;
     font-size: 28px;
     color: #ffc83a;
     background-color: #FAF9F6;
@@ -149,7 +153,9 @@ h1 {
 }
 
 .nav-bar {
-    
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     background-color: #F4BA26;
     height: 70px;
     

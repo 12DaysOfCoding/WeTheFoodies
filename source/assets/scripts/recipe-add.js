@@ -5,6 +5,8 @@ import * as backend from './backend.js';
 
 window.addEventListener('DOMContentLoaded', init);
 
+import * as backend from './backend.js';
+
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
@@ -30,17 +32,23 @@ function addIngredient() {
     console.log('inside');
     ingredientIndex += 1;
     let node = document.createElement('LI');  
-    node.id = `ingredient-${ingredientIndex}`;
+    node.id = `ingredientNode-${ingredientIndex}`;
     let nodeInput = document.createElement('input');
     let br = document.createElement('br');
     nodeInput.type='text';
+    nodeInput.id = `ingredient-${ingredientIndex}`;
     nodeInput.appendChild(br);
     node.appendChild(nodeInput);
     let img = document.createElement('img');
     img.id = `delete-ingredient-${ingredientIndex}`;
     img.className = 'delete';
     img.src = 'assets/images/delete-button.png';
-    img.setAttribute('onClick', 'deleteIngredient(this.id)');
+    // Delete the node
+    let nodeId = `ingredientNode-${ingredientIndex}`;
+    img.onclick = function(){
+      let node = document.getElementById(nodeId);
+      node.remove();
+    }
     node.appendChild(img);
     box.appendChild(node);
   });
@@ -58,17 +66,23 @@ function addInstruction() {
     console.log('inside');
     instructionIndex += 1;
     let node = document.createElement('LI');  
-    node.id = `instruction-${instructionIndex}`;
+    node.id = `instructionNode-${instructionIndex}`;
     let nodeInput = document.createElement('input');
     let br = document.createElement('br');
     nodeInput.type='text';
+    nodeInput.id = `instruction-${instructionIndex}`;
     nodeInput.appendChild(br);
     node.appendChild(nodeInput);
     let img = document.createElement('img');
     img.id = `delete-instruction-${instructionIndex}`;
     img.className = 'delete';
     img.src = 'assets/images/delete-button.png';
-    img.setAttribute('onClick', 'deleteInstruction(this.id)');
+    // Delete the node
+    let nodeId = `instructionNode-${instructionIndex}`;
+    img.onclick = function(){
+      let node = document.getElementById(nodeId);
+      node.remove();
+    }
     node.appendChild(img);
     box.appendChild(node);
   });
