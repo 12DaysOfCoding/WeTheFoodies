@@ -1,6 +1,8 @@
 // recipe-add.js
 /** @module recipe-add */
 
+import * as backend from './backend.js';
+
 window.addEventListener('DOMContentLoaded', init);
 
 var ingredientIndex = 1;
@@ -10,8 +12,10 @@ var instructionIndex = 1;
  * Initialize and call other function
  */
 async function init() {
+  defaultPreference();
   addIngredient();
   addInstruction();
+  
 }
 
 /**
@@ -92,4 +96,34 @@ function deleteInstruction(deleteImageId) {
   let nodeId = 'instruction-' + id;
   let node = document.getElementById(nodeId);
   node.remove();
+}
+
+/**
+ * Get the default preference and show it
+ */
+function defaultPreference(){
+  let intolerance_list = backend.get_intolerance();
+
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = leftCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText))
+      ingredientBox.checked = true;
+    
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = rightCkbox[i].innerText;
+
+    if(intolerance_list.includes(ingredientText))
+      ingredientBox.checked = true;
+    
+  }
+
 }

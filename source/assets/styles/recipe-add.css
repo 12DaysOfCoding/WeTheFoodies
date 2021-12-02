@@ -1,5 +1,8 @@
 * {
 	font-family: 'Inter', sans-serif;
+	padding: 0;
+	border: 0;
+	margin: 0;
 }
 
 .points-summary {
@@ -157,6 +160,7 @@ input {
 	content: "✓";
 	position: absolute;
 	display: none;
+	margin-top: 3px;
 }
   
 .container input:checked ~ .checkmark:after {
