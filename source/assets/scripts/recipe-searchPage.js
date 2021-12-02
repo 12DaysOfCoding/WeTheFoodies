@@ -64,7 +64,7 @@ function hitSearch() {
   recipe_list.innerHTML = '';  // clear old recipe cards
   let list = readPreference();
   let recipe_name = document.querySelector('#search-field').value;
-  backend.search_recipe(recipe_name, false, 10, list).then(data => {
+  backend.search_recipe(recipe_name, true, 10, list).then(data => {
     recipe_list.innerHTML='';
     for(let i = 0; i < data.length; i++){
       let recipeCard = document.createElement('recipe-card');
