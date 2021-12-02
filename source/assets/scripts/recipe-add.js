@@ -224,7 +224,7 @@ function addInstruction() {
 function deleteIngredient(deleteImageId) {
   let id = deleteImageId.substring(18);
   console.log(id);
-  let nodeId = 'ingredient-' + id;
+  let nodeId = 'ingredientNode-' + id;
   let node = document.getElementById(nodeId);
   node.remove();
 }
@@ -236,7 +236,7 @@ function deleteIngredient(deleteImageId) {
 function deleteInstruction(deleteImageId) {
   let id = deleteImageId.substring(19);
   console.log(id);
-  let nodeId = 'instruction-' + id;
+  let nodeId = 'instructionNode-' + id;
   let node = document.getElementById(nodeId);
   node.remove();
 }
