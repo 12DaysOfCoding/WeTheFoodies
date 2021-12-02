@@ -109,7 +109,7 @@ class RecipeCard extends HTMLElement {
     const card = document.createElement('article');
 
     const image = document.createElement('img');
-    image.src = data.thumbnail;
+    image.src = data.thumbnail || 'assets/images/default.png';
     image.alt = data.name;
 
     const wrapper = document.createElement('div');
@@ -130,7 +130,7 @@ class RecipeCard extends HTMLElement {
     const tagWrapper = document.createElement('div');
     tagWrapper.classList.add('tags__wrapper');
         
-    const tags = data.intolerances;
+    const tags = data.intolerances || [];
     tags.forEach((tagName) => {
       const tag = document.createElement('span');
       tag.textContent = tagName;

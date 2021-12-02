@@ -78,10 +78,10 @@ function addNewRecipe() {
         let str = "ingredient-"+i;
         console.log(str);
         let ing = document.getElementById(str);
-        // check whether the li is deleted - if deleted, it is null, don't add.
-        if (ing !== null){
-          console.log(ing.value);
-          let theIngredient = {original:ing.value};
+        // check whether the li is deleted or empty - if deleted, it is null, don't add.
+        if (ing !== null || ing.value === '') {
+          // console.log(ing.value);
+          let theIngredient = {name:ing.value};
           ingredientArr[ingredientArrIndex] = theIngredient;
           ingredientArrIndex += 1;
         }
@@ -110,11 +110,16 @@ function addNewRecipe() {
       }
       recipe.steps = instructionArr;
 
+      recipe.intolerances = [];
+
       console.log(recipe);
 
-      backend.add_recipe(recipe, true);
-
-      window.location.replace('index.html');
+      try {
+        backend.add_recipe(recipe, true);  // using the backend to simply logic
+        window.location.replace('index.html');
+      } catch(e) {
+        alert(e);
+      }
 
   });
 }
