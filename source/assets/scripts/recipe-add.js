@@ -74,34 +74,46 @@ function addNewRecipe() {
 
       //add image ???
       
-      let ingredientListLength = document.querySelectorAll("#ingredientOrderedList li").length;;
+      let ingredientListLength = document.querySelectorAll("#ingredientOrderedList li").length;
 
       let ingredientArr = [];
       console.log(ingredientListLength);
-
-      for(let i = 1; i <= ingredientListLength; i++){
+      let ingredientArrIndex = 0;
+    
+      // ingredientIndex: # of all the li's added (including the li's which are deleted)
+      for(let i = 1; i <= ingredientIndex; i++){
         let str = "ingredient-"+i;
         console.log(str);
         let ing = document.getElementById(str);
-        console.log(ing.value);
-        let theIngredient = {original:ing.value};
-        ingredientArr[i-1] = theIngredient;
+        // check whether the li is deleted - if deleted, it is null, don't add.
+        if (ing !== null){
+          console.log(ing.value);
+          let theIngredient = {original:ing.value};
+          ingredientArr[ingredientArrIndex] = theIngredient;
+          ingredientArrIndex += 1;
+        }
       }
       recipe.ingredients = ingredientArr;
 
       //instruction 
-      let instructionListLength = document.querySelectorAll("#instructionOrderedList li").length;;
+      let instructionListLength = document.querySelectorAll("#instructionOrderedList li").length;
 
       let instructionArr = [];
       console.log(instructionListLength);
-
-      for(let i = 1; i <= instructionListLength; i++){
+      let instructionArrIndex = 0;
+    
+      // instructionIndex: # of all the li's added (including the li's which are deleted)
+      for(let i = 1; i <= instructionIndex; i++){
         let str = "instruction-"+i;
         console.log(str);
         let ing = document.getElementById(str);
-        console.log(ing.value);
-        let step = {number:i, step:ing.value};
-        instructionArr[i-1] = step;
+        // check whether the li is deleted - if deleted, it is null, don't add.
+        if (ing !== null){
+          console.log(ing.value);
+          let step = {number:i, step:ing.value};
+          instructionArr[instructionArrIndex] = step;
+          instructionArrIndex += 1;
+        }
       }
       recipe.steps = instructionArr;
 
@@ -182,7 +194,12 @@ function addIngredient() {
     img.id = `delete-ingredient-${ingredientIndex}`;
     img.className = 'delete';
     img.src = 'assets/images/delete-button.png';
-    img.setAttribute('onClick', 'deleteIngredient(this.id)');
+    // Delete the node
+    let nodeId = `ingredientNode-${ingredientIndex}`;
+    img.onclick = function(){
+      let node = document.getElementById(nodeId);
+      node.remove();
+    }
     node.appendChild(img);
     box.appendChild(node);
   });
@@ -211,32 +228,13 @@ function addInstruction() {
     img.id = `delete-instruction-${instructionIndex}`;
     img.className = 'delete';
     img.src = 'assets/images/delete-button.png';
-    img.setAttribute('onClick', 'deleteInstruction(this.id)');
+    // Delete the node
+    let nodeId = `instructionNode-${instructionIndex}`;
+    img.onclick = function(){
+      let node = document.getElementById(nodeId);
+      node.remove();
+    }
     node.appendChild(img);
     box.appendChild(node);
   });
-}
-
-/**
- * Click to delete a line for filling ingredients
- * @param {String} deleteImageId - ID of the delete button image at the line
- */
-function deleteIngredient(deleteImageId) {
-  let id = deleteImageId.substring(18);
-  console.log(id);
-  let nodeId = 'ingredientNode-' + id;
-  let node = document.getElementById(nodeId);
-  node.remove();
-}
-
-/**
- * Click to delete a line for filling instructions
- * @param {String} deleteImageId - ID of the delete button image at the line
- */
-function deleteInstruction(deleteImageId) {
-  let id = deleteImageId.substring(19);
-  console.log(id);
-  let nodeId = 'instructionNode-' + id;
-  let node = document.getElementById(nodeId);
-  node.remove();
 }
