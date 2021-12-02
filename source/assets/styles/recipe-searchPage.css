@@ -65,6 +65,8 @@ nav {
     margin-right: auto;
     width: 6rem;
     color: #000000;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .diet-restrictionBox{
   position: relative;right:5.5px;
