@@ -103,7 +103,7 @@ function get_localstore(key) {
  */
 export function add_recipe(recipe, custom=false) {
   recipe.hash = compute_hash(recipe);
-  recipe.difficulty = compute_difficulty(recipe);
+  recipe.difficulty = recipe.difficulty || compute_difficulty(recipe);
   set_localstore(recipe.hash, recipe);
   if (custom) add_custom(recipe.hash);  // add the hash to an "custom recipe" hashmap
   return recipe;

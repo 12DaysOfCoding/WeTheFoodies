@@ -5,8 +5,6 @@ window.addEventListener('DOMContentLoaded', init);
 
 import * as backend from './backend.js';
 
-
-
 /**
  * Initialize and call other function
  */
@@ -30,18 +28,22 @@ function populateUI(recipe) {
   document.getElementById('serving-size-input').textContent = `${recipe.servings} servings`;
 
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
-  recipe.ingredients.forEach(function(ingredient) {
-    const ingredientElem = document.createElement('li');
-    ingredientElem.textContent = ingredient.original;
-    ingredientsWrapper.appendChild(ingredientElem);
-  });
+  if (recipe.ingredients) {  // guard for no ingredients
+    recipe.ingredients.forEach(function(ingredient) {
+      const ingredientElem = document.createElement('li');
+      ingredientElem.textContent = ingredient.original;
+      ingredientsWrapper.appendChild(ingredientElem);
+    });
+  }
 
   const stepsWrapper = document.querySelector('.specific-instructions');
-  recipe.steps.forEach(function(step) {
-    const stepElem = document.createElement('li');
-    stepElem.textContent = `${step.step}`; 
-    stepsWrapper.appendChild(stepElem);
-  });
+  if (recipe.steps) {  // guard for no steps
+    recipe.steps.forEach(function(step) {
+      const stepElem = document.createElement('li');
+      stepElem.textContent = `${step.step}`; 
+      stepsWrapper.appendChild(stepElem);
+    });
+  }
 }
 
 /**
