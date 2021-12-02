@@ -372,9 +372,11 @@ export function filter_intolerance(recipe_hashes, intolerances) {
       case 'Vegan':
         aisles_to_avoid.add("Meat");
         aisles_to_avoid.add("Milk, Eggs, Other Dairy");
+        aisles_to_avoid.add("Canned and Jarred");
         break;
       case 'Vegetarian':
         aisles_to_avoid.add("Meat");
+        aisles_to_avoid.add("Canned and Jarred");
         break;
       case 'Dairy-free':
         aisles_to_avoid.add("Milk, Eggs, Other Dairy");
@@ -404,6 +406,13 @@ export function filter_intolerance(recipe_hashes, intolerances) {
       for (let aisle of aisles)
         if (aisles_to_avoid.has(aisle)) return false;
     }
+    let recipe=get_recipe(recipe_hash);
+    recipe.intolerances=[];
+    for (let i = 0; i < intolerances.length; i++){
+     recipe.intolerances.push(intolerances[i]);
+    }
+    remove_recipe(recipe_hash);
+    add_recipe(recipe);
     return true;  // otherwise, include
   });
 }
