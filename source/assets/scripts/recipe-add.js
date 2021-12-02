@@ -25,6 +25,9 @@ async function init() {
 
 }
 
+/**
+ * Add New Recipe to local storage
+ */
 function addNewRecipe() {
   const form = document.getElementById('add-recipe-form');
 
