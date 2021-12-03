@@ -117,7 +117,7 @@ class RecipeCard extends HTMLElement {
     card.classList.add('recipe-card');
 
     const image = document.createElement('img');
-    image.src = data.thumbnail || 'assets/images/default.png';
+    image.src = data.thumbnail || 'assets/images/default-recipe.svg';
     image.alt = data.name;
 
     const wrapper = document.createElement('div');

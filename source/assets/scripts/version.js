@@ -11,6 +11,6 @@ function goBack(){
   const btn = document.getElementById('dount');
 
   btn.addEventListener('click', () => {
-    window.location.replace('settings.html');
+    window.location.assign('settings.html');
   });
 }

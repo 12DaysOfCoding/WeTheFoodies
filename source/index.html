@@ -9,19 +9,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
-  <link href="assets/styles/index.css" rel="stylesheet" >
+  <link href="assets/styles/index.css" rel="stylesheet">
+  <title>Dashboard</title>
 
   <!-- Web Components -->
   <script type="module" src="assets/components/RecipeCard.js"></script>
+  <script type="module" src="assets/scripts/backend.js"></script>
   <script type="module" src="assets/scripts/index.js"></script>
 </head>
 
 <body>
-  <nav>
+  <header>
     <img src="assets/images/logo.svg" id="logo">
-  </nav>
+  </header>
   <main>
-    <section class="points-summary">
+    <!-- <section class="points-summary">
       <div class="prompt">You currently have</div>
       <span class="points" id="num-points">1020</span>
       <span class="points" id="points">POINTS</span>
@@ -29,13 +31,20 @@
       <span>Try out more</span>
       <span id="recipe-level">intermediate</span>
       <span>recipes to advance to the next level!</span>
-    </section>
+    </section> -->
     <section class="section__saved-recipes">
       <h2>Saved Recipes</h2>
       <div class="saved-recipes__wrapper">
         <!-- Recipes Added Here -->
+        <p id="saved-recipes__default">You currently have no saved recipes.</p>
       </div>
+    </section>
+    <section class="section__my-recipes">
       <h2>My Recipes</h2>
+      <div class="my-recipes__wrapper">
+        <!-- Recipes Added Here -->
+        <p id="my-recipes__default">You haven't created any recipes.</p>
+      </div>
     </section>
     <section class="nav-bar">
         <a href="index.html"> 
