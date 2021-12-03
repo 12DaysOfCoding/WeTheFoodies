@@ -9,8 +9,19 @@
   font-family: 'Inter', sans-serif;
 }
 nav {
-    background-color: #F4BA26;
-    padding: 20px;
+	background-color: #F4BA26;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 20px;
+  font-style: normal;
+  font-weight: bold;
 }
 
 #recipe-search {

@@ -12,7 +12,9 @@ body {
 
 main {
     margin: 1rem;
+    margin-top: -10px;
 }
+
 .points-summary {
     text-align: center;
     
@@ -41,12 +43,23 @@ span {
 
 header {
     background-color: #F4BA26;
-    height: 60px;
+    height: 40px;
     padding: 20px;
 }
 
 header > img {
     height: 100%;
+}
+
+#dount-p {
+	text-align: right;
+	margin-top: -60px;
+	margin-bottom: 0;
+}
+
+
+#dount {
+	width: 50px;
 }
 
 #logo {

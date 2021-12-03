@@ -9,16 +9,14 @@ async function init() {
 
 function goVersion(){
   const prefClass = document.getElementsByClassName('version')[0];
-  const imgBtn = prefClass.getElementsByTagName('p')[1];
-  imgBtn.addEventListener('click', () => {
+  prefClass.addEventListener('click', () => {
     window.location.assign('version.html');
   });
 }
 
 function goPreferenceSetting() {
   const prefClass = document.getElementsByClassName('preference')[0];
-  const imgBtn = prefClass.getElementsByTagName('p')[1];
-  imgBtn.addEventListener('click', () => {
+  prefClass.addEventListener('click', () => {
     window.location.assign('preference-setting.html');
   });
 }
