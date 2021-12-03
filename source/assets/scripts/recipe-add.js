@@ -141,6 +141,7 @@ function addIngredient() {
     let br = document.createElement('br');
     nodeInput.type='text';
     nodeInput.id = `ingredient-${ingredientIndex}`;
+    nodeInput.autocomplete = 'off';
     nodeInput.appendChild(br);
     node.appendChild(nodeInput);
     let img = document.createElement('img');
@@ -175,6 +176,7 @@ function addInstruction() {
     let br = document.createElement('br');
     nodeInput.type='text';
     nodeInput.id = `instruction-${instructionIndex}`;
+    nodeInput.autocomplete = 'off';
     nodeInput.appendChild(br);
     node.appendChild(nodeInput);
     let img = document.createElement('img');

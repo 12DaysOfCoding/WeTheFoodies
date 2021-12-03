@@ -6,6 +6,7 @@
   padding: 0;
   border: 0;
   margin: 0;
+  font-family: 'Inter', sans-serif;
 }
 nav {
     background-color: #F4BA26;
@@ -94,6 +95,11 @@ nav {
     display:flex
 }
 
+/* no boarder */
+input:focus {
+  outline: none; 
+}
+
   div.search input[type=text] {
     border-radius: 5px;
     padding: 10px;
@@ -104,7 +110,6 @@ nav {
     background: #f1f1f1;
     font-family: Inter;
     font-style: normal;
-    border-right: none;
   }
   
   /* Style the submit button */
@@ -135,7 +140,7 @@ nav {
     position: relative;
     padding-left: 20px;
     margin-bottom: 0;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 12px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -170,6 +175,7 @@ nav {
     content: "✓";
     position: absolute;
     display: none;
+    margin-left: 3px;
   }
   
   .container input:checked ~ .checkmark:after {
@@ -368,4 +374,20 @@ grid-template-columns: 100px 120px 120px;
 .nav-settings img {
   display: inline-block;
   height: 36px;
+}
+
+.suggest_dropdown {
+  color: gray;
+  font-size: 15px;
+  font-family: Inter;
+  white-space: nowrap;      /*keep text on one line */
+  overflow: hidden;         /*prevent text from being shown outside the border */
+  text-overflow: ellipsis;  /*cut off text with an ellipsis*/
+  padding-left: 7px;
+  margin-top: 3px;
+}
+
+.suggest_dropdown:hover {
+  color: black;
+  cursor: pointer;
 }
