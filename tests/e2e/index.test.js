@@ -51,7 +51,7 @@ describe('Navigating the web app', () => {
     ]);
     let body = await page.$('.settings-body');
     let divs = await body.$$('div');
-    expect(divs.length).toBe(3);
+    expect(divs.length).toBe(2);
     await page.goto('https://cse110-group30-affd4.web.app/');
   });
 
