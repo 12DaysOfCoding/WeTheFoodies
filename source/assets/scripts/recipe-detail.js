@@ -9,6 +9,8 @@ import * as backend from './backend.js';
  * Initialize and call other function
  */
 async function init() {
+  
+  console.log(document.referrer);
 
   const recipe = backend.get_recipe(backend.get_selected());
 
