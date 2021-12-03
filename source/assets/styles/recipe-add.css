@@ -68,6 +68,9 @@ nav {
 .flexbox {
 	width: 340px;
 	display: flex;
+	margin: auto;
+	position: relative;
+	left: -20px;
 }
 
 .RecipeBox {
@@ -196,7 +199,7 @@ input {
 	display: block;
 	margin-left: 5px;
 	margin-right: auto;
-	width: auto;
+	width: 100%;
 	height: auto;
 	border: 1.5px solid #ffc83a;
 	
