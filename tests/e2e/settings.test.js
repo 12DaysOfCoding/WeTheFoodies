@@ -53,6 +53,54 @@ describe('check version page', () => {
   });
 });
 
+/**
+ * check version page after reload
+ */
+ describe('check version page after reload', () => {
+  beforeAll(async () => {
+    await page.goto('http://127.0.0.1:5500/source/version.html');
+  });
+
+  it('check version page', async () => {
+    let version = await page.$("#v-test");
+    let text = await version.getProperty('innerText');
+    expect(text['_remoteObject'].value).toBe("Version beta 1.0");
+    await page.reload();
+
+    let new_version = await page.$("#v-test");
+    let new_text = await new_version.getProperty('innerText');
+    expect(new_text['_remoteObject'].value).toBe("Version beta 1.0");
+
+  });
+  
+
+});
+
+describe('preference-setting test', () => {
+  beforeAll(async () => {
+    await page.goto('http://127.0.0.1:5500/source/preference-setting.html');
+  });
+
+  /**
+	 * Check save button after reload
+	 */
+  it('responds to "save" button press', async () => {
+    let saved_check = await page.$('#save-or-not');
+    let text = await saved_check.getProperty('innerText');
+    expect(text['_remoteObject'].value).toBe("SAVE");
+
+    let button = await page.$('button');
+    await button.click();
+    let text2 = await saved_check.getProperty('innerText');
+    expect(text2['_remoteObject'].value).toBe("SAVED");
+
+    await page.reload();
+    let new_check = await page.$('#save-or-not');
+    let new_text = await new_check.getProperty('innerText');
+    expect(new_text['_remoteObject'].value).toBe("SAVE");
+  });
+});
+
 
 /**
  * go to setting page from dashboard
