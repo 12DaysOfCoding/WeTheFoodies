@@ -107,4 +107,9 @@ function goBack(){
   btn.addEventListener('click', () => {
     window.location.assign('settings.html');
   });
+  
+  const btn2 = document.getElementById('white-arrow');
+  btn2.addEventListener('click', () => {
+    window.location.assign('settings.html');
+  });
 }
