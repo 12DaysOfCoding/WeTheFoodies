@@ -6,10 +6,16 @@
     font-family: 'Inter', sans-serif;
 }
 
-nav {
+header {
     background-color: #F4BA26;
+    height: 40px;
     padding: 20px;
     text-align: center;
+}
+
+header > img {
+    height: 100%;
+    margin: auto;
 }
 
 #dount-p {
@@ -35,7 +41,10 @@ nav {
 }
 
 .bottom-text{
-    margin-top: 175px;
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    right: 0;
     font-family: Inter;
     font-style: normal;
     color: #EAB52F;
@@ -53,12 +62,14 @@ nav {
 
 
 .diet-restrictionBox{
-    position: relative;right:5.5px;
+    position: absolute;right:5.5px;
       display: block;
       margin-left: auto;
       margin-right: auto;
       width:350px;
-      height:110px;
+      height:90px;
+      left: 0;
+      right: 0;
       border:2px solid #FFC83A;
       background-color: white;
       /* margin-top: 10px; */
@@ -159,8 +170,11 @@ grid-template-columns: 100px 120px 120px;
 
 
 .bottom-buttons {
-    position: relative;
+    position: absolute;
     text-align: center;
+    bottom: 50px;
+    left: 0;
+    right: 0;
 }
 
 .bottom-buttons > p {
