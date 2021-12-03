@@ -133,3 +133,10 @@ test('testing get/set intolerance preference', async () => {
   backend.set_intolerance(['1','2','3']);
   expect(backend.get_intolerance()).toEqual(['1','2','3']);
 });
+
+test('testing get/set intolerance preference', async () => {
+  backend.set_intolerance(['Vegan','Soy-free']);
+  expect(backend.get_intolerance()).toEqual(['Vegan','Soy-free']);
+  backend.set_intolerance(['Tree Nut-free','Gluten-free','Dairy-free']);
+  expect(backend.get_intolerance()).toEqual(['Tree Nut-free','Gluten-free','Dairy-free']);
+});

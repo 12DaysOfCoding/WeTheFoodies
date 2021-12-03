@@ -2,6 +2,19 @@ describe('Navigating the web app', () => {
   beforeAll(async () => {
     await page.goto('https://cse110-group30-affd4.web.app/');
   });
+
+  it('Check if page loads', async () => {
+    let dashboard = await page.$('.nav-dashboard');
+    await Promise.all([
+      dashboard.click(),
+      page.waitForNavigation(),
+    ]);
+    let savedRecipes = await page.$('h2');
+    let innerText = await savedRecipes.getProperty('innerText');
+    let text = innerText['_remoteObject'].value;
+    expect(text).toBe('Saved Recipes');
+    await page.goto('https://cse110-group30-affd4.web.app/');
+  });
   
   it('Clicking on search goes to search page', async () => {
     let navSearch = await page.$('.nav-search');
