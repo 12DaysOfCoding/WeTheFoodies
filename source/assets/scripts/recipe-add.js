@@ -114,7 +114,7 @@ function addNewRecipe() {
 
       backend.add_recipe(recipe, true);
 
-      window.location.replace('index.html');
+      window.location.assign('index.html');
 
   });
 }

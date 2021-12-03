@@ -39,6 +39,6 @@ function begin() {
     }
 
     backend.set_intolerance(intolerance_list);
-    window.location.replace('index.html');
+    window.location.assign('index.html');
   });
 }

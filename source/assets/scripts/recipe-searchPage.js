@@ -41,10 +41,6 @@ function bindSearchBar() {
  * event listeners on search button click
  */
 function bindSearchButton() {
-  // Create a recipe card
-  let recipeCard = document.createElement('recipe-card');
-  recipeCard.data = {};
-  document.querySelector('.recipes__wrapper').appendChild(recipeCard);
   let recipe_list = document.querySelector('.recipes__wrapper');
   recipe_list.innerHTML = '';  // clear old recipe cards
   //set the default filter
@@ -102,7 +98,7 @@ function configureRecipeCards() {
   recipeCards.forEach((card) => {
     card.addEventListener('click', () => {
       backend.select_recipe(card.shadowRoot.querySelector('.hash').textContent);
-      window.location.replace('recipe-detail.html');
+      window.location.assign('recipe-detail.html');
     });
   });
 }
