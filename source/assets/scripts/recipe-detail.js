@@ -87,9 +87,10 @@ function goBack(){
   console.log(str);
 
   btn.addEventListener('click', () => {
-    window.history.back();
     if (str === 'index.html'){
-      window.location.reload();  
+      window.location.replace(document.referrer);
+    } else {
+      window.history.back();
     }
   });
 }
