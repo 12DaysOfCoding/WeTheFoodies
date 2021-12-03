@@ -79,7 +79,7 @@ describe('testing functionalities that require actual recipes', () => {
     );
 
     it('saves fetched recipe objects in localstore and getter is also working', () => 
-      result.forEach(recipe => expect(backend.get_recipe(recipe.hash)).toEqual(recipe))
+      result.forEach(recipe => expect(backend.get_recipe(recipe.hash).name).toEqual(recipe.name))
     );
   });
 

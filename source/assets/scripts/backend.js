@@ -103,7 +103,7 @@ function get_localstore(key) {
  */
 export function add_recipe(recipe, custom=false) {
   recipe.hash = compute_hash(recipe);
-  recipe.difficulty = compute_difficulty(recipe);
+  recipe.difficulty = recipe.difficulty || compute_difficulty(recipe);
   set_localstore(recipe.hash, recipe);
   if (custom) add_custom(recipe.hash);  // add the hash to an "custom recipe" hashmap
   return recipe;
@@ -369,30 +369,32 @@ export function filter_intolerance(recipe_hashes, intolerances) {
   const aisles_to_avoid = new Set();  // Make a hashset for checking
   for (let i = 0; i < intolerances.length; i++) 
     switch (intolerances[i]) {
-    case 'Vegan':
-      aisles_to_avoid.add('Meat');
-      aisles_to_avoid.add('Milk, Eggs, Other Dairy');
-      break;
-    case 'Vegetarian':
-      aisles_to_avoid.add('Meat');
-      break;
-    case 'Dairy-free':
-      aisles_to_avoid.add('Milk, Eggs, Other Dairy');
-      break;
-    case 'Seafood-free':
-      aisles_to_avoid.add('Seafood');
-      break;
-    case 'Gluten-free':
-      aisles_to_avoid.add('Baking');
-      break;
-    case 'Tree Nut-free':
-      aisles_to_avoid.add('Nuts');
-      aisles_to_avoid.add('Savory Snacks');
-      break;
-    case 'Peanut-free':
-      aisles_to_avoid.add('Nuts');
-      aisles_to_avoid.add('Savory Snacks');
-      break;
+      case 'Vegan':
+        aisles_to_avoid.add("Meat");
+        aisles_to_avoid.add("Milk, Eggs, Other Dairy");
+        aisles_to_avoid.add("Canned and Jarred");
+        break;
+      case 'Vegetarian':
+        aisles_to_avoid.add("Meat");
+        aisles_to_avoid.add("Canned and Jarred");
+        break;
+      case 'Dairy-free':
+        aisles_to_avoid.add("Milk, Eggs, Other Dairy");
+        break;
+      case 'Seafood-free':
+        aisles_to_avoid.add("Seafood");
+        break;
+      case 'Gluten-free':
+        aisles_to_avoid.add("Baking");
+        break;
+      case 'Tree Nut-free':
+        aisles_to_avoid.add("Nuts");
+        aisles_to_avoid.add("Savory Snacks");
+        break;
+      case 'Peanut-free':
+        aisles_to_avoid.add("Nuts");
+        aisles_to_avoid.add("Savory Snacks");
+        break;
     }
   
 
@@ -404,6 +406,13 @@ export function filter_intolerance(recipe_hashes, intolerances) {
       for (let aisle of aisles)
         if (aisles_to_avoid.has(aisle)) return false;
     }
+    let recipe=get_recipe(recipe_hash);
+    recipe.intolerances=[];
+    for (let i = 0; i < intolerances.length; i++){
+     recipe.intolerances.push(intolerances[i]);
+    }
+    remove_recipe(recipe_hash);
+    add_recipe(recipe);
     return true;  // otherwise, include
   });
 }

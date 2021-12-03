@@ -15,6 +15,19 @@ div {
 	font-weight: 700;
 }
 
+input {
+	border-radius: 5px;
+	padding: 10px;
+	border: 3px solid #FFC83A;
+	background: #f1f1f1;
+	font-family: Inter;
+	font-style: normal;
+}
+
+input:focus {
+	outline: none;
+}
+
 .points {
 	font-size: 35px;
 	font-weight: 800;
@@ -117,15 +130,15 @@ input {
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 80px;
+	cursor: pointer;
 }
-
 
 .container {
 	display: block;
 	position: relative;
 	padding-left: 20px;
 	margin-bottom: 0;
-	cursor: pointer;
+	/* cursor: pointer; */
 	font-size: 12px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -235,6 +248,7 @@ input {
 	justify-content: center;
 	color: #FAF9F6;
 	align-items: center;
+	cursor: pointer;
 }
 .instructionList {
 	border: 1.5px solid #ffc83a;
@@ -261,6 +275,7 @@ input {
 	align-items: center;
 	display: flex;
 	color: #faf9f6;
+	cursor: pointer;
 }
 
 .delete {
@@ -305,8 +320,8 @@ input {
 	float: left;
 	height: 70px;
 	text-align: center;
-  
 }
+
 .nav-settings {
 	/* position: relative; */
 	width: 25%;

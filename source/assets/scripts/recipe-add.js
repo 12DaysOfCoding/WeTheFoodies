@@ -110,12 +110,16 @@ function addNewRecipe() {
     }
     recipe.steps = instructionArr;
 
+    recipe.intolerances = [];
+
     console.log(recipe);
 
-    backend.add_recipe(recipe, true);
-
-    window.location.assign('index.html');
-
+    try {
+      backend.add_recipe(recipe, true);  // using the backend to simply logic
+      window.location.assign('index.html');
+    } catch(e) {
+      alert(e);
+    }
   });
 }
 
@@ -136,6 +140,7 @@ function addIngredient() {
     let br = document.createElement('br');
     nodeInput.type='text';
     nodeInput.id = `ingredient-${ingredientIndex}`;
+    nodeInput.autocomplete = 'off';
     nodeInput.appendChild(br);
     node.appendChild(nodeInput);
     let img = document.createElement('img');
@@ -170,6 +175,7 @@ function addInstruction() {
     let br = document.createElement('br');
     nodeInput.type='text';
     nodeInput.id = `instruction-${instructionIndex}`;
+    nodeInput.autocomplete = 'off';
     nodeInput.appendChild(br);
     node.appendChild(nodeInput);
     let img = document.createElement('img');

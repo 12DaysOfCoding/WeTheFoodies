@@ -95,6 +95,15 @@ class RecipeCard extends HTMLElement {
             .hash {
               display: none;
             }
+
+            .recipe-card {
+              box-shadow: 0 0 0px;
+            }
+
+            .recipe-card:hover {
+              cursor: pointer;
+              box-shadow: 0 0 5px #F4BA26;
+            }
         `;
     styleElem.innerHTML = styles;
 
@@ -105,6 +114,7 @@ class RecipeCard extends HTMLElement {
     hash.classList.add('hash');
     hash.textContent = data.hash;
     const card = document.createElement('article');
+    card.classList.add('recipe-card');
 
     const image = document.createElement('img');
     image.src = data.thumbnail || 'assets/images/default-recipe.svg';
@@ -121,8 +131,7 @@ class RecipeCard extends HTMLElement {
 
     const tagWrapper = document.createElement('div');
     tagWrapper.classList.add('tags__wrapper');
-        
-        
+
     const tags = data.intolerances || [];
     tags.forEach((tagName) => {
       const tag = document.createElement('span');
