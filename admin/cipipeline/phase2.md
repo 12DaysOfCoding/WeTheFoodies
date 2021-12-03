@@ -62,5 +62,6 @@ This is the deatiled documentation for the CI/CD pipeline we've constructed for 
 3. Corresponding Unit tests are run as needed
 4. E2E tests are run if necessary
 5. Codes are sent to Codacy for quality analysis
-6. Pending for human review
-7. Merge to branch 
+6. Deploy to service
+7. Pending for human review
+8. Merge to branch 
