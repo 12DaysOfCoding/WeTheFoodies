@@ -12,9 +12,9 @@ async function init() {
   
   console.log(document.referrer);
   
-  let index = document.referrer.lastIndexOf('\/');
+  let index = document.referrer.lastIndexOf('/');
   let str = document.referrer.substring(index + 1);
-  console.log(document.str);
+  console.log(str);
 
   const recipe = backend.get_recipe(backend.get_selected());
 
