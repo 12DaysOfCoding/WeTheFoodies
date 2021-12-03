@@ -7,9 +7,17 @@
 }
 
 nav {
-    background-color: #F4BA26;
-    padding: 20px;
-    text-align: center;
+	background-color: #F4BA26;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 20px;
 }
 
 #dount-p {
@@ -23,16 +31,19 @@ nav {
 }
 
 .diet-restrictionBox{
-    position: relative;right:5.5px;
+    position: absolute;
+    right:5.5px;
       display: block;
       margin-left: auto;
       margin-right: auto;
       width:350px;
-      height:110px;
+      height:90px;
       border:2px solid #FFC83A;
       background-color: white;
-      margin-top: 150px;
-      margin-bottom: 150px;
+      top: 40%;
+      left: 0;
+      right: 0;
+      
   }
 
 .container {
@@ -125,9 +136,11 @@ grid-template-columns: 100px 120px 120px;
 
 
 .bottom-buttons {
-    position: relative;
+    position: absolute;
     text-align: center;
-    margin-bottom: 100px;
+    bottom: 100px;
+    left: 0;
+    right: 0;
 }
 
 .bottom-buttons > p {
