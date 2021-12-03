@@ -373,10 +373,12 @@ export function filter_intolerance(recipe_hashes, intolerances) {
         aisles_to_avoid.add("Meat");
         aisles_to_avoid.add("Milk, Eggs, Other Dairy");
         aisles_to_avoid.add("Canned and Jarred");
+        aisles_to_avoid.add("Seafood");
         break;
       case 'Vegetarian':
         aisles_to_avoid.add("Meat");
         aisles_to_avoid.add("Canned and Jarred");
+        aisles_to_avoid.add("Seafood");
         break;
       case 'Dairy-free':
         aisles_to_avoid.add("Milk, Eggs, Other Dairy");
