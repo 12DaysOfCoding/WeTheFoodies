@@ -7,7 +7,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	 * Check initial recipe card
 	 */
 	it('Initial Recipe detail Page', async () => {
-		console.log('Checking if page loads');
+		// console.log('Checking if page loads');
 		let ingredients = await page.$('h1');
 		let text = await ingredients.getProperty('innerText');
 		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
@@ -17,7 +17,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	 * Check initial recipe card after reload
 	 */
 	 it('Initial Recipe detail Page after reload', async () => {
-		console.log('Checking if page loads after reload');
+		// console.log('Checking if page loads after reload');
 		let ingredients = await page.$('h1');
 		let text = await ingredients.getProperty('innerText');
 		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
@@ -31,26 +31,20 @@ describe('Basic user flow for Recipe detail page', () => {
 	/**
 	 * Check click save the button change to saved
 	 */
-	it('Check save or saved - 1', async () => {
-		console.log('Checking the "save" button...');
-		let buttons = await page.$$('button');
-		await buttons[1].click();
+	it('Check save or saved', async () => {
+		// console.log('Checking the "save" button...');
+		let save_button = await page.$('.save');
+		await save_button.click();
 		let buttonP = await page.$('#save-or-not');
 		let innerText = await buttonP.getProperty('innerText');
 		let text = innerText['_remoteObject'].value;
 		expect(text).toBe("SAVED");
-	});
-	
-	/**
-	 * Check click saved the button change to save
-	 */
-	it('Check save or saved - 2', async () => {
-		console.log('Checking the "saved" button...');
-		let buttons = await page.$$('button');
-		await buttons[1].click();
-		let buttonP = await page.$('#save-or-not');
-		let innerText = await buttonP.getProperty('innerText');
-		let text = innerText['_remoteObject'].value;
+
+		// click again
+		save_button.click();
+		buttonP = await page.$('#save-or-not');
+		innerText = await buttonP.getProperty('innerText');
+		text = innerText['_remoteObject'].value;
 		expect(text).toBe("SAVE");
 	});
 
@@ -58,7 +52,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	 * Check click back to dashboard
 	 */
 	it('Check go dashboard', async () => {
-		console.log('Checking go dashboard');
+		// console.log('Checking go dashboard');
 		let sections = await page.$$('section');
 		let divs = await sections[2].$$('div');
 		await Promise.all([
@@ -76,7 +70,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	 * Check click go search
 	 */
 	it('Check go search', async () => {
-		console.log('Checking go search');
+		// console.log('Checking go search');
 		let sections = await page.$$('section');
 		let divs = await sections[2].$$('div');
 		await Promise.all([
@@ -94,7 +88,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	 * Check click go add
 	 */
 	it('Check go add', async () => {
-		console.log('Checking go add');
+		// console.log('Checking go add');
 		let sections = await page.$$('section');
 		let divs = await sections[2].$$('div');
 		await Promise.all([
@@ -103,7 +97,7 @@ describe('Basic user flow for Recipe detail page', () => {
 		]);
     let label = await page.$('label');
     let text = await label.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("NAME:");
+    expect(text['_remoteObject'].value).toBe("NAME: ");
 		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
 	});
 
@@ -111,7 +105,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	 * Check click go setting
 	 */
 	it('Check go setting', async () => {
-		console.log('Checking go setting');
+		// console.log('Checking go setting');
 		let sections = await page.$$('section');
 		let divs = await sections[2].$$('div');
 		await Promise.all([
