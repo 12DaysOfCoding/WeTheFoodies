@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/onBoardingPage.html"
+        "destination": "/index.html"
       }
     ]
   }
