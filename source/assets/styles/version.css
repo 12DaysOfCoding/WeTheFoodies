@@ -10,10 +10,18 @@
     margin: 0;
 }
 
-.header-bar {
-    background-color: #F4BA26;
-    padding: 20px;
-    text-align: center;
+nav {
+	background-color: #F4BA26;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 20px;
 }
 
 #dount-p {
@@ -27,7 +35,11 @@
 }
 
 .version-text{
-    margin-top: 250px;
+    position: absolute;
+    top: 40%;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
 }
 
