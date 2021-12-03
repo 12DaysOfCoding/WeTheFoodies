@@ -88,7 +88,7 @@ function goBack(){
 
   btn.addEventListener('click', () => {
     if (str === 'index.html'){
-      window.location.replace(document.referrer);
+      window.location.assign('index.html');
     } else {
       window.history.back();
     }
