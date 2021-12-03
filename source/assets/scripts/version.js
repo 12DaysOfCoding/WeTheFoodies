@@ -16,6 +16,6 @@ function goBack(){
   
   const btn2 = document.getElementById('white-arrow');
   btn2.addEventListener('click', () => {
-    window.history.back();
+    window.location.assign('settings.html');
   });
 }
