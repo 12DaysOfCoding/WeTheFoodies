@@ -82,6 +82,10 @@ nav {
 	clear: none;
 }
 
+#cookingTime{
+	width: 150px;
+}
+
 input.radio {
 	width: auto;
 	display: inline;
