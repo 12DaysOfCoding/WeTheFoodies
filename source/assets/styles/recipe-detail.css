@@ -35,8 +35,19 @@ span {
 }
 
 nav {
-    background-color: #F4BA26;
-    padding: 20px;
+	background-color: #F4BA26;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 10px;
+    font-style: normal;
+    font-weight: bold;
 }
 
 #dount-p {
