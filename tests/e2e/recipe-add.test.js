@@ -300,7 +300,6 @@ describe('Basic user flow for Recipe Add page', () => {
       divs[3].click(),
       page.waitForNavigation(),
     ]);
-    // TODO: check the page after implementing settings page
     await page.goto('http://127.0.0.1:5500/source/recipe-add.html');
   });
 

@@ -12,6 +12,21 @@ describe('Basic user flow for Recipe detail page', () => {
 		let text = await ingredients.getProperty('innerText');
 		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
 	});
+
+	/**
+	 * Check initial recipe card after reload
+	 */
+	 it('Initial Recipe detail Page after reload', async () => {
+		console.log('Checking if page loads after reload');
+		let ingredients = await page.$('h1');
+		let text = await ingredients.getProperty('innerText');
+		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
+
+		await page.reload();
+		let new_ingredients = await page.$('h1');
+		let new_text = await new_ingredients.getProperty('innerText');
+		expect(new_text['_remoteObject'].value).toBe("INGREDIENTS");
+	});
 	
 	/**
 	 * Check click save the button change to saved
