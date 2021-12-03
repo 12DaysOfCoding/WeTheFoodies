@@ -81,7 +81,7 @@ function bindFoodieButton() {
 }
 
 function goBack(){
-  const btn = document.getElementById('dount');
+  const btn = document.getElementById('white-arrow');
   let index = document.referrer.lastIndexOf('/');
   let str = document.referrer.substring(index + 1);
   console.log(str);
