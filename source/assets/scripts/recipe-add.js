@@ -74,7 +74,7 @@ function addNewRecipe() {
       // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
-      if (ing !== null){
+      if (ing && ing.value){
         // console.log(ing.value);
         let theIngredient = {original:ing.value};
         ingredientArr[ingredientArrIndex] = theIngredient;
@@ -96,7 +96,7 @@ function addNewRecipe() {
       // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
-      if (ing !== null){
+      if (ing && ing.value){
         // console.log(ing.value);
         let step = {number:i, step:ing.value};
         instructionArr[instructionArrIndex] = step;

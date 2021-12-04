@@ -149,7 +149,7 @@ h1 {
     font-weight: 400;
 }
 
-#foodie-mode {
+.show-foodie-mode {
     display: block;
     font-size: 30px;
     font-weight: bold;
@@ -180,6 +180,10 @@ h1 {
 
 .save > p {
     display: inline;
+}
+
+.hidden {
+    display:none;
 }
 
 .nav-bar {
