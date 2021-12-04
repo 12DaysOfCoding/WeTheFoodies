@@ -29,7 +29,7 @@ function getSteps() {
 function bindExitButton() {
   const exitBtn = document.getElementById('exit');
   exitBtn.addEventListener('click', () => {
-    window.location.assign('recipe-detail.html');
+    window.history.back();
   });
 }
 
