@@ -9,6 +9,10 @@ import * as backend from './backend.js';
  * Initialize and call other function
  */
 async function init() {
+  
+  let index = document.referrer.document.referrer.lastIndexOf('/');
+  let str = document.referrer.document.referrer.substring(index + 1);
+  console.log(str);
 
   const recipe = backend.get_recipe(backend.get_selected());
 
