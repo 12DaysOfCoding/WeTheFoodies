@@ -27,7 +27,7 @@ function getSteps() {
 }
 
 function bindExitButton() {
-  const exitBtn = document.getElementById('dount-p');
+  const exitBtn = document.getElementById('white-arrow-p');
   exitBtn.addEventListener('click', () => {
     window.history.back();
   });
