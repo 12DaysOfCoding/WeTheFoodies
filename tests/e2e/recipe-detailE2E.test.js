@@ -65,5 +65,48 @@ describe('Basic user flow for Recipe detail page', () => {
 		expect(text).toBe("SAVE");
 	});
 
-	// need foodie button test here
+	/**
+	 * Check foodie mode
+	 */
+	it('Check entering foodie mode', async () => {
+        let foodie = await page.$('#foodie-mode');
+		await Promise.all([
+			foodie.click(),
+			page.waitForNavigation(),
+		]);
+		let step = await page.$('#step-num');
+		let innerText = await step.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('STEP 1');
+	});
+
+	it('Check foodie mode next button', async () => {
+        let next = await page.$('#next');
+		await next.click();
+		let step = await page.$('#step-num');
+		let innerText = await step.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('STEP 2');
+	});
+
+	it('Check foodie mode prev button', async () => {
+        let prev = await page.$('#prev');
+		await prev.click();
+		let step = await page.$('#step-num');
+		let innerText = await step.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('STEP 1');
+	});
+
+	it('Check exiting foodie mode', async () => {
+        let exit = await page.$('#exit');
+		await Promise.all([
+			exit.click(),
+			page.waitForNavigation(),
+		]);
+		let recipeDetail = await page.$('h1');
+		let innerText = await recipeDetail.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('Recipe Detail');
+	});
 });
