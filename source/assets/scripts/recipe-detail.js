@@ -48,6 +48,7 @@ function populateUI(recipe) {
     const foodieInstruction = document.getElementById('how-to-use-foodie');
     const foodieBtn = document.getElementById('foodie-mode');
     foodieInstruction.classList.add('hidden');
+    foodieBtn.classList.remove('show-foodie-mode');
     foodieBtn.classList.add('hidden');
   }
 }
