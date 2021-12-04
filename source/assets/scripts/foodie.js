@@ -8,22 +8,27 @@ let currStep = 0;
 
 let steps = [];
 
+const prevButton = document.querySelector('#prev');
+const nextButton = document.querySelector('#next');
+
 async function init() {
   getSteps();
   updateStep();
 
   bindExitButton();
-
-  const prevButton = document.querySelector('#prev');
-  const nextButton = document.querySelector('#next');
-
-  bindPrevButton(prevButton, nextButton);
-  bindNextButton(prevButton, nextButton);
+  
 }
 
 function getSteps() {
   const recipe = backend.get_recipe(backend.get_selected());
   steps = recipe.steps.map((step) => step.step);
+  if (steps.length === 1) {
+    prevButton.classList.add('hidden');
+    nextButton.classList.add('hidden');
+  } else {
+    bindPrevButton(prevButton, nextButton);
+    bindNextButton(prevButton, nextButton);
+  }
 }
 
 function bindExitButton() {
