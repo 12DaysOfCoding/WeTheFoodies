@@ -1,6 +1,6 @@
 describe('preference-setting test', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/preference-setting.html');
+    await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
   });
 
   /**
@@ -17,68 +17,30 @@ describe('preference-setting test', () => {
     expect(text2['_remoteObject'].value).toBe("SAVED");
   });
 });
-/**
- * Check search filter
- */
-describe('recipe-searchPage load test', () => {
-  beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/recipe-searchPage.html');
-  });
-
-  it('loads filter button', async () => {
-    let text_check = await page.$('#apply-filters');
-    let text = await text_check.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("APPLY FILTERS");
-  });
-
-  it('loads search button', async () => {
-    let text_check = await page.$('.nav-search #nav-dashboard-text');
-    let text = await text_check.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("SEARCH");
-  });
-});
 
 /**
- * check version page
- */
-describe('check version page', () => {
-  beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/version.html');
-  });
-
-  it('check version page', async () => {
-    let version = await page.$("#v-test");
-    let text = await version.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("Version beta 1.0");
-  });
-});
-
-/**
- * check version page after reload
+ * check version page with reloading reload
  */
  describe('check version page after reload', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/version.html');
+    await page.goto('http://cse110-group30-affd4.web.app/version.html');
   });
 
   it('check version page', async () => {
-    let version = await page.$("#v-test");
+    let version = await page.$("#v-text");
     let text = await version.getProperty('innerText');
     expect(text['_remoteObject'].value).toBe("Version beta 1.0");
     await page.reload();
 
-    let new_version = await page.$("#v-test");
+    let new_version = await page.$("#v-text");
     let new_text = await new_version.getProperty('innerText');
     expect(new_text['_remoteObject'].value).toBe("Version beta 1.0");
-
   });
-  
-
 });
 
 describe('preference-setting test', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/preference-setting.html');
+    await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
   });
 
   /**
@@ -107,7 +69,7 @@ describe('preference-setting test', () => {
  */
 describe('go to setting', () => { 
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/index.html');
+    await page.goto('http://cse110-group30-affd4.web.app/index.html');
   });
 
   it('go to setting page from dashboard', async () => {
@@ -118,6 +80,6 @@ describe('go to setting', () => {
     ]);
     let font = await page.$('#setting-text');
     let text = await font.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("FONTSIZE");
+    expect(text['_remoteObject'].value).toBe("PREFERENCE");
   });
 });
