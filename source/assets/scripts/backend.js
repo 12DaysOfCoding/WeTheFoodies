@@ -84,7 +84,7 @@ function reset_intolerences(recipe){
     const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
      for (let aisle of aisles){
        if (Vegan_set.has(aisle)) tag['Vegan']=false;
-       if (Vegetarian_set.has(aisle)) tag['Vegetarian_set']=false;
+       if (Vegetarian_set.has(aisle)) tag['Vegetarian']=false;
        if (Dairy_set.has(aisle)) tag['Dairy-free']=false;
        if (Peanut_set.has(aisle)) tag['Seafood-free']=false;
        if (Seafood_set.has(aisle)) tag['Gluten-free']=false;
