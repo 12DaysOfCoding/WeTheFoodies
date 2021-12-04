@@ -10,12 +10,6 @@ let steps = [];
 
 async function init() {
   getSteps();
-
-  goDashboard();
-  goSearch();
-  goAdd();
-  goSettings();
-
   updateStep();
 
   bindExitButton();
@@ -32,18 +26,10 @@ function getSteps() {
   steps = recipe.steps.map((step) => step.step);
 }
 
-function updateStep() {
-  const stepNum = document.querySelector('#step-num');
-  const step = document.querySelector('#step');
-
-  stepNum.textContent = `STEP ${currStep + 1}`;
-  step.textContent = steps[currStep];
-};
-
 function bindExitButton() {
   const exitBtn = document.getElementById('exit');
   exitBtn.addEventListener('click', () => {
-    window.location.replace('recipe-detail.html');
+    window.location.assign('recipe-detail.html');
   });
 }
 
@@ -77,32 +63,10 @@ function bindNextButton(prevButton, nextButton) {
   });
 }
 
-function goDashboard() {
-  const btn = document.getElementsByClassName('nav-dashboard');
+const updateStep = () => {
+  const stepNum = document.querySelector('#step-num');
+  const step = document.querySelector('#step');
 
-  btn[0].addEventListener('click', () => {
-    window.location.replace('index.html');
-  });
-}
-
-function goSearch() {
-  const btn = document.getElementsByClassName('nav-search');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-search.html');
-  });
-}
-function goAdd() {
-  const btn = document.getElementsByClassName('nav-add');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('#');
-  });
-}
-function goSettings() {
-  const btn = document.getElementsByClassName('nav-settings');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('settings.html');
-  });
-}
+  stepNum.textContent = `STEP ${currStep + 1}`;
+  step.textContent = steps[currStep];
+};

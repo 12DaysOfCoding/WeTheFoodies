@@ -5,11 +5,6 @@ import * as backend from './backend.js';
 window.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-  goDashboard();
-  goSearch();
-  goAdd();
-  goSettings();
-  
   defaultPreference();
   readPreference();
 
@@ -27,12 +22,12 @@ function bindSearchBar() {
     backend.search_suggest(input).then(suggestions => {
       clearDropdowns();
       // rebuild
-      const search_bar = document.querySelector(".search-bar");
+      const search_bar = document.querySelector('.search-bar');
       suggestions.forEach(suggestion => {
         const dropdown = document.createElement('div');
-        dropdown.className = "suggest_dropdown";
+        dropdown.className = 'suggest_dropdown';
         dropdown.innerHTML = suggestion;
-        dropdown.addEventListener("click", function() {
+        dropdown.addEventListener('click', function() {
           input_field.value = this.innerHTML;
           hitSearch();
         });
@@ -46,12 +41,8 @@ function bindSearchBar() {
  * event listeners on search button click
  */
 function bindSearchButton() {
-  // Create a recipe card
-  let recipeCard = document.createElement('recipe-card');
-  recipeCard.data = {};
-  document.querySelector('.recipes__wrapper').appendChild(recipeCard);
-  let recipe_list = document.querySelector(".recipes__wrapper");
-  recipe_list.innerHTML = "";  // clear old recipe cards
+  let recipe_list = document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML = '';  // clear old recipe cards
   //set the default filter
   defaultPreference();
   //select the button
@@ -65,12 +56,12 @@ function bindSearchButton() {
  */
 function hitSearch() {
   clearDropdowns();  // remove all suggestions
-  let recipe_list = document.querySelector(".recipes__wrapper");
-  recipe_list.innerHTML = "";  // clear old recipe cards
+  let recipe_list = document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML = '';  // clear old recipe cards
   let list = readPreference();
   let recipe_name = document.querySelector('#search-field').value;
   backend.search_recipe(recipe_name, true, 10, list).then(data => {
-    recipe_list.innerHTML="";
+    recipe_list.innerHTML='';
     for(let i = 0; i < data.length; i++){
       let recipeCard = document.createElement('recipe-card');
       recipeCard.data = backend.get_recipe(data[i]);
@@ -91,12 +82,12 @@ function hitSearch() {
  * wipe dropdowns
  */
 function clearDropdowns() {
-  const search_bar = document.querySelector(".search-bar");
+  const search_bar = document.querySelector('.search-bar');
   const suggest_dropdowns = document.getElementsByClassName('suggest_dropdown');
   let dropdown_length = suggest_dropdowns.length;
-  while (dropdown_length --> 0) {
+  while (dropdown_length --> 0) 
     search_bar.removeChild(suggest_dropdowns[dropdown_length]);
-  }
+  
 }
 
 /**
@@ -107,7 +98,7 @@ function configureRecipeCards() {
   recipeCards.forEach((card) => {
     card.addEventListener('click', () => {
       backend.select_recipe(card.shadowRoot.querySelector('.hash').textContent);
-      window.location.replace('recipe-detail.html');
+      window.location.assign('recipe-detail.html');
     });
   });
 }
@@ -154,9 +145,9 @@ function defaultPreference(){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = leftCkbox[i].innerText;
 
-    if(intolerance_list.includes(ingredientText)){
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    }
+    
   }
 
   const rightElmt = document.querySelector('.right');
@@ -165,39 +156,9 @@ function defaultPreference(){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = rightCkbox[i].innerText;
 
-    if(intolerance_list.includes(ingredientText)){
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    }
+    
   }
 
-}
-
-function goDashboard() {
-  const btn = document.getElementsByClassName('nav-dashboard');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('index.html');
-  });
-}
-
-function goSearch() {
-  const btn = document.getElementsByClassName('nav-search');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-searchPage.html');
-  });
-}
-function goAdd() {
-  const btn = document.getElementsByClassName('nav-add');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-add.html');
-  });
-}
-function goSettings() {
-  const btn = document.getElementsByClassName('nav-settings');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('settings.html');
-  });
 }

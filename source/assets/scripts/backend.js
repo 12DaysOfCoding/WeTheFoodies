@@ -35,9 +35,9 @@ export async function fetch_recipe(name) {
     const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
     // grab data from raw json
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
-    if (recipe.steps.length) {
+    if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
-    }
+    
     return add_recipe(recipe);
   });
 }
@@ -103,7 +103,7 @@ function get_localstore(key) {
  */
 export function add_recipe(recipe, custom=false) {
   recipe.hash = compute_hash(recipe);
-  recipe.difficulty = compute_difficulty(recipe);
+  recipe.difficulty = recipe.difficulty || compute_difficulty(recipe);
   set_localstore(recipe.hash, recipe);
   if (custom) add_custom(recipe.hash);  // add the hash to an "custom recipe" hashmap
   return recipe;
@@ -128,6 +128,19 @@ export function remove_recipe(recipe_hash){
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
     remove_favorite(recipe_hash);
+  } else 
+    console.warn(`${recipe_hash} not in localstore, check your arguments`);
+  
+}
+
+/**
+ * Remove the recipe temporaly, just for deleting the api's intolerance tags
+ * @param {string} recipe_hash
+ */
+ export function remove_recipe_forIntolerance(recipe_hash){
+  if(localStorage.getItem(recipe_hash)) {
+    localStorage.removeItem(recipe_hash);
+    // note that we also need to remove it from both the custom and favorite arr
   } else 
     console.warn(`${recipe_hash} not in localstore, check your arguments`);
   
@@ -217,7 +230,7 @@ export function remove_favorite(recipe_hash) {
 }
 
 export function select_recipe(recipe_hash) {
-  set_localstore(SELECTED_RECIPE_KEY, recipe_hash)
+  set_localstore(SELECTED_RECIPE_KEY, recipe_hash);
 }
 
 export function get_selected() {
@@ -318,11 +331,11 @@ export async function search_recipe(name, online=false, match_tolerance=10, into
   multimap.forEach(itm => {
     const [recipe_name, recipe_hash] = itm;
     let dist;
-    if (recipe_name.toLowerCase().includes(name.toLowerCase())) {  // substr
+    if (recipe_name.toLowerCase().includes(name.toLowerCase()))   // substr
       dist = -name.length/recipe_name.length;  // huristics: shorter name better
-    } else {
+    else 
       dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
-    }
+    
 
     if (dist < match_tolerance)
       result.push([recipe_hash, dist]);  // use the distance as a sorting key
@@ -361,20 +374,24 @@ export async function search_suggest(name, match_tolerance=15, return_size=5) {
  * @return {Array<string>} - a list of filtered recipe hashes
  */
 export function filter_intolerance(recipe_hashes, intolerances) {
-  if (intolerances == null || !Array.isArray(intolerances)) {
+  if (intolerances == null || !Array.isArray(intolerances)) 
     return recipe_hashes;  // nothing to do, return the original list
-  }
+  
 
   // at this point, we have some intolerances
   const aisles_to_avoid = new Set();  // Make a hashset for checking
-  for (let i = 0; i < intolerances.length; i++) {
+  for (let i = 0; i < intolerances.length; i++) 
     switch (intolerances[i]) {
       case 'Vegan':
         aisles_to_avoid.add("Meat");
         aisles_to_avoid.add("Milk, Eggs, Other Dairy");
+        aisles_to_avoid.add("Canned and Jarred");
+        aisles_to_avoid.add("Seafood");
         break;
       case 'Vegetarian':
         aisles_to_avoid.add("Meat");
+        aisles_to_avoid.add("Canned and Jarred");
+        aisles_to_avoid.add("Seafood");
         break;
       case 'Dairy-free':
         aisles_to_avoid.add("Milk, Eggs, Other Dairy");
@@ -394,7 +411,7 @@ export function filter_intolerance(recipe_hashes, intolerances) {
         aisles_to_avoid.add("Savory Snacks");
         break;
     }
-  }
+  
 
   return recipe_hashes.filter(recipe_hash => {
     const ingredients = get_recipe(recipe_hash).ingredients;
@@ -404,6 +421,13 @@ export function filter_intolerance(recipe_hashes, intolerances) {
       for (let aisle of aisles)
         if (aisles_to_avoid.has(aisle)) return false;
     }
+    let recipe=get_recipe(recipe_hash);
+    recipe.intolerances=[];
+    for (let i = 0; i < intolerances.length; i++){
+     recipe.intolerances.push(intolerances[i]);
+    }
+    remove_recipe_forIntolerance(recipe_hash);
+    add_recipe(recipe);
     return true;  // otherwise, include
   });
 }

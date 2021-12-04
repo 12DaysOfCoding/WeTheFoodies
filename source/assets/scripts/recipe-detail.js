@@ -5,8 +5,6 @@ window.addEventListener('DOMContentLoaded', init);
 
 import * as backend from './backend.js';
 
-
-
 /**
  * Initialize and call other function
  */
@@ -20,10 +18,6 @@ async function init() {
   document.querySelector('.recipe-detail__wrapper').appendChild(expandedRecipeCard);
 
   saveOrSaved(recipe);
-  goDashboard();
-  goSearch();
-  goAdd();
-  goSettings();
   populateUI(recipe);
   bindFoodieButton();
 }
@@ -34,18 +28,22 @@ function populateUI(recipe) {
   document.getElementById('serving-size-input').textContent = `${recipe.servings} servings`;
 
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
-  recipe.ingredients.forEach(function(ingredient) {
-    const ingredientElem = document.createElement('li');
-    ingredientElem.textContent = ingredient.original;
-    ingredientsWrapper.appendChild(ingredientElem);
-  });
+  if (recipe.ingredients) {  // guard for no ingredients
+    recipe.ingredients.forEach(function(ingredient) {
+      const ingredientElem = document.createElement('li');
+      ingredientElem.textContent = ingredient.original;
+      ingredientsWrapper.appendChild(ingredientElem);
+    });
+  }
 
   const stepsWrapper = document.querySelector('.specific-instructions');
-  recipe.steps.forEach(function(step) {
-    const stepElem = document.createElement('li');
-    stepElem.textContent = `${step.step}`; 
-    stepsWrapper.appendChild(stepElem);
-  });
+  if (recipe.steps) {  // guard for no steps
+    recipe.steps.forEach(function(step) {
+      const stepElem = document.createElement('li');
+      stepElem.textContent = `${step.step}`; 
+      stepsWrapper.appendChild(stepElem);
+    });
+  }
 }
 
 /**
@@ -77,51 +75,6 @@ function saveOrSaved(recipe) {
 function bindFoodieButton() {
   const foodieBtn = document.getElementById('foodie-mode');
   foodieBtn.addEventListener('click', () => {
-    window.location.replace('foodie.html');
-  });
-}
-
-/**
- * Click to go back to dashboard
- */
-function goDashboard() {
-  const btn = document.getElementsByClassName('nav-dashboard');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('index.html');
-  });
-}
-
-
-/**
- * Click to go to search
- */
-function goSearch() {
-  const btn = document.getElementsByClassName('nav-search');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-search.html');
-  });
-}
-
-/**
- * Click to add the recipe card
- */
-function goAdd() {
-  const btn = document.getElementsByClassName('nav-add');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('recipe-add.html');
-  });
-}
-
-/**
- * Click to go to settings
- */
-function goSettings() {
-  const btn = document.getElementsByClassName('nav-settings');
-
-  btn[0].addEventListener('click', () => {
-    window.location.replace('settings.html');
+    window.location.assign('foodie.html');
   });
 }

@@ -11,11 +11,12 @@ main {
 body {
     margin: 0;
     padding: 0;
+    background-color: #FAF9F6;
 }
 
 nav {
     background-color: #F4BA26;
-    padding: 10px 20px;
+    height: 80px;
     display: flex;
     justify-content: center;
 }
@@ -23,6 +24,19 @@ nav {
 nav > h1 {
     color: #fff;
     font-size: 2rem;
+    position: absolute;
+	top: -5px;
+}
+
+#dount-p {
+	text-align: right;
+	margin-top: -60px;
+	margin-bottom: 0;
+}
+
+
+#dount {
+	width: 50px;
 }
 
 .section__foodie {
@@ -37,11 +51,24 @@ nav > h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    position: absolute;
+    height: 60%;
+    top: 180px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 0 24px;
 }
 
+.controls__wrapper {
+    display: flex;
+    position: absolute;
+    bottom: 100px;
+}
+
 button {
+    display: flex;
+    align-items: center;
     background-color: #F4BA26;
     color: white;
     border-radius: 50px;
@@ -50,6 +77,18 @@ button {
     padding: 8px 15px;
     font-size: 22px;
     font-weight: 700;
+}
+
+#exit > img {
+    margin-left: 8px;
+}
+
+#prev > img {
+    margin-right: 8px;
+}
+
+#next > img {
+    margin-left: 8px;
 }
 
 .symbol {
@@ -226,4 +265,8 @@ button {
 .nav-settings img {
     display: inline-block;
     height: 36px;
+}
+
+button:hover {
+    cursor: pointer;
 }

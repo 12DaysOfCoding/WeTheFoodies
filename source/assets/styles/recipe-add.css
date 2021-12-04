@@ -1,5 +1,8 @@
 * {
 	font-family: 'Inter', sans-serif;
+	padding: 0;
+	border: 0;
+	margin: 0;
 }
 
 .points-summary {
@@ -10,6 +13,19 @@ div {
 	font-size: 22px;
 	color: #f4ba26;
 	font-weight: 700;
+}
+
+input {
+	border-radius: 5px;
+	padding: 10px;
+	border: 3px solid #FFC83A;
+	background: #f1f1f1;
+	font-family: Inter;
+	font-style: normal;
+}
+
+input:focus {
+	outline: none;
 }
 
 .points {
@@ -27,8 +43,17 @@ span {
 }
 
 nav {
-	background-color: #f4ba26;
-	padding: 20px;
+	background-color: #F4BA26;
+	height: 80px;
+	display: flex;
+	justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 20px;
 }
 
 #dount-p {
@@ -51,7 +76,10 @@ nav {
 
 .flexbox {
 	width: 340px;
+	display: flex;
 	margin: auto;
+	position: relative;
+	left: -20px;
 }
 
 .RecipeBox {
@@ -61,6 +89,10 @@ nav {
 
 .radioClass {
 	clear: none;
+}
+
+#cookingTime{
+	width: 150px;
 }
 
 input.radio {
@@ -85,6 +117,11 @@ label {
 	display: inline-block;
 }
 
+.labelRadio > img {
+	position: relative;
+	top: 5px;
+}
+
 input {
 	font-family: Inter;
 	font-style: normal;
@@ -103,26 +140,27 @@ input {
 	font-family: Inter;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 30px;line-height: 36px;
+	font-size: 30px;
+	line-height: 36px;
 	color: #FFFFFF;
 	padding: 10px;
 	margin: 10px;
-	margin-left: 2px;
+	margin-left: 8px;
 	border: none;
 	width: 99%;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 80px;
+	cursor: pointer;
 }
-
 
 .container {
 	display: block;
 	position: relative;
-	padding-left: 20px;
 	margin-bottom: 0;
-	cursor: pointer;
+	padding-left: 15px;
+	/* cursor: pointer; */
 	font-size: 12px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -146,8 +184,8 @@ input {
 /* Create a custom checkbox */
 .checkmark {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 5px;
+	left: -5px;
 	height: 15px;
 	width: 15px;
 	background-color: #FFC83A;
@@ -157,6 +195,7 @@ input {
 	content: "✓";
 	position: absolute;
 	display: none;
+	margin-top: 3px;
 }
   
 .container input:checked ~ .checkmark:after {
@@ -171,9 +210,9 @@ input {
 .diet-restrictionBox{
 	position: relative;
 	display: block;
-	margin-left: auto;
+	margin-left: 5px;
 	margin-right: auto;
-	width: auto;
+	width: 100%;
 	height: auto;
 	border: 1.5px solid #ffc83a;
 	
@@ -212,6 +251,7 @@ input {
 	border-radius: 6px;
 	width: 100%;
 	font-size: 16px;
+	margin-left: 7px;
     
 }
 .ingredientButton {
@@ -231,6 +271,7 @@ input {
 	justify-content: center;
 	color: #FAF9F6;
 	align-items: center;
+	cursor: pointer;
 }
 .instructionList {
 	border: 1.5px solid #ffc83a;
@@ -238,6 +279,7 @@ input {
 	border-radius: 6px;
 	width: 100%;
 	font-size: 16px;
+	margin-left: 7px;
 }
 .instructionButton {
 	font-family: Inter;
@@ -257,10 +299,17 @@ input {
 	align-items: center;
 	display: flex;
 	color: #faf9f6;
+	cursor: pointer;
+}
+
+.input-list {
+	margin-left: 25px;
 }
 
 .delete {
-	width: 12px;
+	position: relative;
+	top: 3px;
+	width: 18px;
 }
 
 
@@ -272,7 +321,7 @@ input {
 	left: 0;
 	right: 0;
 	margin-top: 10px;
-	border-radius: 0px 0px 6px 6px;
+	/*border-radius: 0px 0px 6px 6px;*/
 	
 }
 
@@ -301,8 +350,8 @@ input {
 	float: left;
 	height: 70px;
 	text-align: center;
-  
 }
+
 .nav-settings {
 	/* position: relative; */
 	width: 25%;
@@ -329,6 +378,7 @@ input {
 	font-size: 12px;
 	/* padding-top: 3px;
 	padding-bottom: 6px; */
+	font-weight: lighter;
 }
 
 .nav-dashboard img {

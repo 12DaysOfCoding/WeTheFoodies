@@ -95,6 +95,15 @@ class RecipeCard extends HTMLElement {
             .hash {
               display: none;
             }
+
+            .recipe-card {
+              box-shadow: 0 0 0px;
+            }
+
+            .recipe-card:hover {
+              cursor: pointer;
+              box-shadow: 0 0 5px #F4BA26;
+            }
         `;
     styleElem.innerHTML = styles;
 
@@ -105,9 +114,10 @@ class RecipeCard extends HTMLElement {
     hash.classList.add('hash');
     hash.textContent = data.hash;
     const card = document.createElement('article');
+    card.classList.add('recipe-card');
 
     const image = document.createElement('img');
-    image.src = data.thumbnail;
+    image.src = data.thumbnail || 'assets/images/default-recipe.svg';
     image.alt = data.name;
 
     const wrapper = document.createElement('div');
@@ -121,8 +131,7 @@ class RecipeCard extends HTMLElement {
 
     const tagWrapper = document.createElement('div');
     tagWrapper.classList.add('tags__wrapper');
-        
-        
+
     const tags = data.intolerances || [];
     tags.forEach((tagName) => {
       const tag = document.createElement('span');
@@ -131,19 +140,27 @@ class RecipeCard extends HTMLElement {
     });
 
     const level = document.createElement('span');
-    const setLevel = data.difficulty;
+    //Need to distinguish the difficulty calculation for custom and normal one
     let numLevel;
+    if(data.difficulty_realLevel == null){
+      const setLevel = data.difficulty;
+  
+      if (setLevel > 0.75) 
+        numLevel = 4;
+      else if (setLevel > 0.50) 
+        numLevel = 3;
+      else if (setLevel > 0.25) 
+        numLevel = 2;
+      else 
+        numLevel = 1;
+        level.textContent = numLevel;
+    }
+    else{
+      numLevel = data.difficulty_realLevel;
+      level.textContent = numLevel;
+    }
 
-    if (setLevel > 0.75) 
-      numLevel = 4;
-    else if (setLevel > 0.50) 
-      numLevel = 3;
-    else if (setLevel > 0.25) 
-      numLevel = 2;
-    else 
-      numLevel = 1;
     
-    level.textContent = numLevel;
     level.classList.add(`level-${numLevel}`);
 
 

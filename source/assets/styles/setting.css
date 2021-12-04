@@ -9,12 +9,21 @@
     font-size: 22px;
     color: #383200;
     font-weight: 700;
+    margin-left: 15px;
 }
 
-.header-bar {
-    background-color: #F4BA26;
-    padding: 20px;
-    text-align: center;
+nav {
+	background-color: #F4BA26;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 20px;
 }
 
 #dount-p {

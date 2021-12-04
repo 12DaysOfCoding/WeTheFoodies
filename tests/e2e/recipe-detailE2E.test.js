@@ -1,111 +1,112 @@
 describe('Basic user flow for Recipe detail page', () => {
 	beforeAll(async () => {
-		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
+		await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
+		await page.type('#search-field', 'pizza');
+		const search_button = await page.$('#search-button');
+		await search_button.click();
+		await page.waitForTimeout(1500);
+		const card = await page.$('recipe-card');
+		await card.click();
+		await page.waitForNavigation();
 	});
 
 	/**
 	 * Check initial recipe card
 	 */
 	it('Initial Recipe detail Page', async () => {
-		console.log('Checking if page loads');
+		// console.log('Checking if page loads');
 		let ingredients = await page.$('h1');
 		let text = await ingredients.getProperty('innerText');
-		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
+		expect(text['_remoteObject'].value).toBe("Recipe Detail");
+	});
+
+	/**
+	 * Check initial recipe card after reload
+	 */
+	 it('Initial Recipe detail Page after reload', async () => {
+		// console.log('Checking if page loads after reload');
+		let ingredients = await page.$('h1');
+		let text = await ingredients.getProperty('innerText');
+		expect(text['_remoteObject'].value).toBe("Recipe Detail");
+
+		await page.reload();
+		let new_ingredients = await page.$('h1');
+		let new_text = await new_ingredients.getProperty('innerText');
+		expect(new_text['_remoteObject'].value).toBe("Recipe Detail");
 	});
 	
 	/**
 	 * Check click save the button change to saved
 	 */
-	it('Check save or saved - 1', async () => {
-		console.log('Checking the "save" button...');
-		let buttons = await page.$$('button');
-		await buttons[1].click();
-		let buttonP = await page.$('#save-or-not');
-		let innerText = await buttonP.getProperty('innerText');
-		let text = innerText['_remoteObject'].value;
-		expect(text).toBe("SAVED");
-	});
-	
-	/**
-	 * Check click saved the button change to save
-	 */
-	it('Check save or saved - 2', async () => {
-		console.log('Checking the "saved" button...');
-		let buttons = await page.$$('button');
-		await buttons[1].click();
+	it('Check save or saved', async () => {
+		// console.log('Checking the "save" button...');
+		// before click
 		let buttonP = await page.$('#save-or-not');
 		let innerText = await buttonP.getProperty('innerText');
 		let text = innerText['_remoteObject'].value;
 		expect(text).toBe("SAVE");
+
+		// click
+		let save_button = await page.$('.save');
+		await save_button.click();
+		page.waitForTimeout(500);
+		// after click
+		buttonP = await page.$('#save-or-not');
+		innerText = await buttonP.getProperty('innerText');
+		text = innerText['_remoteObject'].value;
+		expect(text).toBe("SAVED");
+
+		// click again
+		await save_button.click();
+		page.waitForTimeout(500);
+		buttonP = await page.$('#save-or-not');
+		innerText = await buttonP.getProperty('innerText');
+		text = innerText['_remoteObject'].value;
+		expect(text).toBe("SAVE");
 	});
 
 	/**
-	 * Check click back to dashboard
+	 * Check foodie mode
 	 */
-	it('Check go dashboard', async () => {
-		console.log('Checking go dashboard');
-		let sections = await page.$$('section');
-		let divs = await sections[2].$$('div');
+	it('Check entering foodie mode', async () => {
+        let foodie = await page.$('#foodie-mode');
 		await Promise.all([
-			divs[0].click(),
+			foodie.click(),
 			page.waitForNavigation(),
 		]);
-		let saved_recipe = await page.$('h2');
-    let text = await saved_recipe.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("Saved Recipes");
-		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
-  });
-
-	
-	/**
-	 * Check click go search
-	 */
-	it('Check go search', async () => {
-		console.log('Checking go search');
-		let sections = await page.$$('section');
-		let divs = await sections[2].$$('div');
-		await Promise.all([
-			divs[1].click(),
-			page.waitForNavigation(),
-		]);
-		let applyFilters = await page.$('#apply-filters');
-		let innerText = await applyFilters.getProperty('innerText');
+		let step = await page.$('#step-num');
+		let innerText = await step.getProperty('innerText');
 		let text = innerText['_remoteObject'].value;
-		expect(text).toBe("APPLY FILTERS");
-		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
+		expect(text).toBe('STEP 1');
 	});
 
-	/**
-	 * Check click go add
-	 */
-	it('Check go add', async () => {
-		console.log('Checking go add');
-		let sections = await page.$$('section');
-		let divs = await sections[2].$$('div');
-		await Promise.all([
-			divs[2].click(),
-			page.waitForNavigation(),
-		]);
-    let label = await page.$('label');
-    let text = await label.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("NAME:");
-		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
+	it('Check foodie mode next button', async () => {
+        let next = await page.$('#next');
+		await next.click();
+		let step = await page.$('#step-num');
+		let innerText = await step.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('STEP 2');
 	});
 
-	/**
-	 * Check click go setting
-	 */
-	it('Check go setting', async () => {
-		console.log('Checking go setting');
-		let sections = await page.$$('section');
-		let divs = await sections[2].$$('div');
+	it('Check foodie mode prev button', async () => {
+        let prev = await page.$('#prev');
+		await prev.click();
+		let step = await page.$('#step-num');
+		let innerText = await step.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('STEP 1');
+	});
+
+	it('Check exiting foodie mode', async () => {
+        let exit = await page.$('#exit');
 		await Promise.all([
-			divs[3].click(),
+			exit.click(),
 			page.waitForNavigation(),
 		]);
-		let font = await page.$('setting-text');
-		let text = await font.getProperty('innerText')
-		expect(text['_remoteObject'].value).toBe("FONTSIZE");
-		await page.goto('http://127.0.0.1:5500/source/recipe-detail.html');
+		let recipeDetail = await page.$('h1');
+		let innerText = await recipeDetail.getProperty('innerText');
+		let text = innerText['_remoteObject'].value;
+		expect(text).toBe('Recipe Detail');
 	});
 });

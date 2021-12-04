@@ -35,8 +35,19 @@ span {
 }
 
 nav {
-    background-color: #F4BA26;
-    padding: 20px;
+	background-color: #F4BA26;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+nav > h1 {
+	color: #fff;
+	font-size: 2rem;
+	position: absolute;
+	top: 10px;
+    font-style: normal;
+    font-weight: bold;
 }
 
 #dount-p {
@@ -138,6 +149,10 @@ h1 {
     border-radius: 8px;
 }
 
+#foodie-mode:hover {
+    cursor: pointer;
+}
+
 .save {
     font-size: 28px;
     color: #ffc83a;
@@ -146,6 +161,10 @@ h1 {
     border: 1px solid #ffc83a;
     border-radius: 8px;
     padding: 4px;
+}
+
+.save:hover {
+    cursor: pointer;
 }
 
 .save > p {
@@ -215,6 +234,7 @@ h1 {
     margin: 0; 
     color: white;
     font-size: 12px;
+	font-weight: lighter;
     /* padding-top: 3px;
     padding-bottom: 6px; */
 }
