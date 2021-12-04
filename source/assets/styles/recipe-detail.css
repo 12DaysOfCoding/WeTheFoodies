@@ -52,12 +52,23 @@ nav > h1 {
 
 #dount-p {
     text-align: right;
-    margin-top: -60px;
+    margin-top: -42px;
     margin-bottom: 0;
 }
 
 #dount {
     width: 50px;
+}
+
+#white-arrow-p {
+    text-align: left;
+    margin-left: 15px;
+    margin-top: -57px;
+    margin-bottom: 0;
+}
+
+#white-arrow {
+    width: 20px;
 }
 
 #recipe-search {

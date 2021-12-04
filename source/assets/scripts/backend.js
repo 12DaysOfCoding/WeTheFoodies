@@ -37,11 +37,43 @@ export async function fetch_recipe(name) {
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
     if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
-    
+    recalculate_intolerances(recipe);
     return add_recipe(recipe);
   });
 }
 
+/**
+ * recalculates the intolerences list for the recipe. modifies in-place
+ * @param {*} recipe - the recipe object
+ */
+function recalculate_intolerances(recipe){
+  const tag = {'Vegan':true, 'Vegetarian':true, 'Dairy-free':true, 'Seafood-free':true,
+             'Gluten-free':true, 'Tree Nut-free':true, 'Peanut-free':true, 'Soy-free':true};  // making soyfree true
+  const sets = {};
+  sets['Vegan'] = new Set(['Meat', 'Milk, Eggs, Other Dairy', 'Seafood']);
+  sets['Vegetarian'] = new Set(['Meat', 'Seafood']);
+  sets['Dairy-free'] = new Set(['Milk, Eggs, Other Dairy']);
+  sets['Seafood-free'] = new Set(['Seafood']);
+  sets['Gluten-free'] = new Set(['Baking']);
+  sets['Tree Nut-free'] = new Set(['Nuts', 'Savory Snacks']);
+  sets['Peanut-free'] = new Set(['Nuts', 'Savory Snacks']);
+  for (let ingredient of recipe.ingredients) {
+    if (!ingredient.aisle) continue;  // empty aisle info, do nothing
+    const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
+    for (let aisle of aisles) {
+      for (let key in sets) {
+        if (sets[key].has(aisle)) tag[key] = false;
+      }
+    }
+  }
+  // if (recipe.intolerances.includes('Soy-free')) tag['Soy-free']=true; 
+  recipe.intolerances=[]
+  for(let i in tag){
+    if(tag[i]===true){
+      recipe.intolerances.push(i);
+    }
+  }
+}
 /**
  * compute the hash of a recipe by hashing its steps as a string
  * @param {Object} recipe - a recipe object whose name and steps are populated
@@ -301,9 +333,7 @@ function min_edit_dist(str1, str2, del_cost=1, add_cost=1) {
       else   // we will have to edit
         dp[i][j] = Math.min(dp[i-1][j-1]+sub_cost(c1, c2), 
           Math.min(dp[i-1][j]+del_cost, dp[i][j-1]+add_cost));  // min of the three
-      
     }
-  
   return dp[m][n];
 }
 
@@ -323,6 +353,7 @@ export async function search_recipe(name, online=false, match_tolerance=10, into
   for (let i = 0; i < localStorage.length; i++) {
     const recipe_hash = localStorage.key(i);
     if (recipe_hash.startsWith('%')) continue;  // ignore
+    if (recipe_hash.startsWith('!')) continue;
     const recipe_name = recipe_hash.substring(0, recipe_hash.indexOf('$'));
     multimap.push([recipe_name, recipe_hash]);
   }
@@ -336,7 +367,6 @@ export async function search_recipe(name, online=false, match_tolerance=10, into
     else 
       dist = min_edit_dist(name, recipe_name);  // calculate its edit dist
     
-
     if (dist < match_tolerance)
       result.push([recipe_hash, dist]);  // use the distance as a sorting key
   });
@@ -377,57 +407,10 @@ export function filter_intolerance(recipe_hashes, intolerances) {
   if (intolerances == null || !Array.isArray(intolerances)) 
     return recipe_hashes;  // nothing to do, return the original list
   
-
-  // at this point, we have some intolerances
-  const aisles_to_avoid = new Set();  // Make a hashset for checking
-  for (let i = 0; i < intolerances.length; i++) 
-    switch (intolerances[i]) {
-      case 'Vegan':
-        aisles_to_avoid.add("Meat");
-        aisles_to_avoid.add("Milk, Eggs, Other Dairy");
-        aisles_to_avoid.add("Canned and Jarred");
-        aisles_to_avoid.add("Seafood");
-        break;
-      case 'Vegetarian':
-        aisles_to_avoid.add("Meat");
-        aisles_to_avoid.add("Canned and Jarred");
-        aisles_to_avoid.add("Seafood");
-        break;
-      case 'Dairy-free':
-        aisles_to_avoid.add("Milk, Eggs, Other Dairy");
-        break;
-      case 'Seafood-free':
-        aisles_to_avoid.add("Seafood");
-        break;
-      case 'Gluten-free':
-        aisles_to_avoid.add("Baking");
-        break;
-      case 'Tree Nut-free':
-        aisles_to_avoid.add("Nuts");
-        aisles_to_avoid.add("Savory Snacks");
-        break;
-      case 'Peanut-free':
-        aisles_to_avoid.add("Nuts");
-        aisles_to_avoid.add("Savory Snacks");
-        break;
-    }
-  
-
   return recipe_hashes.filter(recipe_hash => {
-    const ingredients = get_recipe(recipe_hash).ingredients;
-    for (let ingredient of ingredients) {
-      if (!ingredient.aisle) continue;  // empty aisle info, do nothing
-      const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
-      for (let aisle of aisles)
-        if (aisles_to_avoid.has(aisle)) return false;
-    }
-    let recipe=get_recipe(recipe_hash);
-    recipe.intolerances=[];
-    for (let i = 0; i < intolerances.length; i++){
-     recipe.intolerances.push(intolerances[i]);
-    }
-    remove_recipe_forIntolerance(recipe_hash);
-    add_recipe(recipe);
+    const recipe_tags = new Set(get_recipe(recipe_hash).intolerances);
+    for (let intolerace of intolerances)
+      if (!recipe_tags.has(intolerace)) return false;
     return true;  // otherwise, include
   });
 }

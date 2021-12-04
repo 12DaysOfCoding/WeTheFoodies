@@ -20,6 +20,7 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  goBack();
 }
 
 function populateUI(recipe) {
@@ -86,4 +87,13 @@ function bindFoodieButton() {
   foodieBtn.addEventListener('click', () => {
     window.location.assign('foodie.html');
   });
+}
+
+function goBack(){
+  const btn = document.getElementById('white-arrow-p');
+  let index = document.referrer.lastIndexOf('/');
+  let str = document.referrer.substring(index + 1);
+  console.log(str);
+
+  btn.addEventListener('click', () => window.history.back());
 }
