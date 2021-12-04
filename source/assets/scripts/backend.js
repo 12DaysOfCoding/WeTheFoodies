@@ -32,64 +32,75 @@ export async function fetch_recipe(name) {
   const raw_recipes = await fetch_recipe_raw(name);
   // for each recipe, keep only ones in keep_fields and rename them accordingly
   return raw_recipes.map(raw_recipe => {
-    const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
+    let recipe = Object.create(recipe_data);  // prototype inherit recipe_data
     // grab data from raw json
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
     if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
-    var tag = new Object();
-    tag['Vegan']=true;
-    tag['Vegetarian']=true;
-    tag['Dairy-free']=true;
-    tag['Seafood-free']=true;
-    tag['Gluten-free']=true;
-    tag['Tree Nut-free']=true;
-    tag['Peanut-free']=true;
-    let Vegan_set=new Set();
-    let Vegetarian_set=new Set();
-    let Dairy_set=new Set();
-    let Seafood_set=new Set();
-    let Gluten_set=new Set();
-    let Tree_nut_set=new Set();
-    let Peanut_set=new Set();
-    Vegan_set.add("Meat");
-    Vegan_set.add("Milk, Eggs, Other Dairy");
-    Vegan_set.add("Canned and Jarred");
-    Vegan_set.add("Seafood");
-    Vegetarian_set.add("Meat");
-    Vegetarian_set.add("Canned and Jarred");
-    Vegetarian_set.add("Seafood");
-    Dairy_set.add("Milk, Eggs, Other Dairy");
-    Seafood_set.add("Seafood");
-    Gluten_set.add("Baking");
-    Tree_nut_set.add("Nuts");
-    Tree_nut_set.add("Savory Snacks");
-    Peanut_set.add("Nuts");
-    Peanut_set.add("Savory Snacks");
-    let ingredients=recipe.ingredients
-    for (let ingredient of ingredients) {
-      if (!ingredient.aisle) continue;  // empty aisle info, do nothing
-      const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
-       for (let aisle of aisles){
-         if (Vegan_set.has(aisle)) tag['Vegan']=false;
-         if (Vegetarian_set.has(aisle)) tag['Vegetarian_set']=false;
-         if (Dairy_set.has(aisle)) tag['Dairy-free']=false;
-         if (Peanut_set.has(aisle)) tag['Seafood-free']=false;
-         if (Seafood_set.has(aisle)) tag['Gluten-free']=false;
-         if (Tree_nut_set.has(aisle)) tag['Tree Nut-free']=false;
-         if (Vegan_set.has(aisle)) tag['Peanut-free']=false;
-       }
-    }
-    recipe.intolerances=[]
-    for(let i in tag){
-      if(tag[i]===true){
-        recipe.intolerances.push(i);
-      }
-    }
+    recipe=reset_intolerences(recipe);
     return add_recipe(recipe);
   });
 }
 
+/**
+ * Reset the intolerences list for the recipe
+ * @param {*} recipe the recipe object
+ * @returns the recipe object
+ */
+function reset_intolerences(recipe){
+  var tag = new Object();
+  tag['Vegan']=true;
+  tag['Vegetarian']=true;
+  tag['Dairy-free']=true;
+  tag['Seafood-free']=true;
+  tag['Gluten-free']=true;
+  tag['Tree Nut-free']=true;
+  tag['Peanut-free']=true;
+  tag['Soy-free']=false;
+  let Vegan_set=new Set();
+  let Vegetarian_set=new Set();
+  let Dairy_set=new Set();
+  let Seafood_set=new Set();
+  let Gluten_set=new Set();
+  let Tree_nut_set=new Set();
+  let Peanut_set=new Set();
+  Vegan_set.add("Meat");
+  Vegan_set.add("Milk, Eggs, Other Dairy");
+  Vegan_set.add("Canned and Jarred");
+  Vegan_set.add("Seafood");
+  Vegetarian_set.add("Meat");
+  Vegetarian_set.add("Canned and Jarred");
+  Vegetarian_set.add("Seafood");
+  Dairy_set.add("Milk, Eggs, Other Dairy");
+  Seafood_set.add("Seafood");
+  Gluten_set.add("Baking");
+  Tree_nut_set.add("Nuts");
+  Tree_nut_set.add("Savory Snacks");
+  Peanut_set.add("Nuts");
+  Peanut_set.add("Savory Snacks");
+  let ingredients=recipe.ingredients
+  for (let ingredient of ingredients) {
+    if (!ingredient.aisle) continue;  // empty aisle info, do nothing
+    const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
+     for (let aisle of aisles){
+       if (Vegan_set.has(aisle)) tag['Vegan']=false;
+       if (Vegetarian_set.has(aisle)) tag['Vegetarian_set']=false;
+       if (Dairy_set.has(aisle)) tag['Dairy-free']=false;
+       if (Peanut_set.has(aisle)) tag['Seafood-free']=false;
+       if (Seafood_set.has(aisle)) tag['Gluten-free']=false;
+       if (Tree_nut_set.has(aisle)) tag['Tree Nut-free']=false;
+       if (Vegan_set.has(aisle)) tag['Peanut-free']=false;
+     }
+  }
+  if (recipe.intolerances.includes('Soy-free')) tag['Soy-free']=true; 
+  recipe.intolerances=[]
+  for(let i in tag){
+    if(tag[i]===true){
+      recipe.intolerances.push(i);
+    }
+  }
+  return recipe;
+}
 /**
  * compute the hash of a recipe by hashing its steps as a string
  * @param {Object} recipe - a recipe object whose name and steps are populated
