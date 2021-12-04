@@ -45,8 +45,10 @@ function populateUI(recipe) {
     });
   }
   if (recipe.steps.length === 0) {
+    const instructionsList = document.querySelector('.instructions');
     const foodieInstruction = document.getElementById('how-to-use-foodie');
     const foodieBtn = document.getElementById('foodie-mode');
+    instructionsList.classList.add('hidden');
     foodieInstruction.classList.add('hidden');
     foodieBtn.classList.remove('show-foodie-mode');
     foodieBtn.classList.add('hidden');
