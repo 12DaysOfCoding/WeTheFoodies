@@ -171,6 +171,10 @@ h1 {
     display: inline;
 }
 
+.hidden {
+    display:none;
+}
+
 .nav-bar {
     position: fixed;
     bottom: 0;
