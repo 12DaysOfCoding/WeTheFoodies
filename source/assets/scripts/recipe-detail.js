@@ -86,11 +86,5 @@ function goBack(){
   let str = document.referrer.substring(index + 1);
   console.log(str);
 
-  btn.addEventListener('click', () => {
-    if (str === 'index.html'){
-      window.location.assign('index.html');
-    } else if (str === 'recipe-search.html') {
-      window.history.back();
-    }
-  });
+  btn.addEventListener('click', () => window.history.back());
 }
