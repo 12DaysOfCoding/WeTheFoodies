@@ -37,7 +37,6 @@ export async function fetch_recipe(name) {
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
     if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
-    console.log(recipe.intolerances);
     recipe=reset_intolerences(recipe);
     return add_recipe(recipe);
   });
