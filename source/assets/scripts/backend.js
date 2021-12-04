@@ -37,6 +37,7 @@ export async function fetch_recipe(name) {
     Object.keys(keep_fields).forEach(key => recipe[keep_fields[key]] = raw_recipe[key]);
     if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
+    console.log(recipe.intolerances);
     recipe=reset_intolerences(recipe);
     return add_recipe(recipe);
   });
@@ -92,7 +93,7 @@ function reset_intolerences(recipe){
        if (Vegan_set.has(aisle)) tag['Peanut-free']=false;
      }
   }
-  if (recipe.intolerances.includes('Soy-free')) tag['Soy-free']=true; 
+  if (recipe.intolerances.includes('soy free')) tag['Soy-free']=true; 
   recipe.intolerances=[]
   for(let i in tag){
     if(tag[i]===true){
