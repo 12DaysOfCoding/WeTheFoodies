@@ -89,8 +89,17 @@ function goBack(){
   btn.addEventListener('click', () => {
     if (str === 'index.html'){
       window.location.assign('index.html');
+    } else if (str === 'recipe-search.html') {
+      window.history.back();
     } else {
       window.history.back();
+      let index2 = window.location.href.lastIndexOf('/');
+      let str2 = window.location.href.substring(index2 + 1);
+      while (str2 === 'recipe-detail.html' || str2 === 'foodie.html') {
+        window.history.back();
+        index2 = window.location.href.lastIndexOf('/');
+        str2 = window.location.href.substring(index2 + 1);
+      }
     }
   });
 }
