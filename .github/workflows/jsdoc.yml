@@ -22,6 +22,7 @@ jobs:
           recurse: true
           front_page: README.md
           
+      # Deploy documentations to Github Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
