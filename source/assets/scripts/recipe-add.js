@@ -39,7 +39,7 @@ function addNewRecipe() {
 
     const servingSizeField = document.getElementById('servingSize').value;
     recipe.servings = servingSizeField;
-
+    
     let radios = document.getElementsByName('diff');
     for (let i = 0, length = radios.length; i < length; i++) 
       if (radios[i].checked) {
@@ -114,12 +114,20 @@ function addNewRecipe() {
 
     console.log(recipe);
 
-    try {
-      backend.add_recipe(recipe, true);  // using the backend to simply logic
-      window.location.assign('index.html');
-    } catch(e) {
-      alert(e);
-    }
+    var file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.addEventListener("load",()=>{
+      localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`,reader.result);
+      recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
+      try {
+        backend.add_recipe(recipe, true);  // using the backend to simply logic
+        window.location.assign('index.html');
+      } catch(e) {
+        alert(e);
+      }
+    });
+    
   });
 }
 

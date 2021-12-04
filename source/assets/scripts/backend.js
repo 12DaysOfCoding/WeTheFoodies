@@ -382,6 +382,7 @@ export async function search_recipe(name, online=false, match_tolerance=10, into
   for (let i = 0; i < localStorage.length; i++) {
     const recipe_hash = localStorage.key(i);
     if (recipe_hash.startsWith('%')) continue;  // ignore
+    if (recipe_hash.startsWith('!')) continue;
     const recipe_name = recipe_hash.substring(0, recipe_hash.indexOf('$'));
     multimap.push([recipe_name, recipe_hash]);
   }
@@ -433,6 +434,7 @@ export async function search_suggest(name, match_tolerance=15, return_size=5) {
  * @return {Array<string>} - a list of filtered recipe hashes
  */
 export function filter_intolerance(recipe_hashes, intolerances) {
+
   if (intolerances == null || !Array.isArray(intolerances)) 
     return recipe_hashes;  // nothing to do, return the original list
   
@@ -470,8 +472,6 @@ export function filter_intolerance(recipe_hashes, intolerances) {
         aisles_to_avoid.add("Savory Snacks");
         break;
     }
-  
-
   return recipe_hashes.filter(recipe_hash => {
     const ingredients = get_recipe(recipe_hash).ingredients;
     for (let ingredient of ingredients) {
