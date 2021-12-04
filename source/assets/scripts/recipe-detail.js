@@ -20,6 +20,7 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  goBack();
 }
 
 function populateUI(recipe) {
@@ -76,5 +77,20 @@ function bindFoodieButton() {
   const foodieBtn = document.getElementById('foodie-mode');
   foodieBtn.addEventListener('click', () => {
     window.location.assign('foodie.html');
+  });
+}
+
+function goBack(){
+  const btn = document.getElementById('white-arrow-p');
+  let index = document.referrer.lastIndexOf('/');
+  let str = document.referrer.substring(index + 1);
+  console.log(str);
+
+  btn.addEventListener('click', () => {
+    if (str === 'index.html'){
+      window.location.assign('index.html');
+    } else if (str === 'recipe-search.html') {
+      window.history.back();
+    }
   });
 }

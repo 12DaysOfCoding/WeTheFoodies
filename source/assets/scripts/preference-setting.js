@@ -102,8 +102,7 @@ function registerCheckboxes() {
 }
 
 function goBack(){
-  const btn = document.getElementById('dount');
-
+  const btn = document.getElementById('white-arrow-p');
   btn.addEventListener('click', () => {
     window.location.assign('settings.html');
   });
