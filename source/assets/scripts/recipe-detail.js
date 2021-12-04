@@ -43,6 +43,11 @@ function populateUI(recipe) {
       stepElem.textContent = `${step.step}`; 
       stepsWrapper.appendChild(stepElem);
     });
+  } else {
+    const foodieInstruction = document.getElementById('how-to-use-foodie');
+    const foodieBtn = document.getElementById('foodie-mode');
+    foodieInstruction.classList.add('hidden');
+    foodieBtn.classList.add('hidden');
   }
 }
 
