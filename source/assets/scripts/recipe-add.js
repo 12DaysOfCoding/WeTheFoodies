@@ -26,7 +26,7 @@ function addNewRecipe() {
 
   form.addEventListener('submit', (event) => {
     // handle the form data
-    console.log('New Recipe Added');
+    // console.log('New Recipe Added');
 
     event.preventDefault();
     let recipe = {};
@@ -39,17 +39,16 @@ function addNewRecipe() {
 
     const servingSizeField = document.getElementById('servingSize').value;
     recipe.servings = servingSizeField;
-
+    
     let radios = document.getElementsByName('diff');
     for (let i = 0, length = radios.length; i < length; i++) 
       if (radios[i].checked) {
         // do whatever you want with the checked radio
         recipe.difficulty_realLevel = radios[i].value;
-        console.log(radios[i].value);
+        // console.log(radios[i].value);
         // only one radio can be logically checked, don't check the rest
         break;
       }
-      
 
     var veganBox = document.getElementById('vegan');
     if (veganBox.checked)
@@ -57,30 +56,26 @@ function addNewRecipe() {
     else
       recipe.vegan = false;
       
-
     var veggieBox = document.getElementById('veggie');
     if (veggieBox.checked)
       recipe.vegetarian = true;
     else
       recipe.vegetarian = false;
-      
-
-    //add image ???
-      
-    let ingredientListLength = document.querySelectorAll('#ingredientOrderedList li').length;
+            
+    // let ingredientListLength = document.querySelectorAll('#ingredientOrderedList li').length;
 
     let ingredientArr = [];
-    console.log(ingredientListLength);
+    // console.log(ingredientListLength);
     let ingredientArrIndex = 0;
     
     // ingredientIndex: # of all the li's added (including the li's which are deleted)
     for(let i = 1; i <= ingredientIndex; i++){
       let str = 'ingredient-'+i;
-      console.log(str);
+      // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
       if (ing !== null){
-        console.log(ing.value);
+        // console.log(ing.value);
         let theIngredient = {original:ing.value};
         ingredientArr[ingredientArrIndex] = theIngredient;
         ingredientArrIndex += 1;
@@ -89,20 +84,20 @@ function addNewRecipe() {
     recipe.ingredients = ingredientArr;
 
     //instruction 
-    let instructionListLength = document.querySelectorAll('#instructionOrderedList li').length;
+    // let instructionListLength = document.querySelectorAll('#instructionOrderedList li').length;
 
     let instructionArr = [];
-    console.log(instructionListLength);
+    // console.log(instructionListLength);
     let instructionArrIndex = 0;
     
     // instructionIndex: # of all the li's added (including the li's which are deleted)
     for(let i = 1; i <= instructionIndex; i++){
       let str = 'instruction-'+i;
-      console.log(str);
+      // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
       if (ing !== null){
-        console.log(ing.value);
+        // console.log(ing.value);
         let step = {number:i, step:ing.value};
         instructionArr[instructionArrIndex] = step;
         instructionArrIndex += 1;
@@ -110,15 +105,31 @@ function addNewRecipe() {
     }
     recipe.steps = instructionArr;
 
-    recipe.intolerances = [];
+    recipe.intolerances = readPreference();
 
-    console.log(recipe);
+    // console.log(recipe);
 
-    try {
-      backend.add_recipe(recipe, true);  // using the backend to simply logic
-      window.location.assign('index.html');
-    } catch(e) {
-      alert(e);
+    const file = document.querySelector('input[type=file]').files[0];
+    if (file) {  // inputed a file
+      const reader = new FileReader();
+      try {  // save the image and then add
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", () => {
+          localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
+          recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
+          backend.add_recipe(recipe, true);  // using the backend to simply logic
+          window.location.assign('index.html');
+        });
+      } catch(e) {
+        alert(e);
+      }
+    } else {  // no file
+      try {  // add directly
+        backend.add_recipe(recipe, true);  // using the backend to simply logic
+        window.location.assign('index.html');
+      } catch(e) {
+        alert(e);
+      }
     }
   });
 }
@@ -129,10 +140,10 @@ function addNewRecipe() {
 function addIngredient() {
   let btn = document.getElementById('ingredientButton');
   let box = document.getElementById('ingredientOrderedList');
-  console.log('hi');
+  // console.log('hi');
   
   btn.addEventListener('click', () => {
-    console.log('inside');
+    // console.log('inside');
     ingredientIndex += 1;
     let node = document.createElement('LI');  
     node.id = `ingredientNode-${ingredientIndex}`;
@@ -164,10 +175,10 @@ function addIngredient() {
 function addInstruction() {
   let btn = document.getElementById('instructionButton');
   let box = document.getElementById('instructionOrderedList');
-  console.log('hiiii');
+  // console.log('hiiii');
   
   btn.addEventListener('click', () => {
-    console.log('inside');
+    // console.log('inside');
     instructionIndex += 1;
     let node = document.createElement('LI');  
     node.id = `instructionNode-${instructionIndex}`;
@@ -194,6 +205,36 @@ function addInstruction() {
 }
 
 /**
+ * read the check boxes to return a list of preferences
+ * @returns {Array<string>} an array of preferences
+ */
+ function readPreference(){
+  let intolerance_list = [];
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = leftCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = rightCkbox[i].innerText;
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  return intolerance_list;
+}
+
+/**
  * Get the default preference and show it
  */
 function defaultPreference(){
@@ -207,7 +248,6 @@ function defaultPreference(){
 
     if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    
   }
 
   const rightElmt = document.querySelector('.right');
@@ -218,7 +258,5 @@ function defaultPreference(){
 
     if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
-    
   }
-
 }
