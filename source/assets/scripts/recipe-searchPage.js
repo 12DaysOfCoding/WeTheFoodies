@@ -80,7 +80,7 @@ function hitSearch() {
   clearDropdowns();  // remove all suggestions
   
   let recipe_name = document.querySelector('#search-field').value;
-  backend.search_recipe(recipe_name, false)
+  backend.search_recipe(recipe_name, true)
     .then(data => current_recipes = data)
     .then(displayCards);
 
