@@ -1,5 +1,5 @@
 describe('Navigating the web app', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await page.goto('https://cse110-group30-affd4.web.app/');
   });
 
@@ -13,7 +13,6 @@ describe('Navigating the web app', () => {
     let innerText = await savedRecipes.getProperty('innerText');
     let text = innerText['_remoteObject'].value;
     expect(text).toBe('Saved Recipes');
-    await page.goto('https://cse110-group30-affd4.web.app/');
   });
   
   it('Clicking on search goes to search page', async () => {
@@ -26,7 +25,6 @@ describe('Navigating the web app', () => {
     let innerText = await dietaryRestrictions.getProperty('innerText');
     let text = innerText['_remoteObject'].value;
     expect(text).toBe('Dietary Restrictions');
-    await page.goto('https://cse110-group30-affd4.web.app/');
   });
 
   it('Clicking on add goes to add recipe page', async () => {
@@ -40,7 +38,6 @@ describe('Navigating the web app', () => {
     let innerText = await label.getProperty('innerText');
     let text = innerText['_remoteObject'].value;
     expect(text).toBe('NAME: ');
-    await page.goto('https://cse110-group30-affd4.web.app/');
   });
 
   it('Clicking on settings goes to settings page', async () => {
@@ -52,7 +49,6 @@ describe('Navigating the web app', () => {
     let body = await page.$('.settings-body');
     let divs = await body.$$('div');
     expect(divs.length).toBe(2);
-    await page.goto('https://cse110-group30-affd4.web.app/');
   });
 
   it('Clicking on dashboard goes to dashboard page', async () => {
@@ -65,6 +61,5 @@ describe('Navigating the web app', () => {
     let innerText = await savedRecipes.getProperty('innerText');
     let text = innerText['_remoteObject'].value;
     expect(text).toBe('Saved Recipes');
-    await page.goto('https://cse110-group30-affd4.web.app/');
   });
 });

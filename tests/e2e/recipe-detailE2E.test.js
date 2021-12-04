@@ -1,6 +1,6 @@
 describe('Basic user flow for Recipe detail page', () => {
 	beforeAll(async () => {
-		await page.goto('http://127.0.0.1:5500/source/recipe-search.html');
+		await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
 		await page.type('#search-field', 'pizza');
 		const search_button = await page.$('#search-button');
 		await search_button.click();
@@ -17,7 +17,7 @@ describe('Basic user flow for Recipe detail page', () => {
 		// console.log('Checking if page loads');
 		let ingredients = await page.$('h1');
 		let text = await ingredients.getProperty('innerText');
-		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
+		expect(text['_remoteObject'].value).toBe("Recipe Detail");
 	});
 
 	/**
@@ -27,12 +27,12 @@ describe('Basic user flow for Recipe detail page', () => {
 		// console.log('Checking if page loads after reload');
 		let ingredients = await page.$('h1');
 		let text = await ingredients.getProperty('innerText');
-		expect(text['_remoteObject'].value).toBe("INGREDIENTS");
+		expect(text['_remoteObject'].value).toBe("Recipe Detail");
 
 		await page.reload();
 		let new_ingredients = await page.$('h1');
 		let new_text = await new_ingredients.getProperty('innerText');
-		expect(new_text['_remoteObject'].value).toBe("INGREDIENTS");
+		expect(new_text['_remoteObject'].value).toBe("Recipe Detail");
 	});
 	
 	/**

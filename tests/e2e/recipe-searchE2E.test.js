@@ -3,7 +3,7 @@
  */
  describe('recipe-searchPage load test', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/recipe-search.html');
+    await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
   });
 
   it('loads filter button', async () => {

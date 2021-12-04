@@ -1,6 +1,6 @@
 describe('preference-setting test', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/preference-setting.html');
+    await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
   });
 
   /**
@@ -23,7 +23,7 @@ describe('preference-setting test', () => {
  */
  describe('check version page after reload', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/version.html');
+    await page.goto('http://cse110-group30-affd4.web.app/version.html');
   });
 
   it('check version page', async () => {
@@ -40,7 +40,7 @@ describe('preference-setting test', () => {
 
 describe('preference-setting test', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/preference-setting.html');
+    await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
   });
 
   /**
@@ -69,7 +69,7 @@ describe('preference-setting test', () => {
  */
 describe('go to setting', () => { 
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500/source/index.html');
+    await page.goto('http://cse110-group30-affd4.web.app/index.html');
   });
 
   it('go to setting page from dashboard', async () => {
@@ -80,6 +80,6 @@ describe('go to setting', () => {
     ]);
     let font = await page.$('#setting-text');
     let text = await font.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("FONTSIZE");
+    expect(text['_remoteObject'].value).toBe("PREFERENCE");
   });
 });
