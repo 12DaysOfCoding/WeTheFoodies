@@ -31,8 +31,13 @@ function populateUI(recipe) {
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
   if (recipe.ingredients) {  // guard for no ingredients
     recipe.ingredients.forEach(function(ingredient) {
-      const ingredientElem = document.createElement('li');
-      ingredientElem.textContent = ingredient.original;
+      const ingredientElem = document.createElement('div');
+      const check_box = document.createElement('input');
+      check_box.type = 'checkbox';
+      ingredientElem.appendChild(check_box);
+      const text = document.createElement('span');
+      text.innerText = ingredient.original;
+      ingredientElem.appendChild(text);
       ingredientsWrapper.appendChild(ingredientElem);
     });
   }
