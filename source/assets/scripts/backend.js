@@ -66,7 +66,8 @@ function recalculate_intolerances(recipe){
       }
     }
   }
-  // if (recipe.intolerances.includes('Soy-free')) tag['Soy-free']=true; 
+  // if (recipe.intolerances.includes('Soy-free')) tag['Soy-free']=true;
+  if (tag['Vegan']) tag['Vegetarian'] = true;
   recipe.intolerances=[]
   for(let i in tag){
     if(tag[i]===true){

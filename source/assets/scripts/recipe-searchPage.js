@@ -4,12 +4,14 @@ import * as backend from './backend.js';
 
 window.addEventListener('DOMContentLoaded', init);
 
+let current_recipes = [];
+
 async function init() {
   defaultPreference();
-  readPreference();
 
   bindSearchBar();
   bindSearchButton();
+  bindCheckboxes();
 }
 
 /**
@@ -49,6 +51,26 @@ function bindSearchButton() {
   //once the button got clicked, request the data from api and then output the result
   let button = document.querySelector('#search-button');
   button.addEventListener('click', hitSearch);
+  // alternatively, enter key also trigger a search
+  const input_field = document.getElementById('search-field');
+  input_field.addEventListener('keyup', e => {
+    if (e.key === 'Enter') hitSearch();  // enter key pressed
+  });
+}
+
+/**
+ * displays the current recipes with filters applied
+ */
+function displayCards() {
+  let recipe_list = document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML = '';  // clear old recipe cards
+  const recipe_hashes = backend.filter_intolerance(current_recipes, readPreference());
+  for(let recipe_hash of recipe_hashes) {
+    let recipeCard = document.createElement('recipe-card');
+    recipeCard.data = backend.get_recipe(recipe_hash);
+    document.querySelector('.recipes__wrapper').appendChild(recipeCard);
+  }
+  configureRecipeCards();
 }
 
 /**
@@ -56,19 +78,11 @@ function bindSearchButton() {
  */
 function hitSearch() {
   clearDropdowns();  // remove all suggestions
-  let recipe_list = document.querySelector('.recipes__wrapper');
-  recipe_list.innerHTML = '';  // clear old recipe cards
-  let list = readPreference();
+  
   let recipe_name = document.querySelector('#search-field').value;
-  backend.search_recipe(recipe_name, true, 10, list).then(data => {
-    recipe_list.innerHTML='';
-    for(let i = 0; i < data.length; i++){
-      let recipeCard = document.createElement('recipe-card');
-      recipeCard.data = backend.get_recipe(data[i]);
-      document.querySelector('.recipes__wrapper').appendChild(recipeCard);
-    }
-    configureRecipeCards();
-  });
+  backend.search_recipe(recipe_name, true)
+    .then(data => current_recipes = data)
+    .then(displayCards);
 
   // USE FOR TESTING PURPOSES – to not overwhelm API
   // let recipe = backend.get_recipe('Apple Pie Pancakes$5316512375443084');
@@ -87,7 +101,6 @@ function clearDropdowns() {
   let dropdown_length = suggest_dropdowns.length;
   while (dropdown_length --> 0) 
     search_bar.removeChild(suggest_dropdowns[dropdown_length]);
-  
 }
 
 /**
@@ -101,6 +114,18 @@ function configureRecipeCards() {
       window.location.assign('recipe-detail.html');
     });
   });
+}
+
+/**
+ * bind displayCards function to the event of toggling checkboxes
+ */
+function bindCheckboxes() {
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for (let checkbox of leftCkbox) checkbox.addEventListener('change', displayCards)
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for (let checkbox of rightCkbox) checkbox.addEventListener('change', displayCards);
 }
 
 /**
