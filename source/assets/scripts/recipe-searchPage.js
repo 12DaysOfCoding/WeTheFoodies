@@ -4,12 +4,15 @@ import * as backend from './backend.js';
 
 window.addEventListener('DOMContentLoaded', init);
 
+let current_recipes = [];
+
 async function init() {
   defaultPreference();
   readPreference();
 
   bindSearchBar();
   bindSearchButton();
+  // bindCheckboxes();
 }
 
 /**
@@ -49,6 +52,27 @@ function bindSearchButton() {
   //once the button got clicked, request the data from api and then output the result
   let button = document.querySelector('#search-button');
   button.addEventListener('click', hitSearch);
+  // alternatively, enter key also trigger a search
+  const input_field = document.getElementById('search-field');
+  input_field.addEventListener('keyup', e => {
+    if (e.key === 'Enter') hitSearch();  // enter key pressed
+  });
+}
+
+/**
+ * displays the recipe cards given a list of hashes
+ * @param {Array<string>} recipe_hashes - an array of recipe hashes to display
+ */
+function displayCards(recipe_hashes) {
+  let recipe_list = document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML = '';  // clear old recipe cards
+  current_recipes = recipe_hashes;
+  for(let recipe_hash of recipe_hashes) {
+    let recipeCard = document.createElement('recipe-card');
+    recipeCard.data = backend.get_recipe(recipe_hash);
+    document.querySelector('.recipes__wrapper').appendChild(recipeCard);
+  }
+  configureRecipeCards();
 }
 
 /**
@@ -56,19 +80,10 @@ function bindSearchButton() {
  */
 function hitSearch() {
   clearDropdowns();  // remove all suggestions
-  let recipe_list = document.querySelector('.recipes__wrapper');
-  recipe_list.innerHTML = '';  // clear old recipe cards
+  
   let list = readPreference();
   let recipe_name = document.querySelector('#search-field').value;
-  backend.search_recipe(recipe_name, true, 10, list).then(data => {
-    recipe_list.innerHTML='';
-    for(let i = 0; i < data.length; i++){
-      let recipeCard = document.createElement('recipe-card');
-      recipeCard.data = backend.get_recipe(data[i]);
-      document.querySelector('.recipes__wrapper').appendChild(recipeCard);
-    }
-    configureRecipeCards();
-  });
+  backend.search_recipe(recipe_name, false, 10, list).then(displayCards);
 
   // USE FOR TESTING PURPOSES – to not overwhelm API
   // let recipe = backend.get_recipe('Apple Pie Pancakes$5316512375443084');
@@ -87,7 +102,6 @@ function clearDropdowns() {
   let dropdown_length = suggest_dropdowns.length;
   while (dropdown_length --> 0) 
     search_bar.removeChild(suggest_dropdowns[dropdown_length]);
-  
 }
 
 /**
