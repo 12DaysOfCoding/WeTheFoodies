@@ -91,9 +91,15 @@ function bindFoodieButton() {
 
 function goBack(){
   const btn = document.getElementById('white-arrow-p');
-  // let index = document.referrer.lastIndexOf('/');
-  // let str = document.referrer.substring(index + 1);
-  // console.log(str);
+  let index = document.referrer.lastIndexOf('/');
+  let str = document.referrer.substring(index + 1);
+  console.log(str);
 
-  btn.addEventListener('click', () => window.history.back());
+  btn.addEventListener('click', () => {
+    if (str === 'recipe-search.html'){
+      window.history.back();
+    } else {
+      window.location.assign('index.html');
+    }
+  });
 }
