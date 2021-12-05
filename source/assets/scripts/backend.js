@@ -48,7 +48,7 @@ export async function fetch_recipe(name) {
  */
 function recalculate_intolerances(recipe){
   const tag = {'Vegan':true, 'Vegetarian':true, 'Dairy-free':true, 'Seafood-free':true,
-             'Gluten-free':true, 'Tree Nut-free':true, 'Peanut-free':true, 'Soy-free':true};  // making soyfree true
+    'Gluten-free':true, 'Tree Nut-free':true, 'Peanut-free':true, 'Soy-free':true};  // making soyfree true
   const sets = {};
   sets['Vegan'] = new Set(['Meat', 'Milk, Eggs, Other Dairy', 'Seafood']);
   sets['Vegetarian'] = new Set(['Meat', 'Seafood']);
@@ -60,20 +60,20 @@ function recalculate_intolerances(recipe){
   for (let ingredient of recipe.ingredients) {
     if (!ingredient.aisle) continue;  // empty aisle info, do nothing
     const aisles = ingredient.aisle.split(';');  // split to get many aisles since a product can be in multiple
-    for (let aisle of aisles) {
-      for (let key in sets) {
+    for (let aisle of aisles) 
+      for (let key in sets) 
         if (sets[key].has(aisle)) tag[key] = false;
-      }
-    }
+      
+    
   }
   // if (recipe.intolerances.includes('Soy-free')) tag['Soy-free']=true;
   if (tag['Vegan']) tag['Vegetarian'] = true;
-  recipe.intolerances=[]
-  for(let i in tag){
-    if(tag[i]===true){
+  recipe.intolerances=[];
+  for(let i in tag)
+    if(tag[i]===true)
       recipe.intolerances.push(i);
-    }
-  }
+    
+  
 }
 /**
  * compute the hash of a recipe by hashing its steps as a string
@@ -170,11 +170,11 @@ export function remove_recipe(recipe_hash){
  * Remove the recipe temporaly, just for deleting the api's intolerance tags
  * @param {string} recipe_hash
  */
- export function remove_recipe_forIntolerance(recipe_hash){
-  if(localStorage.getItem(recipe_hash)) {
+export function remove_recipe_forIntolerance(recipe_hash){
+  if(localStorage.getItem(recipe_hash)) 
     localStorage.removeItem(recipe_hash);
     // note that we also need to remove it from both the custom and favorite arr
-  } else 
+  else 
     console.warn(`${recipe_hash} not in localstore, check your arguments`);
   
 }

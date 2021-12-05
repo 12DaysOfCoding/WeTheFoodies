@@ -114,7 +114,7 @@ function addNewRecipe() {
       const reader = new FileReader();
       try {  // save the image and then add
         reader.readAsDataURL(file);
-        reader.addEventListener("load", () => {
+        reader.addEventListener('load', () => {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.add_recipe(recipe, true);  // using the backend to simply logic
@@ -123,14 +123,14 @@ function addNewRecipe() {
       } catch(e) {
         alert(e);
       }
-    } else {  // no file
+    } else   // no file
       try {  // add directly
         backend.add_recipe(recipe, true);  // using the backend to simply logic
         window.location.assign('index.html');
       } catch(e) {
         alert(e);
       }
-    }
+    
   });
 }
 
@@ -208,7 +208,7 @@ function addInstruction() {
  * read the check boxes to return a list of preferences
  * @returns {Array<string>} an array of preferences
  */
- function readPreference(){
+function readPreference(){
   let intolerance_list = [];
   const leftElmt = document.querySelector('.left');
   const leftCkbox = leftElmt.getElementsByClassName('container');

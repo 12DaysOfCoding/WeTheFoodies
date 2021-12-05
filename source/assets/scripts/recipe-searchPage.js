@@ -122,7 +122,7 @@ function configureRecipeCards() {
 function bindCheckboxes() {
   const leftElmt = document.querySelector('.left');
   const leftCkbox = leftElmt.getElementsByClassName('container');
-  for (let checkbox of leftCkbox) checkbox.addEventListener('change', displayCards)
+  for (let checkbox of leftCkbox) checkbox.addEventListener('change', displayCards);
   const rightElmt = document.querySelector('.right');
   const rightCkbox = rightElmt.getElementsByClassName('container');
   for (let checkbox of rightCkbox) checkbox.addEventListener('change', displayCards);
