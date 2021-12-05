@@ -29,22 +29,22 @@ function populateUI(recipe) {
   document.getElementById('serving-size-input').textContent = `${recipe.servings} servings`;
 
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
-  if (recipe.ingredients) {  // guard for no ingredients
+  if (recipe.ingredients)   // guard for no ingredients
     recipe.ingredients.forEach(function(ingredient) {
       const ingredientElem = document.createElement('li');
       ingredientElem.textContent = ingredient.original;
       ingredientsWrapper.appendChild(ingredientElem);
     });
-  }
+  
 
   const stepsWrapper = document.querySelector('.specific-instructions');
-  if (recipe.steps) {  // guard for no steps
+  if (recipe.steps)   // guard for no steps
     recipe.steps.forEach(function(step) {
       const stepElem = document.createElement('li');
       stepElem.textContent = `${step.step}`; 
       stepsWrapper.appendChild(stepElem);
     });
-  }
+  
   if (recipe.steps.length === 0) {
     const instructionsList = document.querySelector('.instructions');
     const foodieInstruction = document.getElementById('how-to-use-foodie');
@@ -96,10 +96,10 @@ function goBack(){
   console.log(str);
 
   btn.addEventListener('click', () => {
-    if (str === 'recipe-search.html'){
+    if (str === 'recipe-search.html')
       window.history.back();
-    } else {
+    else 
       window.location.assign('index.html');
-    }
+    
   });
 }

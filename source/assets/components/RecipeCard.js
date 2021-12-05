@@ -156,7 +156,7 @@ class RecipeCard extends HTMLElement {
         numLevel = 2;
       else 
         numLevel = 1;
-        level.textContent = numLevel;
+      level.textContent = numLevel;
     }
     else{
       numLevel = data.difficulty_realLevel;
