@@ -2,7 +2,11 @@
 
 import * as backend from './backend.js';
 
-window.addEventListener('DOMContentLoaded', init);
+if (localStorage.getItem('%not_first_visit')) {
+  window.location.assign('index.html');  // redirect
+} else {  // first visit
+  window.addEventListener('DOMContentLoaded', init);
+}
 
 async function init() {
   begin();
@@ -39,6 +43,7 @@ function begin() {
     }
 
     backend.set_intolerance(intolerance_list);
+    localStorage.setItem('%not_first_visit', 'true');
     window.location.assign('index.html');
   });
 }

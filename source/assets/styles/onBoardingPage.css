@@ -81,7 +81,7 @@ header > img {
     position: relative;
     padding-left: 20px;
     margin-bottom: 0;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-size: 12px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -147,8 +147,6 @@ grid-template-columns: 100px 120px 120px;
     grid-row: 1;     
 }
 
-
-
 .save {
     /* margin-top: 100px; */
     font-size: 30px;
@@ -186,3 +184,6 @@ grid-template-columns: 100px 120px 120px;
     font-weight: 400;
 }
 
+button:hover {
+    cursor: pointer;
+}

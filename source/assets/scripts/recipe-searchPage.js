@@ -2,7 +2,11 @@
 
 import * as backend from './backend.js';
 
-window.addEventListener('DOMContentLoaded', init);
+if (localStorage.getItem('%not_first_visit')) {
+  window.addEventListener('DOMContentLoaded', init);
+} else {  // first visit
+  window.location.assign('onBoardingPage.html');  // redirect
+}
 
 let current_recipes = [];
 
