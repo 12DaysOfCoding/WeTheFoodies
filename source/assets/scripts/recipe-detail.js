@@ -1,9 +1,13 @@
 // recipe-detail.js
 /** @module recipe-detail */
 
-window.addEventListener('DOMContentLoaded', init);
-
 import * as backend from './backend.js';
+
+if (localStorage.getItem('%not_first_visit')) {
+  window.addEventListener('DOMContentLoaded', init);
+} else {  // first visit
+  window.location.assign('onBoardingPage.html');  // redirect
+}
 
 /**
  * Initialize and call other function
