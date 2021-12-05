@@ -116,6 +116,7 @@ header > img {
     content: "✓";
     position: absolute;
     display: none;
+    margin-left: 3px;
   }
   
   .container input:checked ~ .checkmark:after {

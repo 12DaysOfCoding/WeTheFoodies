@@ -103,6 +103,9 @@ class RecipeCard extends HTMLElement {
             .recipe-card:hover {
               cursor: pointer;
               box-shadow: 0 0 5px #F4BA26;
+              cursor: pointer;
+              transform: translateY(-2px);
+              transition: transform 0.2s;
             }
         `;
     styleElem.innerHTML = styles;
