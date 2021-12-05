@@ -8,11 +8,10 @@ let current_recipes = [];
 
 async function init() {
   defaultPreference();
-  readPreference();
 
   bindSearchBar();
   bindSearchButton();
-  // bindCheckboxes();
+  bindCheckboxes();
 }
 
 /**
@@ -60,13 +59,12 @@ function bindSearchButton() {
 }
 
 /**
- * displays the recipe cards given a list of hashes
- * @param {Array<string>} recipe_hashes - an array of recipe hashes to display
+ * displays the current recipes with filters applied
  */
-function displayCards(recipe_hashes) {
+function displayCards() {
   let recipe_list = document.querySelector('.recipes__wrapper');
   recipe_list.innerHTML = '';  // clear old recipe cards
-  current_recipes = recipe_hashes;
+  const recipe_hashes = backend.filter_intolerance(current_recipes, readPreference());
   for(let recipe_hash of recipe_hashes) {
     let recipeCard = document.createElement('recipe-card');
     recipeCard.data = backend.get_recipe(recipe_hash);
@@ -81,9 +79,10 @@ function displayCards(recipe_hashes) {
 function hitSearch() {
   clearDropdowns();  // remove all suggestions
   
-  let list = readPreference();
   let recipe_name = document.querySelector('#search-field').value;
-  backend.search_recipe(recipe_name, false, 10, list).then(displayCards);
+  backend.search_recipe(recipe_name, false)
+    .then(data => current_recipes = data)
+    .then(displayCards);
 
   // USE FOR TESTING PURPOSES – to not overwhelm API
   // let recipe = backend.get_recipe('Apple Pie Pancakes$5316512375443084');
@@ -115,6 +114,18 @@ function configureRecipeCards() {
       window.location.assign('recipe-detail.html');
     });
   });
+}
+
+/**
+ * bind displayCards function to the event of toggling checkboxes
+ */
+function bindCheckboxes() {
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for (let checkbox of leftCkbox) checkbox.addEventListener('change', displayCards)
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for (let checkbox of rightCkbox) checkbox.addEventListener('change', displayCards);
 }
 
 /**
