@@ -1,4 +1,4 @@
-describe('preference-setting test', () => {
+describe('onBoarding preference-setting test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -70,7 +70,7 @@ describe('preference-setting test', () => {
   });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding preference-setting test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -142,7 +142,7 @@ describe('preference-setting test', () => {
   });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding preference-setting test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -151,8 +151,8 @@ describe('preference-setting test', () => {
      * Saving onBoarding preference with no preference
      * nothing shows up in add recipe page, search page, and settings page
      */
-  it('onBoarding preferences set from right div', async () => {
-    console.log('set onBoarding preferences from right div');
+  it('onBoarding preferences set to nothing', async () => {
+    console.log('set onBoarding preferences to nothing');
 
     /**
      * Set preference to nothing from onBoarding page
@@ -197,7 +197,7 @@ describe('preference-setting test', () => {
   });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -215,7 +215,7 @@ describe('preference-setting test', () => {
     });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -243,7 +243,7 @@ describe('preference-setting test', () => {
     });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -266,7 +266,7 @@ describe('preference-setting test', () => {
     });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -298,7 +298,7 @@ describe('preference-setting test', () => {
     });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -335,7 +335,7 @@ describe('preference-setting test', () => {
     });
 });
 
-describe('preference-setting test', () => {
+describe('onBoarding test', () => {
     beforeAll(async () => {
         await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     });
@@ -380,3 +380,6 @@ describe('preference-setting test', () => {
         expect(new_text).toBe('Saved Recipes');
     });
 });
+
+//To Do: set preference and reload before save
+//To Do: set preference and reload after save
