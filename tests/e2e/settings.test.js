@@ -18,26 +18,6 @@ describe('preference-setting test', () => {
   });
 });
 
-/**
- * check version page with reloading reload
- */
- describe('check version page after reload', () => {
-  beforeAll(async () => {
-    await page.goto('http://cse110-group30-affd4.web.app/version.html');
-  });
-
-  it('check version page', async () => {
-    let version = await page.$("#v-text");
-    let text = await version.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("Version beta 1.0");
-    await page.reload();
-
-    let new_version = await page.$("#v-text");
-    let new_text = await new_version.getProperty('innerText');
-    expect(new_text['_remoteObject'].value).toBe("Version beta 1.0");
-  });
-});
-
 describe('preference-setting test', () => {
   beforeAll(async () => {
     await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
@@ -67,6 +47,9 @@ describe('preference-setting test', () => {
    * shows up in add recipe page, search page, and settings page
    */
   it('setting preferences as dairy-free and gluten-free saves correctly', async () => {
+    /**
+     * Set preference from preference setting page
+     */
     let checkboxes = await page.$$('label');
     await checkboxes[2].click();
     await checkboxes[4].click();
@@ -76,6 +59,9 @@ describe('preference-setting test', () => {
     let text2 = await saved_check.getProperty('innerText');
     expect(text2['_remoteObject'].value).toBe("SAVED");
     
+    /**
+     * check preference from recipe add page
+     */
     await page.goto('https://cse110-group30-affd4.web.app/recipe-add.html');
     let addRecipeCheckboxes = await page.$$('.diet-restrictionBox input');
     let checkedCorrectly = true;
@@ -89,6 +75,9 @@ describe('preference-setting test', () => {
       }
     }
 
+    /**
+     * check preference from recipe search page
+     */
     await page.goto('https://cse110-group30-affd4.web.app/recipe-search.html');
     let searchCheckboxes = await page.$$('.diet-restrictionBox input');
     for (let i = 0; i < searchCheckboxes.length ; i++) {
@@ -101,6 +90,9 @@ describe('preference-setting test', () => {
       }
     }
 
+    /**
+     * check preference from preference setting page
+     */
     await page.goto('https://cse110-group30-affd4.web.app/preference-setting.html');
     let settingsCheckboxes = await page.$$('input');
     for (let i = 0; i < settingsCheckboxes.length ; i++) {
