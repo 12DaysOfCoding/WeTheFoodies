@@ -410,8 +410,10 @@ export function filter_intolerance(recipe_hashes, intolerances) {
   
   return recipe_hashes.filter(recipe_hash => {
     const recipe_tags = new Set(get_recipe(recipe_hash).intolerances);
-    for (let intolerace of intolerances)
-      if (!recipe_tags.has(intolerace)) return false;
+    for (let intolerace of intolerances) 
+      if (!recipe_tags.has(intolerace)) 
+        return false;
+      
     return true;  // otherwise, include
   });
 }

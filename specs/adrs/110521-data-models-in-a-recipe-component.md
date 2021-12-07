@@ -1,3 +1,22 @@
+Modification (2021-11-26): The final data model is as follows.
+* author: String (data from API)
+* cuisines: Array (data from API)
+* difficulty: Number
+* dishTypes: Array (data from API)
+* hash: String (hash ID of the recipe)
+* ingredients: Array
+* intolerances: Array (representing dietary restrictions)
+* name: String
+* pricePerServing: Number (data from API)
+* readyInMinutes: Number
+* servings: Number
+* steps: Array
+* thumbnail: String (the image of the recipe)
+* vegan: Boolean
+* vegetarian: Boolean
+
+Calories and ratings are deleted since we don't have space to show more information in the expanded card on a mobile device.
+
 # Decision 3: Data Models in a Recipe Component
 
 * Status: accepted

@@ -1,11 +1,11 @@
 // preference-setting.js
 import * as backend from './backend.js';
 
-if (localStorage.getItem('%not_first_visit')) {
+if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
-} else {  // first visit
+else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
-}
+
 
 async function init() {
   goBack();
@@ -25,7 +25,7 @@ function changePreference(){
   for(let i = 0; i < leftCkbox.length; i++){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     if(ingredientBox.checked){
-      let ingredientText = leftCkbox[i].innerText;
+      let ingredientText = leftCkbox[i].innerText.trim();
       intolerance_list.push(ingredientText);
     }
   }
@@ -35,7 +35,7 @@ function changePreference(){
   for(let i = 0; i < rightCkbox.length; i++){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     if(ingredientBox.checked){
-      let ingredientText = rightCkbox[i].innerText;
+      let ingredientText = rightCkbox[i].innerText.trim();
       intolerance_list.push(ingredientText);
     }
   }
@@ -50,7 +50,7 @@ function defaultPreference(){
   const leftCkbox = leftElmt.getElementsByClassName('container');
   for(let i = 0; i < leftCkbox.length; i++){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
-    let ingredientText = leftCkbox[i].innerText;
+    let ingredientText = leftCkbox[i].innerText.trim();
 
     if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
@@ -61,7 +61,7 @@ function defaultPreference(){
   const rightCkbox = rightElmt.getElementsByClassName('container');
   for(let i = 0; i < rightCkbox.length; i++){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
-    let ingredientText = rightCkbox[i].innerText;
+    let ingredientText = rightCkbox[i].innerText.trim();
 
     if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;

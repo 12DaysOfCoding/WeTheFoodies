@@ -1,3 +1,8 @@
+Modification (2021-12-01): Delete options of Egg-free, Fish-free, and Shell-fish free. Add one option of Seafood-free.
+* It is hard to distinguish egg and dairy based on the API we use, so we just combine them as dairy.
+* It is hard to distinguish the shellfish and fish based on the API we use, so we just combine them as seafood.
+
+
 # Decision 4: Settings of Dietary Preferences
 
 * Status: accepted
