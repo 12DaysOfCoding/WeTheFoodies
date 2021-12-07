@@ -17,5 +17,3 @@ describe('go to setting', () => {
     expect(text['_remoteObject'].value).toBe("PREFERENCE");
   });
 });
-
-//To do: setting page go to preference setting/version
