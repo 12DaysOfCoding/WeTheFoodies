@@ -2,11 +2,11 @@
 
 import * as backend from './backend.js';
 
-if (localStorage.getItem('%not_first_visit')) {
+if (localStorage.getItem('%not_first_visit')) 
   window.location.assign('index.html');  // redirect
-} else {  // first visit
+else   // first visit
   window.addEventListener('DOMContentLoaded', init);
-}
+
 
 async function init() {
   begin();

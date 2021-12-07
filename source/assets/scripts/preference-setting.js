@@ -1,11 +1,11 @@
 // preference-setting.js
 import * as backend from './backend.js';
 
-if (localStorage.getItem('%not_first_visit')) {
+if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
-} else {  // first visit
+else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
-}
+
 
 async function init() {
   goBack();
