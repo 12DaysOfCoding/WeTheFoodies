@@ -8,6 +8,19 @@
   margin: 0;
   font-family: 'Inter', sans-serif;
 }
+
+main {
+  margin: 1rem;
+  margin-top: 100px;
+}
+
+.header {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
+}
+
 nav {
 	background-color: #F4BA26;
   height: 80px;

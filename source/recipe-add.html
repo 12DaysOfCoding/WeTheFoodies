@@ -20,12 +20,14 @@
 </head>
 
 <body>
-  <nav>
-    <h1>Add Recipe</h1>
-  </nav>
-  <p id="dount-p">
-    <img id="dount" src="assets/images/donut.svg">
-  </p>
+  <div class='header'>
+    <nav>
+      <h1>Add Recipe</h1>
+    </nav>
+    <p id="dount-p">
+      <img id="dount" src="assets/images/donut.svg">
+    </p>
+  </div>
   <main>
     <section class="flexbox">
       <div class="RecipeBox">
@@ -43,7 +45,7 @@
 
             <label for="servingSize" class="labelRadio">
               Serving Size:
-              <input autocomplete="off" type="text" id="servingSize" name="servingSize">
+              <input autocomplete="off" type="number" id="servingSize" name="servingSize">
             </label>
           </div>
 
@@ -70,7 +72,7 @@
                 Hard
               </label> 
                         
-              <label for="diff2" class="labelRadio">
+              <label for="diff4" class="labelRadio">
                 <input autocomplete="off" type="radio" id="diff4" name="diff" value="4">
                 <img id="veryHard" src="assets/images/VeryHard4.svg">
                 Very Hard

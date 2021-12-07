@@ -160,10 +160,10 @@ class RecipeCard extends HTMLElement {
     level.classList.add('level');
     level.classList.add(`level-${numLevel}`);
 
-    const points = document.createElement('span');
+    /*const points = document.createElement('span');
     points.classList.add('points');
     points.classList.add(`points-${numLevel}`);
-    points.textContent = '43 points';
+    points.textContent = '43 points';*/
 
     /*const calories = document.createElement('span');
         calories.classList.add('calories');
@@ -172,7 +172,7 @@ class RecipeCard extends HTMLElement {
     wrapperLeft.appendChild(title);
     wrapperLeft.appendChild(tagWrapper);
     wrapperRight.appendChild(level);
-    wrapperRight.appendChild(points);
+    //wrapperRight.appendChild(points);
     // wrapperRight.appendChild(calories);
 
     wrapper.appendChild(wrapperLeft);
