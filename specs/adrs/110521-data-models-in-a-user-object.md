@@ -1,3 +1,15 @@
+Modification (2021-11-26): The final data model is as follows.
+- intolerances: Array (representing dietary restrictions)
+- selected_recipe: String (last visited recipe)
+  - Convenient for save recipe feature and foodie feature to get which recipe to use
+- favorite_recipes: Array
+- custom_recipes: Array (added recipes)
+  - Record the recipes the user added in the app so that those added recipes can be shown in the dashboard
+- not_first_visit: Boolean (true if not first visit)
+  - Decide whether to jump to onboarding page
+
+Consumed calories variable, Points collected variable and current level variable are removed because we decided to build an app which just provide recipe information instead of an interactive recipe app.
+
 # Decision 2: Data Models in a User Object
 
 * Status: accepted
