@@ -1,6 +1,11 @@
 describe('Navigating the web app', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await page.goto('https://cse110-group30-affd4.web.app/');
+    const begin_button = await page.$('.save');
+    if (begin_button) {
+      await begin_button.click();
+      await page.waitForNavigation();
+    }
   });
 
   it('Check if page loads', async () => {
