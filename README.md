@@ -7,11 +7,22 @@
 Our team will design a recipe management application.
 
 ## Setup Instructions
-1. Get [nodejs](https://nodejs.org/en/download/) if you don't already have.
-2. In the root dir of this project, run `npm install`. This will install [ESLint](https://eslint.org/) and [Jest](https://jestjs.io/).
-3. To run the linter, do `npm run lint`. Only unfixable problems will be reported.
-4. To run unit tests, `npm run test`
-5. To run e2e tests, `npm run e2e`
+1. ```git clone https://github.com/cse110-fa21-group30/cse110-fa21-group30.git```
+2. Get [nodejs](https://nodejs.org/en/download/) if you don't already have.
+3. In the root dir of this project, run `npm install`. This will install [ESLint](https://eslint.org/) and [Jest](https://jestjs.io/).
+4. To run the linter, do `npm run lint`. Only unfixable problems will be reported.
+5. To run unit tests, `npm run test`
+6. To run e2e tests, `npm run e2e`
+
+## Contribution
+1. Make changes in the folder called `source`, more specifically, the `html` files are placed directly inside the `source` while the `css` and `js` files are placed inside `assets/style` and `assets/scripts` respectively.
+2. Run `npm run lint` to lint the code up to standard.
+3. Follow the [testing writeup](#testing), add more unit and end to end tests to the corresponding folder (highly recommended).
+4. Run `npm run test` to execute unit tests. Fix any issue.
+5. Run `npm run e2e` to execute end to end test. Fix any issue.
+6. Commit all changes and push.
+7. Make a pull request and fill out the template. Request some reviews.
+8. Make sure all status checks are passed before merging
 
 ## Testing
 * We are using a combination of [Jest](https://jestjs.io/) and [puppeteer](https://developers.google.com/web/tools/puppeteer) to run tests.
