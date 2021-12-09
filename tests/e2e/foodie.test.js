@@ -20,7 +20,6 @@ describe('Basic user flow for Website', () => {
 
   // check page loads
   it('initializes heading', async () => {
-    console.log('Checking if page loads');
     let heading = await page.$$('h1');
     let text = await heading[0].getProperty('innerText');
     expect(text['_remoteObject'].value).toBe("FOODIE MODE");

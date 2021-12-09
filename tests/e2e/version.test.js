@@ -17,8 +17,6 @@ describe('check version page', () => {
   });
 
   it('check version page', async () => {
-    console.log('check version page')
-
     let version = await page.$("#v-text");
     let innerText = await version.getProperty('innerText');
     let text = innerText['_remoteObject'].value;

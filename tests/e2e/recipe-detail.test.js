@@ -1,6 +1,12 @@
 describe('Basic user flow for Recipe detail page', () => {
 	beforeAll(async () => {
 		await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
+		const begin_button = await page.$('.save');
+    if (begin_button) {
+      await begin_button.click();
+      await page.waitForNavigation();
+			await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
+    }
 		await page.type('#search-field', 'pizza');
 		const search_button = await page.$('#search-button');
 		await search_button.click();
@@ -99,7 +105,7 @@ describe('Basic user flow for Recipe detail page', () => {
 	});
 
 	it('Check exiting foodie mode', async () => {
-        let exit = await page.$('#exit');
+    let exit = await page.$('#white-arrow');
 		await Promise.all([
 			exit.click(),
 			page.waitForNavigation(),
