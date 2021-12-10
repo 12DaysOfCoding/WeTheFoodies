@@ -11,47 +11,18 @@ async function toggle_checkboxes(checkbox_selector, boxes_to_check) {
   for (let box_to_check of boxes_to_check) await checkboxes[box_to_check].click();
 }
 
-describe('preference-setting test', () => {
+/**
+ * Saving onBoarding page as dairy-free and vegan, etc.
+ * shows up in add recipe page, search page, and settings page
+ */
+describe('onBoarding preference-setting test', () => {
   const boxes_to_check = [0, 2, 5, 7];  // preference boxes to check
 
   beforeAll(async () => {
-    await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
-    const begin_button = await page.$('.save');
-    if (begin_button) {
-      let button_text = await page.$('.save p');
-      let text = await button_text.getProperty('innerText');
-      if (text['_remoteObject'].value == "Let's begin!") {
-        await begin_button.click();
-        await page.waitForNavigation();
-        await page.goto('http://cse110-group30-affd4.web.app/preference-setting.html');
-      }
-    }
-  });
-
-  it('responds to checkbox clicks "save" button press', async () => {
-    // button initially says save
-    let button_text = await page.$('.save p');
-    let text = await button_text.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("SAVE");
-
-    // toggle them
+    await page.goto('http://cse110-group30-affd4.web.app/onBoardingPage.html');
     await toggle_checkboxes('label', boxes_to_check);
     let done = await page.$('.save');
-    await done.click();  // save
-
-    // bottons should say saved
-    button_text = await page.$('.save p');
-    text = await button_text.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("SAVED");
-
-    // toggle again
-    await toggle_checkboxes('label', boxes_to_check);
-
-    // bottons should say save since retoggled
-    button_text = await page.$('.save p');
-    text = await button_text.getProperty('innerText');
-    expect(text['_remoteObject'].value).toBe("SAVE");
-    // don't hit done, preference shoudn't be saved
+    await done.click();
   });
 
   it('applies preference in recipe add page', async () => {
@@ -75,4 +46,3 @@ describe('preference-setting test', () => {
     await done.click();
   })
 });
-

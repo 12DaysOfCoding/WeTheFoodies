@@ -2,6 +2,12 @@ describe('Basic user flow for Website', () => {
   // First, visit the lab 8 website
   beforeAll(async () => {
     await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
+    const begin_button = await page.$('.save');
+    if (begin_button) {
+      await begin_button.click();
+      await page.waitForNavigation();
+      await page.goto('http://cse110-group30-affd4.web.app/recipe-search.html');
+    }
     await page.type('#search-field', 'pizza');
     const search_button = await page.$('#search-button');
     await search_button.click();
@@ -14,7 +20,6 @@ describe('Basic user flow for Website', () => {
 
   // check page loads
   it('initializes heading', async () => {
-    console.log('Checking if page loads');
     let heading = await page.$$('h1');
     let text = await heading[0].getProperty('innerText');
     expect(text['_remoteObject'].value).toBe("FOODIE MODE");
