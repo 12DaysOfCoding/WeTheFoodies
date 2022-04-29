@@ -43,6 +43,22 @@ function addNewRecipe() {
 
     const servingSizeField = document.getElementById('servingSize').value;
     recipe.servings = servingSizeField;
+
+
+    // Ensure that there are no extreme values as the input:
+    if (recipe.readyInMinutes.length > 3 || recipe.servings.length > 3) {
+
+      // Get the InvalidInput DIV
+      var x = document.getElementById("InvalidInput");
+
+      // Add the "show" class to DIV
+      x.className = "show";
+
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
+      return; 
+    } 
+    console.log("Skipped IF STATEMENT");
     
     let radios = document.getElementsByName('diff');
     for (let i = 0, length = radios.length; i < length; i++) 

@@ -29,6 +29,7 @@ async function init() {
 
 function populateUI(recipe) {
   // console.log(recipe);
+
   document.getElementById('cooking-time-input').textContent = `${recipe.readyInMinutes} mins`;
   document.getElementById('serving-size-input').textContent = `${recipe.servings} servings`;
 
