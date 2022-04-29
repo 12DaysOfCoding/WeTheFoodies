@@ -58,7 +58,6 @@ function addNewRecipe() {
       setTimeout(function () { x.className = x.className.replace("show", ""); }, 2000);
       return; 
     } 
-    console.log("Skipped IF STATEMENT");
     
     let radios = document.getElementsByName('diff');
     for (let i = 0, length = radios.length; i < length; i++) 
