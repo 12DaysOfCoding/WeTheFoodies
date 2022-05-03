@@ -151,6 +151,10 @@ h1 {
     margin-bottom: 100px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .bottom-buttons > p {
     padding: 20px 0 10px 0;
     color: #EAB52F;
@@ -169,10 +173,6 @@ h1 {
     border-radius: 8px;
 }
 
-#foodie-mode:hover {
-    cursor: pointer;
-}
-
 .save {
     font-size: 28px;
     color: #ffc83a;
@@ -181,10 +181,6 @@ h1 {
     border: 1px solid #ffc83a;
     border-radius: 8px;
     padding: 4px;
-}
-
-.save:hover {
-    cursor: pointer;
 }
 
 .save > p {
