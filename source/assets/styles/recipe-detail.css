@@ -331,8 +331,13 @@ a:hover {
     height: 36px;
 }
 
-.box{
+.box {
     display: flex;
     flex-direction: column;
-    gap: 10px
+    gap: 10px;
+}
+
+.box-horizontal {
+    display: flex;
+    gap: 10px;
 }
