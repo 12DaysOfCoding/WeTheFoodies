@@ -173,6 +173,10 @@ button:hover {
     border-radius: 8px;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 .save {
     font-size: 28px;
     color: #ffc83a;
