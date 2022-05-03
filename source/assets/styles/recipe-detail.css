@@ -326,3 +326,9 @@ button:hover {
     display: inline-block;
     height: 36px;
 }
+
+.box{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
