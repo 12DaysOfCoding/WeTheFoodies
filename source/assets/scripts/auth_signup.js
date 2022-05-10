@@ -70,12 +70,15 @@ registerBtn.addEventListener('click', () => {
         .then(() => {
           // TODO: Go to onboarding page. 
           alert('User created!');
+          window.location.href = "onBoardingPage.html";
         });
     })
+
 
     .catch((error) => {
       const errorMessage = error.message;
       alert(errorMessage);
     });
+
 });
 
