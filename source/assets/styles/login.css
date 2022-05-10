@@ -128,7 +128,7 @@ input:focus {
 	outline: none;
 }
 
-#submit {
+.buttonclick {
 	background: #FFC83A;
 	border-radius: 10px;
 	font-family: Inter;

@@ -15,8 +15,7 @@
 
 
   <!-- Web Components -->
-  <script src="assets/scripts/recipe-add.js" type="module"></script>
-  <script src="assets/scripts/backend.js" type="module"></script>
+  <script type="module" src="assets/scripts/auth_signup.js"></script>
 
 </head>
 
@@ -34,18 +33,18 @@
       <h2>Sign Up</h2>
       <!-- Perhaps change the tags to make the HTML more semantic -->
       <h4> Already have an account? <a href="login.html">Log In</a></h4>
-      <form action="/action_page.php" method="post">
+      <form action="onBoardingPage.html">
         <div class="email_pass">
           <label for="email" class="labelInput"><b>Email Address</b></label>
-          <input type="email" placeholder="Enter Email" name="email" required>
+          <input type="email" id="email" placeholder="Enter Email" name="email" required>
 
           <label for="psw" class="labelInput"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
+          <input type="password" id="password" placeholder="Enter Password" name="psw" required>
           <!-- Confirmation could be done with native setCustomValidity TODO -->
           <label for="conf-psw" class="labelInput"><b>Confirm Password</b></label>
           <input type="password" placeholder="Re-enter Password" name="conf-psw" required>
 
-          <button type="submit" id="submit">Sign Up</button>
+          <button id="register"  class="buttonclick">Sign Up</button>
         </div>
 
         <!-- TODO: Add Google Authentication -->

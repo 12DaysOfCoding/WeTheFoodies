@@ -54,30 +54,6 @@ const emailForgotPass = document.createElement('input');
 const sendInstructions = document.createElement('button');
 sendInstructions.textContent = 'Send Instructions';
 
-registerBtn.addEventListener('click', () => {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
-  console.log("Register button clicked")
-
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    // Registered 
-      const user = userCredential.user;
-      set(ref(db, 'users/' + user.uid), {
-        email: email,
-        password: password
-      })
-        .then(() => {
-          // TODO: Go to onboarding page. 
-          alert('User created!');
-        });
-    })
-
-    .catch((error) => {
-      const errorMessage = error.message;
-      alert('Email already in used!');
-    });
-});
 
 // TODO: Store the user to the database
 // googleLoginBtn.addEventListener('click', () => {
@@ -141,70 +117,19 @@ loginBtn.addEventListener('click', () => {
       alert('User loged in!');
 
       //TODO: Go to dashboard
-      welcome.innerHTML = `Welcome ${email}`;
-      inputEmail.style.display = 'none';
-      inputPass.style.display = 'none';
-      loginBtn.style.display = 'none';
-      registerBtn.style.display = 'none';
-      headerContainer.appendChild(welcome);
-      btnContainer.appendChild(logoutBtn);
+      // welcome.innerHTML = `Welcome ${email}`;
+      // inputEmail.style.display = 'none';
+      // inputPass.style.display = 'none';
+      // loginBtn.style.display = 'none';
+      // registerBtn.style.display = 'none';
+      // headerContainer.appendChild(welcome);
+      // btnContainer.appendChild(logoutBtn);
+      
     })
 
     .catch((error) => {
       const errorMessage = error.message;
 
-      alert(errorMessage);
-    });
-});
-
-// TODO: Go to the forgot password page.
-forgotPass.addEventListener('click', () => {
-  headerContainer.appendChild(emailLabel);
-  headerContainer.appendChild(emailForgotPass);
-  btnContainer.appendChild(sendInstructions);
-
-  inputEmail.style.display = 'none';
-  inputPass.style.display = 'none';
-  loginBtn.style.display = 'none';
-  registerBtn.style.display = 'none';
-  googleLoginBtn.style.display = 'none';
-  forgotPass.style.display = 'none';
-});
-
-sendInstructions.addEventListener('click', () => {
-  var email = document.getElementById('email').value;
-
-  sendPasswordResetEmail(auth, email)
-    .then(() => {
-      // Password reset email sent!
-      alert('Password reset email sent!');
-    })
-
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert('Email is wrong! Please try again!');
-    });
-});
-
-logoutBtn.addEventListener('click', () => {
-  signOut(auth).then(() => {
-    // Sign-out successful.
-    alert('User loged out');
-
-    //TODO: Go to login page
-    inputEmail.style.display = 'block';
-    inputPass.style.display = 'block';
-    loginBtn.style.display = '';
-    registerBtn.style.display = '';
-    headerLoginPage.style.display = 'block';
-    welcome.remove();
-    logoutBtn.remove();
-    btnContainer.append(registerBtn);
-    btnContainer.append(loginBtn);
-  })
-    .catch((error) => {
-      const errorMessage = error.message;
       alert(errorMessage);
     });
 });
