@@ -29,5 +29,8 @@
   "jest": {
     "verbose": true,
     "preset": "jest-puppeteer"
+  },
+  "dependencies": {
+    "firebase": "^9.8.1"
   }
 }
