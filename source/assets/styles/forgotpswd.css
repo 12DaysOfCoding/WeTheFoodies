@@ -1,0 +1,156 @@
+* {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 1rem;
+    margin-top: 100px;
+}
+
+.header {
+    position: fixed;
+	z-index: 9999;
+    top: 0;
+    width: 100%;
+}
+
+.points-summary {
+    text-align: center;
+    
+}
+
+.prompt {
+    font-size: 22px;
+    color: #F4BA26;
+    font-weight: 700;
+    padding-top: 20px;
+}
+
+
+.points {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+h2, #points {
+    color: #F4BA26;
+    position: center;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 40px;
+
+    
+}
+h4 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: normal;
+
+}
+a {
+    font-weight: bold;
+}
+span {
+    font-size: 18px;
+}
+
+header {
+    background-color: #F4BA26;
+    height: 40px;
+    padding: 20px;
+}
+
+header > img {
+    height: 100%;
+}
+
+#dount-p {
+	text-align: right;
+	margin-top: -60px;
+	margin-bottom: 0;
+}
+
+
+#dount {
+	width: 50px;
+}
+
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    margin-top: 100px;
+}
+
+.pswd_form {
+    margin-top: 30px;
+    width: 99%;
+	margin: auto;
+	position: relative;
+    max-width: 450px;
+}
+
+
+input {
+	border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+	padding: 10px;
+	border: 3px solid #FFC83A;
+	background: #f1f1f1;
+	font-family: Inter;
+	font-style: normal;
+    width: 95%;
+    
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+ 
+
+}
+
+input:focus {
+	outline: none;
+}
+
+#submit {
+	background: #FFC83A;
+	border-radius: 10px;
+	font-family: Inter;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 36px;
+	color: #FFFFFF;
+	padding: 10px;
+	
+	border: none;
+	width: 90%;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+	cursor: pointer;
+
+
+}
+
+.labelInput {
+	display: table;
+}
