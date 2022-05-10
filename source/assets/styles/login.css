@@ -100,11 +100,11 @@ main {
 
 .login_form {
     margin-top: 30px;
-    width: 340px;
+    width: auto;
 	margin: auto;
 	position: relative;
-	left: -20px;
 }
+
 
 input {
 	border-radius: 5px;
@@ -120,7 +120,6 @@ input {
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 10px;
-
  
 
 }
@@ -141,13 +140,18 @@ input:focus {
 	padding: 10px;
 	
 	border: none;
-	width: 100%;
+	width: 105%;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 10px;
 	cursor: pointer;
+
+
 }
+
+.forgotpsw {
+    float:right}
 
 .labelInput {
 	display: table;
