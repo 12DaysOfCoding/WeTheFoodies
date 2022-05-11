@@ -16,6 +16,8 @@ var instructionIndex = 1;
  * Initialize and call other function
  */
 async function init() {
+  const recipe = backend.get_recipe(backend.get_selected());
+  console.log(recipe);
   defaultPreference();
   addIngredient();
   addInstruction();
@@ -26,6 +28,8 @@ async function init() {
  * Add New Recipe to local storage
  */
 function addNewRecipe() {
+
+ 
   const form = document.getElementById('add-recipe-form');
 
   form.addEventListener('submit', (event) => {
