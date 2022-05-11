@@ -2,7 +2,7 @@
 
 import { recipe_data, keep_fields } from './recipe-data.js';
 
-const API_KEY = '486eca841c6a49b896486723439f9977';
+const API_KEY = 'SPOONACULAR_API_KEY';
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
