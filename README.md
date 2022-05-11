@@ -1,7 +1,7 @@
 # [12DaysOfCoding](admin/team.md)
 [![CI](https://github.com/12DaysOfCoding/WeTheFoodies/actions/workflows/main.yml/badge.svg)](https://github.com/12DaysOfCoding/WeTheFoodies/actions)
 [![CD](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://cse110-group30-affd4.web.app/)
-[![Codacy](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions)
+[![Codacy](https://github.com/12DaysOfCoding/WeTheFoodies/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/12DaysOfCoding/WeTheFoodies/actions)
 
 ## Project Description
 Our team will design a recipe management application.
