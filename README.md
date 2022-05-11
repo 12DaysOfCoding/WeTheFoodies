@@ -1,4 +1,5 @@
 # [12DaysOfCoding](admin/team.md)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0189154ecdb343d5a0fc9f389d88aa30)](https://app.codacy.com/gh/12DaysOfCoding/WeTheFoodies?utm_source=github.com&utm_medium=referral&utm_content=12DaysOfCoding/WeTheFoodies&utm_campaign=Badge_Grade_Settings)
 [![CI](https://github.com/12DaysOfCoding/WeTheFoodies/actions/workflows/main.yml/badge.svg)](https://github.com/12DaysOfCoding/WeTheFoodies/actions)
 [![CD](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://cse110-group30-affd4.web.app/)
 [![Codacy](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions)
