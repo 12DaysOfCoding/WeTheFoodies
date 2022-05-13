@@ -24,6 +24,7 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  bindEditButton();
   goBack();
 }
 
@@ -95,6 +96,13 @@ function bindFoodieButton() {
   const foodieBtn = document.getElementById('foodie-mode');
   foodieBtn.addEventListener('click', () => {
     window.location.assign('foodie.html');
+  });
+}
+
+function bindEditButton() {
+  const foodieBtn = document.getElementById('edit');
+  foodieBtn.addEventListener('click', () => {
+    window.location.assign('recipe-edit.html');
   });
 }
 
