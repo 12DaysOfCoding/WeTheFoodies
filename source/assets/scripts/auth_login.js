@@ -54,50 +54,70 @@ const emailForgotPass = document.createElement('input');
 const sendInstructions = document.createElement('button');
 sendInstructions.textContent = 'Send Instructions';
 
+function renderButton() {
+  gapi.signin2.render('google-login', {
+    'scope': 'profile email',
+    'width': 240,
+    'height': 50,
+    'longtitle': true,
+    'theme': 'dark',
+    'onsuccess': onSuccess,
+    'onfailure': onFailure
+  });
+}
 
 // TODO: Store the user to the database
-// googleLoginBtn.addEventListener('click', () => {
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//       const credential = GoogleAuthProvider.credentialFromResult(result);
-//       const token = credential.accessToken;
-//       // The signed-in user info.
-//       const user = result.user;
-//       const dt = new Date();
-      
-//       // TODO: Store the user data to the database.
-//       // if(!user) 
-//       //   set(ref(db, 'users/' + user.uid), {
-//       //     user: user,
-//       //     last_login: dt,
-//       //   }).then(() =>{
-//       //     alert('User Google Created!');
-//       //   });
-//       // else 
-//       //   update(ref(db, 'users/' + user.uid),{
-//       //     user: user,
-//       //     last_login: dt,
-//       //   }).then(() =>{
-//       //     alert('User Google Logged in!');
-//       //   });
+googleLoginBtn.addEventListener('click', () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      const dt = new Date();
+      console.log("trying to loggin");
 
-//       alert('User Logging in!');
-//       // TODO: Go to onboarding page.
       
-//     })
+      // TODO: Store the user data to the database.
+      if(!user) 
+        set(ref(db, 'users/' + user.uid), {
+          user: user,
+          last_login: dt,
+        }).then(() =>{
+          alert('User Google Created!');
+        });
+      else 
+        update(ref(db, 'users/' + user.uid),{
+          user: user,
+          last_login: dt,
+        }).then(() =>{
+          alert('User Google Logged in!');
+        });
+
+      alert('User Logging in!');
+      console.log("successful");
+      // TODO: Go to onboarding page.
+      window.location.href = "index.html";
+      // location.href = "index.html";
+      
+      
+    })
     
-//     .catch((error) => {
-//       // Handle Errors here.
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-//       // The email of the user's account used.
-//       const email = error.email;
-//       // The AuthCredential type that was used.
-//       const credential = GoogleAuthProvider.credentialFromError(error);
-//     // ...
-//     });
-// });
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
+      alert(errorMessage);
+      console.log(errorMessage)
+
+    });
+});
 
 loginBtn.addEventListener('click', () => {
   var email = document.getElementById('email').value;

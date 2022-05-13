@@ -138,16 +138,7 @@ loginBtn.addEventListener('click', () => {
         last_login: dt,
       });
 
-      alert('User loged in!');
-
-      //TODO: Go to dashboard
-      welcome.innerHTML = `Welcome ${email}`;
-      inputEmail.style.display = 'none';
-      inputPass.style.display = 'none';
-      loginBtn.style.display = 'none';
-      registerBtn.style.display = 'none';
-      headerContainer.appendChild(welcome);
-      btnContainer.appendChild(logoutBtn);
+      alert('User logged in!');
     })
 
     .catch((error) => {
