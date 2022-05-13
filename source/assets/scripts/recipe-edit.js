@@ -18,6 +18,17 @@ var instructionIndex = 1;
 async function init() {
 const recipe = backend.get_recipe(backend.get_selected());
 console.log(recipe);
+  // TODO: set recipe title, cooking time, and serving size
+
+  // TODO: set recipe difficulty
+
+  // TODO: set recipe dietary restrictions
+
+  // TODO: load recipe image
+
+  // TODO: load recipe ingredients
+
+  // TODO: load instructions
   defaultPreference();
   addIngredient();
   addInstruction();
