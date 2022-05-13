@@ -25,6 +25,7 @@ async function init() {
   populateUI(recipe);
   bindFoodieButton();
   bindEditButton();
+  bindDeleteButton();
   goBack();
 }
 
@@ -103,6 +104,13 @@ function bindEditButton() {
   const foodieBtn = document.getElementById('edit');
   foodieBtn.addEventListener('click', () => {
     window.location.assign('recipe-edit.html');
+  });
+}
+
+function bindDeleteButton() {
+  const foodieBtn = document.getElementById('delete');
+  foodieBtn.addEventListener('click', () => {
+    window.location.assign('index.html');
   });
 }
 
