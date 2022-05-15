@@ -143,7 +143,7 @@ export function add_recipe(recipe, custom=false) {
 }
 
 export function edit_recipe(recipe, custom=false) {
-
+  recipe.difficulty = recipe.difficulty || compute_difficulty(recipe);
   set_localstore(localStorage.key(recipe), recipe);
   return recipe;
 }

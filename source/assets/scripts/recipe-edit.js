@@ -26,7 +26,7 @@ async function init() {
   const diff = parseInt(recipe["difficulty_realLevel"]);
   document.getElementsByName('diff')[diff-1].checked = true;
 
-  recipePreferences(recipe["intolerances"]);
+  recipePreferences(recipe.intolerances);
 
   // TODO: load recipe image
 
@@ -34,11 +34,11 @@ async function init() {
   let btn = document.getElementById('ingredientButton');
   btn.addEventListener('click', addIngredient);
 
-  if (recipe["ingredients"].length > 0)
-    document.getElementById('ingredient-1').value = recipe["ingredients"][0]["original"]
+  if (recipe.ingredients.length > 0)
+    document.getElementById('ingredient-1').value = recipe.ingredients[0]["original"]
 
   for (let i = 1; i < recipe["ingredients"].length; i++) {
-    let ingredient_str = recipe["ingredients"][i]["original"];
+    let ingredient_str = recipe.ingredients[i]["original"];
     (addIngredient()).value = ingredient_str;
   }
 
@@ -59,7 +59,7 @@ function addNewRecipe() {
     // console.log('New Recipe Added');
 
     event.preventDefault();
-    let recipe = {};
+    let recipe = backend.get_recipe(backend.get_selected());  // Suggestion: get original recipe JSON and load new values into it
 
     const nameField = document.getElementById('recipeName').value;
     recipe.name = nameField;
