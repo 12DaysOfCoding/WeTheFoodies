@@ -9,13 +9,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
-  <link href="assets/styles/login.css" rel="stylesheet">
+  <link href="assets/styles/forgotpswd.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
   <!-- Web Components -->
-  <script src="assets/scripts/recipe-add.js" type="module"></script>
-  <script src="assets/scripts/backend.js" type="module"></script>
+  <script type="module" src="assets/scripts/auth_forgotpswd.js"></script>
   
 </head>
 
@@ -29,21 +28,19 @@
         </p>
       </div>
   <main>
-    <section class="login_form">
+    <section class="pswd_form">
         <h2>Forgot Password</h2>
-        <h4> Enter your email, and we will send you a 
-          link with instructions to reset your password.</h4>
-
-        <form action="login.html">
-            <div class="email_pass">
-            <label for="email" class="labelInput"><b>Email Address</b></label>
-            <!-- TODO: Add Validation -->
-            <input type="email" placeholder="Enter Email" id="email" name="email" required>
-                
-            <button type="submit" id="submit">Send Instructions</button>
+        <h4> Enter your email, and we will send you a link with instructions to reset your password. <a href="#signIn">Sign In?</a></h4>
+        <form action="/action_page.php" method="post">
+            <div class="pswd">
+              <label for="email" class="labelInput"><b>Email Address</b></label>
+              <input id="email" type="text" placeholder="Enter Email" name="email" required>
+          
+  
+                  
+              <button type="submit" id="submit">Send Instructions</button>
             </div>
         </form>
-
     </section>
     
   </main>
