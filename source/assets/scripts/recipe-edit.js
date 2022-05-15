@@ -35,16 +35,24 @@ async function init() {
   btn.addEventListener('click', addIngredient);
 
   if (recipe.ingredients.length > 0)
-    document.getElementById('ingredient-1').value = recipe.ingredients[0]["original"]
+    document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
 
-  for (let i = 1; i < recipe["ingredients"].length; i++) {
-    let ingredient_str = recipe.ingredients[i]["original"];
-    (addIngredient()).value = ingredient_str;
+  for (let i = 1; i < recipe.ingredients.length; i++) {
+    (addIngredient()).value = recipe.ingredients[i].original;
   }
 
-  // TODO: load instructions
-  //addIngredient();
-  addInstruction();
+  // prime Add Step Button, and render list of existing steps
+  btn = document.getElementById('instructionButton');
+  btn.addEventListener('click', addInstruction);
+
+  if (recipe.ingredients.length > 0)
+    document.getElementById('instruction-1').value = recipe.steps[0].step;
+
+  for (let i = 1; i < recipe.steps.length; i++) {
+    // console.log (step_str);
+    (addInstruction()).value = recipe.steps[i].step;
+  }
+  
   addNewRecipe();
 }
 
@@ -201,35 +209,33 @@ function addIngredient() {
  * Click to add a new line for filling instructions
  */
 function addInstruction() {
-  let btn = document.getElementById('instructionButton');
   let box = document.getElementById('instructionOrderedList');
-  // console.log('hiiii');
   
-  btn.addEventListener('click', () => {
-    // console.log('inside');
-    instructionIndex += 1;
-    let node = document.createElement('LI');  
-    node.id = `instructionNode-${instructionIndex}`;
-    let nodeInput = document.createElement('input');
-    let br = document.createElement('br');
-    nodeInput.type='text';
-    nodeInput.id = `instruction-${instructionIndex}`;
-    nodeInput.autocomplete = 'off';
-    nodeInput.appendChild(br);
-    node.appendChild(nodeInput);
-    let img = document.createElement('img');
-    img.id = `delete-instruction-${instructionIndex}`;
-    img.className = 'delete';
-    img.src = 'assets/images/delete-button.png';
-    // Delete the node
-    let nodeId = `instructionNode-${instructionIndex}`;
-    img.onclick = function(){
-      let node = document.getElementById(nodeId);
-      node.remove();
-    };
-    node.appendChild(img);
-    box.appendChild(node);
-  });
+  // console.log('inside');
+  instructionIndex += 1;
+  let node = document.createElement('LI');  
+  node.id = `instructionNode-${instructionIndex}`;
+  let nodeInput = document.createElement('input');
+  let br = document.createElement('br');
+  nodeInput.type='text';
+  nodeInput.id = `instruction-${instructionIndex}`;
+  nodeInput.autocomplete = 'off';
+  nodeInput.appendChild(br);
+  node.appendChild(nodeInput);
+  let img = document.createElement('img');
+  img.id = `delete-instruction-${instructionIndex}`;
+  img.className = 'delete';
+  img.src = 'assets/images/delete-button.png';
+  // Delete the node
+  let nodeId = `instructionNode-${instructionIndex}`;
+  img.onclick = function(){
+    let node = document.getElementById(nodeId);
+    node.remove();
+  };
+  node.appendChild(img);
+  box.appendChild(node);
+
+  return nodeInput;
 }
 
 /**
