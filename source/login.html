@@ -42,14 +42,23 @@
             <label for="psw" class="labelInput"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" id="password" name="psw" required>
                 
-            <button type="submit" id="login">Log In</button>
+            <button type="submit"  class="buttonclick" id="login">Log In</button>
           </div>
         <!-- <form> -->
         
           
         <span class="forgotpsw"><a href="forgotpass.html" id="forgot-password">Forgot password?</a></span>
     </section>
+
+    <ion-card>
+      <button type="button" id="google-login" class="google-login" >
+        Sign in with Google
+      </button>
+    </ion-card>
+
   </main>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 
 </body>
 </html>
