@@ -28,8 +28,6 @@ async function init() {
 
   recipePreferences(recipe.intolerances);
 
-  // TODO: load recipe image
-
   // prime Add Ingredient Button, and render list of existing ingredients
   let btn = document.getElementById('ingredientButton');
   btn.addEventListener('click', addIngredient);
