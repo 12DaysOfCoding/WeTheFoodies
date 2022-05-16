@@ -2,11 +2,12 @@
 
 import { recipe_data, keep_fields } from './recipe-data.js';
 
-const API_KEY = 'SPOONACULAR_API_KEY';
+const API_KEY = "";
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
+
 
 /**
  * search a recipe by its name and return a promise of list of raw json
@@ -14,6 +15,9 @@ const INTOLERANCE_KEY = '%intolerances';
  * @returns {Promise} - a list of unfiltered recipe, empty if non found
  */
 async function fetch_recipe_raw(name) {
+  const keys = require('../../../keys.json')
+  API_KEY = keys.SPOONACULAR_API_KEY
+  
   const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
   const response = await fetch(url);
   const data = await response.json();
