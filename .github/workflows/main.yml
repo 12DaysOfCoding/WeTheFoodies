@@ -46,7 +46,7 @@ jobs:
         uses: microsoft/variable-substitution@v1
         with:
           # comma separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.
-          files: "keys.json"
+          files: "WeTheFoodies/keys.json"
         env:
           SPOONACULAR_API_KEY: ${{ env.SPOONACULAR_API_KEY }}
 
