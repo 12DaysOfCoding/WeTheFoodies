@@ -16,7 +16,7 @@ var instructionIndex = 1;
  */
 async function init() {
   const recipe = backend.get_recipe(backend.get_selected());
-  console.log(recipe);
+ 
 
   // Populate fields with given recipe info
   document.getElementById('recipeName').value = recipe["name"];
@@ -53,14 +53,15 @@ async function init() {
     (addInstruction()).value = recipe.steps[i].step;
   }
   
-  addNewRecipe();
+  editRecipe();
 }
 
 /**
  * Add New Recipe to local storage
  */
-function addNewRecipe() {
+function editRecipe() {
   const form = document.getElementById('edit-recipe-form');
+  
 
   form.addEventListener('submit', (event) => {
     // handle the form data
@@ -68,7 +69,8 @@ function addNewRecipe() {
 
     event.preventDefault();
     let recipe = backend.get_recipe(backend.get_selected());  // Suggestion: get original recipe JSON and load new values into it
-
+    const recipe_hash = recipe['hash'];
+ 
     const nameField = document.getElementById('recipeName').value;
     recipe.name = nameField;
 
@@ -145,8 +147,6 @@ function addNewRecipe() {
 
     recipe.intolerances = readPreference();
 
-    // console.log(recipe);
-
     const file = document.querySelector('input[type=file]').files[0];
     if (file) {  // inputed a file
       const reader = new FileReader();
@@ -155,7 +155,7 @@ function addNewRecipe() {
         reader.addEventListener('load', () => {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
-          backend.edit_recipe(recipe, true);  // using the backend to simply logic
+          backend.edit_recipe(recipe_hash, recipe, true);  // using the backend to simply logic
           window.location.assign('index.html');
         });
       } catch(e) {
@@ -163,8 +163,7 @@ function addNewRecipe() {
       }
     } else   // no file
       try {  // add directly
-          console.log(recipe);
-        backend.edit_recipe(recipe, true);  // using the backend to simply logic
+        backend.edit_recipe(recipe_hash,recipe, true);  // using the backend to simply logic
         window.location.assign('index.html');
       } catch(e) {
         alert(e);
@@ -211,7 +210,6 @@ function addIngredient() {
 function addInstruction() {
   let box = document.getElementById('instructionOrderedList');
   
-  // console.log('inside');
   instructionIndex += 1;
   let node = document.createElement('LI');  
   node.id = `instructionNode-${instructionIndex}`;
