@@ -1,7 +1,8 @@
 /** @module backend */
 
+import fetch from 'node-fetch';
 import { recipe_data, keep_fields } from './recipe-data.js';
-
+import keys from '../../../keys.json' 
 var API_KEY = "";
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
@@ -15,7 +16,8 @@ const INTOLERANCE_KEY = '%intolerances';
  * @returns {Promise} - a list of unfiltered recipe, empty if non found
  */
 async function fetch_recipe_raw(name) {
-  const keys = require('../../../keys.json')
+
+
   API_KEY = keys.SPOONACULAR_API_KEY
   
   const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
