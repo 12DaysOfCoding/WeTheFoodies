@@ -81,20 +81,20 @@ googleLoginBtn.addEventListener('click', () => {
       
       // TODO: Store the user data to the database.
 
-      if(!user) 
-        set(ref(db, 'users/' + user.uid), {
-          user: user,
-          last_login: dt,
-        }).then(() =>{
-          alert('User Google Created!');
-        });
-      else 
-        update(ref(db, 'users/' + user.uid),{
-          user: user,
-          last_login: dt,
-        }).then(() =>{
-          alert('User Google Logged in!');
-        });
+      // if(!user) 
+      //   set(ref(db, 'users/' + user.uid), {
+      //     user: user,
+      //     last_login: dt,
+      //   }).then(() =>{
+      //     alert('User Google Created!');
+      //   });
+      // else 
+      //   update(ref(db, 'users/' + user.uid),{
+      //     user: user,
+      //     last_login: dt,
+      //   }).then(() =>{
+      //     alert('User Google Logged in!');
+      //   });
 
       alert('User Logging in!');
       console.log("successful");
