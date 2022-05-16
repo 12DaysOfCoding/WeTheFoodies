@@ -80,6 +80,7 @@ googleLoginBtn.addEventListener('click', () => {
 
       
       // TODO: Store the user data to the database.
+
       if(!user) 
         set(ref(db, 'users/' + user.uid), {
           user: user,
