@@ -2,7 +2,7 @@
 
 import { recipe_data, keep_fields } from './recipe-data.js';
 
-const API_KEY = "";
+var API_KEY = "";
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
