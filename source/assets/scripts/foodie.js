@@ -40,10 +40,25 @@ function bindExitButton() {
   exitBtn.addEventListener('click', () => {
     window.history.back();
   });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.key == "Escape")
+      window.history.back();
+  });
 }
 
 function bindPrevButton(prevButton, nextButton) {
   prevButton.classList.add('hidden');
+  prevButton.addEventListener('click', goToPrevious);
+}
+
+function goToPrevious() {
+  nextButton.classList.remove('hidden');
+  if (currStep > 0) currStep -= 1;
+  if (currStep === 0) 
+    prevButton.classList.add('hidden');
+  else 
+    nextButton.classList.remove('disabled');
   
   prevButton.addEventListener('click', goToPrevStep);
   document.addEventListener('keydown', (event)=>{
@@ -78,6 +93,17 @@ function bindNextButton(prevButton, nextButton) {
 
     updateStep();
   });
+}
+
+function goToNext() {
+  prevButton.classList.remove('hidden');
+  if (currStep < steps.length - 1) currStep += 1;
+  if (currStep === steps.length - 1) 
+    nextButton.classList.add('hidden');
+  else 
+    prevButton.classList.remove('disabled');
+
+  updateStep();
 }
 
 const updateStep = () => {
