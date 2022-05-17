@@ -65,7 +65,6 @@ async function init() {
 function editRecipe() {
   const submit = document.getElementById('submit');
 
-  form.addEventListener('submit', (event) => {
   submit.addEventListener('click', (event) => {
     // handle the form data
     // console.log('New Recipe Added');
