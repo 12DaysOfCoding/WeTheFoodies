@@ -19,7 +19,7 @@ async function fetch_recipe_raw(name) {
 
 
   API_KEY = keys.SPOONACULAR_API_KEY
-  print(API_KEY)
+  console.log(API_KEY)
   
   const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
   const response = await fetch(url);
