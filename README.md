@@ -1,7 +1,8 @@
 # [12DaysOfCoding](admin/team.md)
-[![CI](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/main.yml/badge.svg)](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions)
-[![CD](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://cse110-group30-affd4.web.app/)
-[![Codacy](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/cse110-fa21-group30/cse110-fa21-group30/actions)
+[![CI](https://github.com/12DaysOfCoding/WeTheFoodies/actions/workflows/main.yml/badge.svg)](https://github.com/12DaysOfCoding/WeTheFoodies/actions)
+[![CD](https://github.com/12DaysOfCoding/WeTheFoodies/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://wethefoodies.web.app/)
+[![Codacy](https://github.com/12DaysOfCoding/WeTheFoodies/actions/workflows/codacy-analysis.yml/badge.svg)](https://github.com/12DaysOfCoding/WeTheFoodies/actions)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1a2069363fe743c9bbacbe053485d747)](https://www.codacy.com/gh/12DaysOfCoding/WeTheFoodies/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=12DaysOfCoding/WeTheFoodies&amp;utm_campaign=Badge_Grade)
 
 ## Project Description
 Our team will design a recipe management application.
