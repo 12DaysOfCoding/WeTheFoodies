@@ -45,17 +45,26 @@ function bindExitButton() {
 function bindPrevButton(prevButton, nextButton) {
   prevButton.classList.add('hidden');
   
-  prevButton.addEventListener('click', () => {
-    nextButton.classList.remove('hidden');
+  prevButton.addEventListener('click', goToPrevStep);
+  document.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented) {
+      return;
+    }
+    if (event.key === "ArrowLeft") {
+      goToPrevStep();
+    }
+  });
+}
+
+function goToPrevStep() {
+  nextButton.classList.remove('hidden');
     if (currStep > 0) currStep -= 1;
     if (currStep === 0) 
       prevButton.classList.add('hidden');
     else 
       nextButton.classList.remove('disabled');
-    
 
     updateStep();
-  });
 }
 
 function bindNextButton(prevButton, nextButton) {
@@ -66,7 +75,6 @@ function bindNextButton(prevButton, nextButton) {
       nextButton.classList.add('hidden');
     else 
       prevButton.classList.remove('disabled');
-    
 
     updateStep();
   });
