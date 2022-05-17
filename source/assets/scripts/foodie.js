@@ -49,17 +49,6 @@ function bindExitButton() {
 
 function bindPrevButton(prevButton, nextButton) {
   prevButton.classList.add('hidden');
-  prevButton.addEventListener('click', goToPrevious);
-}
-
-function goToPrevious() {
-  nextButton.classList.remove('hidden');
-  if (currStep > 0) currStep -= 1;
-  if (currStep === 0) 
-    prevButton.classList.add('hidden');
-  else 
-    nextButton.classList.remove('disabled');
-  
   prevButton.addEventListener('click', goToPrevStep);
   document.addEventListener('keydown', (event)=>{
     if (event.defaultPrevented) {
@@ -78,9 +67,10 @@ function goToPrevStep() {
       prevButton.classList.add('hidden');
     else 
       nextButton.classList.remove('disabled');
-
     updateStep();
 }
+
+
 
 function bindNextButton(prevButton, nextButton) {
   nextButton.addEventListener('click', () => {
