@@ -129,7 +129,7 @@ input:focus {
 	outline: none;
 }
 
-#submit {
+#send-instructions {
 	background: #FFC83A;
 	border-radius: 10px;
 	font-family: Inter;

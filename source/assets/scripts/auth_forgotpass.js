@@ -51,8 +51,7 @@ logoutBtn.innerHTML = 'Logout';
 const emailLabel = document.createElement('label');
 emailLabel.textContent = 'Email Address: ';
 const emailForgotPass = document.createElement('input');
-const sendInstructions = document.createElement('button');
-sendInstructions.textContent = 'Send Instructions';
+const sendInstructions = document.getElementById('send-instructions');
 
 sendInstructions.addEventListener('click', () => {
   var email = document.getElementById('email').value;
