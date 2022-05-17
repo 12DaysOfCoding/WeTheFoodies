@@ -50,13 +50,12 @@ function bindExitButton() {
 function bindPrevButton(prevButton, nextButton) {
   prevButton.classList.add('hidden');
   prevButton.addEventListener('click', goToPrevStep);
+  
   document.addEventListener('keydown', (event)=>{
-    if (event.defaultPrevented) {
+    if (event.defaultPrevented)
       return;
-    }
-    if (event.key === "ArrowLeft") {
+    if (event.key === "ArrowLeft")
       goToPrevStep();
-    }
   });
 }
 
@@ -67,25 +66,22 @@ function goToPrevStep() {
       prevButton.classList.add('hidden');
     else 
       nextButton.classList.remove('disabled');
+
     updateStep();
 }
 
-
-
 function bindNextButton(prevButton, nextButton) {
-  nextButton.addEventListener('click', () => {
-    prevButton.classList.remove('hidden');
-    if (currStep < steps.length - 1) currStep += 1;
-    if (currStep === steps.length - 1) 
-      nextButton.classList.add('hidden');
-    else 
-      prevButton.classList.remove('disabled');
+  nextButton.addEventListener('click', goToNextStep);
 
-    updateStep();
+  document.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented)
+      return;
+    if (event.key === "ArrowRight")
+      goToNextStep();
   });
 }
 
-function goToNext() {
+function goToNextStep() {
   prevButton.classList.remove('hidden');
   if (currStep < steps.length - 1) currStep += 1;
   if (currStep === steps.length - 1) 
