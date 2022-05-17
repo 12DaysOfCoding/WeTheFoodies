@@ -11,6 +11,11 @@ else   // first visit
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
+document.addEventListener("keydown", (e) => {
+  if (e.key == "Enter")
+    e.preventDefault();
+});
+
 /**
  * Initialize and call other function
  */
@@ -58,10 +63,10 @@ async function init() {
  * Add New Recipe to local storage
  */
 function editRecipe() {
-  const form = document.getElementById('edit-recipe-form');
-  
+  const submit = document.getElementById('submit');
 
   form.addEventListener('submit', (event) => {
+  submit.addEventListener('click', (event) => {
     // handle the form data
     // console.log('New Recipe Added');
 
