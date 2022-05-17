@@ -1,5 +1,5 @@
 // recipe-add.js
-/** @module recipe-add */
+/** @module recipe-edit */
 
 import * as backend from './backend.js';
 
@@ -7,7 +7,6 @@ if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
-
 
 var ingredientIndex = 1;
 var instructionIndex = 1;
@@ -17,28 +16,59 @@ var instructionIndex = 1;
  */
 async function init() {
   const recipe = backend.get_recipe(backend.get_selected());
-  console.log(recipe);
-  defaultPreference();
-  addIngredient();
-  addInstruction();
-  addNewRecipe();
+ 
+
+  // Populate fields with given recipe info
+  document.getElementById('recipeName').value = recipe["name"];
+  document.getElementById('cookingTime').value = recipe["readyInMinutes"];
+  document.getElementById('servingSize').value = recipe["servings"];
+
+  const diff = parseInt(recipe["difficulty_realLevel"]);
+  document.getElementsByName('diff')[diff-1].checked = true;
+
+  recipePreferences(recipe.intolerances);
+
+  // prime Add Ingredient Button, and render list of existing ingredients
+  let btn = document.getElementById('ingredientButton');
+  btn.addEventListener('click', addIngredient);
+
+  if (recipe.ingredients.length > 0)
+    document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
+
+  for (let i = 1; i < recipe.ingredients.length; i++) {
+    (addIngredient()).value = recipe.ingredients[i].original;
+  }
+
+  // prime Add Step Button, and render list of existing steps
+  btn = document.getElementById('instructionButton');
+  btn.addEventListener('click', addInstruction);
+
+  if (recipe.ingredients.length > 0)
+    document.getElementById('instruction-1').value = recipe.steps[0].step;
+
+  for (let i = 1; i < recipe.steps.length; i++) {
+    // console.log (step_str);
+    (addInstruction()).value = recipe.steps[i].step;
+  }
+  
+  editRecipe();
 }
 
 /**
  * Add New Recipe to local storage
  */
-function addNewRecipe() {
-
- 
-  const form = document.getElementById('add-recipe-form');
+function editRecipe() {
+  const form = document.getElementById('edit-recipe-form');
+  
 
   form.addEventListener('submit', (event) => {
     // handle the form data
     // console.log('New Recipe Added');
 
     event.preventDefault();
-    let recipe = {};
-
+    let recipe = backend.get_recipe(backend.get_selected());  // Suggestion: get original recipe JSON and load new values into it
+    const recipe_hash = recipe['hash'];
+ 
     const nameField = document.getElementById('recipeName').value;
     recipe.name = nameField;
 
@@ -115,8 +145,6 @@ function addNewRecipe() {
 
     recipe.intolerances = readPreference();
 
-    // console.log(recipe);
-
     const file = document.querySelector('input[type=file]').files[0];
     if (file) {  // inputed a file
       const reader = new FileReader();
@@ -125,7 +153,7 @@ function addNewRecipe() {
         reader.addEventListener('load', () => {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
-          backend.add_recipe(recipe, true);  // using the backend to simply logic
+          backend.edit_recipe(recipe_hash, recipe, true);  // using the backend to simply logic
           window.location.assign('index.html');
         });
       } catch(e) {
@@ -133,7 +161,7 @@ function addNewRecipe() {
       }
     } else   // no file
       try {  // add directly
-        backend.add_recipe(recipe, true);  // using the backend to simply logic
+        backend.edit_recipe(recipe_hash,recipe, true);  // using the backend to simply logic
         window.location.assign('index.html');
       } catch(e) {
         alert(e);
@@ -141,17 +169,13 @@ function addNewRecipe() {
     
   });
 }
-
+  
 /**
  * Click to add a new line for filling ingredients
  */
 function addIngredient() {
-  let btn = document.getElementById('ingredientButton');
-  let box = document.getElementById('ingredientOrderedList');
-  // console.log('hi');
-  
-  btn.addEventListener('click', () => {
-    // console.log('inside');
+    let box = document.getElementById('ingredientOrderedList');
+
     ingredientIndex += 1;
     let node = document.createElement('LI');  
     node.id = `ingredientNode-${ingredientIndex}`;
@@ -174,42 +198,40 @@ function addIngredient() {
     };
     node.appendChild(img);
     box.appendChild(node);
-  });
-}
 
+    return nodeInput;
+}
+  
 /**
  * Click to add a new line for filling instructions
  */
 function addInstruction() {
-  let btn = document.getElementById('instructionButton');
   let box = document.getElementById('instructionOrderedList');
-  // console.log('hiiii');
   
-  btn.addEventListener('click', () => {
-    // console.log('inside');
-    instructionIndex += 1;
-    let node = document.createElement('LI');  
-    node.id = `instructionNode-${instructionIndex}`;
-    let nodeInput = document.createElement('input');
-    let br = document.createElement('br');
-    nodeInput.type='text';
-    nodeInput.id = `instruction-${instructionIndex}`;
-    nodeInput.autocomplete = 'off';
-    nodeInput.appendChild(br);
-    node.appendChild(nodeInput);
-    let img = document.createElement('img');
-    img.id = `delete-instruction-${instructionIndex}`;
-    img.className = 'delete';
-    img.src = 'assets/images/delete-button.png';
-    // Delete the node
-    let nodeId = `instructionNode-${instructionIndex}`;
-    img.onclick = function(){
-      let node = document.getElementById(nodeId);
-      node.remove();
-    };
-    node.appendChild(img);
-    box.appendChild(node);
-  });
+  instructionIndex += 1;
+  let node = document.createElement('LI');  
+  node.id = `instructionNode-${instructionIndex}`;
+  let nodeInput = document.createElement('input');
+  let br = document.createElement('br');
+  nodeInput.type='text';
+  nodeInput.id = `instruction-${instructionIndex}`;
+  nodeInput.autocomplete = 'off';
+  nodeInput.appendChild(br);
+  node.appendChild(nodeInput);
+  let img = document.createElement('img');
+  img.id = `delete-instruction-${instructionIndex}`;
+  img.className = 'delete';
+  img.src = 'assets/images/delete-button.png';
+  // Delete the node
+  let nodeId = `instructionNode-${instructionIndex}`;
+  img.onclick = function(){
+    let node = document.getElementById(nodeId);
+    node.remove();
+  };
+  node.appendChild(img);
+  box.appendChild(node);
+
+  return nodeInput;
 }
 
 /**
@@ -243,28 +265,27 @@ function readPreference(){
 }
 
 /**
- * Get the default preference and show it
+ * Get the recipe preference list and show it
  */
-function defaultPreference(){
-  let intolerance_list = backend.get_intolerance();
-
-  const leftElmt = document.querySelector('.left');
-  const leftCkbox = leftElmt.getElementsByClassName('container');
-  for(let i = 0; i < leftCkbox.length; i++){
-    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
-    let ingredientText = leftCkbox[i].innerText.trim();
-
-    if(intolerance_list.includes(ingredientText))
-      ingredientBox.checked = true;
+function recipePreferences(intolerance_list){
+      
+    const leftElmt = document.querySelector('.left');
+    const leftCkbox = leftElmt.getElementsByClassName('container');
+    for(let i = 0; i < leftCkbox.length; i++){
+      let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+      let ingredientText = leftCkbox[i].innerText.trim();
+  
+      if(intolerance_list.includes(ingredientText))
+        ingredientBox.checked = true;
+    }
+  
+    const rightElmt = document.querySelector('.right');
+    const rightCkbox = rightElmt.getElementsByClassName('container');
+    for(let i = 0; i < rightCkbox.length; i++){
+      let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+      let ingredientText = rightCkbox[i].innerText.trim();
+  
+      if(intolerance_list.includes(ingredientText))
+        ingredientBox.checked = true;
+    }
   }
-
-  const rightElmt = document.querySelector('.right');
-  const rightCkbox = rightElmt.getElementsByClassName('container');
-  for(let i = 0; i < rightCkbox.length; i++){
-    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
-    let ingredientText = rightCkbox[i].innerText.trim();
-
-    if(intolerance_list.includes(ingredientText))
-      ingredientBox.checked = true;
-  }
-}

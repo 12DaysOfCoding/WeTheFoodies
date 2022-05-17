@@ -142,6 +142,12 @@ export function add_recipe(recipe, custom=false) {
   return recipe;
 }
 
+export function edit_recipe(recipe_hash,recipe, custom=false) {
+  set_localstore(recipe_hash, recipe);
+  return recipe;
+}
+
+
 /**
  * @param {string} recipe_hash - the key to the recipe entry in localstore
  * @return {Object} - the recipe object if found, null otherwise
