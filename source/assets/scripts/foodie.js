@@ -40,6 +40,12 @@ function bindExitButton() {
   exitBtn.addEventListener('click', () => {
     window.history.back();
   });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.key == "Escape") {
+      window.history.back();
+    }
+  });
 }
 
 function bindPrevButton(prevButton, nextButton) {
