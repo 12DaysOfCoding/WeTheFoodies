@@ -34,7 +34,8 @@ function getRecipe(userId) {
   return finalData;
 }
 
-function getRecipeWithValue(userId, value) {
+/* get recipe by its name */
+function getRecipeByName(userId, recipeN) {
   const dbRef = ref(db);
   let finalData = [];
   //const userId = auth.currentUser.uid;
@@ -42,7 +43,7 @@ function getRecipeWithValue(userId, value) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((childSnapshot) => {
-          if (childSnapshot.val().recipeName === value) {
+          if (childSnapshot.val().recipeName === recipeN) {
             finalData.push(childSnapshot.val());
           }
         });
@@ -59,8 +60,8 @@ function getRecipeWithValue(userId, value) {
   return finalData;
 }
 
-let check = getRecipe("123");
-console.log(check);
+//let check = getRecipe("123");
+//console.log(check);
 
 // Working on adding recipe,
 // 2 different types of add
