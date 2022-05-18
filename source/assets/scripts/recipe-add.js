@@ -12,6 +12,11 @@ else   // first visit
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
+document.addEventListener("keydown", (e) => {
+  if (e.key == "Enter")
+    e.preventDefault();
+});
+
 /**
  * Initialize and call other function
  */
