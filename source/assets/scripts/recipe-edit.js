@@ -47,13 +47,14 @@ async function init() {
   // prime Add Step Button, and render list of existing steps
   btn = document.getElementById('instructionButton');
   btn.addEventListener('click', addInstruction);
+
   let ingredient_keyboard = document.getElementById('ingredientOrderedList');
   ingredient_keyboard.addEventListener('keydown', (event)=>{
     if (event.defaultPrevented) {
       return;
     }
     if (event.key === "Enter") {
-      addIngredient();
+      addIngredient().focus();
     }
   });
 
