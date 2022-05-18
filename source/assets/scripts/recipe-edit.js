@@ -36,18 +36,6 @@ async function init() {
   // prime Add Ingredient Button, and render list of existing ingredients
   let btn = document.getElementById('ingredientButton');
   btn.addEventListener('click', addIngredient);
-
-  if (recipe.ingredients.length > 0)
-    document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
-
-  for (let i = 1; i < recipe.ingredients.length; i++) {
-    (addIngredient()).value = recipe.ingredients[i].original;
-  }
-
-  // prime Add Step Button, and render list of existing steps
-  btn = document.getElementById('instructionButton');
-  btn.addEventListener('click', addInstruction);
-
   let ingredient_keyboard = document.getElementById('ingredientOrderedList');
   ingredient_keyboard.addEventListener('keydown', (event)=>{
     if (event.defaultPrevented) {
@@ -59,6 +47,27 @@ async function init() {
   });
 
   if (recipe.ingredients.length > 0)
+    document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
+
+  for (let i = 1; i < recipe.ingredients.length; i++) {
+    (addIngredient()).value = recipe.ingredients[i].original;
+  }
+
+  // prime Add Step Button, and render list of existing steps
+  btn = document.getElementById('instructionButton');
+  btn.addEventListener('click', addInstruction);
+  let instruction_keyboard = document.getElementById('instructionOrderedList');
+  instruction_keyboard.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented) {
+      return;
+    }
+    if (event.key === "Enter") {
+      addInstruction().focus();
+    }
+  });
+  
+
+  if (recipe.steps.length > 0)
     document.getElementById('instruction-1').value = recipe.steps[0].step;
 
   for (let i = 1; i < recipe.steps.length; i++) {
