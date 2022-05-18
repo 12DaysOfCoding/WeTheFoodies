@@ -2,7 +2,7 @@
   "name": "cse110-fa21-group30",
   "version": "1.0.0",
   "description": "[Team Page](admin/team.md)",
-  "main": "index.js",
+  "main": "login.js",
   "type": "module",
   "scripts": {
     "lint": "./node_modules/.bin/eslint --fix source --ext .js",
