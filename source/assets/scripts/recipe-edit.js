@@ -36,6 +36,15 @@ async function init() {
   // prime Add Ingredient Button, and render list of existing ingredients
   let btn = document.getElementById('ingredientButton');
   btn.addEventListener('click', addIngredient);
+  let ingredient_keyboard = document.getElementById('ingredientOrderedList');
+  ingredient_keyboard.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented) {
+      return;
+    }
+    if (event.key === "Enter") {
+      addIngredient().focus();
+    }
+  });
 
   if (recipe.ingredients.length > 0)
     document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
@@ -47,15 +56,16 @@ async function init() {
   // prime Add Step Button, and render list of existing steps
   btn = document.getElementById('instructionButton');
   btn.addEventListener('click', addInstruction);
-  let ingredient_keyboard = document.getElementById('ingredientOrderedList');
-  ingredient_keyboard.addEventListener('keydown', (event)=>{
+  let instruction_keyboard = document.getElementById('instructionOrderedList');
+  instruction_keyboard.addEventListener('keydown', (event)=>{
     if (event.defaultPrevented) {
       return;
     }
     if (event.key === "Enter") {
-      addIngredient();
+      addInstruction().focus();
     }
   });
+  
 
   if (recipe.ingredients.length > 0)
     document.getElementById('instruction-1').value = recipe.steps[0].step;
