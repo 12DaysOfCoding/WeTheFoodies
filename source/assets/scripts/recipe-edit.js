@@ -1,4 +1,3 @@
-// recipe-add.js
 /** @module recipe-edit */
 
 import * as backend from './backend.js';
@@ -11,6 +10,7 @@ else   // first visit
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
+// Prevent "Enter to submit the recipe"
 document.addEventListener("keydown", (e) => {
   if (e.key == "Enter")
     e.preventDefault();
@@ -21,7 +21,6 @@ document.addEventListener("keydown", (e) => {
  */
 async function init() {
   const recipe = backend.get_recipe(backend.get_selected());
- 
 
   // Populate fields with given recipe info
   document.getElementById('recipeName').value = recipe["name"];
@@ -33,7 +32,11 @@ async function init() {
 
   recipePreferences(recipe.intolerances);
 
-  // prime Add Ingredient Button, and render list of existing ingredients
+  /**
+   * Click or "Enter" to add a new line for filling ingredients
+   * Prime Add Ingredient Button, and render list of existing ingredients
+   */
+
   let btn = document.getElementById('ingredientButton');
   btn.addEventListener('click', addIngredient);
   let ingredient_keyboard = document.getElementById('ingredientOrderedList');
@@ -53,7 +56,10 @@ async function init() {
     (addIngredient()).value = recipe.ingredients[i].original;
   }
 
-  // prime Add Step Button, and render list of existing steps
+  /**
+   * Click or "Enter" to add a new line for filling instructions
+   * Prime Add Step Button, and render list of existing steps
+   */
   btn = document.getElementById('instructionButton');
   btn.addEventListener('click', addInstruction);
   let instruction_keyboard = document.getElementById('instructionOrderedList');
@@ -79,7 +85,7 @@ async function init() {
 }
 
 /**
- * Add New Recipe to local storage
+ * Edit Recipe from local storage
  */
 function editRecipe() {
   const submit = document.getElementById('submit');
