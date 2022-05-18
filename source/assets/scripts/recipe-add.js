@@ -1,4 +1,3 @@
-// recipe-add.js
 /** @module recipe-add */
 
 import * as backend from './backend.js';
@@ -8,10 +7,10 @@ if (localStorage.getItem('%not_first_visit'))
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
 
-
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
+// Prevent "Enter to submit the recipe"
 document.addEventListener("keydown", (e) => {
   if (e.key == "Enter")
     e.preventDefault();
@@ -27,14 +26,45 @@ async function init() {
   addIngredient();
   addInstruction();
   addNewRecipe();
+
+  
 }
+
+/**
+ * Click or "Enter" to add a new line for filling ingredients
+ */
+let btn = document.getElementById('ingredientButton');
+btn.addEventListener('click', addIngredient);
+let ingredient_keyboard = document.getElementById('ingredientOrderedList');
+ingredient_keyboard.addEventListener('keydown', (event)=>{
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key === "Enter") {
+    addIngredient().focus();
+  }
+});
+
+/**
+ * Click or "Enter" to add a new line for filling instructions
+ */
+btn = document.getElementById('instructionButton');
+btn.addEventListener('click', addIngredient);
+let instruction_keyboard = document.getElementById('instructionOrderedList');
+instruction_keyboard.addEventListener('keydown', (event)=>{
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key === "Enter") {
+    addInstruction().focus();
+  }
+});
 
 /**
  * Add New Recipe to local storage
  */
 function addNewRecipe() {
 
- 
   const form = document.getElementById('add-recipe-form');
 
   form.addEventListener('submit', (event) => {
@@ -152,74 +182,64 @@ function addNewRecipe() {
   });
 }
 
-/**
- * Click to add a new line for filling ingredients
- */
 function addIngredient() {
-  let btn = document.getElementById('ingredientButton');
+  // let btn = document.getElementById('ingredientButton');
   let box = document.getElementById('ingredientOrderedList');
   // console.log('hi');
-  
-  btn.addEventListener('click', () => {
-    // console.log('inside');
-    ingredientIndex += 1;
-    let node = document.createElement('LI');  
-    node.id = `ingredientNode-${ingredientIndex}`;
-    let nodeInput = document.createElement('input');
-    let br = document.createElement('br');
-    nodeInput.type='text';
-    nodeInput.id = `ingredient-${ingredientIndex}`;
-    nodeInput.autocomplete = 'off';
-    nodeInput.appendChild(br);
-    node.appendChild(nodeInput);
-    let img = document.createElement('img');
-    img.id = `delete-ingredient-${ingredientIndex}`;
-    img.className = 'delete';
-    img.src = 'assets/images/delete-button.png';
-    // Delete the node
-    let nodeId = `ingredientNode-${ingredientIndex}`;
-    img.onclick = function(){
-      let node = document.getElementById(nodeId);
-      node.remove();
-    };
-    node.appendChild(img);
-    box.appendChild(node);
-  });
+
+  ingredientIndex += 1;
+  let node = document.createElement('LI');  
+  node.id = `ingredientNode-${ingredientIndex}`;
+  let nodeInput = document.createElement('input');
+  let br = document.createElement('br');
+  nodeInput.type='text';
+  nodeInput.id = `ingredient-${ingredientIndex}`;
+  nodeInput.autocomplete = 'off';
+  nodeInput.appendChild(br);
+  node.appendChild(nodeInput);
+  let img = document.createElement('img');
+  img.id = `delete-ingredient-${ingredientIndex}`;
+  img.className = 'delete';
+  img.src = 'assets/images/delete-button.png';
+  // Delete the node
+  let nodeId = `ingredientNode-${ingredientIndex}`;
+  img.onclick = function(){
+    let node = document.getElementById(nodeId);
+    node.remove();
+  };
+  node.appendChild(img);
+  box.appendChild(node);
+
+  return nodeInput;
 }
 
-/**
- * Click to add a new line for filling instructions
- */
 function addInstruction() {
-  let btn = document.getElementById('instructionButton');
   let box = document.getElementById('instructionOrderedList');
-  // console.log('hiiii');
-  
-  btn.addEventListener('click', () => {
-    // console.log('inside');
-    instructionIndex += 1;
-    let node = document.createElement('LI');  
-    node.id = `instructionNode-${instructionIndex}`;
-    let nodeInput = document.createElement('input');
-    let br = document.createElement('br');
-    nodeInput.type='text';
-    nodeInput.id = `instruction-${instructionIndex}`;
-    nodeInput.autocomplete = 'off';
-    nodeInput.appendChild(br);
-    node.appendChild(nodeInput);
-    let img = document.createElement('img');
-    img.id = `delete-instruction-${instructionIndex}`;
-    img.className = 'delete';
-    img.src = 'assets/images/delete-button.png';
-    // Delete the node
-    let nodeId = `instructionNode-${instructionIndex}`;
-    img.onclick = function(){
-      let node = document.getElementById(nodeId);
-      node.remove();
-    };
-    node.appendChild(img);
-    box.appendChild(node);
-  });
+
+  instructionIndex += 1;
+  let node = document.createElement('LI');  
+  node.id = `instructionNode-${instructionIndex}`;
+  let nodeInput = document.createElement('input');
+  let br = document.createElement('br');
+  nodeInput.type='text';
+  nodeInput.id = `instruction-${instructionIndex}`;
+  nodeInput.autocomplete = 'off';
+  nodeInput.appendChild(br);
+  node.appendChild(nodeInput);
+  let img = document.createElement('img');
+  img.id = `delete-instruction-${instructionIndex}`;
+  img.className = 'delete';
+  img.src = 'assets/images/delete-button.png';
+  // Delete the node
+  let nodeId = `instructionNode-${instructionIndex}`;
+  img.onclick = function(){
+    let node = document.getElementById(nodeId);
+    node.remove();
+  };
+  node.appendChild(img);
+  box.appendChild(node);
+
+  return nodeInput;
 }
 
 /**
