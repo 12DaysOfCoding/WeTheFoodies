@@ -168,6 +168,13 @@ function editRecipe() {
 
     recipe.intolerances = readPreference();
 
+    try {
+      backend.recipe_field_check(recipe);
+    } catch (e) {
+      alert(e);
+      return;
+    }
+
     const file = document.querySelector('input[type=file]').files[0];
     if (file) {  // inputed a file
       const reader = new FileReader();
