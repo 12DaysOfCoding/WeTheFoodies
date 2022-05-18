@@ -2,6 +2,7 @@
 /** @module recipe-detail */
 
 import * as backend from './backend.js';
+import * as database from './database.js';
 
 if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
@@ -83,6 +84,8 @@ function saveOrSaved(recipe) {
       text.textContent = 'SAVED';
       heart.src = 'assets/images/heart1.svg';
       backend.add_favorite(recipe.hash);
+      database.add_favorite(recipe.name);
+
     } else {
       text.textContent = 'SAVE';
       heart.src = 'assets/images/heart0.svg';

@@ -2,6 +2,7 @@
 /** @module recipe-add */
 
 import * as backend from './backend.js';
+import * as database from './database.js';
 
 if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
@@ -122,15 +123,23 @@ function addNewRecipe() {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.add_recipe(recipe, true);  // using the backend to simply logic
-          window.location.assign('index.html');
+          // Only redirect to index.html once the db has been updated
+          database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances ).then(()=>{
+            window.location.assign('index.html');
+          });
+          
         });
       } catch(e) {
         alert(e);
       }
     } else   // no file
-      try {  // add directly
+      try {  
+        // Add directly
         backend.add_recipe(recipe, true);  // using the backend to simply logic
-        window.location.assign('index.html');
+        // Only redirect to index.html once the db has been updated
+        database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances ).then(()=>{
+          window.location.assign('index.html');
+        });        
       } catch(e) {
         alert(e);
       }

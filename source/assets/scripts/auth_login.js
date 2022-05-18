@@ -76,7 +76,7 @@ googleLoginBtn.addEventListener('click', () => {
       // The signed-in user info.
       const user = result.user;
       const dt = new Date();
-      console.log("trying to loggin");
+      console.log('trying to loggin');
 
       
       // TODO: Store the user data to the database.
@@ -96,9 +96,9 @@ googleLoginBtn.addEventListener('click', () => {
         });
 
       alert('User Logging in!');
-      console.log("successful");
+      console.log('successful');
       // TODO: Go to onboarding page.
-      window.location.href = "index.html";
+      window.location.href = 'index.html';
       // location.href = "index.html";
       
       
@@ -112,9 +112,9 @@ googleLoginBtn.addEventListener('click', () => {
       const email = error.email;
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+      // ...
       alert(errorMessage);
-      console.log(errorMessage)
+      console.log(errorMessage);
 
     });
 });
@@ -135,9 +135,9 @@ loginBtn.addEventListener('click', () => {
       });
 
       alert('User logged in!');
-      window.location.href = "index.html";
+      window.location.href = 'index.html';
       // location.href = "index.html";
-      console.log("successful");
+      console.log('successful');
 
       //TODO: Go to dashboard
       // welcome.innerHTML = `Welcome ${email}`;

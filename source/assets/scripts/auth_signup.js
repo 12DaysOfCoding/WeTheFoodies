@@ -57,20 +57,18 @@ sendInstructions.textContent = 'Send Instructions';
 registerBtn.addEventListener('click', () => {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
-  console.log("Register button clicked")
+  console.log('Register button clicked');
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Registered 
       const user = userCredential.user;
       set(ref(db, 'users/' + user.uid), {
-        email: email,
-        password: password
       })
         .then(() => {
           // TODO: Go to onboarding page. 
           alert('User created!');
-          window.location.href = "onBoardingPage.html";
+          window.location.href = 'onBoardingPage.html';
         });
     })
 
