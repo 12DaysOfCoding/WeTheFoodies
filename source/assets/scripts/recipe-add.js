@@ -23,10 +23,7 @@ async function init() {
   const recipe = backend.get_recipe(backend.get_selected());
   console.log(recipe);
   defaultPreference();
-  addIngredient();
-  addInstruction();
   addNewRecipe();
-
   
 }
 
@@ -49,7 +46,7 @@ ingredient_keyboard.addEventListener('keydown', (event)=>{
  * Click or "Enter" to add a new line for filling instructions
  */
 btn = document.getElementById('instructionButton');
-btn.addEventListener('click', addIngredient);
+btn.addEventListener('click', addInstruction);
 let instruction_keyboard = document.getElementById('instructionOrderedList');
 instruction_keyboard.addEventListener('keydown', (event)=>{
   if (event.defaultPrevented) {
