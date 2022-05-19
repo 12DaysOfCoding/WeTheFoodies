@@ -8,6 +8,30 @@ const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
 
+
+const ERR_NO_NAME        = 'Please enter a name for this recipe';
+const ERR_COOKTIME       = 'Please enter a valid positive cooktime for this recipe';
+const ERR_SERVING_SIZE   = 'Please enter a valid positive serving size for this recipe';
+const ERR_NO_DIFFICULTY  = 'Please select a difficulty level for this recipe';
+const ERR_NO_INGREDIENTS = 'Please enter at least one ingredient to this recipe';
+const ERR_NO_STEPS       = 'Please enter at least one step to this recipe';
+
+/**
+ * check the values of a recipe's fields are valid before beginning processing
+ * @param recipe - recipe Object whose fields are to be checked
+ * @throws       - an error if any field is empty or contains invalid values
+ */
+export function recipe_field_check(recipe) {
+  if (!recipe.name)                   throw ERR_NO_NAME;
+  if (recipe.readyInMinutes <= 0)     throw ERR_COOKTIME;
+  if (recipe.servings <= 0)           throw ERR_SERVING_SIZE;
+  if (!recipe.difficulty_realLevel)   throw ERR_NO_DIFFICULTY;
+
+  if (recipe.ingredients.length <= 0) throw ERR_NO_INGREDIENTS;
+  if (recipe.steps.length <= 0)       throw ERR_NO_STEPS;
+}
+
+
 /**
  * search a recipe by its name and return a promise of list of raw json
  * @param {string} name - name of the recipe
