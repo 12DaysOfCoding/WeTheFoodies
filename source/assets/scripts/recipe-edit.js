@@ -27,7 +27,7 @@ async function init() {
     return;
   }
   
-  const recipe = backend.get_recipe();
+  const recipe = backend.get_recipe(selected);
 
   // Populate fields with given recipe info
   document.getElementById('recipeName').value = recipe["name"];
