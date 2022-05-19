@@ -15,7 +15,7 @@ import {
  * @param {*} instructions List of strings that make up the instrcutions
  * @param {*} dietRestrictions List of booleans for the user recipes
  */
-export async function add_user_recipe(recipeName, servings, cookTime, instructions, dietRestrictions) {
+export async function add_user_recipe(recipeName, servings, cookTime, instructions, dietRestrictions, ingredients) {
   const userRecipes = ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes');
   await push(userRecipes, {
     Name: recipeName,
@@ -23,6 +23,7 @@ export async function add_user_recipe(recipeName, servings, cookTime, instructio
     CookTime: cookTime,
     Instructions: instructions,
     DietRestrictions: dietRestrictions,
+    Ingredients: ingredients
   });
   return true;
 }
@@ -31,14 +32,19 @@ export async function add_user_recipe(recipeName, servings, cookTime, instructio
  * Get list of the user's created recipes
  * @returns A list of user's past created recipes
  */
-export function get_user_recipes() {
+export async function get_user_recipes() {
   const dbRef = ref(db);
   let finalData = null;
-  get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`))
+  await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`))
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
         finalData = snapshot.val();
+        var userList = [];
+        for(var x in finalData)
+          userList.push(finalData[x]);
+       
+        return userList;
       } else 
         console.log('No data available');
             
@@ -62,14 +68,14 @@ export function add_favorite(recipeName){
  * Fetch the user's favorite recipes
  * @returns A list object of favorite recipes
  */
-export function get_favorites(){
+export async function get_favorites(){
   const dbRef = ref(db);
   let finalData = null;
-  get(child(dbRef, `users/${auth.currentUser.uid}/FavoriteRecipes`))
+  await get(child(dbRef, `users/${auth.currentUser.uid}/FavoriteRecipes`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
         finalData = snapshot.val();
+        return finalData;
       } else 
         console.log('No data available');
             
