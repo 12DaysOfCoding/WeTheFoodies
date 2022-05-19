@@ -164,11 +164,6 @@ export function add_recipe(recipe, custom=false) {
   return recipe;
 }
 
-export function edit_recipe(recipe_hash,recipe, custom=false) {
-  set_localstore(recipe_hash, recipe);
-  return recipe;
-}
-
 
 /**
  * @param {string} recipe_hash - the key to the recipe entry in localstore
@@ -176,7 +171,17 @@ export function edit_recipe(recipe_hash,recipe, custom=false) {
  */
 export function get_recipe(recipe_hash){
   const recipe = get_localstore(recipe_hash);  // null if not found
-  if (!recipe) console.warn(`${recipe_hash} not in localstore, check your arguments`);
+  if (!recipe) console.log(`${recipe_hash} not in localstore, check your arguments`);
+  return recipe;
+}
+
+/**
+ * @param {string}  recipe_hash
+ * @param {Object}  recipe
+ * @param {boolean} custom
+*/
+export function edit_recipe(recipe_hash, recipe, custom=false) {
+  set_localstore(recipe_hash, recipe);
   return recipe;
 }
 
@@ -186,6 +191,7 @@ export function get_recipe(recipe_hash){
 export function remove_recipe(recipe_hash){
   if(localStorage.getItem(recipe_hash)) {
     localStorage.removeItem(recipe_hash);
+    localStorage.removeItem("%selected_recipe");
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
     remove_favorite(recipe_hash);
