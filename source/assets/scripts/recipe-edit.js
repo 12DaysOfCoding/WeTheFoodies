@@ -15,8 +15,14 @@ var instructionIndex = 1;
  * Initialize and call other function
  */
 async function init() {
-  const recipe = backend.get_recipe(backend.get_selected());
- 
+  const selected = backend.get_selected()
+
+  if (selected == "") {
+    window.location.assign('index.html');
+    return;
+  }
+  
+  const recipe = backend.get_recipe();
 
   // Populate fields with given recipe info
   document.getElementById('recipeName').value = recipe["name"];

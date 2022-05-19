@@ -13,8 +13,13 @@ else   // first visit
  * Initialize and call other function
  */
 async function init() {
+  const selected = backend.get_selected();
+  if (selected == "") {
+    window.location.assign('index.html');
+    return;
+  }
 
-  const recipe = backend.get_recipe(backend.get_selected());
+  const recipe  = backend.get_recipe(selected);
 
   // Create a recipe card with mock data
   let expandedRecipeCard = document.createElement('expanded-recipe-card');
@@ -25,8 +30,9 @@ async function init() {
   populateUI(recipe);
   bindFoodieButton();
   bindEditButton();
-  bindDeleteButton();
+  bindDeleteButton(recipe.hash);
   goBack();
+  
 }
 
 function populateUI(recipe) {
@@ -107,9 +113,10 @@ function bindEditButton() {
   });
 }
 
-function bindDeleteButton() {
+function bindDeleteButton(recipe_hash) {
   const foodieBtn = document.getElementById('delete');
   foodieBtn.addEventListener('click', () => {
+    backend.remove_recipe(recipe_hash);
     window.location.assign('index.html');
   });
 }
