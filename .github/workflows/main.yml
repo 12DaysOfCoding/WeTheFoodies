@@ -49,7 +49,7 @@ jobs:
           # comma separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.
           files: "keys.json"
         env:
-          SPOONACULAR_API_KEY: ${{ secret.SPOONACULAR_API_KEY }} 
+          SPOONACULAR_API_KEY: ${{ secrets.SPOONACULAR_API_KEY }} 
 
       - name: Test
         run: cat source/assets/scripts/backend.js && npm run test
