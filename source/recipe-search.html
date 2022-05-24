@@ -11,12 +11,15 @@
   <link href="styles.css" rel="stylesheet">
   <link href="assets/styles/recipe-searchPage.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@3/introjs.min.css">
 
 
   <!-- Web Components -->
   <script src="assets/components/RecipeCard.js" type="module"></script>
   <script src="assets/scripts/recipe-searchPage.js" type="module"></script>
   <script src="assets/scripts/backend.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intro.js@3/intro.min.js"></script>
+  <script type="module" src="assets/scripts/tutorial-searchpage.js"></script>
 </head>
 
 <body>
@@ -37,7 +40,7 @@
           <!-- The form -->
           <div class="search">
             <input id="search-field" type="text" placeholder="Search.." name="search" autocomplete="off">
-            <button id="search-button" type="submit"><i class="fa fa-search"></i></button>
+            <button id="search-button" type="submit" class="search-button"><i class="fa fa-search"></i></button>
           </div>
         </div>
         <p id='apply-filters'>APPLY FILTERS</p>

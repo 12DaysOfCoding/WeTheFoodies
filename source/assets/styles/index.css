@@ -110,6 +110,7 @@ recipe-card {
     left: 0;
     right: 0;
     margin-top: 10px;
+    z-index: 10;
 }
 
 .nav-dashboard {
