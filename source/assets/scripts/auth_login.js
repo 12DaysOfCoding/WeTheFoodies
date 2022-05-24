@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js';
 import { getDatabase, set, ref, update } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
-import keys from '../../../keys.json' 
+import keys from '../../../keys.json'; 
 import { 
 
   getAuth, 
@@ -56,17 +56,7 @@ const emailForgotPass = document.createElement('input');
 const sendInstructions = document.createElement('button');
 sendInstructions.textContent = 'Send Instructions';
 
-function renderButton() {
-  gapi.signin2.render('google-login', {
-    'scope': 'profile email',
-    'width': 240,
-    'height': 50,
-    'longtitle': true,
-    'theme': 'dark',
-    'onsuccess': onSuccess,
-    'onfailure': onFailure
-  });
-}
+
 
 // TODO: Store the user to the database
 googleLoginBtn.addEventListener('click', () => {

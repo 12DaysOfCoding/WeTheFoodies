@@ -11,7 +11,7 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
-import keys from '../../../keys.json' 
+import keys from '../../../keys.json'; 
 
 import { keyDefinitions } from 'puppeteer';
 // TODO: Add SDKs for Firebase products that you want to use

@@ -20,7 +20,7 @@ else { // first visit
       window.location.assign('onBoardingPage.html');  // logged in! send to onboarding
     else
       window.location.assign('login.html');           // not logged in! send to login
-  })
+  });
 }
   
 
@@ -87,9 +87,9 @@ async function renderSavedRecipes() {
           });
         });
 
-      } else {
+      } else 
         window.location.assign('login.html');         // not logged in! send to login
-      }
+      
     });
   }
 
@@ -147,9 +147,9 @@ function renderCustomRecipes() {
           });
         });
 
-      } else {
+      } else 
         window.location.assign('login.html');         // not logged in! send to login
-      }
+      
     });
 
   }
