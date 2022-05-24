@@ -7,21 +7,19 @@ import * as database from './database.js';
 
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
 
-// If user has visited before, then continue to init
-// init subfunctions redirect to login.html in the case that the local storage is set, but the user is not logged in
+// user has visited before! proceed with init
+// ( init has additional redirects in case the local storage is set, but the user is not logged in )
 if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 
-// Else, the user must either not be logged in at all, or they must not have been onBoarded yet
+// user is either not logged in or has not been onboarded!
 else { // first visit
   const auth = getAuth();
   onAuthStateChanged(auth, async (user) => {
-    // if the user is logged in, then send to onboarding
     if (user)
-      window.location.assign('onBoardingPage.html');  // redirect
-    // if the user is not logged in, then send to log in
+      window.location.assign('onBoardingPage.html');  // logged in! send to onboarding
     else
-      window.location.assign('login.html');  // redirect
+      window.location.assign('login.html');           // not logged in! send to login
   })
 }
   
@@ -90,7 +88,7 @@ async function renderSavedRecipes() {
         });
 
       } else {
-        window.location.assign('login.html');
+        window.location.assign('login.html');         // not logged in! send to login
       }
     });
   }
@@ -150,7 +148,7 @@ function renderCustomRecipes() {
         });
 
       } else {
-        window.location.assign('login.html');
+        window.location.assign('login.html');         // not logged in! send to login
       }
     });
 
