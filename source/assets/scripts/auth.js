@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js';
 import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
+import keys from '../../../keys.json' 
 import {
   getAuth
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
@@ -12,7 +13,7 @@ import {
 
 // TODO: Integrate API keys to CI/CD Pipeline
 const firebaseConfig = {
-  apiKey: 'AIzaSyBVqGsU9giK0GDQI7OOchNseJzMtn7uDuc',
+  apiKey: keys.FIREBASE_API_KEY,
   authDomain: 'wethefoodies-329cf.firebaseapp.com',
   projectId: 'wethefoodies-329cf',
   storageBucket: 'wethefoodies-329cf.appspot.com',

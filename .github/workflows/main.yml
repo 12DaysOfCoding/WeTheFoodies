@@ -43,6 +43,16 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          # comma separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.
+          files: "keys.json"
+        env:
+          SPOONACULAR_API_KEY: ${{ secrets.SPOONACULAR_API_KEY }} 
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }} 
+
+
       - name: Test
         run: npm run test
 
