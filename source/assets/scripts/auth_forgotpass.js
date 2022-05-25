@@ -11,7 +11,6 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
-import keys from '../../../keys.json'; 
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,7 +20,7 @@ import keys from '../../../keys.json';
 
 // TODO: Integrate API keys to CI/CD Pipeline
 const firebaseConfig = {
-  apiKey: keys.FIREBASE_API_KEY,
+  apiKey: 'AIzaSyBVqGsU9giK0GDQI7OOchNseJzMtn7uDuc',
   authDomain: 'wethefoodies-329cf.firebaseapp.com',
   projectId: 'wethefoodies-329cf',
   storageBucket: 'wethefoodies-329cf.appspot.com',
