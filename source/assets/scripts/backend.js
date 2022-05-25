@@ -8,6 +8,30 @@ const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
 
+
+const ERR_NO_NAME        = 'Please enter a name for this recipe';
+const ERR_COOKTIME       = 'Please enter a valid positive cooktime for this recipe';
+const ERR_SERVING_SIZE   = 'Please enter a valid positive serving size for this recipe';
+const ERR_NO_DIFFICULTY  = 'Please select a difficulty level for this recipe';
+const ERR_NO_INGREDIENTS = 'Please enter at least one ingredient to this recipe';
+const ERR_NO_STEPS       = 'Please enter at least one step to this recipe';
+
+/**
+ * check the values of a recipe's fields are valid before beginning processing
+ * @param recipe - recipe Object whose fields are to be checked
+ * @throws       - an error if any field is empty or contains invalid values
+ */
+export function recipe_field_check(recipe) {
+  if (!recipe.name)                   throw ERR_NO_NAME;
+  if (recipe.readyInMinutes <= 0)     throw ERR_COOKTIME;
+  if (recipe.servings <= 0)           throw ERR_SERVING_SIZE;
+  if (!recipe.difficulty_realLevel)   throw ERR_NO_DIFFICULTY;
+
+  if (recipe.ingredients.length <= 0) throw ERR_NO_INGREDIENTS;
+  if (recipe.steps.length <= 0)       throw ERR_NO_STEPS;
+}
+
+
 /**
  * search a recipe by its name and return a promise of list of raw json
  * @param {string} name - name of the recipe
@@ -81,8 +105,8 @@ function recalculate_intolerances(recipe){
  * @return {string} - hash of its steps as a string
  */
 function compute_hash(recipe) {
-  if (!recipe.name) throw 'recipe has no name';
-  else if (!recipe.steps) throw 'recipe has no steps';
+  if (!recipe.name) throw ERR_NO_NAME;
+   else if (!recipe.steps) throw ERR_NO_STEPS;
 
   // https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript/7616484#7616484
   const cyrb53 = function(str, seed = 0) {
@@ -108,7 +132,7 @@ function compute_hash(recipe) {
 function compute_difficulty(recipe) {
   if (!Array.isArray(recipe.ingredients)) throw 'ingredients array malformed';
   else if (!(Array.isArray(recipe.steps))) throw 'steps array malformed';
-  else if (recipe.readyInMinutes <= 0) throw 'nonpositive cooktime';
+  else if (recipe.readyInMinutes <= 0) throw ERR_COOK_TIME;
   return recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;
 }
 
@@ -148,16 +172,26 @@ export function add_recipe(recipe, custom=false) {
  */
 export function get_recipe(recipe_hash){
   const recipe = get_localstore(recipe_hash);  // null if not found
-  if (!recipe) console.warn(`${recipe_hash} not in localstore, check your arguments`);
+  if (!recipe) console.log(`${recipe_hash} not in localstore, check your arguments`);
   return recipe;
 }
-
+/**
+  * @param {string}  recipe_hash
+  * @param {Object}  recipe
+  * @param {boolean} custom
+ */
+ export function edit_recipe(recipe_hash, recipe, custom=false) {
+  set_localstore(recipe_hash, recipe);
+  return recipe;
+}
 /**
  * @param {string} recipe_hash
  */
 export function remove_recipe(recipe_hash){
   if(localStorage.getItem(recipe_hash)) {
     localStorage.removeItem(recipe_hash);
+    localStorage.removeItem("%selected_recipe");
+
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
     remove_favorite(recipe_hash);

@@ -1,3 +1,4 @@
+
 // foodie.js
 
 import * as backend from './backend.js';
@@ -40,36 +41,56 @@ function bindExitButton() {
   exitBtn.addEventListener('click', () => {
     window.history.back();
   });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key == "Escape")
+      window.history.back();
+  });
 }
 
 function bindPrevButton(prevButton, nextButton) {
   prevButton.classList.add('hidden');
+  prevButton.addEventListener('click', goToPrevStep);
   
-  prevButton.addEventListener('click', () => {
-    nextButton.classList.remove('hidden');
+  document.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented)
+      return;
+    if (event.key === "ArrowLeft")
+      goToPrevStep();
+  });
+}
+
+function goToPrevStep() {
+  nextButton.classList.remove('hidden');
     if (currStep > 0) currStep -= 1;
     if (currStep === 0) 
       prevButton.classList.add('hidden');
     else 
       nextButton.classList.remove('disabled');
-    
 
     updateStep();
-  });
 }
 
 function bindNextButton(prevButton, nextButton) {
-  nextButton.addEventListener('click', () => {
-    prevButton.classList.remove('hidden');
-    if (currStep < steps.length - 1) currStep += 1;
-    if (currStep === steps.length - 1) 
-      nextButton.classList.add('hidden');
-    else 
-      prevButton.classList.remove('disabled');
-    
+  nextButton.addEventListener('click', goToNextStep);
 
-    updateStep();
+  document.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented)
+      return;
+    if (event.key === "ArrowRight")
+      goToNextStep();
   });
+}
+
+function goToNextStep() {
+  prevButton.classList.remove('hidden');
+  if (currStep < steps.length - 1) currStep += 1;
+  if (currStep === steps.length - 1) 
+    nextButton.classList.add('hidden');
+  else 
+    prevButton.classList.remove('disabled');
+
+  updateStep();
 }
 
 const updateStep = () => {

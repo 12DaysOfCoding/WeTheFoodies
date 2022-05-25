@@ -16,6 +16,10 @@ else   // first visit
 async function init() {
 
   const recipe = backend.get_recipe(backend.get_selected());
+  if (recipe == "") {
+    window.location.assign('index.html');
+    return;
+  }
 
   // Create a recipe card with mock data
   let expandedRecipeCard = document.createElement('expanded-recipe-card');
@@ -25,6 +29,8 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  bindEditButton();
+  bindDeleteButton(recipe.hash);
   goBack();
 }
 
@@ -101,11 +107,25 @@ function bindFoodieButton() {
   });
 }
 
+function bindEditButton() {
+  const foodieBtn = document.getElementById('edit');
+  foodieBtn.addEventListener('click', () => {
+    window.location.assign('recipe-edit.html');
+  });
+}
+
+function bindDeleteButton(recipe_hash) {
+  const foodieBtn = document.getElementById('delete');
+  foodieBtn.addEventListener('click', () => {
+    backend.remove_recipe(recipe_hash);
+    window.location.assign('index.html');
+  });
+}
+
 function goBack(){
   const btn = document.getElementById('white-arrow-p');
   let index = document.referrer.lastIndexOf('/');
   let str = document.referrer.substring(index + 1);
-  console.log(str);
 
   btn.addEventListener('click', () => {
     if (str === 'recipe-search.html')
