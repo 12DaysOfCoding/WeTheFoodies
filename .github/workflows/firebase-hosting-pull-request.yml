@@ -7,8 +7,16 @@ jobs:
   build_and_preview:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       - uses: actions/checkout@v2
+      - name: Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          # comma separated list of XML/JSON/YAML files in which tokens are to be substituted. Files names must be specified relative to the folder-path.
+          files: "keys.json"
+        env:
+          SPOONACULAR_API_KEY: '${{ secrets.SPOONACULAR_API_KEY }}'
+          FIREBASE_API_KEY: '${{ secrets.FIREBASE_API_KEY }}'
       - run: npm ci && npm run lint && npm run test
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
