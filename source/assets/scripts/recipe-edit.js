@@ -36,7 +36,9 @@ async function init() {
 
   const diff = parseInt(recipe["difficulty_realLevel"]);
   document.getElementsByName('diff')[diff-1].checked = true;
-
+  if(!recipe.intolerances ){
+    recipe.intolerances = []
+  }
   recipePreferences(recipe.intolerances);
 
   /**
