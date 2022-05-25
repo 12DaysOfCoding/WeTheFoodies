@@ -12,7 +12,6 @@ import {
   sendPasswordResetEmail
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
 
-import { keyDefinitions } from 'puppeteer';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
