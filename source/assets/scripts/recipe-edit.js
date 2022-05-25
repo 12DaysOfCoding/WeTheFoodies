@@ -11,8 +11,8 @@ var ingredientIndex = 1;
 var instructionIndex = 1;
 
 // Prevent "Enter to submit the recipe"
-document.addEventListener("keydown", (e) => {
-  if (e.key == "Enter")
+document.addEventListener('keydown', (e) => {
+  if (e.key == 'Enter')
     e.preventDefault();
 });
 
@@ -20,9 +20,9 @@ document.addEventListener("keydown", (e) => {
  * Initialize and call other function
  */
 async function init() {
-  const selected = backend.get_selected()
+  const selected = backend.get_selected();
 
-  if (selected == "") {
+  if (selected == '') {
     window.location.assign('index.html');
     return;
   }
@@ -30,15 +30,15 @@ async function init() {
   const recipe = backend.get_recipe(selected);
 
   // Populate fields with given recipe info
-  document.getElementById('recipeName').value = recipe["name"];
-  document.getElementById('cookingTime').value = recipe["readyInMinutes"];
-  document.getElementById('servingSize').value = recipe["servings"];
+  document.getElementById('recipeName').value = recipe['name'];
+  document.getElementById('cookingTime').value = recipe['readyInMinutes'];
+  document.getElementById('servingSize').value = recipe['servings'];
 
-  const diff = parseInt(recipe["difficulty_realLevel"]);
+  const diff = parseInt(recipe['difficulty_realLevel']);
   document.getElementsByName('diff')[diff-1].checked = true;
-  if(!recipe.intolerances ){
-    recipe.intolerances = []
-  }
+  if(!recipe.intolerances )
+    recipe.intolerances = [];
+  
   recipePreferences(recipe.intolerances);
 
   /**
@@ -50,20 +50,20 @@ async function init() {
   btn.addEventListener('click', addIngredient);
   let ingredient_keyboard = document.getElementById('ingredientOrderedList');
   ingredient_keyboard.addEventListener('keydown', (event)=>{
-    if (event.defaultPrevented) {
+    if (event.defaultPrevented) 
       return;
-    }
-    if (event.key === "Enter") {
+    
+    if (event.key === 'Enter') 
       addIngredient().focus();
-    }
+    
   });
 
   if (recipe.ingredients.length > 0)
     document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
 
-  for (let i = 1; i < recipe.ingredients.length; i++) {
+  for (let i = 1; i < recipe.ingredients.length; i++) 
     (addIngredient()).value = recipe.ingredients[i].original;
-  }
+  
 
   /**
    * Click or "Enter" to add a new line for filling instructions
@@ -73,22 +73,22 @@ async function init() {
   btn.addEventListener('click', addInstruction);
   let instruction_keyboard = document.getElementById('instructionOrderedList');
   instruction_keyboard.addEventListener('keydown', (event)=>{
-    if (event.defaultPrevented) {
+    if (event.defaultPrevented) 
       return;
-    }
-    if (event.key === "Enter") {
+    
+    if (event.key === 'Enter') 
       addInstruction().focus();
-    }
+    
   });
   
 
   if (recipe.steps.length > 0)
     document.getElementById('instruction-1').value = recipe.steps[0].step;
 
-  for (let i = 1; i < recipe.steps.length; i++) {
+  for (let i = 1; i < recipe.steps.length; i++) 
     // console.log (step_str);
     (addInstruction()).value = recipe.steps[i].step;
-  }
+  
   
   editRecipe();
 }
@@ -219,32 +219,32 @@ function editRecipe() {
  * Click to add a new line for filling ingredients
  */
 function addIngredient() {
-    let box = document.getElementById('ingredientOrderedList');
+  let box = document.getElementById('ingredientOrderedList');
 
-    ingredientIndex += 1;
-    let node = document.createElement('LI');  
-    node.id = `ingredientNode-${ingredientIndex}`;
-    let nodeInput = document.createElement('input');
-    let br = document.createElement('br');
-    nodeInput.type='text';
-    nodeInput.id = `ingredient-${ingredientIndex}`;
-    nodeInput.autocomplete = 'off';
-    nodeInput.appendChild(br);
-    node.appendChild(nodeInput);
-    let img = document.createElement('img');
-    img.id = `delete-ingredient-${ingredientIndex}`;
-    img.className = 'delete';
-    img.src = 'assets/images/delete-button.png';
-    // Delete the node
-    let nodeId = `ingredientNode-${ingredientIndex}`;
-    img.onclick = function(){
-      let node = document.getElementById(nodeId);
-      node.remove();
-    };
-    node.appendChild(img);
-    box.appendChild(node);
+  ingredientIndex += 1;
+  let node = document.createElement('LI');  
+  node.id = `ingredientNode-${ingredientIndex}`;
+  let nodeInput = document.createElement('input');
+  let br = document.createElement('br');
+  nodeInput.type='text';
+  nodeInput.id = `ingredient-${ingredientIndex}`;
+  nodeInput.autocomplete = 'off';
+  nodeInput.appendChild(br);
+  node.appendChild(nodeInput);
+  let img = document.createElement('img');
+  img.id = `delete-ingredient-${ingredientIndex}`;
+  img.className = 'delete';
+  img.src = 'assets/images/delete-button.png';
+  // Delete the node
+  let nodeId = `ingredientNode-${ingredientIndex}`;
+  img.onclick = function(){
+    let node = document.getElementById(nodeId);
+    node.remove();
+  };
+  node.appendChild(img);
+  box.appendChild(node);
 
-    return nodeInput;
+  return nodeInput;
 }
   
 /**
@@ -314,23 +314,23 @@ function readPreference(){
  */
 function recipePreferences(intolerance_list){
       
-    const leftElmt = document.querySelector('.left');
-    const leftCkbox = leftElmt.getElementsByClassName('container');
-    for(let i = 0; i < leftCkbox.length; i++){
-      let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
-      let ingredientText = leftCkbox[i].innerText.trim();
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for(let i = 0; i < leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = leftCkbox[i].innerText.trim();
   
-      if(intolerance_list.includes(ingredientText))
-        ingredientBox.checked = true;
-    }
-  
-    const rightElmt = document.querySelector('.right');
-    const rightCkbox = rightElmt.getElementsByClassName('container');
-    for(let i = 0; i < rightCkbox.length; i++){
-      let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
-      let ingredientText = rightCkbox[i].innerText.trim();
-  
-      if(intolerance_list.includes(ingredientText))
-        ingredientBox.checked = true;
-    }
+    if(intolerance_list.includes(ingredientText))
+      ingredientBox.checked = true;
   }
+  
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i < rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = rightCkbox[i].innerText.trim();
+  
+    if(intolerance_list.includes(ingredientText))
+      ingredientBox.checked = true;
+  }
+}

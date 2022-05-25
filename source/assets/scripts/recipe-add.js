@@ -26,32 +26,32 @@ async function init() {
 /**
  * Click or "Enter" to add a new line for filling ingredients
  */
- let btn = document.getElementById('ingredientButton');
- btn.addEventListener('click', addIngredient);
- let ingredient_keyboard = document.getElementById('ingredientOrderedList');
- ingredient_keyboard.addEventListener('keydown', (event)=>{
-   if (event.defaultPrevented) {
-     return;
-   }
-   if (event.key === "Enter") {
-     addIngredient().focus();
-   }
- });
+let btn = document.getElementById('ingredientButton');
+btn.addEventListener('click', addIngredient);
+let ingredient_keyboard = document.getElementById('ingredientOrderedList');
+ingredient_keyboard.addEventListener('keydown', (event)=>{
+  if (event.defaultPrevented) 
+    return;
+   
+  if (event.key === 'Enter') 
+    addIngredient().focus();
+   
+});
  
- /**
+/**
   * Click or "Enter" to add a new line for filling instructions
   */
- btn = document.getElementById('instructionButton');
- btn.addEventListener('click', addInstruction);
- let instruction_keyboard = document.getElementById('instructionOrderedList');
- instruction_keyboard.addEventListener('keydown', (event)=>{
-   if (event.defaultPrevented) {
-     return;
-   }
-   if (event.key === "Enter") {
-     addInstruction().focus();
-   }
- });
+btn = document.getElementById('instructionButton');
+btn.addEventListener('click', addInstruction);
+let instruction_keyboard = document.getElementById('instructionOrderedList');
+instruction_keyboard.addEventListener('keydown', (event)=>{
+  if (event.defaultPrevented) 
+    return;
+   
+  if (event.key === 'Enter') 
+    addInstruction().focus();
+   
+});
 
 /**
  * Add New Recipe to local storage

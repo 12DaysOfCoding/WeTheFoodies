@@ -16,7 +16,7 @@ else   // first visit
 async function init() {
 
   const recipe = backend.get_recipe(backend.get_selected());
-  if (recipe == "") {
+  if (recipe == '') {
     window.location.assign('index.html');
     return;
   }

@@ -106,7 +106,7 @@ function recalculate_intolerances(recipe){
  */
 function compute_hash(recipe) {
   if (!recipe.name) throw ERR_NO_NAME;
-   else if (!recipe.steps) throw ERR_NO_STEPS;
+  else if (!recipe.steps) throw ERR_NO_STEPS;
 
   // https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript/7616484#7616484
   const cyrb53 = function(str, seed = 0) {
@@ -132,7 +132,7 @@ function compute_hash(recipe) {
 function compute_difficulty(recipe) {
   if (!Array.isArray(recipe.ingredients)) throw 'ingredients array malformed';
   else if (!(Array.isArray(recipe.steps))) throw 'steps array malformed';
-  else if (recipe.readyInMinutes <= 0) throw ERR_COOK_TIME;
+  else if (recipe.readyInMinutes <= 0) throw ERR_COOKTIME;
   return recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;
 }
 
@@ -180,7 +180,7 @@ export function get_recipe(recipe_hash){
   * @param {Object}  recipe
   * @param {boolean} custom
  */
- export function edit_recipe(recipe_hash, recipe, custom=false) {
+export function edit_recipe(recipe_hash, recipe, custom=false) {
   set_localstore(recipe_hash, recipe);
   return recipe;
 }
@@ -190,7 +190,7 @@ export function get_recipe(recipe_hash){
 export function remove_recipe(recipe_hash){
   if(localStorage.getItem(recipe_hash)) {
     localStorage.removeItem(recipe_hash);
-    localStorage.removeItem("%selected_recipe");
+    localStorage.removeItem('%selected_recipe');
 
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
