@@ -98,6 +98,28 @@ describe('testing functionalities that require actual recipes', () => {
     expect(recipe.hash.slice(-7) !== original_hash.slice(-7)).toBe(true);  // different hash
   });
 
+  it('can edit a custom recipe', () => {
+    const custom_recipe = result[0];
+    const original_hash = custom_recipe.hash;
+    custom_recipe.name = 'I am custom';
+    custom_recipe.steps.push('hahaha');
+    backend.add_recipe(custom_recipe, true);
+    const custom_recipes = backend.get_custom();
+    expect(custom_recipes).toHaveLength(1);  // only 1 added
+    const [recipe_hash] = custom_recipes;
+    const recipe = backend.get_recipe(recipe_hash);
+
+    const updated_recipe = 
+
+
+
+  
+
+    expect(recipe.name).toBe(custom_recipe.name);  // name same
+    expect(recipe.steps.pop()).toBe(custom_recipe.steps.pop());  // last step same
+    expect(recipe.hash.slice(-7) !== original_hash.slice(-7)).toBe(true);  // different hash
+  });
+
   it('does not allow dup custom recipe', () => {
     const custom_recipe = result[0];
     custom_recipe.name = 'I am custom';
