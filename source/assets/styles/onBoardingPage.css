@@ -1,32 +1,4 @@
-
-* {
-    padding: 0;
-    border: 0;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-}
-
-header {
-    background-color: #F4BA26;
-    height: 40px;
-    padding: 20px;
-    text-align: center;
-}
-
-header > img {
-    height: 100%;
-    margin: auto;
-}
-
-#dount-p {
-    text-align: right;
-    margin-top: -60px;
-    margin-bottom: 0;
-}
-
-#dount {
-    width: 50px;
-}
+@import url(main.css);
 
 .diet-asking{
     font-size: 16px;
@@ -63,18 +35,18 @@ header > img {
 
 .diet-restrictionBox{
     position: absolute;right:5.5px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width:350px;
-      height:90px;
-      left: 0;
-      right: 0;
-      border:2px solid #FFC83A;
-      background-color: white;
-      /* margin-top: 10px; */
-      margin-bottom: 150px;
-  }
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:350px;
+    height:90px;
+    left: 0;
+    right: 0;
+    border:2px solid #FFC83A;
+    background-color: white;
+    /* margin-top: 10px; */
+    margin-bottom: 150px;
+}
 
 .container {
     display: block;
@@ -93,44 +65,44 @@ header > img {
     margin-top: 4px;
 }
 
-  /* Hide the browser's default checkbox */
-  .container input {
+/* Hide the browser's default checkbox */
+.container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
+}
+
+/* Create a custom checkbox */
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 15px;
     width: 15px;
     background-color: #FFC83A;
-  }
-  
-  .checkmark:after {
+}
+
+.checkmark:after {
     content: "✓";
     position: absolute;
     display: none;
     margin-left: 3px;
-  }
-  
-  .container input:checked ~ .checkmark:after {
+}
+
+.container input:checked ~ .checkmark:after {
     display: block;
-  }
+}
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-background-color: #FFC83A;
+    background-color: #FFC83A;
 }
   
 .container {
-display: grid;
-grid-template-columns: 100px 120px 120px;  
+    display: grid;
+    grid-template-columns: 100px 120px 120px;  
 }
 
 .word {
@@ -140,9 +112,11 @@ grid-template-columns: 100px 120px 120px;
     font-style: italic; 
     font-size: 12px;
 }
+
 .left {
     grid-row: 1;    
 }
+
 .right {
     grid-row: 1;     
 }
@@ -166,8 +140,6 @@ grid-template-columns: 100px 120px 120px;
     display: inline;
 }
 
-
-
 .bottom-buttons {
     position: absolute;
     text-align: center;
@@ -182,8 +154,4 @@ grid-template-columns: 100px 120px 120px;
     font-family: 'Avenir', sans-serif;
     font-size: 12px;
     font-weight: 400;
-}
-
-button:hover {
-    cursor: pointer;
 }

@@ -1,24 +1,7 @@
-* {
-	font-family: 'Inter', sans-serif;
-	padding: 0;
-	border: 0;
-	margin: 0;
-}
+@import url("main.css");
 
 .points-summary {
 	text-align: center;
-}
-
-.header {
-	position: fixed;
-	z-index: 9999;
-	top: 0;
-	width: 100%;
-}
-
-main {
-	margin: 1rem;
-	margin-top: 100px;
 }
 
 div {
@@ -52,31 +35,6 @@ h2,
 
 span {
 	font-size: 18px;
-}
-
-nav {
-	background-color: #F4BA26;
-	height: 80px;
-	display: flex;
-	justify-content: center;
-}
-
-nav > h1 {
-	color: #fff;
-	font-size: 2rem;
-	position: absolute;
-	top: 20px;
-}
-
-#dount-p {
-	text-align: right;
-	margin-top: -60px;
-	margin-bottom: 0;
-}
-
-
-#dount {
-	width: 50px;
 }
 
 #add-recipe {
@@ -245,9 +203,11 @@ input {
 	font-style: italic; 
 	font-size: 12px;
 }
+
 .left {
 	grid-row: 1;    
 }
+
 .right {
 	grid-row: 1;     
 }
@@ -266,6 +226,7 @@ input {
 	margin-left: 7px;
     
 }
+
 .ingredientButton {
 	font-family: Inter;
 	font-style: normal;
@@ -285,6 +246,7 @@ input {
 	align-items: center;
 	cursor: pointer;
 }
+
 .instructionList {
 	border: 1.5px solid #ffc83a;
 	box-sizing: border-box;
@@ -293,6 +255,7 @@ input {
 	font-size: 16px;
 	margin-left: 7px;
 }
+
 .instructionButton {
 	font-family: Inter;
 	font-style: normal;
@@ -322,141 +285,4 @@ input {
 	position: relative;
 	top: 3px;
 	width: 18px;
-}
-
-
-.nav-bar {
-	background-color: #F4BA26;
-	height: 70px;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin-top: 10px;
-	/*border-radius: 0px 0px 6px 6px;*/
-	
-}
-
-.nav-dashboard {
-	/* position: relative; */
-	width: 25%;
-	display: inline;
-	float: left;
-	height: 70px;
-	text-align: center;
-  
-}
-.nav-search {
-	/* position: relative; */
-	width: 25%;
-	display: inline;
-	float: left;
-	height: 70px;
-	text-align: center;
-  
-}
-.nav-add {
-	/* position: relative; */
-	width: 25%;
-	display: inline;
-	float: left;
-	height: 70px;
-	text-align: center;
-}
-
-.nav-settings {
-	/* position: relative; */
-	width: 25%;
-	display: inline;
-	float: left;
-	height: 70px;
-	text-align: center;
- 
-}
-
-.nav-dashboard #nav-dashboard-img {
-	display: inline-block;
-	height: 36px;
-	text-align: center;
-	margin: 0;
-	padding-top: 6px;
-}
-#nav-dashboard-text{
-	display: block;
-	height: 12px;
-	text-align: center;
-	margin: 0; 
-	color: white;
-	font-size: 12px;
-	/* padding-top: 3px;
-	padding-bottom: 6px; */
-	font-weight: lighter;
-}
-
-.nav-dashboard img {
-	display: inline-block;
-	height: 36px;
-}
-.nav-search #nav-search-img {
-	display: inline-block;
-	height: 36px;
-	text-align: center;
-	margin: 0;
-	padding-top: 6px;
-}
-#nav-search-text{
-	display: block;
-	height: 12px;
-	text-align: center;
-	margin: 0; 
-	color: white;
-	font-size: 12px;
-	/* padding-top: 3px;
-	padding-bottom: 6px; */
-}
-.nav-search img {
-	display: inline-block;
-	height: 36px;
-}
-.nav-add #nav-add-img {
-	display: inline-block;
-	height: 36px;
-	text-align: center;
-	margin: 0;
-	padding-top: 6px;
-}
-#nav-add-text{
-	display: block;
-	height: 12px;
-	text-align: center;
-	margin: 0; 
-	color: white;
-	font-size: 12px;
-	/* padding-top: 3px;
-	padding-bottom: 6px; */
-}
-.nav-add img {
-	display: inline-block;
-	height: 36px;
-}
-.nav-settings #nav-settings-img {
-	display: inline-block;
-	height: 36px;
-	text-align: center;
-	margin: 0;
-	padding-top: 6px;
-}
-#nav-settings-text{
-	display: block;
-	height: 12px;
-	text-align: center;
-	margin: 0; 
-	color: white;
-	font-size: 12px;
-	/* padding-top: 3px;
-	padding-bottom: 6px; */
-}
-.nav-settings img {
-	display: inline-block;
-	height: 36px;
 }

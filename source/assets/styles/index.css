@@ -1,32 +1,7 @@
 @import url("main.css");
 
-/* {
-    font-family: 'Inter', sans-serif;
-    padding: 0;
-    border: 0;
-    margin: 0;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    margin: 1rem;
-    margin-top: 100px;
-}
-
-.header {
-    position: fixed;
-	z-index: 9999;
-    top: 0;
-    width: 100%;
-}*/
-
 .points-summary {
     text-align: center;
-    
 }
 
 .prompt {
@@ -35,7 +10,6 @@ main {
     font-weight: 700;
     padding-top: 20px;
 }
-
 
 .points {
     font-size: 35px;
@@ -48,27 +22,6 @@ h2, #points {
 
 span {
     font-size: 18px;
-}
-
-header {
-    background-color: #F4BA26;
-    height: 40px;
-    padding: 20px;
-}
-
-header > img {
-    height: 100%;
-}
-
-#dount-p {
-	text-align: right;
-	margin-top: -60px;
-	margin-bottom: 0;
-}
-
-
-#dount {
-	width: 50px;
 }
 
 #logo {
@@ -103,5 +56,3 @@ recipe-card {
     margin-bottom: 12px;
     height: 100%;
 }
-
-

@@ -1,31 +1,8 @@
-* {
-    /* background-color: #FAF9F6; */
-    font-family: 'Inter', sans-serif;
-}
+@import url(main.css);
 
 main {
     margin: 1rem 0;
     height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #FAF9F6;
-}
-
-nav {
-    background-color: #F4BA26;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-}
-
-nav > h1 {
-    color: #fff;
-    font-size: 2rem;
-    position: absolute;
-	top: -5px;
 }
 
 #dount-p {
@@ -33,21 +10,6 @@ nav > h1 {
     margin-top: -60px;
     margin-top: -42px;
     margin-bottom: 0;
-}
-
-#dount {
-    width: 50px;
-}
-
-#white-arrow-p {
-    text-align: left;
-    margin-left: 15px;
-    margin-top: -57px;
-    margin-bottom: 0;
-}
-
-#white-arrow {
-    width: 20px;
 }
 
 .section__foodie {
@@ -131,148 +93,4 @@ button {
     font-weight: 400;
     text-align: center;
     padding-top: 8px;
-}
-
-.hidden {
-    display:none;
-}
-
-
-
-.nav-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #F4BA26;
-    height: 70px;
-    margin-top: 10px;
-}
-
-.nav-dashboard {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-}
-.nav-search {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-
-}
-.nav-add {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-}
-.nav-settings {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-}
-
-.nav-dashboard #nav-dashboard-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 6px;
-}
-#nav-dashboard-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-
-.nav-dashboard img {
-    display: inline-block;
-    height: 36px;
-}
-.nav-search #nav-search-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 6px;
-}
-#nav-search-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-.nav-search img {
-    display: inline-block;
-    height: 36px;
-}
-.nav-add #nav-add-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 6px;
-}
-#nav-add-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-.nav-add img {
-    display: inline-block;
-    height: 36px;
-}
-.nav-settings #nav-settings-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 6px;
-}
-#nav-settings-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-.nav-settings img {
-    display: inline-block;
-    height: 36px;
-}
-
-button:hover {
-    cursor: pointer;
 }

@@ -1,41 +1,4 @@
-/* body {
-    background-color: #FAF9F6;
-} */
-
-* {
-  padding: 0;
-  border: 0;
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-}
-
-main {
-  margin: 1rem;
-  margin-top: 100px;
-}
-
-.header {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  width: 100%;
-}
-
-nav {
-	background-color: #F4BA26;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-}
-
-nav > h1 {
-	color: #fff;
-	font-size: 2rem;
-	position: absolute;
-	top: 20px;
-  font-style: normal;
-  font-weight: bold;
-}
+@import url("main.css");
 
 #recipe-search {
     display: block;
@@ -44,25 +7,14 @@ nav > h1 {
     width: 50%;
 }
 
-#dount-p {
-    text-align: right;
-    margin-top: -60px;
-    margin-bottom: 0;
-}
-
-#dount {
-    width: 50px;
-}
-
-.title{
+.title {
     width:450px;
     height:50px;
     position: relative;
     background-color:#FFC83A ;
 }
 
-.Recipe-SearchPage > h2 span{
-
+.Recipe-SearchPage > h2 span {
     background:#FFC83A;
     color:#fff;
     
@@ -93,8 +45,9 @@ nav > h1 {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.diet-restrictionBox{
-  position: relative;right:5.5px;
+
+.diet-restrictionBox {
+    position: relative;right:5.5px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -121,7 +74,7 @@ nav > h1 {
 
 /* no boarder */
 input:focus {
-  outline: none; 
+    outline: none; 
 }
 
   div.search input[type=text] {
@@ -134,10 +87,10 @@ input:focus {
     background: #f1f1f1;
     font-family: Inter;
     font-style: normal;
-  }
+}
   
-  /* Style the submit button */
-  div.search button {
+/* Style the submit button */
+div.search button {
     position:relative; right:5px;
     border-radius: 5px;
     float: left;
@@ -150,16 +103,17 @@ input:focus {
     border: 3px solid #FFC83A;
     border-left: none; 
     cursor: pointer;
-  }
+}
   
   
-  /* Clear floats */
-  div.example::after {
+/* Clear floats */
+div.example::after {
     content: "";
     clear: both;
     display: table;
-  }
-  .container {
+}
+
+.container {
     display: block;
     position: relative;
     padding-left: 20px;
@@ -174,46 +128,46 @@ input:focus {
     font-style: normal;
     font-weight: normal;
     margin-top: 7px;
-  }
+}
   
-  /* Hide the browser's default checkbox */
-  .container input {
+/* Hide the browser's default checkbox */
+.container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
+}
   
-  /* Create a custom checkbox */
-  .checkmark {
+/* Create a custom checkbox */
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 15px;
     width: 15px;
     background-color: #FFC83A;
-  }
+}
   
-  .checkmark:after {
+.checkmark:after {
     content: "✓";
     position: absolute;
     display: none;
     margin-left: 3px;
-  }
+}
   
-  .container input:checked ~ .checkmark:after {
+.container input:checked ~ .checkmark:after {
     display: block;
-  }
+}
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-background-color: #FFC83A;
+    background-color: #FFC83A;
 }
   
 .container {
-display: grid;
-grid-template-columns: 100px 120px 120px;  
+    display: grid;
+    grid-template-columns: 100px 120px 120px;  
 }
 
 .word {
@@ -231,7 +185,6 @@ grid-template-columns: 100px 120px 120px;
 }
 
 .section__search-recipes{
-  
   margin-bottom: 100px;
 }
 
@@ -254,150 +207,16 @@ grid-template-columns: 100px 120px 120px;
   margin-right: auto;
   width: 100%;
 }
+
 .section_search-recipes > div {
   width: 360px;
   margin: auto;
 }
+
 .section_search-recipes{
   margin:auto;
   width: auto;
   text-align: center;
-}
-
-.nav-bar {
-    
-  background-color: #F4BA26;
-  height: 70px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  
-  margin-top: 10px;
-}
-
-.nav-dashboard {
-  /* position: relative; */
-  width: 25%;
-  display: inline;
-  float: left;
-  height: 70px;
-  text-align: center;
-  
-}
-.nav-search {
-  /* position: relative; */
-  width: 25%;
-  display: inline;
-  float: left;
-  height: 70px;
-  text-align: center;
-  
-
-}
-.nav-add {
-  /* position: relative; */
-  width: 25%;
-  display: inline;
-  float: left;
-  height: 70px;
-  text-align: center;
-  
-}
-.nav-settings {
-  /* position: relative; */
-  width: 25%;
-  display: inline;
-  float: left;
-  height: 70px;
-  text-align: center;
-  
-}
-
-.nav-dashboard #nav-dashboard-img {
-  display: inline-block;
-  height: 36px;
-  text-align: center;
-  margin: 0;
-  padding-top: 6px;
-}
-#nav-dashboard-text{
-  display: block;
-  height: 12px;
-  text-align: center;
-  margin: 0; 
-  color: white;
-  font-size: 12px;
-  /* padding-top: 3px;
-  padding-bottom: 6px; */
-}
-
-.nav-dashboard img {
-  display: inline-block;
-  height: 36px;
-}
-.nav-search #nav-search-img {
-  display: inline-block;
-  height: 36px;
-  text-align: center;
-  margin: 0;
-  padding-top: 6px;
-}
-#nav-search-text{
-  display: block;
-  height: 12px;
-  text-align: center;
-  margin: 0; 
-  color: white;
-  font-size: 12px;
-  /* padding-top: 3px;
-  padding-bottom: 6px; */
-}
-.nav-search img {
-  display: inline-block;
-  height: 36px;
-}
-.nav-add #nav-add-img {
-  display: inline-block;
-  height: 36px;
-  text-align: center;
-  margin: 0;
-  padding-top: 6px;
-}
-#nav-add-text{
-  display: block;
-  height: 12px;
-  text-align: center;
-  margin: 0; 
-  color: white;
-  font-size: 12px;
-  /* padding-top: 3px;
-  padding-bottom: 6px; */
-}
-.nav-add img {
-  display: inline-block;
-  height: 36px;
-}
-.nav-settings #nav-settings-img {
-  display: inline-block;
-  height: 36px;
-  text-align: center;
-  margin: 0;
-  padding-top: 6px;
-}
-#nav-settings-text{
-  display: block;
-  height: 12px;
-  text-align: center;
-  margin: 0; 
-  color: white;
-  font-size: 12px;
-  /* padding-top: 3px;
-  padding-bottom: 6px; */
-}
-.nav-settings img {
-  display: inline-block;
-  height: 36px;
 }
 
 .suggest_dropdown {
