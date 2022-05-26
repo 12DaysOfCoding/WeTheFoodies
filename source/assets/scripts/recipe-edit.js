@@ -197,7 +197,7 @@ function editRecipe() {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.edit_recipe(recipe_hash, recipe, true);  // using the backend to simply logic
-          window.location.assign('index.html');
+          window.location.assign('recipe-detail.html');
         });
       } catch(e) {
         alert(e);
@@ -205,7 +205,7 @@ function editRecipe() {
     } else   // no file
       try {  // add directly
         backend.edit_recipe(recipe_hash,recipe, true);  // using the backend to simply logic
-        window.location.assign('index.html');
+        window.location.assign('recipe-detail.html');
       } catch(e) {
         alert(e);
       }
