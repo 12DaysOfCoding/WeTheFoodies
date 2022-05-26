@@ -17,7 +17,6 @@
   <script src="assets/components/RecipeCard.js" type="module"></script>
   <script src="assets/scripts/recipe-searchPage.js" type="module"></script>
   <script src="assets/scripts/backend.js" type="module"></script>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body>
@@ -101,13 +100,7 @@
     </section>
 
     <!--Navigation bar-->
-    <div id="nav-placeholder"></div>
-
-    <script>
-    $(function(){
-      $("#nav-placeholder").load("foot-nav.html");
-    });
-    </script>
+    <script id="replace_with_navbar" src="assets/scripts/nav.js"></script>
     <!--end of Navigation bar--> 
   </main>
 </body>

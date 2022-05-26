@@ -15,7 +15,6 @@
   <!-- Web Components -->
 
   <script src="assets/scripts/preference-setting.js" type="module"></script>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 
 <body>
@@ -82,13 +81,7 @@
       </section>
 
       <!--Navigation bar-->
-      <div id="nav-placeholder"></div>
-
-      <script>
-      $(function(){
-        $("#nav-placeholder").load("foot-nav.html");
-      });
-      </script>
+      <script id="replace_with_navbar" src="assets/scripts/nav.js"></script>
       <!--end of Navigation bar-->   
   </main>
 </body>
