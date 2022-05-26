@@ -85,11 +85,11 @@ button {
 #step-num {
     font-style: italic;
     color: #F4BA26;
-    font-size: 22px;
+    font-size: 1.2rem;
 }
 
 #step {
-    font-size: 18px;
+    font-size: 2rem;
     font-weight: 400;
     text-align: center;
     padding-top: 8px;
