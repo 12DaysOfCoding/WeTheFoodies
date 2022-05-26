@@ -128,10 +128,12 @@ main {
 }
 
 /* =====     Universal Page Functionality     ===== */
-a:hover, button:hover, #white-arrow:hover {
+a:hover, button:hover, #white-arrow:hover, input:hover {
     cursor: pointer;
 }
 
 .hidden {
     display: none;
 }
+
+/* =====     Universal Save Button Styling     ===== */

@@ -120,10 +120,6 @@ h1 {
     margin-bottom: 100px;
 }
 
-button:hover {
-    cursor: pointer;
-}
-
 .bottom-buttons > p {
     padding: 20px 0 10px 0;
     color: #EAB52F;
@@ -154,10 +150,6 @@ button:hover {
 
 .save > p {
     display: inline;
-}
-
-.hidden {
-    display:none;
 }
 
 .box {

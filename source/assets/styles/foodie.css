@@ -1,8 +1,7 @@
 @import url(main.css);
 
 main {
-    margin: 1rem 0;
-    height: 100%;
+    margin-top: 0;
 }
 
 #dount-p {
