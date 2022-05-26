@@ -17,7 +17,6 @@
 .Recipe-SearchPage > h2 span {
     background:#FFC83A;
     color:#fff;
-    
     display:inline-block;
     /* padding:15px 25px; */
     padding-top: 10px;
@@ -66,8 +65,7 @@
     width: 360px;
 }
   
-  /* Style the search field */
-
+/* Style the search field */
 .search{
     display:flex
 }
@@ -77,7 +75,7 @@ input:focus {
     outline: none; 
 }
 
-  div.search input[type=text] {
+div.search input[type=text] {
     border-radius: 5px;
     padding: 10px;
     font-size: 17px;
