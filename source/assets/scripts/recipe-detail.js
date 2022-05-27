@@ -124,16 +124,16 @@ function bindDeleteButton(recipe_hash) {
       // Check if recipe is in the custom recipes list
       var customList = backend.get_custom();
       backend.remove_recipe(recipe_hash);
-      if (customList.includes(recipe_hash)) {
+      if (customList.includes(recipe_hash)) 
         database.delete_user_recipe(recipe_hash).then(() => {
           window.location.assign('index.html');
         });
 
-      } else {
+      else 
         database.delete_favorite_recipe(recipe_hash).then(() => {
           window.location.assign('index.html');
         });
-      }
+      
     }
   });
 }

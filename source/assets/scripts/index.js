@@ -13,14 +13,14 @@ if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 
 // user is either not logged in or has not been onboarded!
-else { // first visit
+else  // first visit
   onAuthStateChanged(auth, async (user) => {
     if (user)
       window.location.assign('onBoardingPage.html');  // logged in! send to onboarding
     else
       window.location.assign('login.html');           // not logged in! send to login
   });
-}
+
   
 
 /**

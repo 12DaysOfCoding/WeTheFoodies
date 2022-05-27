@@ -180,7 +180,7 @@ export function get_recipe(recipe_hash){
   * @param {Object}  recipe
   * @param {boolean} custom
  */
-export function edit_recipe(recipe_hash, recipe, custom=false) {
+export function edit_recipe(recipe_hash, recipe,) {
   set_localstore(recipe_hash, recipe);
   return recipe;
 }

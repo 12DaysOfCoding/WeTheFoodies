@@ -95,16 +95,16 @@ export async function get_favorites(){
  * @param {*} recipeName 
  */
 export async function delete_user_recipe(recipeName){
-  recipeName = recipeName.split('$')[0]
+  recipeName = recipeName.split('$')[0];
   const dbRef = ref(db);
   await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`)).then((snapshot) => {
     snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.val().Name == recipeName){
+      if(childSnapshot.val().Name === recipeName){
         const childRef =  ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes/' + childSnapshot.key);
         remove(childRef);
       }
       
-  });
+    });
   });
 
 }
@@ -115,7 +115,7 @@ export async function delete_user_recipe(recipeName){
  * @param {*} recipeName Name of the recipe to edit
  * @param {*} recipe Recipe object to extract data
  */
- export async function edit_recipe(recipe_hash, recipe){
+export async function edit_recipe(recipe_hash, recipe){
   await delete_user_recipe(recipe_hash);
   await add_user_recipe(recipe.name,recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients );
 
@@ -127,17 +127,17 @@ export async function delete_user_recipe(recipeName){
  * Deletes the recipe matching the name in the database under their favorites
  * @param {*} recipeName 
  */
- export async function delete_favorite_recipe(recipeName){
-  recipeName = recipeName.split('$')[0]
+export async function delete_favorite_recipe(recipeName){
+  recipeName = recipeName.split('$')[0];
   const dbRef = ref(db);
   await get(child(dbRef, `users/${auth.currentUser.uid}/FavoriteRecipes`)).then((snapshot) => {
     snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.val() == recipeName){
+      if(childSnapshot.val() === recipeName){
         const childRef =  ref(db, 'users/' + auth.currentUser.uid + '/FavoriteRecipes/' + childSnapshot.key);
         remove(childRef);
       }
       
-  });
+    });
   });
 
 }
