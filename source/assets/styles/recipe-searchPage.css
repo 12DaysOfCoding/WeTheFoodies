@@ -1,185 +1,185 @@
 @import url("main.css");
 
 #recipe-search {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .title {
-    width:450px;
-    height:50px;
-    position: relative;
-    background-color:#FFC83A ;
+  width:450px;
+  height:50px;
+  position: relative;
+  background-color:#FFC83A ;
 }
 
 .Recipe-SearchPage > h2 span {
-    background:#FFC83A;
-    color:#fff;
-    display:inline-block;
-    /* padding:15px 25px; */
-    padding-top: 10px;
-    padding-left: 15px;
-    margin-left:20px;
-    font-family: Inter;
-    font-style: normal;
-    position: relative; left: 100px;
-    justify-items: center;
+  background:#FFC83A;
+  color:#fff;
+  display:inline-block;
+  /* padding:15px 25px; */
+  padding-top: 10px;
+  padding-left: 15px;
+  margin-left:20px;
+  font-family: Inter;
+  font-style: normal;
+  position: relative; left: 100px;
+  justify-items: center;
 }
 
 #apply-filters{
-    font-family: Inter;
-    font-style: italic;
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 15px;
-    /* identical to box height */
-    justify-items: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 6rem;
-    color: #000000;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 15px;
+  /* identical to box height */
+  justify-items: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 6rem;
+  color: #000000;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .diet-restrictionBox {
-    position: relative;right:5.5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:350px;
-    height:110px;
-    border:2px solid #FFC83A;
-    background-color: white;
+  position: relative;right:5.5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:350px;
+  height:110px;
+  border:2px solid #FFC83A;
+  background-color: white;
 }
 
 .Recipe-SearchPage .search-bar{
-    box-sizing: border-box;    
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;right: 2px;
-    width: 360px;
+  box-sizing: border-box;  
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;right: 2px;
+  width: 360px;
 }
   
 /* Style the search field */
 .search{
-    display:flex
+  display:flex
 }
 
 /* no boarder */
 input:focus {
-    outline: none; 
+  outline: none; 
 }
 
 div.search input[type=text] {
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 17px;
-    border: 3px solid #FFC83A;
-    float: left;
-    width: 350px;
-    background: #f1f1f1;
-    font-family: Inter;
-    font-style: normal;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 17px;
+  border: 3px solid #FFC83A;
+  float: left;
+  width: 350px;
+  background: #f1f1f1;
+  font-family: Inter;
+  font-style: normal;
 }
   
 /* Style the submit button */
 div.search button {
-    position:relative; right:5px;
-    border-radius: 5px;
-    float: left;
-    width: 60px;
-    padding: 10px;
-    /* background: #2196F3; */
-    color: #FFC83A;
-    background: #f1f1f1;
-    font-size: 17px;
-    border: 3px solid #FFC83A;
-    border-left: none; 
-    cursor: pointer;
+  position:relative; right:5px;
+  border-radius: 5px;
+  float: left;
+  width: 60px;
+  padding: 10px;
+  /* background: #2196F3; */
+  color: #FFC83A;
+  background: #f1f1f1;
+  font-size: 17px;
+  border: 3px solid #FFC83A;
+  border-left: none; 
+  cursor: pointer;
 }
   
   
 /* Clear floats */
 div.example::after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .container {
-    display: block;
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 0;
-    /* cursor: pointer; */
-    font-size: 12px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    margin-top: 7px;
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 0;
+  /* cursor: pointer; */
+  font-size: 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 7px;
 }
   
 /* Hide the browser's default checkbox */
 .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
   
 /* Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    background-color: #FFC83A;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #FFC83A;
 }
   
 .checkmark:after {
-    content: "✓";
-    position: absolute;
-    display: none;
-    margin-left: 3px;
+  content: "✓";
+  position: absolute;
+  display: none;
+  margin-left: 3px;
 }
   
 .container input:checked ~ .checkmark:after {
-    display: block;
+  display: block;
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-    background-color: #FFC83A;
+  background-color: #FFC83A;
 }
   
 .container {
-    display: grid;
-    grid-template-columns: 100px 120px 120px;  
+  display: grid;
+  grid-template-columns: 100px 120px 120px;  
 }
 
 .word {
-    grid-row: 1; 
-    position: relative;
-    font-family: Inter;
-    font-style: italic; 
-    font-size: 12px;
+  grid-row: 1; 
+  position: relative;
+  font-family: Inter;
+  font-style: italic; 
+  font-size: 12px;
 }
 .left {
-    grid-row: 1;    
+  grid-row: 1;  
 }
 .right {
-    grid-row: 1;     
+  grid-row: 1;   
 }
 
 .section__search-recipes{
@@ -187,16 +187,16 @@ div.example::after {
 }
 
 .recipes__wrapper{
-    column-gap: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
-    margin-left: auto;
-    margin-top: 20px;
-    margin-right: auto;
-    max-width: 350px;
-    row-gap: 20px;
-    position: relative;
+  column-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-right: auto;
+  max-width: 350px;
+  row-gap: 20px;
+  position: relative;
 }
 
 .search_page_content{
@@ -221,8 +221,8 @@ div.example::after {
   color: gray;
   font-size: 15px;
   font-family: Inter;
-  white-space: nowrap;      /*keep text on one line */
-  overflow: hidden;         /*prevent text from being shown outside the border */
+  white-space: nowrap;    /*keep text on one line */
+  overflow: hidden;     /*prevent text from being shown outside the border */
   text-overflow: ellipsis;  /*cut off text with an ellipsis*/
   padding-left: 7px;
   margin-top: 3px;

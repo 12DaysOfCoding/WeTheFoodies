@@ -1,135 +1,135 @@
 @import url("main.css");
 
 #dount-p {
-    text-align: right;
-    margin-top: -42px;
-    margin-bottom: 0;
+  text-align: right;
+  margin-top: -42px;
+  margin-bottom: 0;
 }
 
 .diet-restrictionBox{
-    position: absolute;
-    right:5.5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:350px;
-    height:90px;
-    border:2px solid #FFC83A;
-    background-color: white;
-    top: 40%;
-    left: 0;
-    right: 0;
-    padding: 0.5rem;
+  position: absolute;
+  right:5.5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:350px;
+  height:90px;
+  border:2px solid #FFC83A;
+  background-color: white;
+  top: 40%;
+  left: 0;
+  right: 0;
+  padding: 0.5rem;
 }
 
 
 .container {
-    display: block;
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 0;
-    font-size: 12px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    margin-top: 4px;
+  display: block;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-size: 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 4px;
 }
 
 /* Hide the browser's default checkbox */
 .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
 .container:hover {
-    cursor:pointer;
+  cursor:pointer;
 }
 
 /* Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    background-color: #FFC83A;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #FFC83A;
 }
 
 .checkmark:after {
-    content: "✓";
-    position: absolute;
-    display: none;
-    margin-left: 3px;
+  content: "✓";
+  position: absolute;
+  display: none;
+  margin-left: 3px;
 }
 
 .container input:checked ~ .checkmark:after {
-    display: block;
+  display: block;
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-    background-color: #FFC83A;
+  background-color: #FFC83A;
 }
   
 .container {
-    display: grid;
-    grid-template-columns: 100px 120px 120px;  
+  display: grid;
+  grid-template-columns: 100px 120px 120px;  
 }
 
 .word {
-    grid-row: 1; 
-    position: relative;
-    font-family: Inter;
-    font-style: italic; 
-    font-size: 12px;
+  grid-row: 1; 
+  position: relative;
+  font-family: Inter;
+  font-style: italic; 
+  font-size: 12px;
 }
 
 .left {
-    grid-row: 1;    
+  grid-row: 1;  
 }
 
 .right {
-    grid-row: 1;     
+  grid-row: 1;   
 }
 
 .save {
-    /* margin-top: 100px; */
-    font-size: 30px;
-    color: white;
-    background-color: #ffc83a;
-    width: 340px;
-    border: 1px solid #ffc83a;
-    border-radius: 8px;
-    padding: 4px;
+  /* margin-top: 100px; */
+  font-size: 30px;
+  color: white;
+  background-color: #ffc83a;
+  width: 340px;
+  border: 1px solid #ffc83a;
+  border-radius: 8px;
+  padding: 4px;
 
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
 }
 
 .save > p {
-    display: inline;
+  display: inline;
 }
 
 .bottom-buttons {
-    position: absolute;
-    text-align: center;
-    bottom: 100px;
-    left: 0;
-    right: 0;
+  position: absolute;
+  text-align: center;
+  bottom: 100px;
+  left: 0;
+  right: 0;
 }
 
 .bottom-buttons > p {
-    padding-top: 20px;
-    color: #EAB52F;
-    font-family: 'Avenir', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
+  padding-top: 20px;
+  color: #EAB52F;
+  font-family: 'Avenir', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
 }

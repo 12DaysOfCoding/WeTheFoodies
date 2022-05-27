@@ -1,43 +1,43 @@
 @import url(main.css);
 
 #setting-text {
-    font-size: 22px;
-    color: #383200;
-    font-weight: 700;
-    margin-left: 15px;
+  font-size: 22px;
+  color: #383200;
+  font-weight: 700;
+  margin-left: 15px;
 }
 
 
 .fontsize{
-    display: flex;
-    height: 50px;
-    justify-content: space-between;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
 
-    /* margin-top: 10px; */
-    color: rgb(77, 76, 24);
-    background-color: #FAF9F6;
-    /* border-top: 2px solid #ffc83a; */
-    border-bottom: 2px solid #ffc83a;
-    font-size: 20px;
+  /* margin-top: 10px; */
+  color: rgb(77, 76, 24);
+  background-color: #FAF9F6;
+  /* border-top: 2px solid #ffc83a; */
+  border-bottom: 2px solid #ffc83a;
+  font-size: 20px;
 }
 
 .setting-opt {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
 
-    margin-top: 10px;
-    /* color: #ffc83a; */
-    color: rgb(77, 76, 24);
-    background-color: #FAF9F6;
-    border-bottom: 2px solid #ffc83a;
-    padding-top: 5px;
+  margin-top: 10px;
+  /* color: #ffc83a; */
+  color: rgb(77, 76, 24);
+  background-color: #FAF9F6;
+  border-bottom: 2px solid #ffc83a;
+  padding-top: 5px;
 }
 
 .setting-opt:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .settings-body{
-    margin-bottom: 320px;
+  margin-bottom: 320px;
 }
