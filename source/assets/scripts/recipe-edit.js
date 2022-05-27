@@ -12,7 +12,7 @@ var instructionIndex = 1;
 
 // Prevent "Enter to submit the recipe"
 document.addEventListener('keydown', (e) => {
-  if (e.key == 'Enter')
+  if (e.key === 'Enter')
     e.preventDefault();
 });
 
@@ -22,7 +22,7 @@ document.addEventListener('keydown', (e) => {
 async function init() {
   const selected = backend.get_selected();
 
-  if (selected == '') {
+  if (selected === '') {
     window.location.assign('index.html');
     return;
   }
@@ -34,7 +34,7 @@ async function init() {
   document.getElementById('cookingTime').value = recipe['readyInMinutes'];
   document.getElementById('servingSize').value = recipe['servings'];
 
-  const diff = parseInt(recipe['difficulty_realLevel']);
+  const diff = parseInt(recipe['difficulty_realLevel'], 10);
   document.getElementsByName('diff')[diff-1].checked = true;
   if(!recipe.intolerances )
     recipe.intolerances = [];

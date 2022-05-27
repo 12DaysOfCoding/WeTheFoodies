@@ -11,7 +11,7 @@ else   // first visit
 
 // Prevent "Enter to submit the recipe"
 document.addEventListener('keydown', (e) => {
-  if (e.key == 'Enter')
+  if (e.key === 'Enter')
     e.preventDefault();
 });
 

@@ -1,95 +1,95 @@
 @import url(main.css);
 
 main {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #dount-p {
-    text-align: right;
-    margin-top: -60px;
-    margin-top: -42px;
-    margin-bottom: 0;
+  text-align: right;
+  margin-top: -60px;
+  margin-top: -42px;
+  margin-bottom: 0;
 }
 
 .section__foodie {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
 }
 
 .step__wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    height: 65%;
-    top: 100px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 65%;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 24px;
 }
 
 #step {
-    overflow: auto;
+  overflow: auto;
 }
 
 .controls__wrapper {
-    display: flex;
-    position: absolute;
-    bottom: 12%;
+  display: flex;
+  position: absolute;
+  bottom: 12%;
 }
 
 button {
-    display: flex;
-    align-items: center;
-    background-color: #F4BA26;
-    color: white;
-    border-radius: 50px;
-    border-style: none;
-    margin: auto;
-    padding: 8px 15px;
-    font-size: 22px;
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  background-color: #F4BA26;
+  color: white;
+  border-radius: 50px;
+  border-style: none;
+  margin: auto;
+  padding: 8px 15px;
+  font-size: 22px;
+  font-weight: 700;
 }
 
 #prev > img {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 #next > img {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .symbol {
-    background-color: white;
-    color: #F4BA26;
-    border-radius: 200px;
-    padding: 0.5px 7px;
-    font-weight: 600;
+  background-color: white;
+  color: #F4BA26;
+  border-radius: 200px;
+  padding: 0.5px 7px;
+  font-weight: 600;
 }
 
 #prev {
-    margin-left: 30px;
-    margin-right: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 #next {
-    margin-left: 30px;
-    margin-right: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 #step-num {
-    font-style: italic;
-    color: #F4BA26;
-    font-size: 1.2rem;
+  font-style: italic;
+  color: #F4BA26;
+  font-size: 1.2rem;
 }
 
 #step {
-    font-size: 2rem;
-    font-weight: 400;
-    text-align: center;
-    padding-top: 8px;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 8px;
 }

@@ -41,7 +41,7 @@ async function init() {
 
 async function renderSavedRecipes() {
 
-  if (localStorage.getItem('%first_time') != '1') {
+  if (localStorage.getItem('%first_time') !== '1') {
     const favorites = backend.get_favorite();
     console.log(favorites);
     if (favorites.length !== 0) document.querySelector('.saved-recipes__wrapper').innerHTML = '';
@@ -74,7 +74,7 @@ async function renderSavedRecipes() {
           backend.add_favorite(recipe[0].hash);
           recipe = recipe[0];
           let recipeCard = document.createElement('recipe-card');
-          if (recipe.difficulty == 0) 
+          if (recipe.difficulty === 0) 
             recipe.difficulty = 1;
           
           recipe.difficulty_realLevel = Math.round(recipe.difficulty);
@@ -97,7 +97,7 @@ async function renderSavedRecipes() {
 }
 
 function renderCustomRecipes() {
-  if (localStorage.getItem('%first_time') != '1') {
+  if (localStorage.getItem('%first_time') !== '1') {
     const customRecipes = backend.get_custom();
     if (customRecipes.length !== 0) document.querySelector('.my-recipes__wrapper').innerHTML = '';
     customRecipes.forEach(function (recipeHash) {
