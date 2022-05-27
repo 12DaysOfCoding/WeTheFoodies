@@ -130,7 +130,7 @@ function compute_hash(recipe) {
 function compute_difficulty(recipe) {
   if (!Array.isArray(recipe.ingredients)) throw 'ingredients array malformed';
   else if (!(Array.isArray(recipe.steps))) throw 'steps array malformed';
-  else if (recipe.readyInMinutes <= 0) throw ERR_COOKTIME;
+  else if (recipe.readyInMinutes <= 0) throw ERR_COOK_TIME;
   return recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;
 }
 
@@ -191,7 +191,7 @@ export function edit_recipe(recipe_hash, recipe, custom=false) {
 export function remove_recipe(recipe_hash){
   if(localStorage.getItem(recipe_hash)) {
     localStorage.removeItem(recipe_hash);
-    localStorage.removeItem('%selected_recipe');
+    localStorage.removeItem("%selected_recipe");
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
     remove_favorite(recipe_hash);
