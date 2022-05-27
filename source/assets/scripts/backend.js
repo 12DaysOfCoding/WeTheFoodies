@@ -8,6 +8,7 @@ const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
 
+
 const ERR_NO_NAME        = 'Please enter a name for this recipe';
 const ERR_COOKTIME       = 'Please enter a valid positive cooktime for this recipe';
 const ERR_SERVING_SIZE   = 'Please enter a valid positive serving size for this recipe';
@@ -29,6 +30,7 @@ export function recipe_field_check(recipe) {
   if (recipe.ingredients.length <= 0) throw ERR_NO_INGREDIENTS;
   if (recipe.steps.length <= 0)       throw ERR_NO_STEPS;
 }
+
 
 /**
  * search a recipe by its name and return a promise of list of raw json
@@ -130,7 +132,7 @@ function compute_hash(recipe) {
 function compute_difficulty(recipe) {
   if (!Array.isArray(recipe.ingredients)) throw 'ingredients array malformed';
   else if (!(Array.isArray(recipe.steps))) throw 'steps array malformed';
-  else if (recipe.readyInMinutes <= 0) throw ERR_COOK_TIME;
+  else if (recipe.readyInMinutes <= 0) throw ERR_COOKTIME;
   return recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;
 }
 
@@ -164,7 +166,6 @@ export function add_recipe(recipe, custom=false) {
   return recipe;
 }
 
-
 /**
  * @param {string} recipe_hash - the key to the recipe entry in localstore
  * @return {Object} - the recipe object if found, null otherwise
@@ -174,24 +175,23 @@ export function get_recipe(recipe_hash){
   if (!recipe) console.log(`${recipe_hash} not in localstore, check your arguments`);
   return recipe;
 }
-
 /**
- * @param {string}  recipe_hash
- * @param {Object}  recipe
- * @param {boolean} custom
-*/
+  * @param {string}  recipe_hash
+  * @param {Object}  recipe
+  * @param {boolean} custom
+ */
 export function edit_recipe(recipe_hash, recipe, custom=false) {
   set_localstore(recipe_hash, recipe);
   return recipe;
 }
-
 /**
  * @param {string} recipe_hash
  */
 export function remove_recipe(recipe_hash){
   if(localStorage.getItem(recipe_hash)) {
     localStorage.removeItem(recipe_hash);
-    localStorage.removeItem("%selected_recipe");
+    localStorage.removeItem('%selected_recipe');
+
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
     remove_favorite(recipe_hash);

@@ -2,6 +2,7 @@
 /** @module recipe-detail */
 
 import * as backend from './backend.js';
+import * as database from './database.js';
 
 if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
@@ -14,12 +15,12 @@ else   // first visit
  */
 async function init() {
   const selected = backend.get_selected();
-  if (selected == "") {
+  if (selected == '') {
     window.location.assign('index.html');
     return;
   }
-
-  const recipe  = backend.get_recipe(selected);
+  
+  const recipe = backend.get_recipe(selected);
 
   // Create a recipe card with mock data
   let expandedRecipeCard = document.createElement('expanded-recipe-card');
@@ -32,7 +33,6 @@ async function init() {
   bindEditButton();
   bindDeleteButton(recipe.hash);
   goBack();
-  
 }
 
 function populateUI(recipe) {
@@ -91,6 +91,8 @@ function saveOrSaved(recipe) {
       text.textContent = 'SAVED';
       heart.src = 'assets/images/heart1.svg';
       backend.add_favorite(recipe.hash);
+      database.add_favorite(recipe.name);
+
     } else {
       text.textContent = 'SAVE';
       heart.src = 'assets/images/heart0.svg';
@@ -116,7 +118,7 @@ function bindEditButton() {
 function bindDeleteButton(recipe_hash) {
   const foodieBtn = document.getElementById('delete');
   foodieBtn.addEventListener('click', () => {
-    let text = "Do you want to delete the recipe?"
+    let text = 'Do you want to delete the recipe?'
     if (confirm(text) == true) {
       backend.remove_recipe(recipe_hash);
       window.location.assign('index.html');
@@ -128,7 +130,6 @@ function goBack(){
   const btn = document.getElementById('white-arrow-p');
   let index = document.referrer.lastIndexOf('/');
   let str = document.referrer.substring(index + 1);
-  console.log(str);
 
   btn.addEventListener('click', () => {
     if (str === 'recipe-search.html')

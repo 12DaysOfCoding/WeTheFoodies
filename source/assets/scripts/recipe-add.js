@@ -1,30 +1,30 @@
+// recipe-add.js
 /** @module recipe-add */
 
 import * as backend from './backend.js';
+import * as database from './database.js';
 
 if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
 
-var ingredientIndex = 1;
-var instructionIndex = 1;
-
 // Prevent "Enter to submit the recipe"
-document.addEventListener("keydown", (e) => {
-  if (e.key == "Enter")
+document.addEventListener('keydown', (e) => {
+  if (e.key == 'Enter')
     e.preventDefault();
 });
+
+
+var ingredientIndex = 1;
+var instructionIndex = 1;
 
 /**
  * Initialize and call other function
  */
 async function init() {
-  const recipe = backend.get_recipe(backend.get_selected());
-  console.log(recipe);
   defaultPreference();
   addNewRecipe();
-  
 }
 
 /**
@@ -34,34 +34,33 @@ let btn = document.getElementById('ingredientButton');
 btn.addEventListener('click', addIngredient);
 let ingredient_keyboard = document.getElementById('ingredientOrderedList');
 ingredient_keyboard.addEventListener('keydown', (event)=>{
-  if (event.defaultPrevented) {
+  if (event.defaultPrevented) 
     return;
-  }
-  if (event.key === "Enter") {
+   
+  if (event.key === 'Enter') 
     addIngredient().focus();
-  }
+   
 });
-
+ 
 /**
- * Click or "Enter" to add a new line for filling instructions
- */
+  * Click or "Enter" to add a new line for filling instructions
+  */
 btn = document.getElementById('instructionButton');
 btn.addEventListener('click', addInstruction);
 let instruction_keyboard = document.getElementById('instructionOrderedList');
 instruction_keyboard.addEventListener('keydown', (event)=>{
-  if (event.defaultPrevented) {
+  if (event.defaultPrevented) 
     return;
-  }
-  if (event.key === "Enter") {
+   
+  if (event.key === 'Enter') 
     addInstruction().focus();
-  }
+   
 });
 
 /**
  * Add New Recipe to local storage
  */
 function addNewRecipe() {
-
   const form = document.getElementById('add-recipe-form');
 
   form.addEventListener('submit', (event) => {
@@ -154,6 +153,7 @@ function addNewRecipe() {
       return;
     }
 
+
     const file = document.querySelector('input[type=file]').files[0];
     if (file) {  // inputed a file
       const reader = new FileReader();
@@ -163,15 +163,23 @@ function addNewRecipe() {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.add_recipe(recipe, true);  // using the backend to simply logic
-          window.location.assign('index.html');
+          // Only redirect to index.html once the db has been updated
+          database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients ).then(()=>{
+            window.location.assign('index.html');
+          });
+          
         });
       } catch(e) {
         alert(e);
       }
     } else   // no file
-      try {  // add directly
+      try {  
+        // Add directly
         backend.add_recipe(recipe, true);  // using the backend to simply logic
-        window.location.assign('index.html');
+        // Only redirect to index.html once the db has been updated
+        database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients ).then(()=>{
+          window.location.assign('index.html');
+        });        
       } catch(e) {
         alert(e);
       }
@@ -179,10 +187,11 @@ function addNewRecipe() {
   });
 }
 
+/**
+ * Click to add a new line for filling ingredients
+ */
 function addIngredient() {
-  // let btn = document.getElementById('ingredientButton');
   let box = document.getElementById('ingredientOrderedList');
-  // console.log('hi');
 
   ingredientIndex += 1;
   let node = document.createElement('LI');  
@@ -210,6 +219,9 @@ function addIngredient() {
   return nodeInput;
 }
 
+/**
+ * Click to add a new line for filling instructions
+ */
 function addInstruction() {
   let box = document.getElementById('instructionOrderedList');
 

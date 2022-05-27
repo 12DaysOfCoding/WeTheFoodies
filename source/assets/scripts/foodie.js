@@ -1,3 +1,4 @@
+
 // foodie.js
 
 import * as backend from './backend.js';
@@ -41,8 +42,8 @@ function bindExitButton() {
     window.history.back();
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key == "Escape")
+  document.addEventListener('keydown', (e) => {
+    if (e.key == 'Escape')
       window.history.back();
   });
 }
@@ -54,20 +55,20 @@ function bindPrevButton(prevButton, nextButton) {
   document.addEventListener('keydown', (event)=>{
     if (event.defaultPrevented)
       return;
-    if (event.key === "ArrowLeft")
+    if (event.key === 'ArrowLeft')
       goToPrevStep();
   });
 }
 
 function goToPrevStep() {
   nextButton.classList.remove('hidden');
-    if (currStep > 0) currStep -= 1;
-    if (currStep === 0) 
-      prevButton.classList.add('hidden');
-    else 
-      nextButton.classList.remove('disabled');
+  if (currStep > 0) currStep -= 1;
+  if (currStep === 0) 
+    prevButton.classList.add('hidden');
+  else 
+    nextButton.classList.remove('disabled');
 
-    updateStep();
+  updateStep();
 }
 
 function bindNextButton(prevButton, nextButton) {
@@ -76,7 +77,7 @@ function bindNextButton(prevButton, nextButton) {
   document.addEventListener('keydown', (event)=>{
     if (event.defaultPrevented)
       return;
-    if (event.key === "ArrowRight")
+    if (event.key === 'ArrowRight')
       goToNextStep();
   });
 }
