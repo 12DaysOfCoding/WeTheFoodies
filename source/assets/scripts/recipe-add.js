@@ -9,6 +9,12 @@ if (localStorage.getItem('%not_first_visit'))
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
 
+// Prevent "Enter to submit the recipe"
+document.addEventListener('keydown', (e) => {
+  if (e.key == 'Enter')
+    e.preventDefault();
+});
+
 
 var ingredientIndex = 1;
 var instructionIndex = 1;
@@ -18,8 +24,6 @@ var instructionIndex = 1;
  */
 async function init() {
   defaultPreference();
-  addIngredient();
-  addInstruction();
   addNewRecipe();
 }
 
