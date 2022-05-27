@@ -4,7 +4,7 @@
 import * as backend from './backend.js';
 import * as database from './database.js';
 
-if (localStorage.getItem('%not_first_visit')) 
+if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
@@ -41,7 +41,7 @@ function populateUI(recipe) {
 
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
   if (recipe.ingredients)   // guard for no ingredients
-    recipe.ingredients.forEach(function(ingredient) {
+    recipe.ingredients.forEach(function (ingredient) {
       const ingredientElem = document.createElement('div');
       const check_box = document.createElement('input');
       check_box.type = 'checkbox';
@@ -51,16 +51,16 @@ function populateUI(recipe) {
       ingredientElem.appendChild(text);
       ingredientsWrapper.appendChild(ingredientElem);
     });
-  
+
 
   const stepsWrapper = document.querySelector('.specific-instructions');
   if (recipe.steps)   // guard for no steps
-    recipe.steps.forEach(function(step) {
+    recipe.steps.forEach(function (step) {
       const stepElem = document.createElement('li');
-      stepElem.textContent = `${step.step}`; 
+      stepElem.textContent = `${step.step}`;
       stepsWrapper.appendChild(stepElem);
     });
-  
+
   if (recipe.steps.length === 0) {
     const instructionsList = document.querySelector('.instructions');
     const foodieInstruction = document.getElementById('how-to-use-foodie');
@@ -96,6 +96,7 @@ function saveOrSaved(recipe) {
       text.textContent = 'SAVE';
       heart.src = 'assets/images/heart0.svg';
       backend.remove_favorite(recipe.hash);
+      database.delete_favorite_recipe(recipe.hash);
     }
   });
 }
@@ -117,12 +118,24 @@ function bindEditButton() {
 function bindDeleteButton(recipe_hash) {
   const foodieBtn = document.getElementById('delete');
   foodieBtn.addEventListener('click', () => {
+    // Check if recipe is in the custom recipes list
+    var customList = backend.get_custom();
     backend.remove_recipe(recipe_hash);
-    window.location.assign('index.html');
+    if (customList.includes(recipe_hash)) {
+      database.delete_user_recipe(recipe_hash).then(() => {
+        window.location.assign('index.html');
+      });
+
+    } else {
+      database.delete_favorite_recipe(recipe_hash).then(() => {
+        window.location.assign('index.html');
+      });
+    }
+
   });
 }
 
-function goBack(){
+function goBack() {
   const btn = document.getElementById('white-arrow-p');
   let index = document.referrer.lastIndexOf('/');
   let str = document.referrer.substring(index + 1);
@@ -130,8 +143,8 @@ function goBack(){
   btn.addEventListener('click', () => {
     if (str === 'recipe-search.html')
       window.history.back();
-    else 
+    else
       window.location.assign('index.html');
-    
+
   });
 }

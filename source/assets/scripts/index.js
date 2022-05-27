@@ -3,7 +3,7 @@
 
 import * as backend from './backend.js';
 import * as database from './database.js';
-// import {auth} from './auth.js'
+import {auth} from './auth.js';
 
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
 
@@ -14,7 +14,6 @@ if (localStorage.getItem('%not_first_visit'))
 
 // user is either not logged in or has not been onboarded!
 else { // first visit
-  const auth = getAuth();
   onAuthStateChanged(auth, async (user) => {
     if (user)
       window.location.assign('onBoardingPage.html');  // logged in! send to onboarding

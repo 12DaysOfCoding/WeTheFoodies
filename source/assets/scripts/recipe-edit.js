@@ -1,6 +1,8 @@
 /** @module recipe-edit */
 
 import * as backend from './backend.js';
+import * as database from './database.js';
+
 
 if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
@@ -20,14 +22,27 @@ document.addEventListener('keydown', (e) => {
  * Initialize and call other function
  */
 async function init() {
+  // Check if recipe is in the custom recipes list, prevent from editing 3rd party recipes
+  var customList = backend.get_custom();
   const selected = backend.get_selected();
-
+  
   if (selected == '') {
     window.location.assign('index.html');
     return;
   }
-  
   const recipe = backend.get_recipe(selected);
+  if (!customList.includes(recipe.hash)) {
+    window.location.assign('index.html')
+  }
+
+  // const selected = backend.get_selected();
+
+  // if (selected == '') {
+  //   window.location.assign('index.html');
+  //   return;
+  // }
+  
+  // const recipe = backend.get_recipe(selected);
 
   // Populate fields with given recipe info
   document.getElementById('recipeName').value = recipe['name'];
@@ -106,6 +121,7 @@ function editRecipe() {
     event.preventDefault();
     let recipe = backend.get_recipe(backend.get_selected());  // Suggestion: get original recipe JSON and load new values into it
     const recipe_hash = recipe['hash'];
+    
  
     const nameField = document.getElementById('recipeName').value;
     recipe.name = nameField;
@@ -199,7 +215,10 @@ function editRecipe() {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.edit_recipe(recipe_hash, recipe, true);  // using the backend to simply logic
-          window.location.assign('index.html');
+          database.edit_recipe(recipe_hash, recipe).then(()=>{
+            window.location.assign('index.html');
+          });
+          
         });
       } catch(e) {
         alert(e);
@@ -207,7 +226,9 @@ function editRecipe() {
     } else   // no file
       try {  // add directly
         backend.edit_recipe(recipe_hash,recipe, true);  // using the backend to simply logic
-        window.location.assign('index.html');
+        database.edit_recipe(recipe_hash, recipe).then(()=>{
+          window.location.assign('index.html');
+        });
       } catch(e) {
         alert(e);
       }
