@@ -35,16 +35,6 @@ async function init() {
     window.location.assign('index.html')
   }
 
-  // const selected = backend.get_selected();
-
-  // if (selected == '') {
-  //   window.location.assign('index.html');
-  //   return;
-  // }
-  
-  // const recipe = backend.get_recipe(selected);
-
-  // Populate fields with given recipe info
   document.getElementById('recipeName').value = recipe['name'];
   document.getElementById('cookingTime').value = recipe['readyInMinutes'];
   document.getElementById('servingSize').value = recipe['servings'];

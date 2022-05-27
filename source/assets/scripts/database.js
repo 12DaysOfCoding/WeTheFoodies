@@ -21,7 +21,6 @@ import {
 export async function add_user_recipe(recipeName, servings, cookTime, instructions, dietRestrictions, ingredients) {
  
  
-  console.log(auth.currentUser)
   const userRecipes = ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes');
   await push(userRecipes, {
     Name: recipeName,
@@ -44,7 +43,6 @@ export async function get_user_recipes() {
   await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
         finalData = snapshot.val();
         var userList = [];
         for(var x in finalData)
@@ -101,11 +99,7 @@ export async function delete_user_recipe(recipeName){
   const dbRef = ref(db);
   await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`)).then((snapshot) => {
     snapshot.forEach(function(childSnapshot) {
-      console.log("Entered for each");
-      console.log(childSnapshot.val().Name);
-      console.log(recipeName)
       if(childSnapshot.val().Name == recipeName){
-        console.log( childSnapshot.key)
         const childRef =  ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes/' + childSnapshot.key);
         remove(childRef);
       }
