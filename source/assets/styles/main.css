@@ -1,0 +1,139 @@
+
+/* =====   Universal Body Formatting   ===== */
+* {
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FAF9F6;
+}
+
+/* =====   Universal Title Formatting   ===== */
+.header {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
+}
+
+header {
+  background-color: #F4BA26;
+  height: 40px;
+  padding: 20px;
+  text-align: center;
+}
+
+header > img {
+  height: 100%;
+  margin: auto;
+}
+
+nav {
+  background-color: #F4BA26;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+nav > h1 {
+  color: #fff;
+  font-size: 2rem;
+  position: absolute;
+  top: 20px;
+  font-style: normal;
+  font-weight: bold;
+  padding-top: 0px;
+}
+
+/* =====   Back Arrow Styling   ===== */
+#white-arrow-p {
+  text-align: left;
+  margin-left: 15px;
+  margin-top: -57px;
+  margin-bottom: 0;
+}
+
+#white-arrow {
+  width: 20px;
+}
+
+/* =====   RENDER THE DONUT!   ===== */
+#dount-p {
+  text-align: right;
+  margin-top: -60px;
+  margin-bottom: 0;
+}
+
+#dount {
+  width: 50px;
+}
+
+/* =====   Universal Page Formatting   ===== */
+main {
+  margin: 1rem;
+  margin-top: 100px;
+}
+
+.nav-bar {
+  background-color: #F4BA26;
+  height: 70px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+}
+  
+.nav-section {
+  width: 25%;
+  display: inline;
+  float: left;
+  height: 70px;
+  text-align: center;
+}
+
+.nav-object {
+  width: 25%;
+  display: inline;
+  float: left;
+  height: 70px;
+  text-align: center;
+}
+
+.nav-img {
+  display: inline-block;
+  height: 36px;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+}
+
+.resized {
+  height: 42px;
+  padding-top: 0px;
+}
+
+.nav-text {
+  display: block;
+  height: 12px;
+  text-align: center;
+  margin: 0; 
+  color: white;
+  font-size: 12px;
+}
+
+/* =====   Universal Page Functionality   ===== */
+a:hover, button:hover, #white-arrow:hover, input:hover {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* =====   Universal Save Button Styling   ===== */

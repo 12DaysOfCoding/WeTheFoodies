@@ -31,8 +31,8 @@ function getSteps() {
     prevButton.classList.add('hidden');
     nextButton.classList.add('hidden');
   } else {
-    bindPrevButton(prevButton, nextButton);
-    bindNextButton(prevButton, nextButton);
+    bindPrevButton(prevButton);
+    bindNextButton(nextButton);
   }
 }
 
@@ -43,12 +43,12 @@ function bindExitButton() {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key == 'Escape')
+    if (e.key === 'Escape')
       window.history.back();
   });
 }
 
-function bindPrevButton(prevButton, nextButton) {
+function bindPrevButton(prevButton) {
   prevButton.classList.add('hidden');
   prevButton.addEventListener('click', goToPrevStep);
   
@@ -71,7 +71,7 @@ function goToPrevStep() {
   updateStep();
 }
 
-function bindNextButton(prevButton, nextButton) {
+function bindNextButton(nextButton) {
   nextButton.addEventListener('click', goToNextStep);
 
   document.addEventListener('keydown', (event)=>{

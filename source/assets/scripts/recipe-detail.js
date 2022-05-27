@@ -1,4 +1,3 @@
-// recipe-detail.js
 /** @module recipe-detail */
 
 import * as backend from './backend.js';
@@ -14,12 +13,13 @@ else   // first visit
  * Initialize and call other function
  */
 async function init() {
-
-  const recipe = backend.get_recipe(backend.get_selected());
-  if (recipe == '') {
+  const selected = backend.get_selected();
+  if (selected === '') {
     window.location.assign('index.html');
     return;
   }
+
+  const recipe = backend.get_recipe(selected);
 
   // Create a recipe card with mock data
   let expandedRecipeCard = document.createElement('expanded-recipe-card');
@@ -118,20 +118,23 @@ function bindEditButton() {
 function bindDeleteButton(recipe_hash) {
   const foodieBtn = document.getElementById('delete');
   foodieBtn.addEventListener('click', () => {
-    // Check if recipe is in the custom recipes list
-    var customList = backend.get_custom();
-    backend.remove_recipe(recipe_hash);
-    if (customList.includes(recipe_hash)) {
-      database.delete_user_recipe(recipe_hash).then(() => {
-        window.location.assign('index.html');
-      });
 
-    } else {
-      database.delete_favorite_recipe(recipe_hash).then(() => {
-        window.location.assign('index.html');
-      });
+    let text = 'Do you want to delete the recipe?';
+    if (confirm(text) === true) {
+      // Check if recipe is in the custom recipes list
+      var customList = backend.get_custom();
+      backend.remove_recipe(recipe_hash);
+      if (customList.includes(recipe_hash)) {
+        database.delete_user_recipe(recipe_hash).then(() => {
+          window.location.assign('index.html');
+        });
+
+      } else {
+        database.delete_favorite_recipe(recipe_hash).then(() => {
+          window.location.assign('index.html');
+        });
+      }
     }
-
   });
 }
 

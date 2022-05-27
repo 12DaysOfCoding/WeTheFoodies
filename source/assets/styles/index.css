@@ -1,237 +1,58 @@
-* {
-    font-family: 'Inter', sans-serif;
-    padding: 0;
-    border: 0;
-    margin: 0;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    margin: 1rem;
-    margin-top: 100px;
-}
-
-.header {
-    position: fixed;
-	z-index: 9999;
-    top: 0;
-    width: 100%;
-}
+@import url("main.css");
 
 .points-summary {
-    text-align: center;
-    
+  text-align: center;
 }
 
 .prompt {
-    font-size: 22px;
-    color: #F4BA26;
-    font-weight: 700;
-    padding-top: 20px;
+  font-size: 22px;
+  color: #F4BA26;
+  font-weight: 700;
+  padding-top: 20px;
 }
 
-
 .points {
-    font-size: 35px;
-    font-weight: 800;
+  font-size: 35px;
+  font-weight: 800;
 }
 
 h2, #points {
-    color: #F4BA26;
+  color: #F4BA26;
 }
 
 span {
-    font-size: 18px;
-}
-
-header {
-    background-color: #F4BA26;
-    height: 40px;
-    padding: 20px;
-}
-
-header > img {
-    height: 100%;
-}
-
-#dount-p {
-	text-align: right;
-	margin-top: -60px;
-	margin-bottom: 0;
-}
-
-
-#dount {
-	width: 50px;
+  font-size: 18px;
 }
 
 #logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .section__saved-recipes,
 .section__my-recipes {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .section__my-recipes {
-    margin-bottom: 100px;
+  margin-bottom: 100px;
 }
 
 .section__saved-recipes > h2,
 .section__my-recipes > h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .my-recipes__wrapper,
 .saved-recipes__wrapper {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 recipe-card {
-    margin-right: 10px;
-    margin-bottom: 12px;
-    height: 100%;
-}
-
-.nav-bar {
-    background-color: #F4BA26;
-    height: 70px;
-    position: fixed;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    margin-top: 10px;
-}
-
-.nav-dashboard {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-}
-.nav-search {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-
-}
-.nav-add {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-}
-.nav-settings {
-    /* position: relative; */
-    width: 25%;
-    display: inline;
-    float: left;
-    height: 70px;
-    text-align: center;
-    
-}
-
-.nav-dashboard #nav-dashboard-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 6px;
-}
-#nav-dashboard-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-
-.nav-dashboard img {
-    display: inline-block;
-    height: 36px;
-}
-.nav-search #nav-search-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 6px;
-}
-#nav-search-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-.nav-search img {
-    display: inline-block;
-    height: 36px;
-}
-.nav-add #nav-add-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 2px;
-}
-#nav-add-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-.nav-add img {
-    display: inline-block;
-    height: 40px;
-}
-.nav-settings #nav-settings-img {
-    display: inline-block;
-    height: 36px;
-    text-align: center;
-    margin: 0;
-    padding-top: 8px;
-}
-#nav-settings-text{
-    display: block;
-    height: 12px;
-    text-align: center;
-    margin: 0; 
-    color: white;
-    font-size: 12px;
-    /* padding-top: 3px;
-    padding-bottom: 6px; */
-}
-.nav-settings img {
-    display: inline-block;
-    height: 34px;
+  margin-right: 10px;
+  margin-bottom: 12px;
+  height: 100%;
 }
