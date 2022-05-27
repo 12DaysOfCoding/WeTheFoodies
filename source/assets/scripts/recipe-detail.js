@@ -14,7 +14,7 @@ else   // first visit
  */
 async function init() {
   const selected = backend.get_selected();
-  if (selected == "") {
+  if (selected == '') {
     window.location.assign('index.html');
     return;
   }
@@ -116,7 +116,7 @@ function bindEditButton() {
 function bindDeleteButton(recipe_hash) {
   const foodieBtn = document.getElementById('delete');
   foodieBtn.addEventListener('click', () => {
-    let text = "Do you want to delete the recipe?"
+    let text = 'Do you want to delete the recipe?'
     if (confirm(text) == true) {
       backend.remove_recipe(recipe_hash);
       window.location.assign('index.html');

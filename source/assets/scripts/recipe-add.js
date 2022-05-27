@@ -10,9 +10,9 @@ else   // first visit
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
-// Prevent "Enter to submit the recipe"
-document.addEventListener("keydown", (e) => {
-  if (e.key == "Enter")
+// Prevent 'Enter to submit the recipe'
+document.addEventListener('keydown', (e) => {
+  if (e.key == 'Enter')
     e.preventDefault();
 });
 
@@ -28,22 +28,21 @@ async function init() {
 }
 
 /**
- * Click or "Enter" to add a new line for filling ingredients
+ * Click or 'Enter' to add a new line for filling ingredients
  */
 let btn = document.getElementById('ingredientButton');
 btn.addEventListener('click', addIngredient);
 let ingredient_keyboard = document.getElementById('ingredientOrderedList');
 ingredient_keyboard.addEventListener('keydown', (event)=>{
-  if (event.defaultPrevented) {
+  if (event.defaultPrevented)
     return;
-  }
-  if (event.key === "Enter") {
+    
+  if (event.key === 'Enter')
     addIngredient().focus();
-  }
 });
 
 /**
- * Click or "Enter" to add a new line for filling instructions
+ * Click or 'Enter' to add a new line for filling instructions
  */
 btn = document.getElementById('instructionButton');
 btn.addEventListener('click', addInstruction);
@@ -52,7 +51,7 @@ instruction_keyboard.addEventListener('keydown', (event)=>{
   if (event.defaultPrevented) {
     return;
   }
-  if (event.key === "Enter") {
+  if (event.key === 'Enter') {
     addInstruction().focus();
   }
 });

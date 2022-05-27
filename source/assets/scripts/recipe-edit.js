@@ -10,9 +10,9 @@ else   // first visit
 var ingredientIndex = 1;
 var instructionIndex = 1;
 
-// Prevent "Enter to submit the recipe"
-document.addEventListener("keydown", (e) => {
-  if (e.key == "Enter")
+// Prevent 'Enter to submit the recipe'
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter')
     e.preventDefault();
 });
 
@@ -20,9 +20,9 @@ document.addEventListener("keydown", (e) => {
  * Initialize and call other function
  */
 async function init() {
-  const selected = backend.get_selected()
+  const selected = backend.get_selected();
 
-  if (selected == "") {
+  if (selected === '') {
     window.location.assign('index.html');
     return;
   }
@@ -30,17 +30,17 @@ async function init() {
   const recipe = backend.get_recipe(selected);
 
   // Populate fields with given recipe info
-  document.getElementById('recipeName').value = recipe["name"];
-  document.getElementById('cookingTime').value = recipe["readyInMinutes"];
-  document.getElementById('servingSize').value = recipe["servings"];
+  document.getElementById('recipeName').value = recipe['name'];
+  document.getElementById('cookingTime').value = recipe['readyInMinutes'];
+  document.getElementById('servingSize').value = recipe['servings'];
 
-  const diff = parseInt(recipe["difficulty_realLevel"]);
+  const diff = parseInt(recipe['difficulty_realLevel'], 10);
   document.getElementsByName('diff')[diff-1].checked = true;
 
   recipePreferences(recipe.intolerances);
 
   /**
-   * Click or "Enter" to add a new line for filling ingredients
+   * Click or 'Enter' to add a new line for filling ingredients
    * Prime Add Ingredient Button, and render list of existing ingredients
    */
 
@@ -51,7 +51,7 @@ async function init() {
     if (event.defaultPrevented) {
       return;
     }
-    if (event.key === "Enter") {
+    if (event.key ==== 'Enter') {
       addIngredient().focus();
     }
   });
@@ -59,12 +59,11 @@ async function init() {
   if (recipe.ingredients.length > 0)
     document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
 
-  for (let i = 1; i < recipe.ingredients.length; i++) {
+  for (let i = 1; i < recipe.ingredients.length; i++)
     (addIngredient()).value = recipe.ingredients[i].original;
-  }
 
   /**
-   * Click or "Enter" to add a new line for filling instructions
+   * Click or 'Enter' to add a new line for filling instructions
    * Prime Add Step Button, and render list of existing steps
    */
   btn = document.getElementById('instructionButton');
@@ -74,7 +73,7 @@ async function init() {
     if (event.defaultPrevented) {
       return;
     }
-    if (event.key === "Enter") {
+    if (event.key ==== 'Enter') {
       addInstruction().focus();
     }
   });
