@@ -70,6 +70,11 @@ function populateUI(recipe) {
     foodieBtn.classList.remove('show-foodie-mode');
     foodieBtn.classList.add('hidden');
   }
+
+  if ( !backend.get_recipe_status() ) {
+    document.getElementById("delete").classList.add("hidden");
+    document.getElementById("edit").classList.add("hidden");
+  }
 }
 
 /**
