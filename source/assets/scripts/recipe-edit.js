@@ -207,7 +207,7 @@ function editRecipe() {
           recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.edit_recipe(recipe_hash, recipe, true);  // using the backend to simply logic
           database.edit_recipe(recipe_hash, recipe).then(()=>{
-            window.location.assign('index.html');
+            window.location.assign('recipe-detail.html');
           });
 
         });
@@ -218,7 +218,7 @@ function editRecipe() {
       try {  // add directly
         backend.edit_recipe(recipe_hash,recipe, true);  // using the backend to simply logic
         database.edit_recipe(recipe_hash, recipe).then(()=>{
-          window.location.assign('index.html');
+          window.location.assign('recipe-detail.html');
         });
       } catch(e) {
         alert(e);
