@@ -96,6 +96,7 @@ async function init() {
   
   
   editRecipe();
+  goBack();
 }
 
 /**
@@ -344,4 +345,18 @@ function recipePreferences(intolerance_list){
     if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
   }
+}
+
+function goBack() {
+  const btn = document.getElementById('white-arrow-p');
+  let index = document.referrer.lastIndexOf('/');
+  let str = document.referrer.substring(index + 1);
+
+  btn.addEventListener('click', () => {
+    if (str === 'recipe-search.html')
+      window.history.back();
+    else
+      window.location.assign('recipe-detail.html');
+
+  });
 }
