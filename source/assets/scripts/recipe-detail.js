@@ -29,6 +29,7 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  showHideButtons(recipe);
   bindEditButton();
   bindDeleteButton(recipe.hash);
   goBack();
@@ -69,11 +70,6 @@ function populateUI(recipe) {
     foodieInstruction.classList.add('hidden');
     foodieBtn.classList.remove('show-foodie-mode');
     foodieBtn.classList.add('hidden');
-  }
-
-  if ( !backend.get_recipe_status() ) {
-    document.getElementById('delete').classList.add('hidden');
-    document.getElementById('edit').classList.add('hidden');
   }
 }
 
@@ -141,6 +137,14 @@ function bindDeleteButton(recipe_hash) {
       
     }
   });
+}
+
+function showHideButtons(recipe) {
+  var customList = backend.get_custom();
+  if ( customList.includes(recipe.hash) ) {
+    document.getElementById('delete').classList.remove('hidden');
+    document.getElementById('edit').classList.remove('hidden');
+  }
 }
 
 function goBack() {

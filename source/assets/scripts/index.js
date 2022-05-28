@@ -106,7 +106,7 @@ function renderCustomRecipes() {
       document.querySelector('.my-recipes__wrapper').appendChild(recipeCard);
 
       recipeCard.addEventListener('click', () => {
-        backend.select_recipe(recipe.hash, true);
+        backend.select_recipe(recipe.hash);
         window.location.assign('recipe-detail.html');
       });
     });
@@ -141,7 +141,7 @@ function renderCustomRecipes() {
           document.querySelector('.my-recipes__wrapper').appendChild(recipeCard);
 
           recipeCard.addEventListener('click', () => {
-            backend.select_recipe(recipe.hash, true);
+            backend.select_recipe(recipe.hash);
             window.location.assign('recipe-detail.html');
           });
         });
