@@ -7,7 +7,7 @@ const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
-const PERSONAL_RECIPE_KEY = "%personal_recipe"
+const PERSONAL_RECIPE_KEY = '%personal_recipe';
 
 
 const ERR_NO_NAME        = 'Please enter a name for this recipe';
