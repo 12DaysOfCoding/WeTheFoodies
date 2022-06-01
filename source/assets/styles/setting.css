@@ -87,6 +87,19 @@ nav > h1 {
     padding-top: 5px;
 }
 
+.logout{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+
+    margin-top: 10px;
+    /* color: #ffc83a; */
+    color: rgb(77, 76, 24);
+    background-color: #FAF9F6;
+    border-bottom: 2px solid #ffc83a;
+    padding-top: 5px;
+}
+
 
 .settings-body{
     margin-bottom: 320px;
