@@ -1,16 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js';
-import { getDatabase, set, ref, update } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
+import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
 import { 
   getAuth, 
-  createUserWithEmailAndPassword, 
-  signInWithPopup, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  GoogleAuthProvider, 
-  sendEmailVerification,
   sendPasswordResetEmail
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -32,25 +27,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth();
-const provider = new GoogleAuthProvider();
 
 // DOM elements
-// TODO: Change below elements to correct elements. 
-const headerContainer = document.getElementById('header-container');
-const btnContainer = document.getElementById('btn-container');
-const inputEmail = document.getElementById('email');
-const inputPass = document.getElementById('password');
-const registerBtn = document.getElementById('register');
-const loginBtn = document.getElementById('login');
-const googleLoginBtn = document.getElementById('google-login');
 const logoutBtn = document.createElement('button');
-const forgotPass = document.getElementById('forgot-password');
-const welcome = document.createElement('h2');
-const headerLoginPage = document.getElementById('form-header');
 logoutBtn.innerHTML = 'Logout';
 const emailLabel = document.createElement('label');
 emailLabel.textContent = 'Email Address: ';
-const emailForgotPass = document.createElement('input');
 const sendInstructions = document.getElementById('send-instructions');
 
 sendInstructions.addEventListener('click', () => {
@@ -62,9 +44,7 @@ sendInstructions.addEventListener('click', () => {
       alert('Password reset email sent!');
     })
 
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+    .catch(() => {
       alert('Email is wrong! Please try again!');
     });
 });

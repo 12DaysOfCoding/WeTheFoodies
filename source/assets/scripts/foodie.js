@@ -1,3 +1,4 @@
+
 // foodie.js
 
 import * as backend from './backend.js';
@@ -30,8 +31,8 @@ function getSteps() {
     prevButton.classList.add('hidden');
     nextButton.classList.add('hidden');
   } else {
-    bindPrevButton(prevButton, nextButton);
-    bindNextButton(prevButton, nextButton);
+    bindPrevButton(prevButton);
+    bindNextButton(nextButton);
   }
 }
 
@@ -40,36 +41,56 @@ function bindExitButton() {
   exitBtn.addEventListener('click', () => {
     window.history.back();
   });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape')
+      window.history.back();
+  });
 }
 
-function bindPrevButton(prevButton, nextButton) {
+function bindPrevButton(prevButton) {
   prevButton.classList.add('hidden');
+  prevButton.addEventListener('click', goToPrevStep);
   
-  prevButton.addEventListener('click', () => {
-    nextButton.classList.remove('hidden');
-    if (currStep > 0) currStep -= 1;
-    if (currStep === 0) 
-      prevButton.classList.add('hidden');
-    else 
-      nextButton.classList.remove('disabled');
-    
-
-    updateStep();
+  document.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented)
+      return;
+    if (event.key === 'ArrowLeft')
+      goToPrevStep();
   });
 }
 
-function bindNextButton(prevButton, nextButton) {
-  nextButton.addEventListener('click', () => {
-    prevButton.classList.remove('hidden');
-    if (currStep < steps.length - 1) currStep += 1;
-    if (currStep === steps.length - 1) 
-      nextButton.classList.add('hidden');
-    else 
-      prevButton.classList.remove('disabled');
-    
+function goToPrevStep() {
+  nextButton.classList.remove('hidden');
+  if (currStep > 0) currStep -= 1;
+  if (currStep === 0) 
+    prevButton.classList.add('hidden');
+  else 
+    nextButton.classList.remove('disabled');
 
-    updateStep();
+  updateStep();
+}
+
+function bindNextButton(nextButton) {
+  nextButton.addEventListener('click', goToNextStep);
+
+  document.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented)
+      return;
+    if (event.key === 'ArrowRight')
+      goToNextStep();
   });
+}
+
+function goToNextStep() {
+  prevButton.classList.remove('hidden');
+  if (currStep < steps.length - 1) currStep += 1;
+  if (currStep === steps.length - 1) 
+    nextButton.classList.add('hidden');
+  else 
+    prevButton.classList.remove('disabled');
+
+  updateStep();
 }
 
 const updateStep = () => {

@@ -5,6 +5,7 @@ import {
   get,
   child,
   push,
+  remove
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
 
 /**
@@ -14,8 +15,12 @@ import {
  * @param {*} cookTime Cook time of the recipe
  * @param {*} instructions List of strings that make up the instrcutions
  * @param {*} dietRestrictions List of booleans for the user recipes
+ * @param {*} ingredients List of ingredients for the user recipes
+ * 
  */
 export async function add_user_recipe(recipeName, servings, cookTime, instructions, dietRestrictions, ingredients) {
+ 
+ 
   const userRecipes = ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes');
   await push(userRecipes, {
     Name: recipeName,
@@ -38,7 +43,6 @@ export async function get_user_recipes() {
   await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
         finalData = snapshot.val();
         var userList = [];
         for(var x in finalData)
@@ -84,6 +88,58 @@ export async function get_favorites(){
       console.error(error);
     });
   return finalData;
+}
+
+/**
+ * Deletes the recipe matching the name in the database under the user created recipe
+ * @param {*} recipeName 
+ */
+export async function delete_user_recipe(recipeName){
+  recipeName = recipeName.split('$')[0];
+  const dbRef = ref(db);
+  await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`)).then((snapshot) => {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val().Name === recipeName){
+        const childRef =  ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes/' + childSnapshot.key);
+        remove(childRef);
+      }
+      
+    });
+  });
+
+}
+
+
+/**
+ * Edits the recipe matching the name in the database under the user created recipe
+ * @param {*} recipeName Name of the recipe to edit
+ * @param {*} recipe Recipe object to extract data
+ */
+export async function edit_recipe(recipe_hash, recipe){
+  await delete_user_recipe(recipe_hash);
+  await add_user_recipe(recipe.name,recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients );
+
+
+
+}
+
+/**
+ * Deletes the recipe matching the name in the database under their favorites
+ * @param {*} recipeName 
+ */
+export async function delete_favorite_recipe(recipeName){
+  recipeName = recipeName.split('$')[0];
+  const dbRef = ref(db);
+  await get(child(dbRef, `users/${auth.currentUser.uid}/FavoriteRecipes`)).then((snapshot) => {
+    snapshot.forEach(function(childSnapshot) {
+      if(childSnapshot.val() === recipeName){
+        const childRef =  ref(db, 'users/' + auth.currentUser.uid + '/FavoriteRecipes/' + childSnapshot.key);
+        remove(childRef);
+      }
+      
+    });
+  });
+
 }
 
 

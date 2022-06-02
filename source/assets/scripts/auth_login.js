@@ -1,15 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js';
-import { getDatabase, set, ref, update } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
+import { getDatabase,  ref, update } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js';
 import { 
+
   getAuth, 
-  createUserWithEmailAndPassword, 
   signInWithPopup, 
   signInWithEmailAndPassword, 
-  signOut, 
   GoogleAuthProvider, 
-  sendEmailVerification,
-  sendPasswordResetEmail
+  
 } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,86 +34,29 @@ const provider = new GoogleAuthProvider();
 
 // DOM elements
 // TODO: Change below elements to correct elements. 
-const headerContainer = document.getElementById('header-container');
-const btnContainer = document.getElementById('btn-container');
-const inputEmail = document.getElementById('email');
-const inputPass = document.getElementById('password');
-const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
 const googleLoginBtn = document.getElementById('google-login');
 const logoutBtn = document.createElement('button');
-const forgotPass = document.getElementById('forgot-password');
-const welcome = document.createElement('h2');
-const headerLoginPage = document.getElementById('form-header');
 logoutBtn.innerHTML = 'Logout';
 const emailLabel = document.createElement('label');
 emailLabel.textContent = 'Email Address: ';
-const emailForgotPass = document.createElement('input');
 const sendInstructions = document.createElement('button');
 sendInstructions.textContent = 'Send Instructions';
 
-function renderButton() {
-  gapi.signin2.render('google-login', {
-    'scope': 'profile email',
-    'width': 240,
-    'height': 50,
-    'longtitle': true,
-    'theme': 'dark',
-    'onsuccess': onSuccess,
-    'onfailure': onFailure
-  });
-}
+
 
 // TODO: Store the user to the database
 googleLoginBtn.addEventListener('click', () => {
   signInWithPopup(auth, provider)
-    .then((result) => {
+    .then(() => {
     // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      const dt = new Date();
-      console.log('trying to loggin');
-
-      
-      // TODO: Store the user data to the database.
-      if(!user) 
-        set(ref(db, 'users/' + user.uid), {
-          user: user,
-          last_login: dt,
-        }).then(() =>{
-          alert('User Google Created!');
-        });
-      else 
-        update(ref(db, 'users/' + user.uid),{
-          user: user,
-          last_login: dt,
-        }).then(() =>{
-          alert('User Google Logged in!');
-        });
-
-      alert('User Logging in!');
-      console.log('successful');
-      // TODO: Go to onboarding page.
       window.location.href = 'index.html';
-      // location.href = "index.html";
-      
-      
     })
     
     .catch((error) => {
       // Handle Errors here.
-      const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
       alert(errorMessage);
-      console.log(errorMessage);
-
     });
 });
 
