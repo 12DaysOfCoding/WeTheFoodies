@@ -8,13 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
   <link href="assets/styles/setting.css" rel="stylesheet">
 
 
   <!-- Web Components -->
 
-  <script src="assets/scripts/setting.js"></script>
+  <script type="module" src="assets/scripts/setting.js"></script>
+  <script type="module" src="assets/scripts/auth.js"></script>
 </head>
 
 <body>
@@ -37,6 +37,10 @@
       </div>
       <div class="setting-opt version">
         <P id="setting-text">VERSION</P>
+        <p id="setting-arrow"><img src="assets/images/arrow-setting.svg" alt=""></p>
+      </div>
+      <div class="logout">
+        <P id="setting-text">LOG OUT</P>
         <p id="setting-arrow"><img src="assets/images/arrow-setting.svg" alt=""></p>
       </div>
     </div>

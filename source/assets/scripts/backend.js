@@ -8,7 +8,6 @@ const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
 
-
 const ERR_NO_NAME        = 'Please enter a name for this recipe';
 const ERR_COOKTIME       = 'Please enter a valid positive cooktime for this recipe';
 const ERR_SERVING_SIZE   = 'Please enter a valid positive serving size for this recipe';
@@ -299,6 +298,7 @@ export function remove_favorite(recipe_hash) {
 export function select_recipe(recipe_hash) {
   set_localstore(SELECTED_RECIPE_KEY, recipe_hash);
 }
+
 
 export function get_selected() {
   const selected = get_localstore(SELECTED_RECIPE_KEY);

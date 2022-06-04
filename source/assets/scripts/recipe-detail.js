@@ -29,6 +29,7 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  showHideButtons(recipe);
   bindEditButton();
   bindDeleteButton(recipe.hash);
   goBack();
@@ -136,6 +137,15 @@ function bindDeleteButton(recipe_hash) {
       
     }
   });
+}
+
+function showHideButtons(recipe) {
+  var customList = backend.get_custom();
+  if ( customList.includes(recipe.hash) ) {
+    document.getElementById('delete').classList.remove('hidden');
+    document.getElementById('edit').classList.remove('hidden');
+    document.getElementById('edit').classList.remove('hidden');
+  }
 }
 
 function goBack() {
