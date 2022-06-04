@@ -58,8 +58,13 @@ async function renderSavedRecipes() {
   } else {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
+      // Remove any existing favorite recipes from local storage
+      const favoriteRecipes = backend.get_favorite();
+      favoriteRecipes.forEach(function (recipeHash) {
+        backend.remove_recipe(recipeHash);
+      });
+
       if (user) {
-        console.log(auth.currentUser.uid);
         var favoritesList = {};
         favoritesList = await database.get_favorites();
         favoritesList = new Map(Object.entries(favoritesList));
@@ -120,7 +125,7 @@ function renderCustomRecipes() {
         // Remove any existing custom recipes from local storage
         var customRecipes = backend.get_custom();
         customRecipes.forEach(function (recipeHash) {
-          backend.remove_custom(recipeHash);
+          backend.remove_recipe(recipeHash);
         });
 
         var customList = {};
