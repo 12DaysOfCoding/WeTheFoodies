@@ -1,5 +1,7 @@
 import {auth} from './auth.js';
-
+import { 
+  signOut 
+} from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
 if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit

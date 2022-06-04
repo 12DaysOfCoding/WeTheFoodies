@@ -18,7 +18,7 @@ import {
  * @param {*} ingredients List of ingredients for the user recipes
  * 
  */
-export async function add_user_recipe(recipeName, servings, cookTime, instructions, dietRestrictions, ingredients) {
+export async function add_user_recipe(recipeHash, recipeName, servings, cookTime, instructions, dietRestrictions, ingredients, difficultyRealLevel) {
  
  
   const userRecipes = ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes');
@@ -28,7 +28,9 @@ export async function add_user_recipe(recipeName, servings, cookTime, instructio
     CookTime: cookTime,
     Instructions: instructions,
     DietRestrictions: dietRestrictions,
-    Ingredients: ingredients
+    Ingredients: ingredients,
+    Hash: recipeHash,
+    Difficulty: difficultyRealLevel
   });
   return true;
 }
@@ -91,15 +93,15 @@ export async function get_favorites(){
 }
 
 /**
- * Deletes the recipe matching the name in the database under the user created recipe
- * @param {*} recipeName 
+ * Deletes the recipe matching the hash in the database under the user created recipes
+ * @param {*} recipeHash 
  */
-export async function delete_user_recipe(recipeName){
-  recipeName = recipeName.split('$')[0];
+export async function delete_user_recipe(recipeHash){
+
   const dbRef = ref(db);
   await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`)).then((snapshot) => {
     snapshot.forEach(function(childSnapshot) {
-      if(childSnapshot.val().Name === recipeName){
+      if(childSnapshot.val().Hash === recipeHash){
         const childRef =  ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes/' + childSnapshot.key);
         remove(childRef);
       }
@@ -117,7 +119,7 @@ export async function delete_user_recipe(recipeName){
  */
 export async function edit_recipe(recipe_hash, recipe){
   await delete_user_recipe(recipe_hash);
-  await add_user_recipe(recipe.name,recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients );
+  await add_user_recipe(recipe_hash, recipe.name,recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients,recipe.difficulty_realLevel  );
 
 
 
