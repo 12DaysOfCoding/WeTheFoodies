@@ -1,5 +1,11 @@
 @import url("main.css");
 
+#dount-e {
+  text-align: right;
+  margin-top: -42px;
+  margin-bottom: 0;
+}
+
 .points-summary {
   text-align: center;
 }
