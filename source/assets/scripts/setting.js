@@ -33,14 +33,14 @@ function goLogOutSetting() {
   prefClass.addEventListener('click', () => {
     signOut(auth).then(() => {
       // Sign-out successful.
-      alert("You've been logged out");
+      alert('You\'ve been logged out');
       //Go to login page
       window.location.assign('login.html');
-  })
-    .catch((error) => {
-      const errorMessage = error.message;
-      alert(errorMessage);
-    });
+    })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
     
   });
 }

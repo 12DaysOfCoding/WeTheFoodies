@@ -120,7 +120,7 @@ function renderCustomRecipes() {
         // Remove any existing custom recipes from local storage
         var customRecipes = backend.get_custom();
         customRecipes.forEach(function (recipeHash) {
-          backend.remove_custom(recipeHash)
+          backend.remove_custom(recipeHash);
         });
 
         var customList = {};
