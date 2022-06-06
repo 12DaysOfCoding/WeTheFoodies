@@ -10,7 +10,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #FAF9F6;
+  background-color: #faf9f6;
 }
 
 /* =====   Universal Title Formatting   ===== */
@@ -22,7 +22,7 @@ body {
 }
 
 header {
-  background-color: #F4BA26;
+  background-color: #f4ba26;
   height: 40px;
   padding: 20px;
   text-align: center;
@@ -34,7 +34,7 @@ header > img {
 }
 
 nav {
-  background-color: #F4BA26;
+  background-color: #f4ba26;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -47,7 +47,7 @@ nav > h1 {
   top: 20px;
   font-style: normal;
   font-weight: bold;
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 /* =====   Back Arrow Styling   ===== */
@@ -80,7 +80,7 @@ main {
 }
 
 .nav-bar {
-  background-color: #F4BA26;
+  background-color: #f4ba26;
   height: 70px;
   position: fixed;
   bottom: 0;
@@ -88,7 +88,7 @@ main {
   right: 0;
   margin-top: 10px;
 }
-  
+
 .nav-section {
   width: 25%;
   display: inline;
@@ -115,20 +115,23 @@ main {
 
 .resized {
   height: 42px;
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 .nav-text {
   display: block;
   height: 12px;
   text-align: center;
-  margin: 0; 
+  margin: 0;
   color: white;
   font-size: 12px;
 }
 
 /* =====   Universal Page Functionality   ===== */
-a:hover, button:hover, #white-arrow:hover, input:hover {
+a:hover,
+button:hover,
+#white-arrow:hover,
+input:hover {
   cursor: pointer;
 }
 
