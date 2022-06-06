@@ -164,7 +164,7 @@ function addNewRecipe() {
           recipe.thumbnail = localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.add_recipe(recipe, true);  // using the backend to simply logic
           // Only redirect to index.html once the db has been updated
-          database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients).then(() => {
+          database.add_user_recipe(recipe.hash, recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients, recipe.difficulty_realLevel).then(() => {
             window.location.assign('index.html');
           
           });
@@ -178,9 +178,8 @@ function addNewRecipe() {
       try {
         // Add directly
         backend.add_recipe(recipe, true);  // using the backend to simply logic
-       
         // Only redirect to index.html once the db has been updated
-        database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients).then(() => {
+        database.add_user_recipe(recipe.hash, recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients, recipe.difficulty_realLevel).then(() => {
           window.location.assign('index.html');
             
         });

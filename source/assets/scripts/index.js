@@ -58,8 +58,13 @@ async function renderSavedRecipes() {
   } else {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
+      // Remove any existing favorite recipes from local storage
+      const favoriteRecipes = backend.get_favorite();
+      favoriteRecipes.forEach(function (recipeHash) {
+        backend.remove_recipe(recipeHash);
+      });
+
       if (user) {
-        console.log(auth.currentUser.uid);
         var favoritesList = {};
         favoritesList = await database.get_favorites();
         favoritesList = new Map(Object.entries(favoritesList));
@@ -116,6 +121,13 @@ function renderCustomRecipes() {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+
+        // Remove any existing custom recipes from local storage
+        var customRecipes = backend.get_custom();
+        customRecipes.forEach(function (recipeHash) {
+          backend.remove_recipe(recipeHash);
+        });
+
         var customList = {};
         customList = await database.get_user_recipes();
         for(const recipe in customList){
@@ -131,7 +143,7 @@ function renderCustomRecipes() {
           backend.add_recipe(customRecipe, true);
         }
         
-        const customRecipes = backend.get_custom();
+        customRecipes = backend.get_custom();
         console.log(customRecipes);
         if (customRecipes.length !== 0) document.querySelector('.my-recipes__wrapper').innerHTML = '';
         customRecipes.forEach(function (recipeHash) {
