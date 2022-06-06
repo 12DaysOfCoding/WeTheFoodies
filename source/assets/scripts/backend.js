@@ -299,14 +299,6 @@ export function select_recipe(recipe_hash) {
   set_localstore(SELECTED_RECIPE_KEY, recipe_hash);
 }
 
-/**
- * @return whether or not the selected recipe is marked as personal or not
-*/
-export function get_recipe_status() {
-  const personal_status = get_localstore(PERSONAL_RECIPE_KEY);
-  return personal_status ? personal_status : '';
-}
-
 export function get_selected() {
   const selected = get_localstore(SELECTED_RECIPE_KEY);
   return selected ? selected : '';
