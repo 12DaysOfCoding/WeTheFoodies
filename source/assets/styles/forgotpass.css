@@ -31,7 +31,7 @@ h2,
   margin-bottom: 20px;
   text-align: center;
   font-weight: 700;
-  font-size: 40px;  
+  font-size: 40px;
 }
 
 h4 {
@@ -49,48 +49,43 @@ span {
 }
 
 .pswd_form {
-  margin-top: 30px;
   width: 99%;
-	margin: auto;
-	position: relative;
+  margin: auto;
+  margin-top: 30px;
+  position: relative;
   max-width: 450px;
 }
 
 input {
-	border-radius: 5px;
+  border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 10px;
-	padding: 10px;
-	border: 3px solid #ffc83a;
-	background: #f1f1f1;
-	font-family: Inter;
-	font-style: normal;
+  padding: 10px;
+  border: 3px solid #ffc83a;
+  background: #f1f1f1;
   width: 95%;
-  
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 input:focus {
-	outline: none;
+  outline: none;
 }
 
 #send-instructions {
-	background: #ffc83a;
-	border-radius: 10px;
-	font-weight: bold;
-	font-size: 30px;
-	line-height: 36px;
-	color: #ffffff;
-	padding: 10px;
-	
-	border: none;
-	width: 90%;
+  background: #ffc83a;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 36px;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  width: 90%;
   margin-left: 5%;
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .labelInput {
-	display: table;
+  display: table;
 }

@@ -8,13 +8,13 @@
 
 .diet-restrictionBox{
   position: absolute;
-  right:5.5px;
+  right: 5.5px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width:350px;
-  height:90px;
-  border:2px solid #ffc83a;
+  width: 350px;
+  height: 90px;
+  border: 2px solid #ffc83a;
   background-color: white;
   top: 40%;
   left: 0;
@@ -22,9 +22,9 @@
   padding: 0.5rem;
 }
 
-
 .container {
-  display: block;
+  display: grid;
+  grid-template-columns: 100px 120px 120px;
   position: relative;
   padding-left: 20px;
   margin-bottom: 0;
@@ -75,12 +75,7 @@
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: #FFC83A;
-}
-  
-.container {
-  display: grid;
-  grid-template-columns: 100px 120px 120px;  
+  background-color: #ffc83a;
 }
 
 .word {
