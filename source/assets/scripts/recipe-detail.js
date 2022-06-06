@@ -144,6 +144,7 @@ function showHideButtons(recipe) {
   if ( customList.includes(recipe.hash) ) {
     document.getElementById('delete').classList.remove('hidden');
     document.getElementById('edit').classList.remove('hidden');
+    document.getElementById('save').classList.add('hidden');
   }
 }
 
