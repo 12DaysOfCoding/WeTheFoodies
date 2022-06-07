@@ -137,7 +137,7 @@ function renderCustomRecipes() {
           customRecipe.steps = recipeObj.Instructions;
           customRecipe.ingredients = recipeObj.Ingredients;
           customRecipe.readyInMinutes = recipeObj.CookTime;
-          customRecipe.serving = recipeObj.Serving;
+          customRecipe.servings = recipeObj.Servings;
           customRecipe.intolerances = recipeObj.DietRestrictions;
           customRecipe.difficulty_realLevel = 1;
           backend.add_recipe(customRecipe, true);

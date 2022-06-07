@@ -24,7 +24,7 @@ export async function add_user_recipe(recipeHash, recipeName, servings, cookTime
   const userRecipes = ref(db, 'users/' + auth.currentUser.uid + '/UserRecipes');
   await push(userRecipes, {
     Name: recipeName,
-    Serving: servings,
+    Servings: servings,
     CookTime: cookTime,
     Instructions: instructions,
     DietRestrictions: dietRestrictions,
@@ -97,7 +97,7 @@ export async function get_favorites(){
  * @param {*} recipeHash 
  */
 export async function delete_user_recipe(recipeHash){
-
+  console.log("Entered delete function.")
   const dbRef = ref(db);
   await get(child(dbRef, `users/${auth.currentUser.uid}/UserRecipes`)).then((snapshot) => {
     snapshot.forEach(function(childSnapshot) {
