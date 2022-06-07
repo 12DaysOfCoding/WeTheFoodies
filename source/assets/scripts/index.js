@@ -67,6 +67,8 @@ async function renderSavedRecipes() {
       if (user) {
         var favoritesList = {};
         favoritesList = await database.get_favorites();
+        // Handle case where there are no user recipes
+        if(!favoritesList) return;
         favoritesList = new Map(Object.entries(favoritesList));
         const favorites = [];
         console.log(favoritesList)

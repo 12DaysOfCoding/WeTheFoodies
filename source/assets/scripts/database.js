@@ -56,7 +56,7 @@ export async function get_user_recipes() {
             
     })
     .catch((error) => {
-      console.error(error);
+      // console.error(error);
     });
   return finalData;
 }
@@ -87,7 +87,7 @@ export async function get_favorites(){
             
     })
     .catch((error) => {
-      console.error(error);
+      // console.error(error);
     });
   return finalData;
 }
