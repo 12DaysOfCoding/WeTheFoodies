@@ -42,7 +42,7 @@ async function renderSavedRecipes() {
 
   if (localStorage.getItem('%first_time') !== '1') {
     const favorites = backend.get_favorite();
-    console.log(favorites);
+    // console.log(favorites);
     if (favorites.length !== 0) document.querySelector('.saved-recipes__wrapper').innerHTML = '';
     favorites.forEach(function (recipeHash) {
       const recipe = backend.get_recipe(recipeHash);
@@ -69,11 +69,14 @@ async function renderSavedRecipes() {
         favoritesList = await database.get_favorites();
         favoritesList = new Map(Object.entries(favoritesList));
         const favorites = [];
+        console.log(favoritesList)
         for (const recipeName of favoritesList.values()) 
           favorites.push(await backend.fetch_recipe(recipeName));
+          console.log(favorites)
         
         if (favorites.length !== 0) document.querySelector('.saved-recipes__wrapper').innerHTML = '';
         favorites.forEach(function (recipe) {
+          console.log(recipe)
 
           backend.add_favorite(recipe[0].hash);
           recipe = recipe[0];
@@ -144,7 +147,7 @@ function renderCustomRecipes() {
         }
         
         customRecipes = backend.get_custom();
-        console.log(customRecipes);
+        // console.log(customRecipes);
         if (customRecipes.length !== 0) document.querySelector('.my-recipes__wrapper').innerHTML = '';
         customRecipes.forEach(function (recipeHash) {
           const recipe = backend.get_recipe(recipeHash);

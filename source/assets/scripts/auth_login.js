@@ -78,7 +78,6 @@ loginBtn.addEventListener('click', () => {
       alert('User logged in!');
       window.location.href = 'index.html';
       // location.href = "index.html";
-      console.log('successful');
 
       //TODO: Go to dashboard
       // welcome.innerHTML = `Welcome ${email}`;
