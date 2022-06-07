@@ -2,7 +2,7 @@ const tutorialSearchPage = introJs();
 
 // and check for it when deciding whether to start.
 window.addEventListener("load", function () {
-  var doneTour = localStorage.getItem("doneTourSearchPage") === "yeah!";
+  var doneTour = localStorage.getItem("%doneTourSearchPage") === "yeah!";
   if (doneTour) return;
   else {
     tutorialSearchPage
@@ -32,10 +32,10 @@ window.addEventListener("load", function () {
 
 // add a flag when we're done
 tutorialSearchPage.oncomplete(function () {
-  localStorage.setItem("doneTourSearchPage", "yeah!");
+  localStorage.setItem("%doneTourSearchPage", "yeah!");
 });
 
 // add a flag when we exit
 tutorialSearchPage.onexit(function () {
-  localStorage.setItem("doneTourSearchPage", "yeah!");
+  localStorage.setItem("%doneTourSearchPage", "yeah!");
 });

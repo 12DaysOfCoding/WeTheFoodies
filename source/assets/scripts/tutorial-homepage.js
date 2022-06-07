@@ -2,7 +2,7 @@ const tutorial = introJs();
 
 // and check for it when deciding whether to start.
 window.addEventListener("load", function () {
-  var doneTour = localStorage.getItem("doneTour") === "yeah!";
+  var doneTour = localStorage.getItem("%doneTour") === "yeah!";
   if (doneTour) return;
   else {
     tutorial
@@ -44,11 +44,11 @@ window.addEventListener("load", function () {
 
 // add a flag when we're done
 tutorial.oncomplete(function () {
-  console.log("done tutorial");
-  localStorage.setItem("doneTour", "yeah!");
+  console.log("$done tutorial");
+  localStorage.setItem("%doneTour", "yeah!");
 });
 
 // add a flag when we exit
 tutorial.onexit(function () {
-  localStorage.setItem("doneTour", "yeah!");
+  localStorage.setItem("%doneTour", "yeah!");
 });
