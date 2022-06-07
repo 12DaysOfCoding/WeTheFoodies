@@ -291,3 +291,9 @@ input {
   top: 3px;
   width: 18px;
 }
+
+.customTooltip * {
+  color:#000000;
+  font-size: 15px;
+  font-weight: 400;
+}

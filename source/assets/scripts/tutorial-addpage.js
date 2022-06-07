@@ -7,6 +7,7 @@ window.addEventListener("load", function () {
   else {
     tutorialAddPage
       .setOptions({
+        tooltipClass: "customTooltip",
         steps: [
           {
             title: "Welcome",
