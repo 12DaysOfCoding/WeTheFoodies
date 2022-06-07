@@ -72,6 +72,7 @@ section > div {
   border: 1px solid #F4BA26;
   padding: 8px 5px;
   border-radius: 8px;
+  width: 45%;
 }
 
 #cooking-time,
@@ -80,7 +81,7 @@ section > div {
   font-size: 12px;
   font-weight: 400;
   display: inline;
-  line-height: 40%;
+  line-height: 95%;
   margin-right: 8px;
 }
 
@@ -90,7 +91,9 @@ section > div {
   font-size: 12px;
   font-weight: 400;
   display: inline;
-  line-height: 40%;
+  line-height: 95%;
+  width: 65%;
+  overflow-wrap: break-word;
 }
 
 h1 {

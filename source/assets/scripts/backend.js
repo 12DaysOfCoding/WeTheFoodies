@@ -299,7 +299,6 @@ export function select_recipe(recipe_hash) {
   set_localstore(SELECTED_RECIPE_KEY, recipe_hash);
 }
 
-
 export function get_selected() {
   const selected = get_localstore(SELECTED_RECIPE_KEY);
   return selected ? selected : '';
