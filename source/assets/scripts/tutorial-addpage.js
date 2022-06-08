@@ -31,11 +31,6 @@ window.addEventListener("load", function () {
             intro:
               "This is where you add your own recipe, including all the ingredients and instructions. You can also add a photo of the recipe if you want",
           },
-          {
-            element: document.querySelector(".addButton"),
-            intro:
-              "After finishing your recipe, you can press this button to finally add it to your homepage",
-          },
         ],
       })
       .start();
