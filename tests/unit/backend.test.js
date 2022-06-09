@@ -99,6 +99,28 @@ describe('testing functionalities that require actual recipes', () => {
     expect(recipe.hash.slice(-7) !== original_hash.slice(-7)).toBe(true);  // different hash
   });
 
+  it('can edit a custom recipe', () => {
+    //custome_recipe returns a list of the custom recipe's hashes
+    const custom_recipes = backend.get_custom();
+    //should be one recipe's hash since we have one recipe stored from the previos test "can add recipe"
+    expect(custom_recipes).toHaveLength(1); 
+    const [recipe_hash] = custom_recipes;
+    //fetch the recipe that's already stored
+    const recipe = backend.get_recipe(recipe_hash);
+    const updated_recipe = recipe;
+    updated_recipe.name = 'Apple pie'; //change the name of the recipe
+    backend.edit_recipe(updated_recipe.hash, updated_recipe, true);
+
+    const updated_custom_recipes = backend.get_custom();
+    //there should still just be one recipe saved since we're editing the same
+    expect(updated_custom_recipes).toHaveLength(1);
+    const [updated_recipe_hash] = updated_custom_recipes;
+    //fetch the recipe after we've edited it
+    const updated = backend.get_recipe(updated_recipe_hash);
+    expect(updated.name).toBe('Apple pie');
+
+  });
+
   it('does not allow dup custom recipe', () => {
     const custom_recipe = result[0];
     custom_recipe.name = 'I am custom';
