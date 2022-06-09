@@ -1,14 +1,16 @@
-// recipe-add.js
-/** @module recipe-add */
+/** @module recipe-edit */
 
 import * as backend from './backend.js';
 import * as database from './database.js';
 
 
-if (localStorage.getItem('%not_first_visit'))
+if (localStorage.getItem('%not_first_visit')) 
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
+
+var ingredientIndex = 1;
+var instructionIndex = 1;
 
 // Prevent "Enter to submit the recipe"
 document.addEventListener('keydown', (e) => {
@@ -16,61 +18,102 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
 });
 
-
-var ingredientIndex = 1;
-var instructionIndex = 1;
-
 /**
  * Initialize and call other function
  */
 async function init() {
-  defaultPreference();
-  addNewRecipe();
+  // Check if recipe is in the custom recipes list, prevent from editing 3rd party recipes
+  var customList = backend.get_custom();
+  const selected = backend.get_selected();
+  
+  if (selected === '') {
+    window.location.assign('index.html');
+    return;
+  }
+  const recipe = backend.get_recipe(selected);
+  if (!customList.includes(recipe.hash)) 
+    window.location.assign('index.html');
+  
+
+  document.getElementById('recipeName').value = recipe['name'];
+  document.getElementById('cookingTime').value = recipe['readyInMinutes'];
+  document.getElementById('servingSize').value = recipe['servings'];
+
+  const diff = parseInt(recipe['difficulty_realLevel'], 10);
+  document.getElementsByName('diff')[diff-1].checked = true;
+  if(!recipe.intolerances )
+    recipe.intolerances = [];
+  
+  recipePreferences(recipe.intolerances);
+
+  /**
+   * Click or "Enter" to add a new line for filling ingredients
+   * Prime Add Ingredient Button, and render list of existing ingredients
+   */
+
+  let btn = document.getElementById('ingredientButton');
+  btn.addEventListener('click', addIngredient);
+  let ingredient_keyboard = document.getElementById('ingredientOrderedList');
+  ingredient_keyboard.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented) 
+      return;
+    
+    if (event.key === 'Enter') 
+      addIngredient().focus();
+    
+  });
+
+  if (recipe.ingredients.length > 0)
+    document.getElementById('ingredient-1').value = recipe.ingredients[0].original;
+
+  for (let i = 1; i < recipe.ingredients.length; i++) 
+    (addIngredient()).value = recipe.ingredients[i].original;
+  
+
+  /**
+   * Click or "Enter" to add a new line for filling instructions
+   * Prime Add Step Button, and render list of existing steps
+   */
+  btn = document.getElementById('instructionButton');
+  btn.addEventListener('click', addInstruction);
+  let instruction_keyboard = document.getElementById('instructionOrderedList');
+  instruction_keyboard.addEventListener('keydown', (event)=>{
+    if (event.defaultPrevented) 
+      return;
+    
+    if (event.key === 'Enter') 
+      addInstruction().focus();
+    
+  });
+  
+
+  if (recipe.steps.length > 0)
+    document.getElementById('instruction-1').value = recipe.steps[0].step;
+
+  for (let i = 1; i < recipe.steps.length; i++) 
+    // console.log (step_str);
+    (addInstruction()).value = recipe.steps[i].step;
+  
+  
+  editRecipe();
+  goBack();
 }
 
 /**
- * Click or "Enter" to add a new line for filling ingredients
+ * Edit Recipe from local storage
  */
-let btn = document.getElementById('ingredientButton');
-btn.addEventListener('click', addIngredient);
-let ingredient_keyboard = document.getElementById('ingredientOrderedList');
-ingredient_keyboard.addEventListener('keydown', (event) => {
-  if (event.defaultPrevented)
-    return;
+function editRecipe() {
+  const submit = document.getElementById('submit');
 
-  if (event.key === 'Enter')
-    addIngredient().focus();
-
-});
-
-/**
-  * Click or "Enter" to add a new line for filling instructions
-  */
-btn = document.getElementById('instructionButton');
-btn.addEventListener('click', addInstruction);
-let instruction_keyboard = document.getElementById('instructionOrderedList');
-instruction_keyboard.addEventListener('keydown', (event) => {
-  if (event.defaultPrevented)
-    return;
-
-  if (event.key === 'Enter')
-    addInstruction().focus();
-
-});
-
-/**
- * Add New Recipe to local storage
- */
-function addNewRecipe() {
-  const form = document.getElementById('add-recipe-form');
-
-  form.addEventListener('submit', (event) => {
+  submit.addEventListener('click', (event) => {
     // handle the form data
     // console.log('New Recipe Added');
 
     event.preventDefault();
-    let recipe = {};
-
+    let recipe = backend.get_recipe(backend.get_selected());  // Suggestion: get original recipe JSON and load new values into it
+    const recipe_hash = recipe['hash'];
+    
+ 
     const nameField = document.getElementById('recipeName').value;
     recipe.name = nameField;
 
@@ -79,9 +122,9 @@ function addNewRecipe() {
 
     const servingSizeField = document.getElementById('servingSize').value;
     recipe.servings = servingSizeField;
-
+    
     let radios = document.getElementsByName('diff');
-    for (let i = 0, length = radios.length; i < length; i++)
+    for (let i = 0, length = radios.length; i < length; i++) 
       if (radios[i].checked) {
         // do whatever you want with the checked radio
         recipe.difficulty_realLevel = radios[i].value;
@@ -95,28 +138,28 @@ function addNewRecipe() {
       recipe.vegan = true;
     else
       recipe.vegan = false;
-
+      
     var veggieBox = document.getElementById('veggie');
     if (veggieBox.checked)
       recipe.vegetarian = true;
     else
       recipe.vegetarian = false;
-
+            
     // let ingredientListLength = document.querySelectorAll('#ingredientOrderedList li').length;
 
     let ingredientArr = [];
     // console.log(ingredientListLength);
     let ingredientArrIndex = 0;
-
+    
     // ingredientIndex: # of all the li's added (including the li's which are deleted)
-    for (let i = 1; i <= ingredientIndex; i++) {
-      let str = 'ingredient-' + i;
+    for(let i = 1; i <= ingredientIndex; i++){
+      let str = 'ingredient-'+i;
       // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
-      if (ing && ing.value) {
+      if (ing && ing.value){
         // console.log(ing.value);
-        let theIngredient = { original: ing.value };
+        let theIngredient = {original:ing.value};
         ingredientArr[ingredientArrIndex] = theIngredient;
         ingredientArrIndex += 1;
       }
@@ -129,16 +172,16 @@ function addNewRecipe() {
     let instructionArr = [];
     // console.log(instructionListLength);
     let instructionArrIndex = 0;
-
+    
     // instructionIndex: # of all the li's added (including the li's which are deleted)
-    for (let i = 1; i <= instructionIndex; i++) {
-      let str = 'instruction-' + i;
+    for(let i = 1; i <= instructionIndex; i++){
+      let str = 'instruction-'+i;
       // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
-      if (ing && ing.value) {
+      if (ing && ing.value){
         // console.log(ing.value);
-        let step = { number: i, step: ing.value };
+        let step = {number:i, step:ing.value};
         instructionArr[instructionArrIndex] = step;
         instructionArrIndex += 1;
       }
@@ -161,35 +204,29 @@ function addNewRecipe() {
         reader.readAsDataURL(file);
         reader.addEventListener('load', () => {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
-          recipe.thumbnail = localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
-          backend.add_recipe(recipe, true);  // using the backend to simply logic
-          // Only redirect to index.html once the db has been updated
-          database.add_user_recipe(recipe.hash, recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients, recipe.difficulty_realLevel).then(() => {
-            window.location.assign('index.html');
-          
+          recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
+          backend.edit_recipe(recipe_hash, recipe, true);  // using the backend to simply logic
+          database.edit_recipe(recipe_hash, recipe).then(()=>{
+            window.location.assign('recipe-detail.html');
           });
-         
 
         });
-      } catch (e) {
+      } catch(e) {
         alert(e);
       }
     } else   // no file
-      try {
-        // Add directly
-        backend.add_recipe(recipe, true);  // using the backend to simply logic
-        // Only redirect to index.html once the db has been updated
-        database.add_user_recipe(recipe.hash, recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients, recipe.difficulty_realLevel).then(() => {
-          window.location.assign('index.html');
-            
+      try {  // add directly
+        backend.edit_recipe(recipe_hash,recipe, true);  // using the backend to simply logic
+        database.edit_recipe(recipe_hash, recipe).then(()=>{
+          window.location.assign('recipe-detail.html');
         });
-      } catch (e) {
+      } catch(e) {
         alert(e);
       }
-
+    
   });
 }
-
+  
 /**
  * Click to add a new line for filling ingredients
  */
@@ -197,11 +234,11 @@ function addIngredient() {
   let box = document.getElementById('ingredientOrderedList');
 
   ingredientIndex += 1;
-  let node = document.createElement('LI');
+  let node = document.createElement('LI');  
   node.id = `ingredientNode-${ingredientIndex}`;
   let nodeInput = document.createElement('input');
   let br = document.createElement('br');
-  nodeInput.type = 'text';
+  nodeInput.type='text';
   nodeInput.id = `ingredient-${ingredientIndex}`;
   nodeInput.autocomplete = 'off';
   nodeInput.appendChild(br);
@@ -212,7 +249,7 @@ function addIngredient() {
   img.src = 'assets/images/delete-button.png';
   // Delete the node
   let nodeId = `ingredientNode-${ingredientIndex}`;
-  img.onclick = function () {
+  img.onclick = function(){
     let node = document.getElementById(nodeId);
     node.remove();
   };
@@ -221,19 +258,19 @@ function addIngredient() {
 
   return nodeInput;
 }
-
+  
 /**
  * Click to add a new line for filling instructions
  */
 function addInstruction() {
   let box = document.getElementById('instructionOrderedList');
-
+  
   instructionIndex += 1;
-  let node = document.createElement('LI');
+  let node = document.createElement('LI');  
   node.id = `instructionNode-${instructionIndex}`;
   let nodeInput = document.createElement('input');
   let br = document.createElement('br');
-  nodeInput.type = 'text';
+  nodeInput.type='text';
   nodeInput.id = `instruction-${instructionIndex}`;
   nodeInput.autocomplete = 'off';
   nodeInput.appendChild(br);
@@ -244,7 +281,7 @@ function addInstruction() {
   img.src = 'assets/images/delete-button.png';
   // Delete the node
   let nodeId = `instructionNode-${instructionIndex}`;
-  img.onclick = function () {
+  img.onclick = function(){
     let node = document.getElementById(nodeId);
     node.remove();
   };
@@ -258,14 +295,14 @@ function addInstruction() {
  * read the check boxes to return a list of preferences
  * @returns {Array<string>} an array of preferences
  */
-function readPreference() {
+function readPreference(){
   let intolerance_list = [];
   const leftElmt = document.querySelector('.left');
   const leftCkbox = leftElmt.getElementsByClassName('container');
 
-  for (let i = 0; i < leftCkbox.length; i++) {
+  for(let i = 0; i < leftCkbox.length; i++){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
-    if (ingredientBox.checked) {
+    if(ingredientBox.checked){
       let ingredientText = leftCkbox[i].innerText.trim();
       intolerance_list.push(ingredientText);
     }
@@ -273,9 +310,9 @@ function readPreference() {
 
   const rightElmt = document.querySelector('.right');
   const rightCkbox = rightElmt.getElementsByClassName('container');
-  for (let i = 0; i < rightCkbox.length; i++) {
+  for(let i = 0; i < rightCkbox.length; i++){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
-    if (ingredientBox.checked) {
+    if(ingredientBox.checked){
       let ingredientText = rightCkbox[i].innerText.trim();
       intolerance_list.push(ingredientText);
     }
@@ -285,28 +322,41 @@ function readPreference() {
 }
 
 /**
- * Get the default preference and show it
+ * Get the recipe preference list and show it
  */
-function defaultPreference() {
-  let intolerance_list = backend.get_intolerance();
-
+function recipePreferences(intolerance_list){
+      
   const leftElmt = document.querySelector('.left');
   const leftCkbox = leftElmt.getElementsByClassName('container');
-  for (let i = 0; i < leftCkbox.length; i++) {
+  for(let i = 0; i < leftCkbox.length; i++){
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = leftCkbox[i].innerText.trim();
-
-    if (intolerance_list.includes(ingredientText))
+  
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
   }
-
+  
   const rightElmt = document.querySelector('.right');
   const rightCkbox = rightElmt.getElementsByClassName('container');
-  for (let i = 0; i < rightCkbox.length; i++) {
+  for(let i = 0; i < rightCkbox.length; i++){
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = rightCkbox[i].innerText.trim();
-
-    if (intolerance_list.includes(ingredientText))
+  
+    if(intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
   }
+}
+
+function goBack() {
+  const btn = document.getElementById('white-arrow-p');
+  let index = document.referrer.lastIndexOf('/');
+  let str = document.referrer.substring(index + 1);
+
+  btn.addEventListener('click', () => {
+    if (str === 'recipe-search.html')
+      window.history.back();
+    else
+      window.location.assign('recipe-detail.html');
+
+  });
 }

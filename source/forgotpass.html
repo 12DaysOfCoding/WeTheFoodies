@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="assets/styles/forgotpass.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  <!-- Web Components -->
+  <script type="module" src="assets/scripts/auth_forgotpass.js"></script>
+  
+</head>
+
+<body>
+    <div class='header'>
+        <header>
+          <img src="assets/images/logo.svg" id="logo">
+        </header>
+        <p id="dount-p">
+          <img id="dount" src="assets/images/donut.svg">
+        </p>
+      </div>
+  <main>
+    <section class="pswd_form">
+        <h2>Forgot Password</h2>
+        <h4> Enter your email, and we will send you a link with instructions to reset your password. <a href="./login.html">Back to login?</a></h4>
+            <div class="pswd">
+              <label for="email" class="labelInput"><b>Email Address</b></label>
+              <input id="email" type="text" placeholder="Enter Email" name="email" required>
+          
+  
+                  
+              <button type="submit" id="send-instructions">Send Instructions</button>
+              <!-- TODO: Email sent page -->
+            </div>
+    </section>
+    
+  </main>
+
+</body>
+</html>
