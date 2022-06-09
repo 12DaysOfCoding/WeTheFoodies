@@ -2,7 +2,9 @@
 
 import { recipe_data, keep_fields } from './recipe-data.js';
 
-const API_KEY = 'cd5607bd33744aa3a4b30b8d87ffb894';
+const API_KEY = '486eca841c6a49b896486723439f9977';
+
+
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
@@ -40,7 +42,8 @@ async function fetch_recipe_raw(name) {
   const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
   const response = await fetch(url);
   const data = await response.json();
-  if (data.results.length > 0) return data.results;
+  console.log(data)
+  if (data.results && data.results.length  > 0) return data.results;
   else{
     // Spoonacular API has difficulty resolving a title with more than three words 
     var name_arr = name.split(' ', 3);
@@ -49,7 +52,7 @@ async function fetch_recipe_raw(name) {
     const url = `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
     const response = await fetch(url);
     const data = await response.json();
-    if (data.results.length > 0) return data.results;
+    if (data.results && data.results.length > 0) return data.results;
     else return [];// an empty list
   }
     

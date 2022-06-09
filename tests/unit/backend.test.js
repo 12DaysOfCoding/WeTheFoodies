@@ -44,6 +44,7 @@ describe('testing functionalities that require actual recipes', () => {
     it('fuzzy searches', async () => {
       expect(await backend.search_recipe('fried rice')).toHaveLength(0);
       const online_results = await backend.search_recipe('fried rice', true);
+      console.log(online_results)
       expect(online_results.length > 0).toBe(true);
     });
     
