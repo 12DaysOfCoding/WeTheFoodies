@@ -8,7 +8,7 @@
 Our team will design a recipe management application.
 
 ## Setup Instructions
-1. ```git clone https://github.com/cse110-fa21-group30/cse110-fa21-group30.git```
+1. ```git clone https://github.com/12DaysOfCoding/WeTheFoodies.git```
 2. Get [nodejs](https://nodejs.org/en/download/) if you don't already have.
 3. In the root dir of this project, run `npm install`. This will install [ESLint](https://eslint.org/) and [Jest](https://jestjs.io/).
 4. To run the linter, do `npm run lint`. Only unfixable problems will be reported.
