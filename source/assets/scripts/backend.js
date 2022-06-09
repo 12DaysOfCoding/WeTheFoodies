@@ -43,8 +43,8 @@ async function fetch_recipe_raw(name) {
   if (data.results.length > 0) return data.results;
   else{
     // Spoonacular API has difficulty resolving a title with more than three words 
-    var name_arr = name.split(' ', 3)
-    name = name_arr.join(' ')
+    var name_arr = name.split(' ', 3);
+    name = name_arr.join(' ');
     // if we get zero results attempt to do a title match to the recipe
     const url = `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
     const response = await fetch(url);
@@ -63,10 +63,10 @@ async function fetch_recipe_raw(name) {
  * @return {Promise} returns a list of fetched recipe for testing purpose
  */
 export async function fetch_recipe(name) {
-  console.log("Fetch raw recipe by name")
-  console.log(name)
+  console.log('Fetch raw recipe by name');
+  console.log(name);
   const raw_recipes = await fetch_recipe_raw(name);
-  console.log(raw_recipes)
+  console.log(raw_recipes);
   // for each recipe, keep only ones in keep_fields and rename them accordingly
   return raw_recipes.map(raw_recipe => {
     const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
@@ -75,8 +75,8 @@ export async function fetch_recipe(name) {
     if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
     recalculate_intolerances(recipe);
-    console.log("About to add new recipe to backend")
-    console.log(recipe)
+    console.log('About to add new recipe to backend');
+    console.log(recipe);
     return add_recipe(recipe);
   });
 }

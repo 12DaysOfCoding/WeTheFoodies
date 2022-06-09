@@ -55,7 +55,7 @@ export async function get_user_recipes() {
         console.log('No data available');
             
     })
-    .catch((error) => {
+    .catch(() => {
       // console.error(error);
     });
   return finalData;
@@ -86,7 +86,7 @@ export async function get_favorites(){
         console.log('No data available');
             
     })
-    .catch((error) => {
+    .catch(() => {
       // console.error(error);
     });
   return finalData;

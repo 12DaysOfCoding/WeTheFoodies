@@ -71,14 +71,14 @@ async function renderSavedRecipes() {
         if(!favoritesList) return;
         favoritesList = new Map(Object.entries(favoritesList));
         const favorites = [];
-        console.log(favoritesList)
+        console.log(favoritesList);
         for (const recipeName of favoritesList.values()) 
           favorites.push(await backend.fetch_recipe(recipeName));
-          console.log(favorites)
+        console.log(favorites);
         
         if (favorites.length !== 0) document.querySelector('.saved-recipes__wrapper').innerHTML = '';
         favorites.forEach(function (recipe) {
-          console.log(recipe)
+          console.log(recipe);
 
           backend.add_favorite(recipe[0].hash);
           recipe = recipe[0];

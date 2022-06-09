@@ -36,7 +36,7 @@ function goLogOutSetting() {
       alert('You\'ve been logged out');
       
       // Clear all the previous user's data, except for it being the first visit
-      localStorage.clear()
+      localStorage.clear();
       localStorage.setItem('%not_first_visit', 'true');
       //Go to login page
       window.location.assign('login.html');
