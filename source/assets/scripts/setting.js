@@ -38,8 +38,13 @@ function goLogOutSetting() {
       // Clear all the previous user's data, except for it being the first visit
       localStorage.clear();
       localStorage.setItem('%not_first_visit', 'true');
+      localStorage.setItem('%doneTourAddPage', 'yeah!');
+      localStorage.setItem('%doneTour', 'yeah!');
+      localStorage.setItem('%doneTourSearchPage', 'yeah!');
+
       //Go to login page
       window.location.assign('login.html');
+
     })
       .catch((error) => {
         const errorMessage = error.message;
