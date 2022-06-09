@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@3/introjs.min.css">
+  <!-- <link href="styles.css" rel="stylesheet"> -->
   <link href="assets/styles/index.css" rel="stylesheet">
   <title>Dashboard</title>
 
@@ -18,6 +19,9 @@
   <script type="module" src="assets/scripts/index.js"></script>
   <script type="module" src="assets/scripts/database.js"></script>
   <script type="module" src="assets/scripts/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intro.js@3/intro.min.js"></script>
+  <script type="module" src="assets/scripts/tutorial-homepage.js"></script>
+  
 </head>
 
 <body>
@@ -53,32 +57,10 @@
         <p id="my-recipes__default">You haven't created any recipes.</p>
       </div>
     </section>
-    <section class="nav-bar">
-        <a href="index.html"> 
-          <div class="nav-dashboard">
-            <p id="nav-dashboard-img"><img src="assets/images/nav-bar-dashboard.svg" alt=""></p>
-            <p id="nav-dashboard-text">DASHBOARD</p>
-          </div>
-        </a>
-        <a href="recipe-search.html">      
-          <div class="nav-search">
-          <p id="nav-search-img"><img src="assets/images/nav-bar-search.svg" alt=""></p>
-          <p id="nav-dashboard-text">SEARCH</p>
-        </div>
-        </a>
-        <a href="recipe-add.html">
-          <div class="nav-add">
-            <p id="nav-add-img"><img src="assets/images/nav-bar-add.svg" alt=""></p>
-            <p id="nav-dashboard-text">ADD</p>
-          </div>
-        </a>
-        <a href="settings.html">
-          <div class="nav-settings">
-            <p id="nav-settings-img"><img src="assets/images/nav-bar-settings.svg" alt=""></p>
-            <p id="nav-dashboard-text">SETTINGS</p>
-          </div>
-        </a>
-    </section>
+    
+    <!--Navigation bar-->
+    <script id="replace_with_navbar" src="assets/scripts/nav.js"></script>
+    <!--end of Navigation bar--> 
   </main>
 </body>
 

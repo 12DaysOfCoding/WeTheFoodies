@@ -1,10 +1,9 @@
-// recipe-detail.js
 /** @module recipe-detail */
 
 import * as backend from './backend.js';
 import * as database from './database.js';
 
-if (localStorage.getItem('%not_first_visit')) 
+if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
@@ -14,12 +13,13 @@ else   // first visit
  * Initialize and call other function
  */
 async function init() {
-
-  const recipe = backend.get_recipe(backend.get_selected());
-  if (recipe == "") {
+  const selected = backend.get_selected();
+  if (selected === '') {
     window.location.assign('index.html');
     return;
   }
+
+  const recipe = backend.get_recipe(selected);
 
   // Create a recipe card with mock data
   let expandedRecipeCard = document.createElement('expanded-recipe-card');
@@ -29,6 +29,7 @@ async function init() {
   saveOrSaved(recipe);
   populateUI(recipe);
   bindFoodieButton();
+  showHideButtons(recipe);
   bindEditButton();
   bindDeleteButton(recipe.hash);
   goBack();
@@ -41,7 +42,7 @@ function populateUI(recipe) {
 
   const ingredientsWrapper = document.querySelector('.specific-ingredients');
   if (recipe.ingredients)   // guard for no ingredients
-    recipe.ingredients.forEach(function(ingredient) {
+    recipe.ingredients.forEach(function (ingredient) {
       const ingredientElem = document.createElement('div');
       const check_box = document.createElement('input');
       check_box.type = 'checkbox';
@@ -51,16 +52,16 @@ function populateUI(recipe) {
       ingredientElem.appendChild(text);
       ingredientsWrapper.appendChild(ingredientElem);
     });
-  
+
 
   const stepsWrapper = document.querySelector('.specific-instructions');
   if (recipe.steps)   // guard for no steps
-    recipe.steps.forEach(function(step) {
+    recipe.steps.forEach(function (step) {
       const stepElem = document.createElement('li');
-      stepElem.textContent = `${step.step}`; 
+      stepElem.textContent = `${step.step}`;
       stepsWrapper.appendChild(stepElem);
     });
-  
+
   if (recipe.steps.length === 0) {
     const instructionsList = document.querySelector('.instructions');
     const foodieInstruction = document.getElementById('how-to-use-foodie');
@@ -96,6 +97,7 @@ function saveOrSaved(recipe) {
       text.textContent = 'SAVE';
       heart.src = 'assets/images/heart0.svg';
       backend.remove_favorite(recipe.hash);
+      database.delete_favorite_recipe(recipe.hash);
     }
   });
 }
@@ -117,12 +119,36 @@ function bindEditButton() {
 function bindDeleteButton(recipe_hash) {
   const foodieBtn = document.getElementById('delete');
   foodieBtn.addEventListener('click', () => {
-    backend.remove_recipe(recipe_hash);
-    window.location.assign('index.html');
+
+    let text = 'Do you want to delete the recipe?';
+    if (confirm(text) === true) {
+      // Check if recipe is in the custom recipes list
+      var customList = backend.get_custom();
+      backend.remove_recipe(recipe_hash);
+      if (customList.includes(recipe_hash)) 
+        database.delete_user_recipe(recipe_hash).then(() => {
+          window.location.assign('index.html');
+        });
+
+      else 
+        database.delete_favorite_recipe(recipe_hash).then(() => {
+          window.location.assign('index.html');
+        });
+      
+    }
   });
 }
 
-function goBack(){
+function showHideButtons(recipe) {
+  var customList = backend.get_custom();
+  if ( customList.includes(recipe.hash) ) {
+    document.getElementById('delete').classList.remove('hidden');
+    document.getElementById('edit').classList.remove('hidden');
+    document.getElementById('save').classList.add('hidden');
+  }
+}
+
+function goBack() {
   const btn = document.getElementById('white-arrow-p');
   let index = document.referrer.lastIndexOf('/');
   let str = document.referrer.substring(index + 1);
@@ -130,8 +156,8 @@ function goBack(){
   btn.addEventListener('click', () => {
     if (str === 'recipe-search.html')
       window.history.back();
-    else 
+    else
       window.location.assign('index.html');
-    
+
   });
 }

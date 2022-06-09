@@ -4,10 +4,17 @@
 import * as backend from './backend.js';
 import * as database from './database.js';
 
-if (localStorage.getItem('%not_first_visit')) 
+
+if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 else   // first visit
   window.location.assign('onBoardingPage.html');  // redirect
+
+// Prevent "Enter to submit the recipe"
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter')
+    e.preventDefault();
+});
 
 
 var ingredientIndex = 1;
@@ -18,40 +25,38 @@ var instructionIndex = 1;
  */
 async function init() {
   defaultPreference();
-  addIngredient();
-  addInstruction();
   addNewRecipe();
 }
 
 /**
  * Click or "Enter" to add a new line for filling ingredients
  */
- let btn = document.getElementById('ingredientButton');
- btn.addEventListener('click', addIngredient);
- let ingredient_keyboard = document.getElementById('ingredientOrderedList');
- ingredient_keyboard.addEventListener('keydown', (event)=>{
-   if (event.defaultPrevented) {
-     return;
-   }
-   if (event.key === "Enter") {
-     addIngredient().focus();
-   }
- });
- 
- /**
+let btn = document.getElementById('ingredientButton');
+btn.addEventListener('click', addIngredient);
+let ingredient_keyboard = document.getElementById('ingredientOrderedList');
+ingredient_keyboard.addEventListener('keydown', (event) => {
+  if (event.defaultPrevented)
+    return;
+
+  if (event.key === 'Enter')
+    addIngredient().focus();
+
+});
+
+/**
   * Click or "Enter" to add a new line for filling instructions
   */
- btn = document.getElementById('instructionButton');
- btn.addEventListener('click', addInstruction);
- let instruction_keyboard = document.getElementById('instructionOrderedList');
- instruction_keyboard.addEventListener('keydown', (event)=>{
-   if (event.defaultPrevented) {
-     return;
-   }
-   if (event.key === "Enter") {
-     addInstruction().focus();
-   }
- });
+btn = document.getElementById('instructionButton');
+btn.addEventListener('click', addInstruction);
+let instruction_keyboard = document.getElementById('instructionOrderedList');
+instruction_keyboard.addEventListener('keydown', (event) => {
+  if (event.defaultPrevented)
+    return;
+
+  if (event.key === 'Enter')
+    addInstruction().focus();
+
+});
 
 /**
  * Add New Recipe to local storage
@@ -74,9 +79,9 @@ function addNewRecipe() {
 
     const servingSizeField = document.getElementById('servingSize').value;
     recipe.servings = servingSizeField;
-    
+
     let radios = document.getElementsByName('diff');
-    for (let i = 0, length = radios.length; i < length; i++) 
+    for (let i = 0, length = radios.length; i < length; i++)
       if (radios[i].checked) {
         // do whatever you want with the checked radio
         recipe.difficulty_realLevel = radios[i].value;
@@ -90,28 +95,28 @@ function addNewRecipe() {
       recipe.vegan = true;
     else
       recipe.vegan = false;
-      
+
     var veggieBox = document.getElementById('veggie');
     if (veggieBox.checked)
       recipe.vegetarian = true;
     else
       recipe.vegetarian = false;
-            
+
     // let ingredientListLength = document.querySelectorAll('#ingredientOrderedList li').length;
 
     let ingredientArr = [];
     // console.log(ingredientListLength);
     let ingredientArrIndex = 0;
-    
+
     // ingredientIndex: # of all the li's added (including the li's which are deleted)
-    for(let i = 1; i <= ingredientIndex; i++){
-      let str = 'ingredient-'+i;
+    for (let i = 1; i <= ingredientIndex; i++) {
+      let str = 'ingredient-' + i;
       // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
-      if (ing && ing.value){
+      if (ing && ing.value) {
         // console.log(ing.value);
-        let theIngredient = {original:ing.value};
+        let theIngredient = { original: ing.value };
         ingredientArr[ingredientArrIndex] = theIngredient;
         ingredientArrIndex += 1;
       }
@@ -124,16 +129,16 @@ function addNewRecipe() {
     let instructionArr = [];
     // console.log(instructionListLength);
     let instructionArrIndex = 0;
-    
+
     // instructionIndex: # of all the li's added (including the li's which are deleted)
-    for(let i = 1; i <= instructionIndex; i++){
-      let str = 'instruction-'+i;
+    for (let i = 1; i <= instructionIndex; i++) {
+      let str = 'instruction-' + i;
       // console.log(str);
       let ing = document.getElementById(str);
       // check whether the li is deleted - if deleted, it is null, don't add.
-      if (ing && ing.value){
+      if (ing && ing.value) {
         // console.log(ing.value);
-        let step = {number:i, step:ing.value};
+        let step = { number: i, step: ing.value };
         instructionArr[instructionArrIndex] = step;
         instructionArrIndex += 1;
       }
@@ -149,7 +154,6 @@ function addNewRecipe() {
       return;
     }
 
-
     const file = document.querySelector('input[type=file]').files[0];
     if (file) {  // inputed a file
       const reader = new FileReader();
@@ -157,29 +161,32 @@ function addNewRecipe() {
         reader.readAsDataURL(file);
         reader.addEventListener('load', () => {
           localStorage.setItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`, reader.result);
-          recipe.thumbnail=localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
+          recipe.thumbnail = localStorage.getItem(`!${recipe.servings}${recipe.name}${recipe.readyInMinutes}`);
           backend.add_recipe(recipe, true);  // using the backend to simply logic
           // Only redirect to index.html once the db has been updated
-          database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients ).then(()=>{
+          database.add_user_recipe(recipe.hash, recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients, recipe.difficulty_realLevel).then(() => {
             window.location.assign('index.html');
-          });
           
+          });
+         
+
         });
-      } catch(e) {
+      } catch (e) {
         alert(e);
       }
     } else   // no file
-      try {  
+      try {
         // Add directly
         backend.add_recipe(recipe, true);  // using the backend to simply logic
         // Only redirect to index.html once the db has been updated
-        database.add_user_recipe(recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients ).then(()=>{
+        database.add_user_recipe(recipe.hash, recipe.name, recipe.servings, recipe.readyInMinutes, recipe.steps, recipe.intolerances, recipe.ingredients, recipe.difficulty_realLevel).then(() => {
           window.location.assign('index.html');
-        });        
-      } catch(e) {
+            
+        });
+      } catch (e) {
         alert(e);
       }
-    
+
   });
 }
 
@@ -190,11 +197,11 @@ function addIngredient() {
   let box = document.getElementById('ingredientOrderedList');
 
   ingredientIndex += 1;
-  let node = document.createElement('LI');  
+  let node = document.createElement('LI');
   node.id = `ingredientNode-${ingredientIndex}`;
   let nodeInput = document.createElement('input');
   let br = document.createElement('br');
-  nodeInput.type='text';
+  nodeInput.type = 'text';
   nodeInput.id = `ingredient-${ingredientIndex}`;
   nodeInput.autocomplete = 'off';
   nodeInput.appendChild(br);
@@ -205,7 +212,7 @@ function addIngredient() {
   img.src = 'assets/images/delete-button.png';
   // Delete the node
   let nodeId = `ingredientNode-${ingredientIndex}`;
-  img.onclick = function(){
+  img.onclick = function () {
     let node = document.getElementById(nodeId);
     node.remove();
   };
@@ -222,11 +229,11 @@ function addInstruction() {
   let box = document.getElementById('instructionOrderedList');
 
   instructionIndex += 1;
-  let node = document.createElement('LI');  
+  let node = document.createElement('LI');
   node.id = `instructionNode-${instructionIndex}`;
   let nodeInput = document.createElement('input');
   let br = document.createElement('br');
-  nodeInput.type='text';
+  nodeInput.type = 'text';
   nodeInput.id = `instruction-${instructionIndex}`;
   nodeInput.autocomplete = 'off';
   nodeInput.appendChild(br);
@@ -237,7 +244,7 @@ function addInstruction() {
   img.src = 'assets/images/delete-button.png';
   // Delete the node
   let nodeId = `instructionNode-${instructionIndex}`;
-  img.onclick = function(){
+  img.onclick = function () {
     let node = document.getElementById(nodeId);
     node.remove();
   };
@@ -251,14 +258,14 @@ function addInstruction() {
  * read the check boxes to return a list of preferences
  * @returns {Array<string>} an array of preferences
  */
-function readPreference(){
+function readPreference() {
   let intolerance_list = [];
   const leftElmt = document.querySelector('.left');
   const leftCkbox = leftElmt.getElementsByClassName('container');
 
-  for(let i = 0; i < leftCkbox.length; i++){
+  for (let i = 0; i < leftCkbox.length; i++) {
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
-    if(ingredientBox.checked){
+    if (ingredientBox.checked) {
       let ingredientText = leftCkbox[i].innerText.trim();
       intolerance_list.push(ingredientText);
     }
@@ -266,9 +273,9 @@ function readPreference(){
 
   const rightElmt = document.querySelector('.right');
   const rightCkbox = rightElmt.getElementsByClassName('container');
-  for(let i = 0; i < rightCkbox.length; i++){
+  for (let i = 0; i < rightCkbox.length; i++) {
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
-    if(ingredientBox.checked){
+    if (ingredientBox.checked) {
       let ingredientText = rightCkbox[i].innerText.trim();
       intolerance_list.push(ingredientText);
     }
@@ -280,26 +287,26 @@ function readPreference(){
 /**
  * Get the default preference and show it
  */
-function defaultPreference(){
+function defaultPreference() {
   let intolerance_list = backend.get_intolerance();
 
   const leftElmt = document.querySelector('.left');
   const leftCkbox = leftElmt.getElementsByClassName('container');
-  for(let i = 0; i < leftCkbox.length; i++){
+  for (let i = 0; i < leftCkbox.length; i++) {
     let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = leftCkbox[i].innerText.trim();
 
-    if(intolerance_list.includes(ingredientText))
+    if (intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
   }
 
   const rightElmt = document.querySelector('.right');
   const rightCkbox = rightElmt.getElementsByClassName('container');
-  for(let i = 0; i < rightCkbox.length; i++){
+  for (let i = 0; i < rightCkbox.length; i++) {
     let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
     let ingredientText = rightCkbox[i].innerText.trim();
 
-    if(intolerance_list.includes(ingredientText))
+    if (intolerance_list.includes(ingredientText))
       ingredientBox.checked = true;
   }
 }

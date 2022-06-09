@@ -3,7 +3,7 @@
 
 import * as backend from './backend.js';
 import * as database from './database.js';
-// import {auth} from './auth.js'
+import {auth} from './auth.js';
 
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-auth.js';
 
@@ -13,15 +13,14 @@ if (localStorage.getItem('%not_first_visit'))
   window.addEventListener('DOMContentLoaded', init);
 
 // user is either not logged in or has not been onboarded!
-else { // first visit
-  const auth = getAuth();
+else  // first visit
   onAuthStateChanged(auth, async (user) => {
     if (user)
       window.location.assign('onBoardingPage.html');  // logged in! send to onboarding
     else
       window.location.assign('login.html');           // not logged in! send to login
   });
-}
+
   
 
 /**
@@ -41,9 +40,9 @@ async function init() {
 
 async function renderSavedRecipes() {
 
-  if (localStorage.getItem('%first_time') != '1') {
+  if (localStorage.getItem('%first_time') !== '1') {
     const favorites = backend.get_favorite();
-    console.log(favorites);
+    // console.log(favorites);
     if (favorites.length !== 0) document.querySelector('.saved-recipes__wrapper').innerHTML = '';
     favorites.forEach(function (recipeHash) {
       const recipe = backend.get_recipe(recipeHash);
@@ -59,22 +58,32 @@ async function renderSavedRecipes() {
   } else {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
+      // Remove any existing favorite recipes from local storage
+      const favoriteRecipes = backend.get_favorite();
+      favoriteRecipes.forEach(function (recipeHash) {
+        backend.remove_recipe(recipeHash);
+      });
+
       if (user) {
-        console.log(auth.currentUser.uid);
         var favoritesList = {};
         favoritesList = await database.get_favorites();
+        // Handle case where there are no user recipes
+        if(!favoritesList) return;
         favoritesList = new Map(Object.entries(favoritesList));
         const favorites = [];
+        console.log(favoritesList);
         for (const recipeName of favoritesList.values()) 
           favorites.push(await backend.fetch_recipe(recipeName));
+        console.log(favorites);
         
         if (favorites.length !== 0) document.querySelector('.saved-recipes__wrapper').innerHTML = '';
         favorites.forEach(function (recipe) {
+          console.log(recipe);
 
           backend.add_favorite(recipe[0].hash);
           recipe = recipe[0];
           let recipeCard = document.createElement('recipe-card');
-          if (recipe.difficulty == 0) 
+          if (recipe.difficulty === 0) 
             recipe.difficulty = 1;
           
           recipe.difficulty_realLevel = Math.round(recipe.difficulty);
@@ -97,7 +106,7 @@ async function renderSavedRecipes() {
 }
 
 function renderCustomRecipes() {
-  if (localStorage.getItem('%first_time') != '1') {
+  if (localStorage.getItem('%first_time') !== '1') {
     const customRecipes = backend.get_custom();
     if (customRecipes.length !== 0) document.querySelector('.my-recipes__wrapper').innerHTML = '';
     customRecipes.forEach(function (recipeHash) {
@@ -117,6 +126,13 @@ function renderCustomRecipes() {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+
+        // Remove any existing custom recipes from local storage
+        var customRecipes = backend.get_custom();
+        customRecipes.forEach(function (recipeHash) {
+          backend.remove_recipe(recipeHash);
+        });
+
         var customList = {};
         customList = await database.get_user_recipes();
         for(const recipe in customList){
@@ -126,14 +142,14 @@ function renderCustomRecipes() {
           customRecipe.steps = recipeObj.Instructions;
           customRecipe.ingredients = recipeObj.Ingredients;
           customRecipe.readyInMinutes = recipeObj.CookTime;
-          customRecipe.serving = recipeObj.Serving;
+          customRecipe.servings = recipeObj.Servings;
           customRecipe.intolerances = recipeObj.DietRestrictions;
-          customRecipe.difficulty_realLevel = 1;
+          customRecipe.difficulty_realLevel = recipeObj.Difficulty;
           backend.add_recipe(customRecipe, true);
         }
         
-        const customRecipes = backend.get_custom();
-        console.log(customRecipes);
+        customRecipes = backend.get_custom();
+        // console.log(customRecipes);
         if (customRecipes.length !== 0) document.querySelector('.my-recipes__wrapper').innerHTML = '';
         customRecipes.forEach(function (recipeHash) {
           const recipe = backend.get_recipe(recipeHash);

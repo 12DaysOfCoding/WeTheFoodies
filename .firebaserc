@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "wethefoodies-329cf"
-  }
+    "default": "wethefoodies-329cf",
+    "prod": "wethefoodies-329cf"
+  },
+  "targets": {}
 }

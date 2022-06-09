@@ -3,11 +3,12 @@
 import { recipe_data, keep_fields } from './recipe-data.js';
 
 const API_KEY = '486eca841c6a49b896486723439f9977';
+
+
 const CUSTOM_RECIPE_KEY = '%custom_recipes';
 const FAVORITE_RECIPE_KEY = '%favorite_recipes';
 const SELECTED_RECIPE_KEY = '%selected_recipe';
 const INTOLERANCE_KEY = '%intolerances';
-
 
 const ERR_NO_NAME        = 'Please enter a name for this recipe';
 const ERR_COOKTIME       = 'Please enter a valid positive cooktime for this recipe';
@@ -41,8 +42,20 @@ async function fetch_recipe_raw(name) {
   const url = `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
   const response = await fetch(url);
   const data = await response.json();
-  if (data.results) return data.results;
-  else return [];  // an empty list
+  console.log(data)
+  if (data.results && data.results.length  > 0) return data.results;
+  else{
+    // Spoonacular API has difficulty resolving a title with more than three words 
+    var name_arr = name.split(' ', 3);
+    name = name_arr.join(' ');
+    // if we get zero results attempt to do a title match to the recipe
+    const url = `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&apiKey=${API_KEY}&addRecipeInformation=true&fillIngredients=true`;
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data.results && data.results.length > 0) return data.results;
+    else return [];// an empty list
+  }
+    
 }
 
 /**
@@ -53,7 +66,10 @@ async function fetch_recipe_raw(name) {
  * @return {Promise} returns a list of fetched recipe for testing purpose
  */
 export async function fetch_recipe(name) {
+  console.log('Fetch raw recipe by name');
+  console.log(name);
   const raw_recipes = await fetch_recipe_raw(name);
+  console.log(raw_recipes);
   // for each recipe, keep only ones in keep_fields and rename them accordingly
   return raw_recipes.map(raw_recipe => {
     const recipe = Object.create(recipe_data);  // prototype inherit recipe_data
@@ -62,6 +78,8 @@ export async function fetch_recipe(name) {
     if (recipe.steps.length) 
       recipe.steps = recipe.steps[0].steps;  // special modification: spoonacular's step array is cursed
     recalculate_intolerances(recipe);
+    console.log('About to add new recipe to backend');
+    console.log(recipe);
     return add_recipe(recipe);
   });
 }
@@ -106,7 +124,7 @@ function recalculate_intolerances(recipe){
  */
 function compute_hash(recipe) {
   if (!recipe.name) throw ERR_NO_NAME;
-   else if (!recipe.steps) throw ERR_NO_STEPS;
+  else if (!recipe.steps) throw ERR_NO_STEPS;
 
   // https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript/7616484#7616484
   const cyrb53 = function(str, seed = 0) {
@@ -132,7 +150,7 @@ function compute_hash(recipe) {
 function compute_difficulty(recipe) {
   if (!Array.isArray(recipe.ingredients)) throw 'ingredients array malformed';
   else if (!(Array.isArray(recipe.steps))) throw 'steps array malformed';
-  else if (recipe.readyInMinutes <= 0) throw ERR_COOK_TIME;
+  else if (recipe.readyInMinutes <= 0) throw ERR_COOKTIME;
   return recipe.ingredients.length * recipe.steps.length / recipe.readyInMinutes;
 }
 
@@ -180,7 +198,7 @@ export function get_recipe(recipe_hash){
   * @param {Object}  recipe
   * @param {boolean} custom
  */
- export function edit_recipe(recipe_hash, recipe, custom=false) {
+export function edit_recipe(recipe_hash, recipe,) {
   set_localstore(recipe_hash, recipe);
   return recipe;
 }
@@ -190,7 +208,7 @@ export function get_recipe(recipe_hash){
 export function remove_recipe(recipe_hash){
   if(localStorage.getItem(recipe_hash)) {
     localStorage.removeItem(recipe_hash);
-    localStorage.removeItem("%selected_recipe");
+    localStorage.removeItem('%selected_recipe');
 
     // note that we also need to remove it from both the custom and favorite arr
     remove_custom(recipe_hash);
