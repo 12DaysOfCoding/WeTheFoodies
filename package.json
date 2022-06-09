@@ -1,5 +1,5 @@
 {
-  "name": "cse110-fa21-group30",
+  "name": "wethefoodies",
   "version": "1.0.0",
   "description": "[Team Page](admin/team.md)",
   "main": "login.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cse110-fa21-group30/cse110-fa21-group30.git"
+    "url": "git+https://github.com/12DaysOfCoding/WeTheFoodies.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cse110-fa21-group30/cse110-fa21-group30/issues"
+    "url": "https://github.com/12DaysOfCoding/WeTheFoodies.git/issues"
   },
-  "homepage": "https://github.com/cse110-fa21-group30/cse110-fa21-group30#readme",
+  "homepage": "https://github.com/12DaysOfCoding/WeTheFoodies.git#readme",
   "devDependencies": {
     "eslint": "^8.1.0",
     "jest": "^27.3.1",
