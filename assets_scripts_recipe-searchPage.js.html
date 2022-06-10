@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: assets/scripts/recipe-searchPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: assets/scripts/recipe-searchPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// recipe-searchPage.js
+
+import * as backend from './backend.js';
+
+if (localStorage.getItem('%not_first_visit')) 
+  window.addEventListener('DOMContentLoaded', init);
+else   // first visit
+  window.location.assign('onBoardingPage.html');  // redirect
+
+
+let current_recipes = [];
+
+async function init() {
+  defaultPreference();
+
+  bindSearchBar();
+  bindSearchButton();
+  bindCheckboxes();
+}
+
+/**
+ * event listeners on search input change
+ */
+function bindSearchBar() {
+  const input_field = document.getElementById('search-field');
+  input_field.addEventListener('input', function() {
+    const input = this.value;
+    backend.search_suggest(input).then(suggestions => {
+      clearDropdowns();
+      // rebuild
+      const search_bar = document.querySelector('.search-bar');
+      suggestions.forEach(suggestion => {
+        const dropdown = document.createElement('div');
+        dropdown.className = 'suggest_dropdown';
+        dropdown.innerHTML = suggestion;
+        dropdown.addEventListener('click', function() {
+          input_field.value = this.innerHTML;
+          hitSearch();
+        });
+        search_bar.appendChild(dropdown);
+      });
+    });
+  });
+}
+
+/**
+ * event listeners on search button click
+ */
+function bindSearchButton() {
+  let recipe_list = document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML = '';  // clear old recipe cards
+  //set the default filter
+  defaultPreference();
+  //select the button
+  //once the button got clicked, request the data from api and then output the result
+  let button = document.querySelector('#search-button');
+  button.addEventListener('click', hitSearch);
+  // alternatively, enter key also trigger a search
+  const input_field = document.getElementById('search-field');
+  input_field.addEventListener('keyup', e => {
+    if (e.key === 'Enter') hitSearch();  // enter key pressed
+  });
+}
+
+/**
+ * displays the current recipes with filters applied
+ */
+function displayCards() {
+  let recipe_list = document.querySelector('.recipes__wrapper');
+  recipe_list.innerHTML = '';  // clear old recipe cards
+  const recipe_hashes = backend.filter_intolerance(current_recipes, readPreference());
+  for(let recipe_hash of recipe_hashes) {
+    let recipeCard = document.createElement('recipe-card');
+    recipeCard.data = backend.get_recipe(recipe_hash);
+    document.querySelector('.recipes__wrapper').appendChild(recipeCard);
+  }
+  configureRecipeCards();
+}
+
+/**
+ * app logic when we hit search
+ */
+function hitSearch() {
+  clearDropdowns();  // remove all suggestions
+  
+  let recipe_name = document.querySelector('#search-field').value;
+  backend.search_recipe(recipe_name, true)
+    .then(data => current_recipes = data)
+    .then(displayCards);
+
+  // USE FOR TESTING PURPOSES – to not overwhelm API
+  // let recipe = backend.get_recipe('Apple Pie Pancakes$5316512375443084');
+  // let recipeCard = document.createElement('recipe-card');
+  // recipeCard.data = recipe;
+  // document.querySelector('.recipes__wrapper').appendChild(recipeCard);
+  // configureRecipeCards();
+}
+
+/**
+ * wipe dropdowns
+ */
+function clearDropdowns() {
+  const search_bar = document.querySelector('.search-bar');
+  const suggest_dropdowns = document.getElementsByClassName('suggest_dropdown');
+  let dropdown_length = suggest_dropdowns.length;
+  while (dropdown_length --> 0) 
+    search_bar.removeChild(suggest_dropdowns[dropdown_length]);
+}
+
+/**
+ * add event listeners for each recipe card onclick
+ */
+function configureRecipeCards() {
+  const recipeCards = document.querySelectorAll('recipe-card');
+  recipeCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      backend.select_recipe(card.shadowRoot.querySelector('.hash').textContent);
+      window.location.assign('recipe-detail.html');
+    });
+  });
+}
+
+/**
+ * bind displayCards function to the event of toggling checkboxes
+ */
+function bindCheckboxes() {
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for (let checkbox of leftCkbox) checkbox.addEventListener('change', displayCards);
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for (let checkbox of rightCkbox) checkbox.addEventListener('change', displayCards);
+}
+
+/**
+ * read the check boxes to return a list of preferences
+ * @returns {Array&lt;string>} an array of preferences
+ */
+function readPreference(){
+  let intolerance_list = [];
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+
+  for(let i = 0; i &lt; leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = leftCkbox[i].innerText.trim();
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i &lt; rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    if(ingredientBox.checked){
+      let ingredientText = rightCkbox[i].innerText.trim();
+      intolerance_list.push(ingredientText);
+    }
+  }
+
+  return intolerance_list;
+}
+
+/**
+ * apply the default preferences to the UI
+ */
+function defaultPreference(){
+  let intolerance_list = backend.get_intolerance();
+
+  const leftElmt = document.querySelector('.left');
+  const leftCkbox = leftElmt.getElementsByClassName('container');
+  for(let i = 0; i &lt; leftCkbox.length; i++){
+    let ingredientBox = leftCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = leftCkbox[i].innerText.trim();
+
+    if(intolerance_list.includes(ingredientText))
+      ingredientBox.checked = true;
+    
+  }
+
+  const rightElmt = document.querySelector('.right');
+  const rightCkbox = rightElmt.getElementsByClassName('container');
+  for(let i = 0; i &lt; rightCkbox.length; i++){
+    let ingredientBox = rightCkbox[i].getElementsByTagName('input')[0];
+    let ingredientText = rightCkbox[i].innerText.trim();
+
+    if(intolerance_list.includes(ingredientText))
+      ingredientBox.checked = true;
+    
+  }
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-backend.html">backend</a></li><li><a href="module-index.html">index</a></li><li><a href="module-recipe-add.html">recipe-add</a></li><li><a href="module-recipe-data.html">recipe-data</a></li><li><a href="module-recipe-detail.html">recipe-detail</a></li><li><a href="module-recipe-edit.html">recipe-edit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#add_favorite">add_favorite</a></li><li><a href="global.html#add_user_recipe">add_user_recipe</a></li><li><a href="global.html#bindCheckboxes">bindCheckboxes</a></li><li><a href="global.html#bindSearchBar">bindSearchBar</a></li><li><a href="global.html#bindSearchButton">bindSearchButton</a></li><li><a href="global.html#clearDropdowns">clearDropdowns</a></li><li><a href="global.html#configureRecipeCards">configureRecipeCards</a></li><li><a href="global.html#defaultPreference">defaultPreference</a></li><li><a href="global.html#delete_favorite_recipe">delete_favorite_recipe</a></li><li><a href="global.html#delete_user_recipe">delete_user_recipe</a></li><li><a href="global.html#displayCards">displayCards</a></li><li><a href="global.html#edit_recipe">edit_recipe</a></li><li><a href="global.html#get_favorites">get_favorites</a></li><li><a href="global.html#get_user_recipes">get_user_recipes</a></li><li><a href="global.html#hitSearch">hitSearch</a></li><li><a href="global.html#readPreference">readPreference</a></li><li><a href="global.html#registerCheckboxes">registerCheckboxes</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 10 2022 23:55:33 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

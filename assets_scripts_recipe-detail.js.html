@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: assets/scripts/recipe-detail.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: assets/scripts/recipe-detail.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module recipe-detail */
+
+import * as backend from './backend.js';
+import * as database from './database.js';
+
+if (localStorage.getItem('%not_first_visit'))
+  window.addEventListener('DOMContentLoaded', init);
+else   // first visit
+  window.location.assign('onBoardingPage.html');  // redirect
+
+
+/**
+ * Initialize and call other function
+ */
+async function init() {
+  const selected = backend.get_selected();
+  if (selected === '') {
+    window.location.assign('index.html');
+    return;
+  }
+
+  const recipe = backend.get_recipe(selected);
+
+  // Create a recipe card with mock data
+  let expandedRecipeCard = document.createElement('expanded-recipe-card');
+  expandedRecipeCard.data = recipe;
+  document.querySelector('.recipe-detail__wrapper').appendChild(expandedRecipeCard);
+
+  saveOrSaved(recipe);
+  populateUI(recipe);
+  bindFoodieButton();
+  showHideButtons(recipe);
+  bindEditButton();
+  bindDeleteButton(recipe.hash);
+  goBack();
+}
+
+function populateUI(recipe) {
+  // console.log(recipe);
+  document.getElementById('cooking-time-input').textContent = `${recipe.readyInMinutes} mins`;
+  document.getElementById('serving-size-input').textContent = `${recipe.servings} servings`;
+
+  const ingredientsWrapper = document.querySelector('.specific-ingredients');
+  if (recipe.ingredients)   // guard for no ingredients
+    recipe.ingredients.forEach(function (ingredient) {
+      const ingredientElem = document.createElement('div');
+      const check_box = document.createElement('input');
+      check_box.type = 'checkbox';
+      ingredientElem.appendChild(check_box);
+      const text = document.createElement('span');
+      text.innerText = ingredient.original;
+      ingredientElem.appendChild(text);
+      ingredientsWrapper.appendChild(ingredientElem);
+    });
+
+
+  const stepsWrapper = document.querySelector('.specific-instructions');
+  if (recipe.steps)   // guard for no steps
+    recipe.steps.forEach(function (step) {
+      const stepElem = document.createElement('li');
+      stepElem.textContent = `${step.step}`;
+      stepsWrapper.appendChild(stepElem);
+    });
+
+  if (recipe.steps.length === 0) {
+    const instructionsList = document.querySelector('.instructions');
+    const foodieInstruction = document.getElementById('how-to-use-foodie');
+    const foodieBtn = document.getElementById('foodie-mode');
+    instructionsList.classList.add('hidden');
+    foodieInstruction.classList.add('hidden');
+    foodieBtn.classList.remove('show-foodie-mode');
+    foodieBtn.classList.add('hidden');
+  }
+}
+
+/**
+ * Click to change to save or saved
+ */
+function saveOrSaved(recipe) {
+  const btn = document.querySelector('.save');
+  const heart = document.getElementById('heart');
+  const text = document.getElementById('save-or-not');
+
+  if (backend.get_favorite().includes(recipe.hash)) {
+    text.textContent = 'SAVED';
+    heart.src = 'assets/images/heart1.svg';
+  }
+
+  btn.addEventListener('click', () => {
+    if (text.textContent === 'SAVE') {
+      text.textContent = 'SAVED';
+      heart.src = 'assets/images/heart1.svg';
+      backend.add_favorite(recipe.hash);
+      database.add_favorite(recipe.name);
+
+    } else {
+      text.textContent = 'SAVE';
+      heart.src = 'assets/images/heart0.svg';
+      backend.remove_favorite(recipe.hash);
+      database.delete_favorite_recipe(recipe.hash);
+    }
+  });
+}
+
+function bindFoodieButton() {
+  const foodieBtn = document.getElementById('foodie-mode');
+  foodieBtn.addEventListener('click', () => {
+    window.location.assign('foodie.html');
+  });
+}
+
+function bindEditButton() {
+  const foodieBtn = document.getElementById('edit');
+  foodieBtn.addEventListener('click', () => {
+    window.location.assign('recipe-edit.html');
+  });
+}
+
+function bindDeleteButton(recipe_hash) {
+  const foodieBtn = document.getElementById('delete');
+  foodieBtn.addEventListener('click', () => {
+
+    let text = 'Do you want to delete the recipe?';
+    if (confirm(text) === true) {
+      // Check if recipe is in the custom recipes list
+      var customList = backend.get_custom();
+      backend.remove_recipe(recipe_hash);
+      if (customList.includes(recipe_hash)) 
+        database.delete_user_recipe(recipe_hash).then(() => {
+          window.location.assign('index.html');
+        });
+
+      else 
+        database.delete_favorite_recipe(recipe_hash).then(() => {
+          window.location.assign('index.html');
+        });
+      
+    }
+  });
+}
+
+function showHideButtons(recipe) {
+  var customList = backend.get_custom();
+  if ( customList.includes(recipe.hash) ) {
+    document.getElementById('delete').classList.remove('hidden');
+    document.getElementById('edit').classList.remove('hidden');
+    document.getElementById('save').classList.add('hidden');
+  }
+}
+
+function goBack() {
+  const btn = document.getElementById('white-arrow-p');
+  let index = document.referrer.lastIndexOf('/');
+  let str = document.referrer.substring(index + 1);
+
+  btn.addEventListener('click', () => {
+    if (str === 'recipe-search.html')
+      window.history.back();
+    else
+      window.location.assign('index.html');
+
+  });
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-backend.html">backend</a></li><li><a href="module-index.html">index</a></li><li><a href="module-recipe-add.html">recipe-add</a></li><li><a href="module-recipe-data.html">recipe-data</a></li><li><a href="module-recipe-detail.html">recipe-detail</a></li><li><a href="module-recipe-edit.html">recipe-edit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#add">add</a></li><li><a href="global.html#add_favorite">add_favorite</a></li><li><a href="global.html#add_user_recipe">add_user_recipe</a></li><li><a href="global.html#bindCheckboxes">bindCheckboxes</a></li><li><a href="global.html#bindSearchBar">bindSearchBar</a></li><li><a href="global.html#bindSearchButton">bindSearchButton</a></li><li><a href="global.html#clearDropdowns">clearDropdowns</a></li><li><a href="global.html#configureRecipeCards">configureRecipeCards</a></li><li><a href="global.html#defaultPreference">defaultPreference</a></li><li><a href="global.html#delete_favorite_recipe">delete_favorite_recipe</a></li><li><a href="global.html#delete_user_recipe">delete_user_recipe</a></li><li><a href="global.html#displayCards">displayCards</a></li><li><a href="global.html#edit_recipe">edit_recipe</a></li><li><a href="global.html#get_favorites">get_favorites</a></li><li><a href="global.html#get_user_recipes">get_user_recipes</a></li><li><a href="global.html#hitSearch">hitSearch</a></li><li><a href="global.html#readPreference">readPreference</a></li><li><a href="global.html#registerCheckboxes">registerCheckboxes</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Jun 10 2022 23:55:33 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
