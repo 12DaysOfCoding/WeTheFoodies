@@ -52,3 +52,8 @@ const add = (a, b) => a + b;
 - We are using [Codacy](https://www.codacy.com/) to analysis the quality of the source code. 
 - For each pull request, the CI/CD pipeline ([this file in particular](.github/workflows/codacy-analysis.yml)) would automatically enable Codacy and perform analysis as needed. 
 - Codacy also provided us the dashboard to monitor various aspects of the project, including code duplication, complexity, etc. 
+
+
+
+Reason to avoid hiding API keys:
+Although we had originally wanted to hide our API keys within our codebase, we have concluded that it would be better to direct our efforts else where. Our project has two API keys: Spoonacular and Firebase. In regards to the Spoonacular API we concluded that it would not be detrimental to security to expose this key. Spoonacular is a free public API with only GET capabilities. Upon further research, we found that exposing the Firebase key is not a security risk. This key is an identifier for our database and with our Firebase security rules limiting access to an authenticated user’s own data, there is little risk of abuse. Although we had originally planned to hide these keys out of code practice, we realized that with the time we had sunk into finding a solution as well as our value of simplicity, it would be best to keep our project in its original form of vanilla javascript. This allowed us to redirect our efforts elsewhere rather than spend more time re-working our project to support environment variables.
